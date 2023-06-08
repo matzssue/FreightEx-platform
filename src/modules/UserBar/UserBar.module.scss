@@ -1,0 +1,15 @@
+@import "../../styles/variables.scss";
+
+.container {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: #131212;
+  color: $secondary-text-color;
+  width: 100%;
+  gap: 30px;
+  height: 8%;
+  padding: 0.2rem 0;
+  padding-right: 2rem;
+}
