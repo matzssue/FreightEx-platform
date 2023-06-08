@@ -10,13 +10,14 @@
 }
 html,
 body {
-  font-family: $font-family;
   box-sizing: border-box;
+  height: 100%;
+  color: $primary-text-color;
+  background-color: $bacground-color;
+  font-family: $font-family;
   margin: 0;
   padding: 0;
   border: 0;
-  color: black;
-  height: 100%;
 }
 
 a {
