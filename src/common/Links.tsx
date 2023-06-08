@@ -1,14 +1,34 @@
-const Links = ({ data }) => {
+import { ReactNode } from "react";
+import styles from "./Links.module.scss";
+import { NavLink } from "react-router-dom";
+type Link = {
+  linkName: string;
+  link: string;
+  icon?: ReactNode;
+};
+
+type LinksProps = {
+  data: Link[];
+  activeMode?: boolean;
+};
+
+const Links: React.FC<LinksProps> = ({ data, activeMode = true }) => {
   return (
     <ul>
       {data.map((link) => (
         <li key={link.linkName}>
-          <a href={link.link}>
+          <NavLink
+            to={link.link}
+            className={({ isActive }) =>
+              isActive && activeMode ? styles.active : ""
+            }
+          >
             {link.icon} {link.linkName}
-          </a>
+          </NavLink>
         </li>
       ))}
     </ul>
   );
 };
+
 export default Links;
