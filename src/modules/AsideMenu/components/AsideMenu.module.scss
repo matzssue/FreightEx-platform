@@ -21,17 +21,21 @@
     a {
       font-weight: 600;
       transition: color 0.5s ease, background-color 0.3s ease;
-      &:hover {
-        color: $hover-text-color;
-        background-color: $primary-color;
-      }
+      border-radius: 1rem;
     }
   }
 }
 
 .main-links {
+  height: 50%;
   li {
     font-size: 1.2rem;
+  }
+  a {
+    &:hover {
+      background-color: $primary-blue-color;
+      color: $secondary-text-color;
+    }
   }
 }
 
@@ -39,6 +43,11 @@
   li {
     font-size: 0.7rem;
     line-height: 0.7;
+  }
+  a {
+    &:hover {
+      color: $hover-text-color;
+    }
   }
 }
 

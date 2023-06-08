@@ -10,7 +10,7 @@ export const AsideMenu = () => {
         <Links data={menuLinks} />
       </div>
       <div className={styles["info-links"]}>
-        <Links data={infoLinks} />
+        <Links activeMode={false} data={infoLinks} />
       </div>
       <p className={styles.author}>@made by m.kluska</p>
     </nav>
