@@ -1,12 +1,21 @@
-@import "../../../styles/variables.scss";
+@import '../../../styles/variables.scss';
 
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $nav-width;
+  height: 100%;
   background-color: $primary-color;
-  padding: 0 1rem;
+  padding: 1rem 1rem;
+  transition: all 0.15s;
 
   img {
     scale: 0.8;
     border-bottom: 1px solid $line-color;
+    &.hidden {
+      display: none;
+    }
   }
 
   ul {
@@ -20,9 +29,13 @@
   li {
     a {
       font-weight: 600;
-      transition: color 0.5s ease, background-color 0.3s ease;
       border-radius: 1rem;
+      transition: color 0.5s ease, background-color 0.3s ease;
     }
+  }
+  &.hidden {
+    padding: 0;
+    width: 0;
   }
 }
 
@@ -37,6 +50,11 @@
       color: $secondary-text-color;
     }
   }
+  &.hidden {
+    ul {
+      display: none;
+    }
+  }
 }
 
 .info-links {
@@ -48,6 +66,9 @@
     &:hover {
       color: $hover-text-color;
     }
+  }
+  &.hidden {
+    display: none;
   }
 }
 
