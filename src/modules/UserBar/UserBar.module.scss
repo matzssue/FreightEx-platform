@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .container {
   box-sizing: border-box;
@@ -12,4 +12,18 @@
   height: 8%;
   padding: 0.2rem 0;
   padding-right: 2rem;
+  position: relative;
+  .button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 20px;
+    left: 25px;
+    background-color: $primary-color;
+    border: none;
+    border-radius: 0.2rem;
+    padding: 0.3rem 0.5rem;
+    z-index: 1;
+    cursor: pointer;
+  }
 }
