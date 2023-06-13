@@ -4,7 +4,7 @@ import styles from './FiltersMenu.module.scss';
 import { FilterCard } from './FilterCard';
 export const FiltersMenu = () => {
   return (
-    <div className={styles.filters}>
+    <div className={styles['filters-container']}>
       <FilterCard filterName={'Truck'} topLeftLabel={'min'} topRightLabel={'max'}>
         <div className={styles.input}>
           <label>Weight</label>
