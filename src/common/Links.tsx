@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import styles from "./Links.module.scss";
-import { NavLink } from "react-router-dom";
+import { ReactNode } from 'react';
+import styles from './Links.module.scss';
+import { NavLink } from 'react-router-dom';
 type Link = {
   linkName: string;
   link: string;
@@ -12,16 +12,14 @@ type LinksProps = {
   activeMode?: boolean;
 };
 
-const Links: React.FC<LinksProps> = ({ data, activeMode = true }) => {
+const Links = ({ data, activeMode = true }: LinksProps) => {
   return (
     <ul>
       {data.map((link) => (
         <li key={link.linkName}>
           <NavLink
             to={link.link}
-            className={({ isActive }) =>
-              isActive && activeMode ? styles.active : ""
-            }
+            className={({ isActive }) => (isActive && activeMode ? styles.active : '')}
           >
             {link.icon} {link.linkName}
           </NavLink>
