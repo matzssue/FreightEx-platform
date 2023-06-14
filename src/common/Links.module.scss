@@ -1,16 +1,33 @@
-@import "../styles/variables.scss";
+@import '../styles/variables.scss';
 
-li {
+ul {
+  display: flex;
+
+  span {
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+.list {
   width: 100%;
 }
 a {
   display: flex;
   gap: 10px;
   padding: 0.3rem 1rem;
+  color: $primary-color;
 }
 
 .active {
   background-color: $primary-blue-color;
   border-radius: 1rem;
   color: white;
+}
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
 }

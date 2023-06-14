@@ -10,9 +10,10 @@ type Link = {
 type LinksProps = {
   data: Link[];
   activeMode?: boolean;
+  hidden?: boolean;
 };
 
-const Links = ({ data, activeMode = true }: LinksProps) => {
+const Links = ({ data, activeMode = true, hidden }: LinksProps) => {
   return (
     <ul>
       {data.map((link) => (
@@ -21,7 +22,8 @@ const Links = ({ data, activeMode = true }: LinksProps) => {
             to={link.link}
             className={({ isActive }) => (isActive && activeMode ? styles.active : '')}
           >
-            {link.icon} {link.linkName}
+            {link.icon && <span className={styles.icon}>{link.icon}</span>}
+            <span className={hidden ? styles.hidden : ''}>{link.linkName}</span>
           </NavLink>
         </li>
       ))}
