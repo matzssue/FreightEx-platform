@@ -1,12 +1,12 @@
 @import '../styles/variables.scss';
 
-.loads {
+.container {
   width: 100%;
   flex-grow: 1;
-
   padding-left: calc($nav-width + 2rem);
-  transition: 0.15s padding-left;
+  transition: 0.3s padding-left;
+  border: 1px solid #d8d8d8;
 }
 .hidden {
-  padding-left: 0rem;
+  padding-left: calc(40px + 2rem);
 }

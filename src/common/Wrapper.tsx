@@ -3,7 +3,9 @@ import styles from './Wrapper.module.scss';
 
 const Wrapper = ({ children, showMenu }: { children?: ReactNode; showMenu: boolean }) => {
   return (
-    <div className={!showMenu ? `${styles.loads} ${styles.hidden}` : styles.loads}>{children}</div>
+    <div className={!showMenu ? `${styles.container} ${styles.hidden}` : styles.container}>
+      {children}
+    </div>
   );
 };
 export default Wrapper;

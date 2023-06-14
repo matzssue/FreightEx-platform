@@ -8,71 +8,85 @@
   height: 100%;
   background-color: $primary-color;
   padding: 1rem 1rem;
-  transition: all 0.15s;
+  transition: all 0.3s;
+  overflow: hidden;
+  &.hidden {
+    width: 40px;
+  }
+}
+.nav-container {
+  position: relative;
+  height: 100%;
 
-  img {
-    scale: 0.8;
-    border-bottom: 1px solid $line-color;
+  .logo {
+    position: absolute;
+    top: 50px;
+    left: 0px;
     &.hidden {
       display: none;
     }
   }
+  .main-links {
+    position: absolute;
+    top: 200px;
+    left: -5px;
 
-  ul {
+    ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      gap: 10px;
+      flex-wrap: nowrap;
+      li {
+        &:hover {
+          border-radius: 1rem;
+          background-color: $primary-blue-color;
+        }
+        a {
+          &:hover {
+            color: white;
+          }
+        }
+        font-size: 1.2rem;
+      }
+    }
+  }
+  .info-links {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    a {
-      font-weight: 600;
-      border-radius: 1rem;
-      transition: color 0.5s ease, background-color 0.3s ease;
-    }
-  }
-  &.hidden {
-    padding: 0;
-    width: 0;
-  }
-}
-
-.main-links {
-  height: 50%;
-  li {
-    font-size: 1.2rem;
-  }
-  a {
-    &:hover {
-      background-color: $primary-blue-color;
-      color: $secondary-text-color;
-    }
-  }
-  &.hidden {
+    top: 500px;
+    overflow: hidden;
+    width: 300px;
+    left: -5px;
     ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      li {
+        font-size: 0.7rem;
+        line-height: 0.8;
+        a {
+          &:hover {
+            color: $primary-blue-color;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    &.hidden {
       display: none;
     }
   }
-}
-
-.info-links {
-  li {
-    font-size: 0.7rem;
-    line-height: 0.7;
-  }
-  a {
-    &:hover {
-      color: $hover-text-color;
+  .author {
+    position: absolute;
+    top: 700px;
+    left: 20px;
+    margin-top: 1rem;
+    font-size: 0.5rem;
+    width: 200px;
+    &.hidden {
+      display: none;
     }
   }
-  &.hidden {
-    display: none;
-  }
-}
-
-.author {
-  margin-top: 1rem;
-  font-size: 0.5rem;
 }
