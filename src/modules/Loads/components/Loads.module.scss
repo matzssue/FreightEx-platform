@@ -1,0 +1,36 @@
+@import '../../../styles/variables.scss';
+
+.sort-list {
+  background-color: #777777;
+  color: $secondary-text-color;
+  text-align: center;
+  font-size: 0.8rem;
+  ul {
+    display: grid;
+    padding: 0;
+    margin: 0;
+    grid-template-columns: 1fr 1fr 0.6fr 0.8fr 0.6fr 0.6fr 1.2fr 0.6fr;
+    li {
+      position: relative;
+      padding: 0.5rem 0.2rem;
+      cursor: pointer;
+      &:hover {
+        background-color: $primary-blue-color;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0px;
+        height: 100%;
+        border-right: 2px solid rgb(209, 208, 208);
+        vertical-align: middle;
+      }
+    }
+  }
+}
+.loads {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
