@@ -1,0 +1,20 @@
+@import '../../../../styles/variables.scss';
+
+.list-container {
+  display: flex;
+  gap: 5px;
+  margin: 0.5rem 1rem 0rem 0rem;
+
+  span {
+    background-color: $secondary-color;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem 0.2rem 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    cursor: pointer;
+    &:hover {
+      background-color: $primary-color;
+    }
+  }
+}

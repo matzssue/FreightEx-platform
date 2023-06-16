@@ -1,0 +1,52 @@
+@import '../../../../styles/variables.scss';
+
+.filters-container {
+  display: flex;
+  justify-content: space-around;
+  background-color: $secondary-color;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  gap: 15px;
+  font-size: 0.7rem;
+  position: relative;
+}
+
+.input {
+  display: flex;
+  gap: 20px;
+
+  label {
+    width: 70px;
+  }
+  input {
+    width: 50px;
+    gap: 5px;
+    background-color: $secondary-color;
+    border: 0;
+    padding: 0.2rem;
+    font-size: 1rem;
+  }
+}
+
+.show-filters__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 10%;
+  height: 20px;
+  left: 45%;
+  bottom: 0px;
+  background-color: #5e5e5e;
+  color: $secondary-color;
+  font-weight: 600;
+  font-size: 0.6rem;
+  padding: 0.2rem;
+  border: 1px solid rgba(143, 143, 143, 0.349);
+  border-radius: 1rem;
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: #868686;
+  }
+}
