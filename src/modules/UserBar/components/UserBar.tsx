@@ -2,16 +2,24 @@ import { Avatar } from '@mui/material';
 import styles from './UserBar.module.scss';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdNotificationsOutline } from 'react-icons/io';
+import { useDisclosure } from '../../../hooks/useDisclosure';
+import { AddLoad } from '../../Loads/Loads/components/AddLoad';
+
 export const UserBar = ({ setShowMenu }) => {
+  const { isOpen, open, close } = useDisclosure();
+
   return (
     <div className={styles.container}>
+      <AddLoad handleClose={close} isOpen={isOpen} />
       <button
         className={styles['hamburger-button']}
         onClick={() => setShowMenu((prevValue) => !prevValue)}
       >
         <GiHamburgerMenu />
       </button>
-      <button className={styles['freight-button']}>Add Freight</button>
+      <button onClick={open} className={styles['freight-button']}>
+        Add Freight
+      </button>
       <button className={styles['notification-button']}>
         <IoMdNotificationsOutline />
       </button>
