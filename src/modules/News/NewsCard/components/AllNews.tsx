@@ -24,7 +24,7 @@ export const AllNews = () => {
     <>
       <header className={styles.header}>
         <h1>Transport, Logistics </h1>
-        <h2>Explore the latest news, innovaions and successes in the transport and logitics</h2>
+        <h2>Explore the latest news, innovations and successes in the transport and logistics</h2>
       </header>
       <section className={styles.news}>
         {news &&
