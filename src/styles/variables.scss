@@ -1,9 +1,9 @@
 /// colors
 //background
-$bacground-color: #373e40;
+$bacground-color: #bdbebe;
 //main colors
-$primary-color: #e9e9e9;
-$secodnary-color: #d9d9d9;
+$primary-color: #ffffff;
+$secondary-color: #f1f1f1;
 $primary-blue-color: #2a4354;
 //text colors
 $primary-text-color: #0a0909;
@@ -15,7 +15,8 @@ $secondary-button-color: #2b932f;
 //other
 $line-color: #436c88;
 /// fonts
-$font-family: "Nunito", sans-serif;
+$font-family: 'Nunito', sans-serif;
+$secondary-font-family: 'Geologica', sans-serif;
 /// spacing
 
 /// breakpoints
@@ -23,3 +24,5 @@ $breakpoint-small: 576px;
 $breakpoint-medium: 768px;
 $breakpoint-large: 992px;
 /// border radius
+// navigation
+$nav-width: 150px;
