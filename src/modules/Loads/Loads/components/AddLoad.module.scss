@@ -1,0 +1,33 @@
+@import '../../../../styles/variables.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    width: 60vw;
+    // height: 50vh;
+    padding: 1rem;
+    header {
+      background-color: $secondary-color;
+    }
+    .close {
+      position: absolute;
+      right: 20px;
+    }
+    .inputs-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+  }
+  .vehicle-inputs {
+    // grid-column: 1/3;
+  }
+}
