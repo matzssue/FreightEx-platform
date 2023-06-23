@@ -1,0 +1,27 @@
+.autocomplete-dropdown-container {
+}
+.suggestion-item--active {
+  background-color: red;
+  &:hover {
+    background-color: aqua;
+  }
+}
+.suggestion-item {
+  background-color: blue;
+  &:hover {
+    background-color: aqua;
+  }
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  .location-search-input {
+    padding: 1rem;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.23);
+    border-radius: 0.2rem;
+    &:hover {
+      border-color: black;
+    }
+  }
+}
