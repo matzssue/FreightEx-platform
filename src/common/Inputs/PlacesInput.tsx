@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
+import { IoLocationSharp } from 'react-icons/io5';
 import styles from './PlacesInput.module.scss';
 
 export const PlacesInput = ({ control, name, label }) => {
@@ -46,8 +47,8 @@ export const PlacesInput = ({ control, name, label }) => {
                     className: styles['location-search-input'],
                   })}
                 />
-                {fieldState.error && <p>{fieldState.error.message}</p>}
-                <div className='autocomplete-dropdown-container'>
+                {fieldState.error && <p className={styles.error}>{fieldState.error.message}</p>}
+                <div className={styles['autocomplete-dropdown-container']}>
                   {loading && <div>Loading...</div>}
 
                   {filtered.map((suggestion, i) => {
@@ -55,18 +56,20 @@ export const PlacesInput = ({ control, name, label }) => {
                       ? styles['suggestion-item--active']
                       : styles['suggestion-item'];
                     // inline style for demonstration purpose
-                    const style = suggestion.active
-                      ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                    // const style = suggestion.active
+                    //   ? { backgroundColor: 'yellow', cursor: 'pointer' }
+                    //   : { backgroundColor: 'yellow', cursor: 'pointer' };
                     return (
                       <div
                         {...getSuggestionItemProps(suggestion, {
                           className,
-                          style,
+                          // style,
                         })}
                         key={i}
                       >
-                        <span>{suggestion.description}</span>
+                        <span>
+                          <IoLocationSharp /> {suggestion.description}
+                        </span>
                       </div>
                     );
                   })}
