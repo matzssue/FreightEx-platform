@@ -1,7 +1,12 @@
 .container {
   display: flex;
 
-  label {
-    min-width: 150px;
+  .label {
+    padding-top: 0.4rem;
+    min-width: 50px;
   }
+}
+.Mui-error {
+  width: 500px;
+  color: yellow !important;
 }
