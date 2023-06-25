@@ -1,7 +1,6 @@
 @import '../styles/variables.scss';
 
 .container {
-  width: 100%;
   flex-grow: 1;
   padding-left: calc($nav-width + 2rem);
   transition: 0.3s padding-left;
