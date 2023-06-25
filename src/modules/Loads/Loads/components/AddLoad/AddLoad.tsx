@@ -12,6 +12,17 @@ import { LoadHeader } from './LoadHeader';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
+import AlertDialog from '../../../../../common/Dialog/AlertDialog';
+import { useDisclosure } from '../../../../../hooks/useDisclosure';
+import { useAppSelector, useAppDispatch } from '../../../../../store/hooks';
+
+import {
+  openModal,
+  closeModal,
+  openDialog,
+  closeDialog,
+} from '../../../../../store/reducers/modalSlice';
+
 type FreightModalProps = {
   handleAgree?: () => void;
   isOpen: boolean;
@@ -34,15 +45,19 @@ const addLoadSchema = yup.object({
   currency: yup.string().required('Please select currency'),
 });
 
-export const AddLoad = ({ isOpen, handleClose }: FreightModalProps) => {
+export const AddLoad = () => {
+  const dispatch = useAppDispatch();
+  const isModalOpen = useAppSelector((state) => state.modal.isLoadModalOpen);
+  const isDialogOpen = useAppSelector((state) => state.modal.isLoadDialogOpen);
+
   // const currentDate = dayjs(new Date());
   // console.log(currentDate);
   // const [date, setDate] = useState(currentDate);
-
   const {
     handleSubmit,
     control,
     formState: { errors },
+    reset,
   } = useForm({
     // defaultValues: {
     //   loading: '',
@@ -53,13 +68,13 @@ export const AddLoad = ({ isOpen, handleClose }: FreightModalProps) => {
     //   term: '',
     //   currency: '',
     // },
-    // resolver: yupResolver(addLoadSchema),
-    resolver: async (data, context, options) => {
-      // you can debug your validation schema here
-      console.log('formData', data);
-      console.log('validation result', await yupResolver(addLoadSchema)(data, context, options));
-      return yupResolver(addLoadSchema)(data, context, options);
-    },
+    resolver: yupResolver(addLoadSchema),
+    // resolver: async (data, context, options) => {
+    //   // you can debug your validation schema here
+    //   console.log('formData', data);
+    //   console.log('validation result', await yupResolver(addLoadSchema)(data, context, options));
+    //   return yupResolver(addLoadSchema)(data, context, options);
+    // },
   });
 
   /**
@@ -68,17 +83,24 @@ export const AddLoad = ({ isOpen, handleClose }: FreightModalProps) => {
   const onSubmit = async (data) => {
     console.log(data);
   };
-
+  const closeAllHandler = () => {
+    reset();
+    dispatch(closeModal());
+  };
   return (
     <div>
-      <Modal
-        open={isOpen}
-        onClose={handleClose}
-        aria-labelledby='load-modal'
-        aria-describedby='addLoad-modal'
-      >
+      <Modal open={isModalOpen} aria-labelledby='load-modal' aria-describedby='addLoad-modal'>
         <div className={styles.container}>
-          <LoadHeader />
+          <AlertDialog
+            title={'add-load-form'}
+            label={'Are you sure you want to close the form?'}
+            content={'This will cause the form data to be reset'}
+            description={'add-load-form-description'}
+            agreeHandler={() => closeAllHandler()}
+            open={isDialogOpen}
+            close={() => dispatch(closeDialog())}
+          />
+          <LoadHeader onClick={() => dispatch(openDialog())} />
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={styles['inputs-container']}>
               <div className={styles['loading-inputs']}>
