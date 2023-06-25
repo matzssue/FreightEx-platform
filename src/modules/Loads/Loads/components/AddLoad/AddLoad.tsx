@@ -7,7 +7,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import CheckboxInput from '../../../../../common/Inputs/Checkbox';
 import { TextFieldInput } from '../../../../../common/Inputs/TextField';
 import { SelectInput } from '../../../../../common/Inputs/Select';
-import { currencies } from '../../sortData';
+import { currencies } from '../../loadData';
 import { LoadHeader } from './LoadHeader';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
