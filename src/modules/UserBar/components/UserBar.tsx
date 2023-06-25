@@ -3,21 +3,27 @@ import styles from './UserBar.module.scss';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 import { useDisclosure } from '../../../hooks/useDisclosure';
-import { AddLoad } from '../../Loads/Loads/components/AddLoad';
+import { AddLoad } from '../../Loads/Loads/components/AddLoad/AddLoad';
+import { useEffect } from 'react';
+
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+
+import { openModal, closeModal } from '../../../store/reducers/modalSlice';
 
 export const UserBar = ({ setShowMenu }) => {
-  const { isOpen, open, close } = useDisclosure();
+  const dispatch = useAppDispatch();
+  const modal = useAppSelector((state) => state.modal.isLoadModalOpen);
 
   return (
     <div className={styles.container}>
-      <AddLoad handleClose={close} isOpen={isOpen} />
+      <AddLoad />
       <button
         className={styles['hamburger-button']}
         onClick={() => setShowMenu((prevValue) => !prevValue)}
       >
         <GiHamburgerMenu />
       </button>
-      <button onClick={open} className={styles['freight-button']}>
+      <button onClick={() => dispatch(openModal())} className={styles['freight-button']}>
         Add Freight
       </button>
       <button className={styles['notification-button']}>
