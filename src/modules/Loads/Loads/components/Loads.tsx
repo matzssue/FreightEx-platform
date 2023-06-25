@@ -1,5 +1,5 @@
 import styles from './Loads.module.scss';
-import { List } from '../../../../common/List';
+import { List } from '../../../../common/Lists/List';
 import { useEffect } from 'react';
 import { sortData } from '../loadData';
 import { Load } from './Load';
