@@ -24,8 +24,6 @@ export const TextFieldInput = ({ name, control, label, ...props }: FormInputProp
             error={!!error}
             onChange={onChange}
             value={value}
-            // fullWidth
-
             label={null}
             variant='standard'
             {...props}
