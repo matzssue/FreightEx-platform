@@ -7,3 +7,5 @@ export const sortData = [
   'Unloading date',
   'Publisher',
 ];
+
+export const currencies = ['EUR', 'PLN'];
