@@ -1,16 +1,25 @@
 import { useCallback, useState } from 'react';
-import { Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
 import { IoLocationSharp } from 'react-icons/io5';
 import styles from './PlacesInput.module.scss';
 
-export const PlacesInput = ({ control, name, label }) => {
+type PlacesInputProps<T extends FieldValues> = {
+  name: Path<T>;
+  label: string;
+  control: Control<T>;
+};
+
+export const PlacesInput = <T extends FieldValues>({
+  control,
+  name,
+  label,
+}: PlacesInputProps<T>) => {
   return (
     <Controller
       control={control}
       name={name}
-      defaultValue=''
       rules={{ required: `Please select ${name}. Use postal-code!!` }}
       render={({ field, fieldState }) => (
         <PlacesAutocomplete

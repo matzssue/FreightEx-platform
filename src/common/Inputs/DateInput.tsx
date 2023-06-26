@@ -1,29 +1,36 @@
-import { Controller, useForm } from 'react-hook-form';
+import { Control, Controller, useForm, FieldValues, PathValue, Path } from 'react-hook-form';
 import styles from './DateInput.module.scss';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
-import { useState } from 'react';
+import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker';
+import dayjs, { Dayjs } from 'dayjs';
 
-export const DateInput = ({ control, name, label = '' }) => {
-  const currentDate = dayjs(new Date());
-  // console.log(currentDate);
-  const [date, setDate] = useState(currentDate);
+type DateInputProps<T extends FieldValues> = {
+  name: Path<T>;
+  label: string;
+  control: Control<T>;
+};
+
+export const DateInput = <T extends FieldValues>({ control, name, label }: DateInputProps<T>) => {
+  const currentDate: Dayjs = dayjs(new Date());
+
   return (
     <Controller
       name={name}
       control={control}
-      defaultValue={currentDate}
-      render={({ field, fieldState: { error } }) => (
+      defaultValue={currentDate as PathValue<T, Path<T>> | undefined}
+      render={({ field: { onChange, value }, fieldState: { error } }) => (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div className={styles.container}>
             {/* <label>Date</label> */}
             <DatePicker
-              {...field}
-              onChange={(date) => setDate(date)}
+              // {...field}
+              onChange={(date) => {
+                // setDate(date);
+                onChange(date);
+              }}
               className={styles.input}
-              value={date}
+              value={value}
               label={label}
               slotProps={{
                 textField: {

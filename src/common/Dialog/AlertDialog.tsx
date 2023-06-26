@@ -6,6 +6,16 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+type AlertDialogProps = {
+  open: boolean;
+  close: () => void;
+  agreeHandler: () => void;
+  content: string;
+  title: string;
+  description: string;
+  label: string;
+};
+
 export default function AlertDialog({
   open,
   close,
@@ -14,7 +24,7 @@ export default function AlertDialog({
   title,
   description,
   label,
-}) {
+}: AlertDialogProps) {
   return (
     <div>
       <Dialog

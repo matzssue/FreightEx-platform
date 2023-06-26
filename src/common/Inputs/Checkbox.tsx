@@ -1,7 +1,20 @@
 import { FormControlLabel, Checkbox, InputLabel, Select } from '@mui/material';
-import { Controller } from 'react-hook-form';
+import { Controller, Control, FieldValues, Path, PathValue } from 'react-hook-form';
 
-const CheckboxInput = ({ name, label, control, defaultValue = false }) => {
+type CheckboxInputProps<T extends FieldValues> = {
+  name: Path<T>;
+  control: Control<T>;
+  label: string | null;
+  defaultValue?: boolean | undefined;
+  sx?: Record<string, any>;
+};
+
+const CheckboxInput = <T extends FieldValues>({
+  name,
+  label,
+  control,
+  defaultValue = false,
+}: CheckboxInputProps<T>) => {
   return (
     <FormControlLabel
       label={label}
@@ -11,7 +24,7 @@ const CheckboxInput = ({ name, label, control, defaultValue = false }) => {
         <Controller
           name={name}
           control={control}
-          defaultValue={defaultValue}
+          defaultValue={defaultValue as PathValue<T, Path<T>>}
           render={({ field }) => (
             <Checkbox
               checked={field.value}
