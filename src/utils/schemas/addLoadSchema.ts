@@ -9,13 +9,16 @@ export const addLoadSchema = yup.object().shape({
   price: yup.string().required('Price is required').min(3),
   term: yup.string().required('Payment term is required').min(1),
   currency: yup.string().required('Please select currency'),
+  length: yup.number().positive().max(16).optional(),
+  weight: yup.number().positive().max(99).optional(),
+
   multiCheckbox: yup
     .object()
     .shape({
-      bus: yup.boolean(),
-      solo: yup.boolean(),
-      semiTrailer: yup.boolean(),
-      doubleTrailer: yup.boolean(),
+      bus: yup.boolean().default(false),
+      solo: yup.boolean().default(false),
+      semiTrailer: yup.boolean().default(false),
+      doubleTrailer: yup.boolean().default(false),
     })
     .test('multiCheckbox', 'At least one of the checkbox is required', (options) => {
       console.log(
@@ -24,8 +27,4 @@ export const addLoadSchema = yup.object().shape({
       );
       return options.bus || options.solo || options.semiTrailer || options.doubleTrailer;
     }),
-  // bus: yup.boolean().oneOf([true], 'At least one checkbox must be selected'),
-  // solo: yup.boolean().oneOf([true], 'At least one checkbox must be selected'),
-  // semiTrailer: yup.boolean().oneOf([true], 'At least one checkbox must be selected'),
-  // doubleTrailer: yup.boolean().oneOf([true], 'At least one checkbox must be selected'),
 });
