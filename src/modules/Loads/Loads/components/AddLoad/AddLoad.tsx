@@ -34,14 +34,8 @@ export const AddLoad = () => {
     control,
     formState: { errors },
     reset,
-  } = useForm<AddLoadValues>({
-    resolver: yupResolver(addLoadSchema),
-    // resolver: async (data, context, options) => {
-    //   // you can debug your validation schema here
-    //   console.log('formData', data);
-    //   console.log('validation result', await yupResolver(addLoadSchema)(data, context, options));
-    //   return yupResolver(addLoadSchema)(data, context, options);
-    // },
+  } = useForm({
+    resolver: yupResolver<AddLoadValues>(addLoadSchema),
   });
 
   const onSubmit = async (data: AddLoadValues) => {
@@ -82,6 +76,41 @@ export const AddLoad = () => {
                 />
                 <PlacesInput label={'Unloading adress'} control={control} name={'unloading'} />
               </div>
+              <div className={styles['cargo-dimensions']}>
+                <p>Cargo </p>
+                <div className={styles['dimensions-inputs__container']}>
+                  <TextFieldInput<AddLoadValues>
+                    label={'length(m)'}
+                    name='length'
+                    control={control}
+                    defaultValue={''}
+                    sx={{
+                      width: '40px',
+                      '& input': {
+                        padding: '5px',
+                        margin: '0px',
+                        fontSize: '15px',
+                      },
+                    }}
+                    type='number'
+                  />
+                  <TextFieldInput<AddLoadValues>
+                    label={'weight(t)'}
+                    name='weight'
+                    control={control}
+                    defaultValue={''}
+                    sx={{
+                      width: '40px',
+                      '& input': {
+                        padding: '5px',
+                        margin: '0px',
+                        fontSize: '15px',
+                      },
+                    }}
+                    type='number'
+                  />
+                </div>
+              </div>
               <div className={styles['vehicle-inputs']}>
                 <p>Vehicle type</p>
                 <CheckboxInput<AddLoadValues>
@@ -110,31 +139,35 @@ export const AddLoad = () => {
                   >{`Error: ${errors?.multiCheckbox?.message}`}</p>
                 )}
               </div>
-              <div className={styles['payment-inputs']}>
-                <p>Payment</p>
-                <TextFieldInput<AddLoadValues>
-                  label={'term'}
-                  name='term'
-                  control={control}
-                  defaultValue=''
-                  sx={{ width: '70px', helperText: { width: '300px' } }}
-                />
-
-                <div className={styles.payment}>
+              <div className={styles['payment-inputs__container']}>
+                <p className={styles.title}>Payment</p>
+                <div className={styles['payment-inputs']}>
                   <TextFieldInput<AddLoadValues>
-                    label={'price'}
-                    name='price'
+                    label={'term'}
+                    name='term'
                     control={control}
                     defaultValue=''
-                    sx={{ width: '70px' }}
+                    sx={{ width: '70px', helperText: { width: '300px' } }}
+                    variant='standard'
                   />
-                  <SelectInput<AddLoadValues>
-                    options={currencies}
-                    label={''}
-                    name={'currency'}
-                    control={control}
-                    defaultValue='EUR'
-                  />
+
+                  <div className={styles.payment}>
+                    <TextFieldInput<AddLoadValues>
+                      label={'price'}
+                      name='price'
+                      control={control}
+                      defaultValue=''
+                      sx={{ width: '70px' }}
+                      variant='standard'
+                    />
+                    <SelectInput<AddLoadValues>
+                      options={currencies}
+                      label={''}
+                      name={'currency'}
+                      control={control}
+                      defaultValue='EUR'
+                    />
+                  </div>
                 </div>
               </div>
             </div>
