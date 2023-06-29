@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Control, Controller, FieldValues, Path } from 'react-hook-form';
+import { Control, Controller, FieldValues, Path, PathValue } from 'react-hook-form';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
 import { IoLocationSharp } from 'react-icons/io5';
@@ -9,6 +9,7 @@ type PlacesInputProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   control: Control<T>;
+  defaultValue: PathValue<T, Path<T>> | undefined;
 };
 
 export const PlacesInput = <T extends FieldValues>({
@@ -20,6 +21,7 @@ export const PlacesInput = <T extends FieldValues>({
     <Controller
       control={control}
       name={name}
+      defaultValue={'' as PathValue<T, Path<T>> | undefined}
       rules={{ required: `Please select ${name}. Use postal-code!!` }}
       render={({ field, fieldState }) => (
         <PlacesAutocomplete
