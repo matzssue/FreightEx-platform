@@ -9,7 +9,6 @@ type PlacesInputProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   control: Control<T>;
-  defaultValue: PathValue<T, Path<T>> | undefined;
 };
 
 export const PlacesInput = <T extends FieldValues>({
