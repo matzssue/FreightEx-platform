@@ -1,7 +1,7 @@
 import { menuLinks, infoLinks } from '../asideMenuData';
 import logo from '../../../../assets/logo.svg';
 import styles from './AsideMenu.module.scss';
-import Links from '../../../../common/Links';
+import Links from '../../../../common/Lists/Links';
 
 export const AsideMenu = ({ showMenu }: { showMenu: boolean }) => {
   return (

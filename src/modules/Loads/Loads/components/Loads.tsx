@@ -1,7 +1,9 @@
 import styles from './Loads.module.scss';
-import { List } from '../../../../common/List';
-import { sortData } from '../sortData';
+import { List } from '../../../../common/Lists/List';
+import { useEffect } from 'react';
+import { sortData } from '../loadData';
 import { Load } from './Load';
+
 export const Loads = () => {
   return (
     <div>

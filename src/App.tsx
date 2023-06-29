@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styles from './App.module.scss';
 import Wrapper from './common/Wrapper';
@@ -12,6 +12,21 @@ import { NewsCard } from './modules/News/NewsCard/components/NewsCard';
 import { AllNews } from './modules/News/NewsCard/components/AllNews';
 import { Home } from './Views/Home';
 import { News } from './Views/News';
+import { Loader } from '@googlemaps/js-api-loader';
+
+const loader = new Loader({
+  apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+  version: 'weekly',
+});
+
+loader.load().then(async () => {
+  const data = (await google.maps.importLibrary('places')) as google.maps.MapsLibrary;
+  console.log('test', data);
+  // map = new Map(document.getElementById("map") as HTMLElement, {
+  //   center: { lat: -34.397, lng: 150.644 },
+  //   zoom: 8,
+  // });
+});
 
 function App() {
   const [showMenu, setShowMenu] = useState<boolean>(true);
