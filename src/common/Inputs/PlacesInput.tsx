@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Control, Controller, FieldValues, Path, PathValue } from 'react-hook-form';
-import PlacesAutocomplete from 'react-places-autocomplete';
+import PlacesAutocomplete, { getLatLng } from 'react-places-autocomplete';
 import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
 import { IoLocationSharp } from 'react-icons/io5';
 import styles from './PlacesInput.module.scss';
@@ -15,6 +15,7 @@ export const PlacesInput = <T extends FieldValues>({
   control,
   name,
   label,
+  setAddress,
 }: PlacesInputProps<T>) => {
   return (
     <Controller
@@ -29,8 +30,11 @@ export const PlacesInput = <T extends FieldValues>({
           value={field.value}
           onChange={(value) => field.onChange(value)}
           onSelect={async (value, placeId) => {
-            const response = await geocodeByAddress(value);
+            // const response = await geocodeByAddress(value);
+
             const [place] = await geocodeByPlaceId(placeId);
+            const cordinates = await getLatLng(place);
+
             console.log('response, placeID', place);
             const { long_name: postalCode = '' } =
               place.address_components.find((c) => c.types.includes('postal_code')) || {};
@@ -38,8 +42,16 @@ export const PlacesInput = <T extends FieldValues>({
               place.address_components.find((c) => c.types.includes('locality')) || {};
             const { long_name: country = '' } =
               place.address_components.find((c) => c.types.includes('country')) || {};
-            const adress = { postalCode, town, country };
-            console.log(adress);
+            const address = {
+              postal_code: postalCode,
+              country: country,
+              latitude: cordinates.lat,
+              longitude: cordinates.lng,
+              city: town,
+            };
+
+            setAddress(address);
+
             return field.onChange(value);
           }}
         >
