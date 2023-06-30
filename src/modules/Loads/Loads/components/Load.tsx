@@ -1,27 +1,39 @@
 import styles from './Load.module.scss';
 import Avatar from '@mui/material/Avatar';
-export const Load = () => {
+export const Load = ({
+  loadingCity,
+  loadingPostCode,
+  unloadingCity,
+  unloadingPostCode,
+  price,
+  currency,
+  paymentTerm,
+  loadingDate,
+  unloadingDate,
+  cargoLength,
+  cargoWeight,
+}) => {
   return (
     <div className={styles.load}>
       <span>
-        <p className={styles.city}>Warszawa</p>
-        <p className={styles['post-code']}>00-001</p>
+        <p className={styles.city}>{loadingCity}</p>
+        <p className={styles['post-code']}>{loadingPostCode}</p>
       </span>
       <span>
-        <p className={styles.city}>Zielona Góra</p>
-        <p className={styles['post-code']}>65-003</p>
+        <p className={styles.city}>{unloadingCity}</p>
+        <p className={styles['post-code']}>{unloadingPostCode}</p>
       </span>
       <span>
-        <p className={styles.salary}>1500zł</p>
-        <p className={styles.term}>payment term: 45d</p>
+        <p className={styles.salary}>{`${price} ${currency}`}</p>
+        <p className={styles.term}>payment term: {paymentTerm}d</p>
       </span>
       <span className={styles.cargo}>
-        <span>Length: 7ldm</span>
-        <span>Weight: 6t</span>
+        <span>Length: {cargoLength}ldm</span>
+        <span>Weight: {cargoWeight}t</span>
         <p>Type: pallets</p>
       </span>
-      <p className={styles.date}>26.05.2023</p>
-      <p className={styles.date}>27.05.2023</p>
+      <p className={styles.date}>{loadingDate}</p>
+      <p className={styles.date}>{unloadingDate}</p>
       <span className={styles.company}>
         <p className={styles.name}>Firma Lubuska S.A</p>
         <div>
