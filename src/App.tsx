@@ -13,6 +13,8 @@ import { AllNews } from './modules/News/NewsCard/components/AllNews';
 import { Home } from './Views/Home';
 import { News } from './Views/News';
 import { Loader } from '@googlemaps/js-api-loader';
+import { QueryClient, QueryClientProvider, QueryCache } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const loader = new Loader({
   apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
@@ -28,23 +30,37 @@ loader.load().then(async () => {
   // });
 });
 
+const queryClient = new QueryClient({
+  queryCache: new QueryCache(),
+  defaultOptions: {
+    queries: {
+      staleTime: 60_000,
+    },
+  },
+});
+
 function App() {
   const [showMenu, setShowMenu] = useState<boolean>(true);
 
   return (
     <>
-      <BrowserRouter>
-        <UserBar setShowMenu={setShowMenu} />
-        <div className={styles.box}>
-          <AsideMenu showMenu={showMenu} />
-          <Wrapper showMenu={showMenu}>
-            <Routes>
-              <Route element={<Home />} path='/loads' />
-              <Route element={<News />} path='/news' />
-            </Routes>
-          </Wrapper>
-        </div>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        {process.env.NODE_ENV === 'development' && (
+          <ReactQueryDevtools position='top-right' initialIsOpen={false} />
+        )}
+        <BrowserRouter>
+          <UserBar setShowMenu={setShowMenu} />
+          <div className={styles.box}>
+            <AsideMenu showMenu={showMenu} />
+            <Wrapper showMenu={showMenu}>
+              <Routes>
+                <Route element={<Home />} path='/loads' />
+                <Route element={<News />} path='/news' />
+              </Routes>
+            </Wrapper>
+          </div>
+        </BrowserRouter>
+      </QueryClientProvider>
     </>
   );
 }
