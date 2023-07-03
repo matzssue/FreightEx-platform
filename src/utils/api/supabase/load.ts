@@ -1,5 +1,6 @@
 import supabase from '../../../config/supabase';
 import { AddLoadValues } from '../../schemas/addLoadSchema';
+import { Database } from '../../../types/supabase';
 
 // export const addLoad = async (newLoad: AddLoadValues) => {
 //   const { data, error } = await supabase.from('loads').insert(newLoad);
@@ -9,9 +10,44 @@ import { AddLoadValues } from '../../schemas/addLoadSchema';
 //   return data;
 // };
 
-export const addLoad = async (data) => {
-  const loadingId = data.loadingAddress.postal_code.replace(/-/g, '');
-  const unloadingId = data.unloadingAddress.postal_code.replace(/-/g, '');
+type AddressesDatabase = Database['public']['Tables']['addresses']['Row'];
+type Loads = Database['public']['Tables']['loads']['Row'];
+
+// type AddLoadData = {
+//   length: number;
+//   weight: number;
+//   loadingAddress: Addresses;
+//   unloadingAddress: Addresses;
+//   currency: string;
+//   loadingDate: string;
+//   unloadingDate: string;
+//   price: string;
+//   term: string;
+//   multiCheckbox: string[];
+//   created_at: string;
+// };
+// type Address = {
+//   postal_code: string;
+//   city: string;
+//   latitude: number;
+//   longitude: number;
+//   country: string;
+// };
+
+export type Addresses = Omit<AddressesDatabase, 'id'>;
+
+export type LoadData = Loads & {
+  unloading_address_id: AddressesDatabase;
+  loading_address_id: AddressesDatabase;
+};
+
+export type AddLoadData = Omit<AddLoadValues, 'loadingAddress' | 'unloadingAddress'> & {
+  loadingAddress: Addresses;
+  unloadingAddress: Addresses;
+};
+export const addLoad = async (data: AddLoadData) => {
+  const loadingId = +data.loadingAddress.postal_code.replace(/-/g, '');
+  const unloadingId = +data.unloadingAddress.postal_code.replace(/-/g, '');
 
   const { error } = await supabase.from('addresses').upsert([
     { id: loadingId, ...data.loadingAddress },
@@ -19,9 +55,6 @@ export const addLoad = async (data) => {
   ]);
   if (error) throw new Error();
 
-  console.log(data);
-  // console.log(error);
-  console.log(data);
   const loadData = {
     loading_address_id: loadingId,
     unloading_address_id: unloadingId,
@@ -40,10 +73,14 @@ export const addLoad = async (data) => {
   if (error) throw new Error();
   return data;
 };
+
 export const getAllLoads = async () => {
   const { data, error } = await supabase
-    .from('orders')
-    .select('*, unloading_address_id(*), loading_address_id(*)');
+    .from('loads')
+    .select(`*, unloading_address_id(*), loading_address_id(*)`)
+    .order('created_at', { ascending: false })
+    .returns<LoadData[]>();
+
   if (error) throw new Error();
   const loads = data.map((load) => {
     return {
@@ -61,5 +98,6 @@ export const getAllLoads = async () => {
     };
   });
   // console.log(data);
+
   return loads;
 };
