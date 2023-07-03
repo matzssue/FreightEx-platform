@@ -9,7 +9,8 @@
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update-types": "npx supabase gen types typescript --project-id \"cxupvaymlpdeyyrdrpkn\" > src/types/supabase.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
