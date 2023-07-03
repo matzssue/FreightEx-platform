@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+
+  .label {
+    padding-top: 0.4rem;
+    min-width: 50px;
+  }
+  .helperText {
+    width: max-content;
+    font-size: 0.6rem;
+  }
+}

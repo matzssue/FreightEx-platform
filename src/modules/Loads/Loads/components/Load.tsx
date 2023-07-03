@@ -1,27 +1,74 @@
+import { Json } from '../../../../types/supabase';
 import styles from './Load.module.scss';
 import Avatar from '@mui/material/Avatar';
-export const Load = () => {
+
+export type Vehicles = {
+  [key: string]: boolean;
+};
+
+type Load = {
+  loadingCity: string;
+  loadingPostCode: string;
+  loadingCountry: string;
+  unloadingCity: string;
+  unloadingPostCode: string;
+  unloadingCountry: string;
+  price: string;
+  currency: string;
+  paymentTerm: string;
+  loadingDate: string;
+  unloadingDate: string;
+  cargoLength: number | null;
+  cargoWeight: number | null;
+  vehicles: Vehicles;
+};
+
+export const Load = ({
+  loadingCity,
+  loadingPostCode,
+  loadingCountry,
+  unloadingCity,
+  unloadingPostCode,
+  unloadingCountry,
+  price,
+  currency,
+  paymentTerm,
+  loadingDate,
+  unloadingDate,
+  cargoLength,
+  cargoWeight,
+  vehicles,
+}: Load) => {
   return (
     <div className={styles.load}>
       <span>
-        <p className={styles.city}>Warszawa</p>
-        <p className={styles['post-code']}>00-001</p>
+        <p className={styles.country}>{loadingCountry}</p>
+        <p className={styles['post-code']}>
+          {loadingPostCode} {loadingCity}
+        </p>
       </span>
       <span>
-        <p className={styles.city}>Zielona Góra</p>
-        <p className={styles['post-code']}>65-003</p>
+        <p className={styles.country}>{unloadingCountry}</p>
+        <p className={styles['post-code']}>
+          {unloadingPostCode} {unloadingCity}
+        </p>
       </span>
       <span>
-        <p className={styles.salary}>1500zł</p>
-        <p className={styles.term}>payment term: 45d</p>
+        <p className={styles.salary}>{`${price} ${currency}`}</p>
+        <p className={styles.term}>payment term: {paymentTerm}d</p>
       </span>
       <span className={styles.cargo}>
-        <span>Length: 7ldm</span>
-        <span>Weight: 6t</span>
-        <p>Type: pallets</p>
+        <span>Length: {cargoLength}ldm</span>
+        <span>Weight: {cargoWeight}t</span>
+        <p>
+          Vehicle:
+          {Object.keys(vehicles)
+            .filter((key) => vehicles[key])
+            .join(', ')}
+        </p>
       </span>
-      <p className={styles.date}>26.05.2023</p>
-      <p className={styles.date}>27.05.2023</p>
+      <p className={styles.date}>{loadingDate}</p>
+      <p className={styles.date}>{unloadingDate}</p>
       <span className={styles.company}>
         <p className={styles.name}>Firma Lubuska S.A</p>
         <div>

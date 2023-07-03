@@ -1,6 +1,5 @@
 .box {
-  display: grid;
-  grid-template-columns: 200px 1fr;
+  display: flex;
   box-sizing: border-box;
-  height: 92%;
+  height: 94%;
 }

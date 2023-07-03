@@ -1,0 +1,38 @@
+@import '../../../../../styles/variables.scss';
+
+.header {
+  position: relative;
+  display: flex;
+  background-color: $primary-blue-color;
+  width: 100%;
+  height: 40px;
+
+  p {
+    align-self: center;
+    color: $secondary-text-color;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    margin-left: 1rem;
+  }
+  .close {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 10px;
+    right: 10px;
+    height: 20px;
+    width: 20px;
+    border: none;
+    padding: 0.2rem;
+    cursor: pointer;
+    background-color: transparent;
+    color: $secondary-text-color;
+
+    &:hover {
+      background-color: $bacground-color;
+      color: rgb(187, 22, 22);
+      border-radius: 50%;
+    }
+  }
+}
