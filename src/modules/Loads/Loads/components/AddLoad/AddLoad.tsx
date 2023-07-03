@@ -18,15 +18,18 @@ import { useAppSelector, useAppDispatch } from '../../../../../store/hooks';
 
 import { closeModal, openDialog, closeDialog } from '../../../../../store/reducers/modalSlice';
 import { addLoadSchema, AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
-import { addLoad } from '../../../../../utils/api/supabase/load';
+import { AddLoadData, Addresses, addLoad } from '../../../../../utils/api/supabase/load';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const AddLoad = () => {
+  const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
+
   const isModalOpen = useAppSelector((state) => state.modal.isLoadModalOpen);
   const isDialogOpen = useAppSelector((state) => state.modal.isLoadDialogOpen);
 
-  const [loadingAddress, setLoadingAddress] = useState(null);
-  const [unloadingAddress, setUnloadingAddress] = useState(null);
+  const [loadingAddress, setLoadingAddress] = useState<Addresses | undefined>(undefined);
+  const [unloadingAddress, setUnloadingAddress] = useState<Addresses | undefined>(undefined);
 
   const {
     handleSubmit,
@@ -37,16 +40,27 @@ export const AddLoad = () => {
     resolver: yupResolver<AddLoadValues>(addLoadSchema),
   });
 
+  const mutation = useMutation(async (values: AddLoadData) => addLoad(values), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['orders']);
+      console.log('load added successfully');
+    },
+    onError: () => {
+      console.log('Cos poszlo nie tak');
+    },
+  });
+
   const onSubmit = async (data: AddLoadValues) => {
     console.log(data.loadingDate);
+    if (!loadingAddress || !unloadingAddress) return;
     const loadData = {
       ...data,
       loadingAddress,
       unloadingAddress,
     };
 
-    addLoad(loadData);
-    reset();
+    mutation.mutate(loadData);
+    closeAllHandler();
   };
   const closeAllHandler = () => {
     reset();
@@ -75,7 +89,7 @@ export const AddLoad = () => {
                   setAddress={setLoadingAddress}
                   label={'Address'}
                   control={control}
-                  name={'loading'}
+                  name={'loadingAddress'}
                 />
                 {/* <PlacesInput2 label={'Loading adress'} control={control} name={'loading'} /> */}
               </div>
@@ -90,7 +104,7 @@ export const AddLoad = () => {
                   setAddress={setUnloadingAddress}
                   label={'Unloading address'}
                   control={control}
-                  name={'unloading'}
+                  name={'unloadingAddress'}
                 />
               </div>
               <div className={styles['cargo-dimensions']}>
