@@ -1,10 +1,35 @@
+import { Json } from '../../../../types/supabase';
 import styles from './Load.module.scss';
 import Avatar from '@mui/material/Avatar';
+
+export type Vehicles = {
+  [key: string]: boolean;
+};
+
+type Load = {
+  loadingCity: string;
+  loadingPostCode: string;
+  loadingCountry: string;
+  unloadingCity: string;
+  unloadingPostCode: string;
+  unloadingCountry: string;
+  price: string;
+  currency: string;
+  paymentTerm: string;
+  loadingDate: string;
+  unloadingDate: string;
+  cargoLength: number | null;
+  cargoWeight: number | null;
+  vehicles: Vehicles;
+};
+
 export const Load = ({
   loadingCity,
   loadingPostCode,
+  loadingCountry,
   unloadingCity,
   unloadingPostCode,
+  unloadingCountry,
   price,
   currency,
   paymentTerm,
@@ -12,16 +37,21 @@ export const Load = ({
   unloadingDate,
   cargoLength,
   cargoWeight,
-}) => {
+  vehicles,
+}: Load) => {
   return (
     <div className={styles.load}>
       <span>
-        <p className={styles.city}>{loadingCity}</p>
-        <p className={styles['post-code']}>{loadingPostCode}</p>
+        <p className={styles.country}>{loadingCountry}</p>
+        <p className={styles['post-code']}>
+          {loadingPostCode} {loadingCity}
+        </p>
       </span>
       <span>
-        <p className={styles.city}>{unloadingCity}</p>
-        <p className={styles['post-code']}>{unloadingPostCode}</p>
+        <p className={styles.country}>{unloadingCountry}</p>
+        <p className={styles['post-code']}>
+          {unloadingPostCode} {unloadingCity}
+        </p>
       </span>
       <span>
         <p className={styles.salary}>{`${price} ${currency}`}</p>
@@ -30,7 +60,12 @@ export const Load = ({
       <span className={styles.cargo}>
         <span>Length: {cargoLength}ldm</span>
         <span>Weight: {cargoWeight}t</span>
-        <p>Type: pallets</p>
+        <p>
+          Vehicle:
+          {Object.keys(vehicles)
+            .filter((key) => vehicles[key])
+            .join(', ')}
+        </p>
       </span>
       <p className={styles.date}>{loadingDate}</p>
       <p className={styles.date}>{unloadingDate}</p>
