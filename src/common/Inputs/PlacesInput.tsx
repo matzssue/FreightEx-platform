@@ -1,20 +1,23 @@
-import { useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { Control, Controller, FieldValues, Path, PathValue } from 'react-hook-form';
-import PlacesAutocomplete from 'react-places-autocomplete';
+import PlacesAutocomplete, { getLatLng } from 'react-places-autocomplete';
 import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
 import { IoLocationSharp } from 'react-icons/io5';
 import styles from './PlacesInput.module.scss';
+import { Addresses } from '../../utils/api/supabase/load';
 
 type PlacesInputProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   control: Control<T>;
+  setAddress: (adress: Addresses) => void;
 };
 
 export const PlacesInput = <T extends FieldValues>({
   control,
   name,
   label,
+  setAddress,
 }: PlacesInputProps<T>) => {
   return (
     <Controller
@@ -25,12 +28,16 @@ export const PlacesInput = <T extends FieldValues>({
       render={({ field, fieldState }) => (
         <PlacesAutocomplete
           googleCallbackName={name}
-          debounce={300}
+          debounce={700}
+          searchOptions={{ types: ['postal_code'] }}
           value={field.value}
-          onChange={(value) => field.onChange(value)}
+          onChange={(value) => field.onChange(value as PathValue<T, Path<T>> | ChangeEvent)}
           onSelect={async (value, placeId) => {
-            const response = await geocodeByAddress(value);
+            // const response = await geocodeByAddress(value);
+
             const [place] = await geocodeByPlaceId(placeId);
+            const cordinates = await getLatLng(place);
+
             console.log('response, placeID', place);
             const { long_name: postalCode = '' } =
               place.address_components.find((c) => c.types.includes('postal_code')) || {};
@@ -38,15 +45,24 @@ export const PlacesInput = <T extends FieldValues>({
               place.address_components.find((c) => c.types.includes('locality')) || {};
             const { long_name: country = '' } =
               place.address_components.find((c) => c.types.includes('country')) || {};
-            const adress = { postalCode, town, country };
-            console.log(adress);
-            return field.onChange(value);
+            const address = {
+              postal_code: postalCode,
+              country: country,
+              latitude: cordinates.lat,
+              longitude: cordinates.lng,
+              city: town,
+            };
+
+            setAddress(address);
+
+            return field.onChange(value as PathValue<T, Path<T>> | ChangeEvent);
           }}
         >
           {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
-            const filtered = suggestions.filter((suggestion) =>
-              suggestion.types.includes('postal_code'),
-            );
+            // console.log(suggestions, getSuggestionItemProps, getInputProps);
+            // const filtered = suggestions.filter((suggestion) =>
+            //   suggestion.types.includes('postal_code'),
+            // );
 
             return (
               <div className={styles.container}>
@@ -61,7 +77,7 @@ export const PlacesInput = <T extends FieldValues>({
                 <div className={styles['autocomplete-dropdown-container']}>
                   {loading && <div>Loading...</div>}
 
-                  {filtered.map((suggestion, i) => {
+                  {suggestions.map((suggestion, i) => {
                     const className = suggestion.active
                       ? styles['suggestion-item--active']
                       : styles['suggestion-item'];

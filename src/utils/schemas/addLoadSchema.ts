@@ -2,8 +2,8 @@ import * as yup from 'yup';
 
 export type AddLoadValues = yup.InferType<typeof addLoadSchema>;
 export const addLoadSchema = yup.object().shape({
-  loading: yup.string().required('Loading address is required').min(3),
-  unloading: yup.string().required('Unloading address is required').min(3),
+  loadingAddress: yup.string().required('Loading address is required').min(3),
+  unloadingAddress: yup.string().required('Unloading address is required').min(3),
   loadingDate: yup.string().required('Loading date is required').min(5),
   unloadingDate: yup.string().required('Unloading date is required').min(5),
   price: yup.string().required('Price is required').min(3),

@@ -1,33 +1,35 @@
 import Modal from '@mui/material/Modal';
 import styles from './AddLoad.module.scss';
-import { Controller, FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { PlacesInput } from '../../../../../common/Inputs/PlacesInput';
 import { DateInput } from '../../../../../common/Inputs/DateInput';
-import { AiOutlineClose } from 'react-icons/ai';
+
 import CheckboxInput from '../../../../../common/Inputs/Checkbox';
 import { TextFieldInput } from '../../../../../common/Inputs/TextField';
 import { SelectInput } from '../../../../../common/Inputs/Select';
 import { currencies } from '../../loadData';
 import { LoadHeader } from './LoadHeader';
-import * as yup from 'yup';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import AlertDialog from '../../../../../common/Dialog/AlertDialog';
-import { useDisclosure } from '../../../../../hooks/useDisclosure';
+
 import { useAppSelector, useAppDispatch } from '../../../../../store/hooks';
 
-import {
-  openModal,
-  closeModal,
-  openDialog,
-  closeDialog,
-} from '../../../../../store/reducers/modalSlice';
+import { closeModal, openDialog, closeDialog } from '../../../../../store/reducers/modalSlice';
 import { addLoadSchema, AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
+import { AddLoadData, Addresses, addLoad } from '../../../../../utils/api/supabase/load';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const AddLoad = () => {
+  const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
+
   const isModalOpen = useAppSelector((state) => state.modal.isLoadModalOpen);
   const isDialogOpen = useAppSelector((state) => state.modal.isLoadDialogOpen);
+
+  const [loadingAddress, setLoadingAddress] = useState<Addresses | undefined>(undefined);
+  const [unloadingAddress, setUnloadingAddress] = useState<Addresses | undefined>(undefined);
 
   const {
     handleSubmit,
@@ -38,8 +40,27 @@ export const AddLoad = () => {
     resolver: yupResolver<AddLoadValues>(addLoadSchema),
   });
 
+  const mutation = useMutation(async (values: AddLoadData) => addLoad(values), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['orders']);
+      console.log('load added successfully');
+    },
+    onError: () => {
+      console.log('Cos poszlo nie tak');
+    },
+  });
+
   const onSubmit = async (data: AddLoadValues) => {
-    console.log(data);
+    console.log(data.loadingDate);
+    if (!loadingAddress || !unloadingAddress) return;
+    const loadData = {
+      ...data,
+      loadingAddress,
+      unloadingAddress,
+    };
+
+    mutation.mutate(loadData);
+    closeAllHandler();
   };
   const closeAllHandler = () => {
     reset();
@@ -63,8 +84,13 @@ export const AddLoad = () => {
             <div className={styles['inputs-container']}>
               <div className={styles['loading-inputs']}>
                 <p className={styles.title}>Loading</p>
-                <DateInput label={'Date'} control={control} name={'loadingDate'} />
-                <PlacesInput label={'Address'} control={control} name={'loading'} />
+                <DateInput<AddLoadValues> label={'Date'} control={control} name={'loadingDate'} />
+                <PlacesInput<AddLoadValues>
+                  setAddress={setLoadingAddress}
+                  label={'Address'}
+                  control={control}
+                  name={'loadingAddress'}
+                />
                 {/* <PlacesInput2 label={'Loading adress'} control={control} name={'loading'} /> */}
               </div>
               <div className={styles['unloading-inputs']}>
@@ -74,7 +100,12 @@ export const AddLoad = () => {
                   control={control}
                   name={'unloadingDate'}
                 />
-                <PlacesInput label={'Unloading adress'} control={control} name={'unloading'} />
+                <PlacesInput<AddLoadValues>
+                  setAddress={setUnloadingAddress}
+                  label={'Unloading address'}
+                  control={control}
+                  name={'unloadingAddress'}
+                />
               </div>
               <div className={styles['cargo-dimensions']}>
                 <p>Cargo </p>
