@@ -1,14 +1,16 @@
-import { useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { Control, Controller, FieldValues, Path, PathValue } from 'react-hook-form';
 import PlacesAutocomplete, { getLatLng } from 'react-places-autocomplete';
 import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
 import { IoLocationSharp } from 'react-icons/io5';
 import styles from './PlacesInput.module.scss';
+import { Addresses } from '../../utils/api/supabase/load';
 
 type PlacesInputProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   control: Control<T>;
+  setAddress: (adress: Addresses) => void;
 };
 
 export const PlacesInput = <T extends FieldValues>({
@@ -26,9 +28,10 @@ export const PlacesInput = <T extends FieldValues>({
       render={({ field, fieldState }) => (
         <PlacesAutocomplete
           googleCallbackName={name}
-          debounce={300}
+          debounce={700}
+          searchOptions={{ types: ['postal_code'] }}
           value={field.value}
-          onChange={(value) => field.onChange(value)}
+          onChange={(value) => field.onChange(value as PathValue<T, Path<T>> | ChangeEvent)}
           onSelect={async (value, placeId) => {
             // const response = await geocodeByAddress(value);
 
@@ -52,13 +55,14 @@ export const PlacesInput = <T extends FieldValues>({
 
             setAddress(address);
 
-            return field.onChange(value);
+            return field.onChange(value as PathValue<T, Path<T>> | ChangeEvent);
           }}
         >
           {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
-            const filtered = suggestions.filter((suggestion) =>
-              suggestion.types.includes('postal_code'),
-            );
+            // console.log(suggestions, getSuggestionItemProps, getInputProps);
+            // const filtered = suggestions.filter((suggestion) =>
+            //   suggestion.types.includes('postal_code'),
+            // );
 
             return (
               <div className={styles.container}>
@@ -73,7 +77,7 @@ export const PlacesInput = <T extends FieldValues>({
                 <div className={styles['autocomplete-dropdown-container']}>
                   {loading && <div>Loading...</div>}
 
-                  {filtered.map((suggestion, i) => {
+                  {suggestions.map((suggestion, i) => {
                     const className = suggestion.active
                       ? styles['suggestion-item--active']
                       : styles['suggestion-item'];
