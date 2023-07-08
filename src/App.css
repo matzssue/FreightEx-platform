@@ -1,0 +1,20 @@
+.box {
+  display: flex;
+  box-sizing: border-box;
+  height: 94%;
+}
+.pac-container {
+  z-index: 2001;
+}
+.modal {
+  z-index: 2000;
+}
+.modal-backdrop {
+  z-index: 1000;
+}
+.pac-item {
+  cursor: pointer;
+}
+.pac-item:hover {
+  background-color: rgb(214, 214, 214);
+}
