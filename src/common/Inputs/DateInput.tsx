@@ -2,43 +2,56 @@ import { Control, Controller, useForm, FieldValues, PathValue, Path } from 'reac
 import styles from './DateInput.module.scss';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker';
-import dayjs, { Dayjs } from 'dayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { ChangeEvent } from 'react';
 
 type DateInputProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   control: Control<T>;
+  size?: 'small' | 'medium';
+  fontSize?: string;
 };
 
-export const DateInput = <T extends FieldValues>({ control, name, label }: DateInputProps<T>) => {
-  const currentDate: Dayjs = dayjs(new Date());
-
+export const DateInput = <T extends FieldValues>({
+  control,
+  name,
+  label,
+  size = 'medium',
+  fontSize = '18px',
+}: DateInputProps<T>) => {
   return (
     <Controller
       name={name}
       control={control}
-      defaultValue={currentDate as PathValue<T, Path<T>> | undefined}
+      defaultValue={null as PathValue<T, Path<T>> | undefined}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div className={styles.container}>
-            {/* <label>Date</label> */}
+            <label htmlFor={name}>{label}</label>
             <DatePicker
-              // {...field}
               onChange={(date) => {
-                // setDate(date);
-                onChange(date);
+                onChange(date as PathValue<T, Path<T>> | ChangeEvent<Element>);
+              }}
+              sx={{
+                '& .MuiOutlinedInput-input': {
+                  fontSize: fontSize,
+                },
+                '.css-1wc848c-MuiFormHelperText-root': {
+                  fontFamily: 'Nunito, sans-serif',
+                },
               }}
               className={styles.input}
               value={value}
-              label={label}
               slotProps={{
                 textField: {
+                  size: size,
                   variant: 'outlined',
                   error: !!error,
                   helperText: error?.message,
                 },
               }}
+              // sx={sx}
             />
           </div>
         </LocalizationProvider>

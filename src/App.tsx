@@ -1,6 +1,6 @@
 import { useState, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import styles from './App.module.scss';
+import './App.css';
 import Wrapper from './common/Wrapper';
 import { AsideMenu } from './modules/Home/AsideMenu/components/AsideMenu';
 import { UserBar } from './modules/UserBar/components/UserBar';
@@ -10,20 +10,17 @@ import { News } from './Views/News';
 import { Loader } from '@googlemaps/js-api-loader';
 import { QueryClient, QueryClientProvider, QueryCache } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Loads } from './modules/Loads/Loads/components/Loads';
 
-const loader = new Loader({
-  apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
-  version: 'weekly',
-});
+// const loader = new Loader({
+//   apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+//   version: 'weekly',
+// });
 
-loader.load().then(async () => {
-  const data = (await google.maps.importLibrary('places')) as google.maps.MapsLibrary;
-  console.log('test', data);
-  // map = new Map(document.getElementById("map") as HTMLElement, {
-  //   center: { lat: -34.397, lng: 150.644 },
-  //   zoom: 8,
-  // });
-});
+// loader.load().then(async () => {
+//   const data = (await google.maps.importLibrary('places')) as google.maps.MapsLibrary;
+//   console.log('test', data);
+// });
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -46,11 +43,14 @@ function App() {
         <Suspense fallback='Loading...'>
           <BrowserRouter>
             <UserBar setShowMenu={setShowMenu} />
-            <div className={styles.box}>
+            <div className={'box'}>
               <AsideMenu showMenu={showMenu} />
               <Wrapper showMenu={showMenu}>
                 <Routes>
-                  <Route element={<Home />} path='/loads' />
+                  <Route path='/loads'>
+                    <Route index element={<Home />} />
+                    <Route element={<Home />} path=':id' />
+                  </Route>
                   <Route element={<News />} path='/news' />
                 </Routes>
               </Wrapper>

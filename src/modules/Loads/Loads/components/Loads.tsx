@@ -2,10 +2,26 @@ import styles from './Loads.module.scss';
 import { List } from '../../../../common/Lists/List';
 import { sortData } from '../loadData';
 import { Load, Vehicles } from './Load';
-import { getAllLoads } from '../../../../utils/api/supabase/load';
+import { getAllLoads, getFilteredLoads } from '../../../../utils/api/supabase/load';
 import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../../../store/hooks';
 export const Loads = () => {
-  const { data, isLoading } = useQuery(['orders'], async () => await getAllLoads());
+  const { id } = useParams<string>();
+  // console.log(id);
+  const filters = useAppSelector((state) => state.loadsFilters.filters);
+
+  const { data: allLoads } = useQuery(['loads'], async () => await getAllLoads());
+
+  const { data: filteredLoads, isLoading } = useQuery(['loads', id], async () => {
+    if (!filters || !id) return [];
+    const foundFilter = filters.find((filter) => filter.id === id);
+
+    return await getFilteredLoads(foundFilter);
+  });
+
+  const loads = id ? filteredLoads : allLoads;
 
   return (
     <div>
@@ -17,7 +33,7 @@ export const Loads = () => {
           {isLoading ? (
             <p>loading</p>
           ) : (
-            data?.map((load) => (
+            loads?.map((load) => (
               <li key={load.id}>
                 <Load
                   key={load.id}

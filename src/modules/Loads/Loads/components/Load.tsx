@@ -60,7 +60,7 @@ export const Load = ({
       <span className={styles.cargo}>
         <span>Length: {cargoLength}ldm</span>
         <span>Weight: {cargoWeight}t</span>
-        <p>
+        <p className={styles.vehicles}>
           Vehicle:
           {Object.keys(vehicles)
             .filter((key) => vehicles[key])
@@ -79,7 +79,7 @@ export const Load = ({
           <Avatar
             alt={`Mateusz photo`}
             src='https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80'
-            sx={{ width: 45, height: 45 }}
+            sx={{ width: 40, height: 40 }}
           />
         </div>
       </span>
