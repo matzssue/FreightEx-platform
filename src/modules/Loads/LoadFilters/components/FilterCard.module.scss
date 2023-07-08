@@ -2,11 +2,14 @@
 
 .filter {
   position: relative;
-  width: 300px;
-  background-color: $primary-color;
-  border-radius: 30px;
-  padding: 2rem 1rem;
-  box-shadow: 6px 4px 9px -5px rgba(137, 137, 138, 1);
+  width: auto;
+  // background-color: $primary-color;
+  border-radius: 1px;
+  padding: 0.5rem 0.3rem;
+  padding-top: 1rem;
+  // box-shadow: 6px 4px 9px -5px rgba(137, 137, 138, 1);
+  border-right: 1px solid rgba(128, 128, 128, 0.322);
+
   .filter-name {
     position: absolute;
     top: -10px;
@@ -16,19 +19,4 @@
     color: $primary-color;
     font-size: 1rem;
   }
-  .min {
-    position: absolute;
-    left: 120px;
-    top: 5px;
-  }
-  .max {
-    position: absolute;
-    left: 195px;
-    top: 5px;
-  }
-}
-.inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
