@@ -1,16 +1,15 @@
 import styles from './FilterCard.module.scss';
 import { ReactNode } from 'react';
+import { Title } from '../../../../common/Title';
 type FilterCard = {
   children: ReactNode;
   filterName: string;
-  topLeftLabel: string;
-  topRightLabel?: string;
 };
 
-export const FilterCard = ({ children, filterName, topLeftLabel, topRightLabel }: FilterCard) => {
+export const FilterCard = ({ children, filterName }: FilterCard) => {
   return (
     <div className={styles.filter}>
-      <span className={styles['filter-name']}>{filterName}</span>
+      <Title title={filterName} />
       <div>{children}</div>
     </div>
   );
