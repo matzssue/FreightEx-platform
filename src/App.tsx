@@ -49,7 +49,10 @@ function App() {
                 <Routes>
                   <Route path='/loads'>
                     <Route index element={<Home />} />
-                    <Route element={<Home />} path=':id' />
+                    <Route path='/loads/:id'>
+                      <Route index element={<Home />} />
+                      <Route element={<Home />} path='/loads/:id/:loadId' />
+                    </Route>
                   </Route>
                   <Route element={<News />} path='/news' />
                 </Routes>
