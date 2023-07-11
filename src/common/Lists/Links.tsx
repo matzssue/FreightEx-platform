@@ -15,7 +15,7 @@ type LinksProps = {
 
 const Links = ({ data, activeMode = true, hidden }: LinksProps) => {
   return (
-    <ul>
+    <ul className={styles['list-container']}>
       {data.map((link) => (
         <li key={link.linkName}>
           <NavLink
