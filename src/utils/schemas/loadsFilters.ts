@@ -1,8 +1,18 @@
 import * as yup from 'yup';
 export type LoadsFiltersValues = yup.InferType<typeof loadsFilterSchema>;
 export const loadsFilterSchema = yup.object().shape({
-  loadingPlace: yup.string().required(),
-  unloadingPlace: yup.string().nullable(),
+  loadingAddress: yup.string().required(),
+  unloadingAddress: yup.string().nullable().optional(),
+  loadingAddressData: yup.object().shape({
+    city: yup.string().required(),
+    country: yup.string().required(),
+    latitude: yup.number().required(),
+    longitude: yup.number().required(),
+    postal_code: yup.string().required(),
+  }),
+  unloadingAddressData: yup.object().shape({
+    country: yup.string(),
+  }),
   startLoadingDate: yup.date().nullable(),
   endLoadingDate: yup
     .date()
@@ -53,9 +63,9 @@ export const loadsFilterSchema = yup.object().shape({
     .number()
     .typeError('Enter a number')
     .transform((v, o) => (o === '' ? null : v))
-    .min(0, 'Loading area cannot be negative')
+    .min(5, 'Loading area cannot be negative')
     .max(100000, 'Loading area cannot exceed 150')
-    .nullable(),
+    .required(),
   unloadingArea: yup
     .number()
     .typeError('Enter a number')
