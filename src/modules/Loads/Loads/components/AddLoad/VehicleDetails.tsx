@@ -1,12 +1,17 @@
 import styles from './VehicleDetails.module.scss';
 import CheckboxInput from '../../../../../common/Inputs/Checkbox';
-
+import { FieldErrors } from 'react-hook-form';
 import { AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
+import { ControllerProps } from '../../types';
+import { Title } from '../../../../../common/Title';
 
-export const VehicleDetails = ({ errors, control }) => {
+export const VehicleDetails = ({
+  errors,
+  control,
+}: ControllerProps<AddLoadValues> & { errors: FieldErrors<AddLoadValues> }) => {
   return (
     <div className={styles['vehicle-inputs']}>
-      <p>Vehicle type</p>
+      <Title title={'Vehicle'} />
       <CheckboxInput<AddLoadValues> control={control} label={'solo'} name={'multiCheckbox.solo'} />
       <CheckboxInput<AddLoadValues> control={control} label={'bus'} name={'multiCheckbox.bus'} />
       <CheckboxInput<AddLoadValues>

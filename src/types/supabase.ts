@@ -99,7 +99,27 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_entries_within_distance: {
+        Args: {
+          tlongitude: number
+          tlatitude: number
+          distance: number
+        }
+        Returns: {
+          created_at: string
+          currency: string
+          id: number
+          length: number | null
+          loading_address_id: number | null
+          loading_date: string
+          price: string
+          term: string
+          unloading_address_id: number | null
+          unloading_date: string
+          vehicle_types: Json
+          weight: number | null
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

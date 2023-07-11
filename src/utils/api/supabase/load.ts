@@ -1,42 +1,12 @@
 import supabase from '../../../config/supabase';
 import { AddLoadValues } from '../../schemas/addLoadSchema';
 import { Database } from '../../../types/supabase';
-import { useAppSelector } from '../../../store/hooks';
-import { LoadsFiltersValues } from '../../schemas/loadsFilters';
-import moment from 'moment';
-import { toRadians } from '../../helpers/getBoundRadius';
 
-// export const addLoad = async (newLoad: AddLoadValues) => {
-//   const { data, error } = await supabase.from('loads').insert(newLoad);
-//   console.log(error);
-//   console.log(data);
-//   if (error) throw new Error();
-//   return data;
-// };
+import { LoadsFiltersValues } from '../../schemas/loadsFilters';
+import { LoadsFilters } from '../../../store/reducers/loadsFiltersSlice';
 
 type AddressesDatabase = Database['public']['Tables']['addresses']['Row'];
 type Loads = Database['public']['Tables']['loads']['Row'];
-
-// type AddLoadData = {
-//   length: number;
-//   weight: number;
-//   loadingAddress: Addresses;
-//   unloadingAddress: Addresses;
-//   currency: string;
-//   loadingDate: string;
-//   unloadingDate: string;
-//   price: string;
-//   term: string;
-//   multiCheckbox: string[];
-//   created_at: string;
-// };
-// type Address = {
-//   postal_code: string;
-//   city: string;
-//   latitude: number;
-//   longitude: number;
-//   country: string;
-// };
 
 export type Addresses = Omit<AddressesDatabase, 'id'>;
 
@@ -45,17 +15,18 @@ export type LoadData = Loads & {
   loading_address_id: AddressesDatabase;
 };
 
-export type AddLoadData = Omit<AddLoadValues, 'loadingAddress' | 'unloadingAddress'> & {
-  loadingAddress: Addresses;
-  unloadingAddress: Addresses;
+export type AddLoadData = AddLoadValues & {
+  loadingAddressData: Addresses;
+  unloadingAddressData: Addresses;
 };
+
 export const addLoad = async (data: AddLoadData) => {
-  const loadingId = +data.loadingAddress.postal_code.replace(/-/g, '');
-  const unloadingId = +data.unloadingAddress.postal_code.replace(/-/g, '');
+  const loadingId = +data.loadingAddressData.postal_code.replace(/-/g, '');
+  const unloadingId = +data.unloadingAddressData.postal_code.replace(/-/g, '');
 
   const { error } = await supabase.from('addresses').upsert([
-    { id: loadingId, ...data.loadingAddress },
-    { id: unloadingId, ...data.unloadingAddress },
+    { id: loadingId, ...data.loadingAddressData },
+    { id: unloadingId, ...data.unloadingAddressData },
   ]);
   if (error) throw new Error();
 
@@ -73,9 +44,9 @@ export const addLoad = async (data: AddLoadData) => {
   };
 
   const { data: load, error: loadError } = await supabase.from('loads').insert(loadData);
-  console.log(loadError, load);
-  if (error) throw new Error();
-  return data;
+
+  if (loadError) throw new Error();
+  return load;
 };
 
 export const getAllLoads = async () => {
@@ -105,7 +76,7 @@ export const getAllLoads = async () => {
 
   return loads;
 };
-export const getFilteredLoads = async (filter: LoadsFiltersValues) => {
+export const getFilteredLoads = async (filter: LoadsFilters) => {
   if (!filter) return;
   const {
     maxWeight,
@@ -117,27 +88,21 @@ export const getFilteredLoads = async (filter: LoadsFiltersValues) => {
     startUnloadingDate,
     endUnloadingDate,
     loadingArea,
-    loadingPlaceData,
-    unloadingPlace,
+    loadingAddressData,
   } = filter;
 
-  let query;
+  // if (!loadingArea) {
+  //   query = supabase.from('loads').select(`*, unloading_address_id(*), loading_address_id(*)`);
+  //   console.log('noLoadingArea', query);
+  // }
 
-  if (!loadingArea) {
-    query = supabase.from('loads').select(`*, unloading_address_id(*), loading_address_id(*)`);
-    console.log('noLoadingArea', query);
-  }
-  if (loadingArea) {
-    // console.log(loadingPlaceData.latitude, loadingPlaceData.longitude, loadingArea);
+  let query = supabase.rpc('get_entries_within_distance', {
+    distance: loadingArea,
+    tlatitude: loadingAddressData.latitude,
+    tlongitude: loadingAddressData.longitude,
+  });
 
-    query = supabase.rpc('get_entries_within_distance', {
-      distance: loadingArea,
-      tlatitude: loadingPlaceData.latitude,
-      tlongitude: loadingPlaceData.longitude,
-    });
-    console.log('loadingArea', query);
-  }
-
+  console.log(startLoadingDate, endLoadingDate, startLoadingDate, endUnloadingDate);
   if (!query) return;
 
   if (maxWeight) {
@@ -165,26 +130,11 @@ export const getFilteredLoads = async (filter: LoadsFiltersValues) => {
     query = query.lte('unloading_date', endUnloadingDate);
   }
 
-  const { data, error } = await query;
+  const { data, error } = await query.returns<LoadData[]>();
 
   if (error) throw new Error();
+
   console.log(data);
-
-  // if (loadingArea) {
-  //   query = query.rpc('get_entries_within_distance', {
-  //     tlongitude: loadingPlace.longitude,
-  //     tlatitude: loadingPlace.latitude,
-  //     distance: loadingArea,
-  //   });
-  // }
-
-  // .order('created_at', { ascending: false })
-  // .returns<LoadData[]>();
-
-  // if (error) throw new Error();
-  // console.log(data);
-  // console.log(error);
-
   const loads = data.map((load) => {
     return {
       id: load.id,

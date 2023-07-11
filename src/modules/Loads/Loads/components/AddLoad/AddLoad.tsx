@@ -8,9 +8,9 @@ import AlertDialog from '../../../../../common/Dialog/AlertDialog';
 import { useAppSelector, useAppDispatch } from '../../../../../store/hooks';
 import { closeModal, openDialog, closeDialog } from '../../../../../store/reducers/modalSlice';
 import { addLoadSchema, AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
-import { AddLoadData, Addresses, addLoad } from '../../../../../utils/api/supabase/load';
+import { AddLoadData, addLoad } from '../../../../../utils/api/supabase/load';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { LoadDetails } from './LoadDetails';
+import { PlaceAndDateSearch } from './PlaceAndDateSearch';
 import { CargoDetails } from './CargoDetails';
 import { VehicleDetails } from './VehicleDetails';
 import { PaymentDetails } from './PaymentDetails';
@@ -42,15 +42,14 @@ export const AddLoad = () => {
     },
   });
 
-  const onSubmit = async (data: AddLoadValues) => {
-    console.log(data);
-    mutation.mutate(data);
-
-    closeAllHandler();
-  };
   const closeAllHandler = () => {
     reset();
     dispatch(closeModal());
+  };
+  const onSubmit = async (data: AddLoadData) => {
+    console.log(data);
+    mutation.mutate(data);
+    closeAllHandler();
   };
 
   return (
@@ -68,7 +67,7 @@ export const AddLoad = () => {
         <LoadHeader onClick={() => dispatch(openDialog())} />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles['inputs-container']}>
-            <LoadDetails control={control} setValue={setValue} />
+            <PlaceAndDateSearch control={control} setValue={setValue} />
             <CargoDetails control={control} />
             <VehicleDetails control={control} errors={errors} />
             <PaymentDetails selectOptions={currencies} control={control} />

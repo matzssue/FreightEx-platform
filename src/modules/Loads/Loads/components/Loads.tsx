@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../store/hooks';
 export const Loads = () => {
   const { id } = useParams<string>();
+  console.log(id);
   // console.log(id);
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
@@ -17,12 +18,12 @@ export const Loads = () => {
   const { data: filteredLoads, isLoading } = useQuery(['loads', id], async () => {
     if (!filters || !id) return [];
     const foundFilter = filters.find((filter) => filter.id === id);
-
+    if (!foundFilter) return;
     return await getFilteredLoads(foundFilter);
   });
 
   const loads = id ? filteredLoads : allLoads;
-
+  console.log(loads);
   return (
     <div>
       <div className={styles['sort-list']}>
@@ -36,7 +37,7 @@ export const Loads = () => {
             loads?.map((load) => (
               <li key={load.id}>
                 <Load
-                  key={load.id}
+                  loadId={load.id}
                   loadingCity={load.loadingAddress.city}
                   loadingPostCode={load.loadingAddress.postal_code}
                   loadingCountry={load.loadingAddress.country}

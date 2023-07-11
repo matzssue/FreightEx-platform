@@ -4,11 +4,16 @@ import { TextFieldInput } from '../../../../../common/Inputs/TextField';
 import { SelectInput } from '../../../../../common/Inputs/Select';
 
 import { AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
+import { ControllerProps } from '../../types';
+import { Title } from '../../../../../common/Title';
 
-export const PaymentDetails = ({ control, selectOptions }) => {
+export const PaymentDetails = ({
+  control,
+  selectOptions,
+}: ControllerProps<AddLoadValues> & { selectOptions: string[] }) => {
   return (
     <div className={styles['payment-inputs__container']}>
-      <p className={styles.title}>Payment</p>
+      <Title title={'Payment'} />
       <div className={styles['payment-inputs']}>
         <TextFieldInput<AddLoadValues>
           label={'term'}
@@ -34,6 +39,8 @@ export const PaymentDetails = ({ control, selectOptions }) => {
             name={'currency'}
             control={control}
             defaultValue='EUR'
+            variant='standard'
+            sx={{ width: '50px', fontSize: '10px', marginLeft: '9px' }}
           />
         </div>
       </div>

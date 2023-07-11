@@ -1,22 +1,14 @@
 @import '../../../../styles/variables.scss';
 
 .filter {
-  position: relative;
   width: auto;
   // background-color: $primary-color;
   border-radius: 1px;
   padding: 0.5rem 0.3rem;
-  padding-top: 1rem;
+
   // box-shadow: 6px 4px 9px -5px rgba(137, 137, 138, 1);
   border-right: 1px solid rgba(128, 128, 128, 0.322);
-
-  .filter-name {
-    position: absolute;
-    top: -10px;
-    background-color: $primary-blue-color;
-    padding: 0.1rem 1rem;
-    border-radius: 1rem;
-    color: $primary-color;
-    font-size: 1rem;
+  p {
+    font-size: 0.9rem;
   }
 }
