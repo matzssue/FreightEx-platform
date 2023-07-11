@@ -4,10 +4,13 @@ import { TextFieldInput } from '../../../../../common/Inputs/TextField';
 
 import { AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
 
-export const CargoDetails = ({ control }) => {
+import { ControllerProps } from '../../types';
+import { Title } from '../../../../../common/Title';
+
+export const CargoDetails = ({ control }: ControllerProps<AddLoadValues>) => {
   return (
     <div className={styles['cargo-dimensions']}>
-      <p>Cargo </p>
+      <Title title={'Cargo'} />
       <div className={styles['dimensions-inputs__container']}>
         <TextFieldInput<AddLoadValues>
           label={'length(m)'}
