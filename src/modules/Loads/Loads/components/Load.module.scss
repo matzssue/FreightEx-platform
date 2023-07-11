@@ -79,15 +79,15 @@
     justify-self: center;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-weight: 700;
-    width: 100px;
-    font-size: 0.6rem;
     height: 25px;
+    width: 100px;
+    color: white;
     background-color: $secondary-button-color;
+    font-weight: 700;
+    font-size: 0.6rem;
     border-radius: 1rem;
-    box-shadow: 8px 8px 22px -11px rgba(136, 136, 136, 1);
     border: none;
+    box-shadow: 8px 8px 22px -11px rgba(136, 136, 136, 1);
     cursor: pointer;
     &:hover {
       background-color: #35bb3a;
