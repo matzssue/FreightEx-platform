@@ -1,21 +1,20 @@
-import styles from './LoadDetails.module.scss';
+import styles from './PlaceAndDateSearch.module.scss';
 
 import { DateInput } from '../../../../../common/Inputs/DateInput';
 import { AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
 import { PlacesAutocompleteInput } from '../../../../../common/Inputs/PlacesAutocompleteInput';
-
-export const LoadDetails = ({ control, setValue }) => {
+import { ControllerProps } from '../../types';
+import { UseFormSetValue } from 'react-hook-form';
+import { Title } from '../../../../../common/Title';
+export const PlaceAndDateSearch = ({
+  control,
+  setValue,
+}: ControllerProps<AddLoadValues> & { setValue: UseFormSetValue<AddLoadValues> }) => {
   return (
     <>
       <div className={styles['loading-inputs']}>
-        <p className={styles.title}>Loading</p>
+        <Title title={'Loading'} />
         <DateInput<AddLoadValues> label={'Date'} control={control} name={'loadingDate'} />
-        {/* <PlacesInput<AddLoadValues>
-          setAddress={setLoadingAddress}
-          label={'Address'}
-          control={control}
-          name={'loadingAddress'}
-        /> */}
         <PlacesAutocompleteInput<AddLoadValues>
           setValue={setValue}
           setValueKey='loadingAddressData'
@@ -32,7 +31,7 @@ export const LoadDetails = ({ control, setValue }) => {
         />
       </div>
       <div className={styles['unloading-inputs']}>
-        <p className={styles.title}>Unloading</p>
+        <Title title={'Unloading'} />
         <DateInput<AddLoadValues> label={'Date'} control={control} name={'unloadingDate'} />
         <PlacesAutocompleteInput
           setValue={setValue}
