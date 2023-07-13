@@ -1,0 +1,59 @@
+@import '../../../../../styles/variables.scss';
+
+.container {
+  width: 400px;
+  height: 100%;
+  background-color: $secondary-color;
+  position: absolute;
+  right: 0;
+  top: 0;
+  box-shadow: -4px 0px 22px 2px rgba(82, 82, 82, 0.51);
+  .close-button {
+    height: max-content;
+    width: max-content;
+    padding-top: 1rem;
+    border: none;
+    color: $primary-blue-color;
+
+    svg {
+      padding: 0.2rem;
+      &:hover {
+        background-color: $primary-color;
+        border-radius: 30%;
+      }
+    }
+  }
+}
+.load-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1rem;
+  gap: 5px;
+
+  .details-container {
+    padding: 0.5rem 1rem;
+    background-color: $primary-color;
+    border-radius: 5px;
+    p {
+      margin: 0.5rem 0;
+    }
+    &.route,
+    &.payment {
+      display: flex;
+      gap: 15px;
+      grid-column: 1/3;
+    }
+  }
+
+  .accept-button {
+    grid-column: 1/3;
+    background-color: $secondary-button-color;
+    color: $secondary-text-color;
+    border: none;
+    padding: 0.5rem 0;
+    font-weight: 700;
+    &:hover {
+      background-color: $secondary-hover-text-color;
+    }
+  }
+}
