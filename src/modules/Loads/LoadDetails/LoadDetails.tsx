@@ -1,13 +1,12 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
-import { getLoadDetails } from '../../../../../utils/api/supabase/getLoadDetails';
+import { getLoadDetails } from '../../../utils/api/supabase/getLoadDetails';
 import { useQuery } from '@tanstack/react-query';
 import styles from './LoadDetails.module.scss';
 import { LoadMap } from './LoadMap';
-import { LoadAddress } from '../Loads/LoadAddress';
+import { LoadAddress } from '../LoadsList/components/Loads/LoadAddress';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { useCalculateRoute } from '../../../../../hooks/useCalculateRoute';
 export const LoadDetails = () => {
   const { loadId, filterId } = useParams();
   if (!loadId) return;

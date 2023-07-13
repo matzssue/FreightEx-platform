@@ -1,12 +1,10 @@
-import { Json } from '../../../../../types/supabase';
 import styles from './Load.module.scss';
 import Avatar from '@mui/material/Avatar';
-import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { noFilterTab } from '../../loadData';
-import { getLoadDetails } from '../../../../../utils/api/supabase/getLoadDetails';
 import { NavLink } from 'react-router-dom';
 import { LoadAddress } from './LoadAddress';
+
 export type Vehicles = {
   [key: string]: boolean;
 };

@@ -2,7 +2,8 @@ import styles from './Loads.module.scss';
 import { List } from '../../../../../common/Lists/List';
 import { noFilterTab, sortData } from '../../loadData';
 import { Load, Vehicles } from './Load';
-import { getAllLoads, getFilteredLoads } from '../../../../../utils/api/supabase/load';
+import { getAllLoads } from '../../../../../utils/api/supabase/getAllLoads';
+import { getFilteredLoads } from '../../../../../utils/api/supabase/getFilteredLoads';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -14,7 +15,7 @@ export const Loads = () => {
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
   const { data: allLoads } = useQuery(['loads'], async () => await getAllLoads());
-
+  /// czy na pewno nie da sie tego lepiej napisac?
   const { data: filteredLoads, isLoading } = useQuery(['loads', filterId], async () => {
     if (!filters || !filterId || filterId === noFilterTab) return [];
     const foundFilter = filters.find((filter) => filter.id === filterId);
