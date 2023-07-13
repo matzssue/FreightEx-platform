@@ -1,5 +1,5 @@
 import { Control, Controller, FieldValues, Path, PathValue } from 'react-hook-form';
-import { MenuItem } from '@mui/material';
+import { MenuItem, SxProps } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { FormHelperText, FormControl, Select, InputLabel } from '@mui/material';
 import { useState } from 'react';
@@ -9,8 +9,10 @@ type SelectInputProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   control: Control<T>;
-  options: string[];
+  options: string[] | number[];
   defaultValue: PathValue<T, Path<T>> | undefined;
+  variant?: 'standard' | 'outlined' | 'filled';
+  sx?: SxProps;
 };
 
 export const SelectInput = <T extends FieldValues>({
@@ -19,6 +21,8 @@ export const SelectInput = <T extends FieldValues>({
   control,
   options,
   defaultValue,
+  variant,
+  sx,
 }: SelectInputProps<T>) => {
   return (
     <Controller
@@ -27,23 +31,27 @@ export const SelectInput = <T extends FieldValues>({
       defaultValue={defaultValue}
       control={control}
       render={({ field: { onBlur, onChange, value } }) => (
-        <FormControl style={{ width: '10%', margin: '0px' }}>
-          <InputLabel className={styles.label}>{label}</InputLabel>
+        <FormControl style={{ flexDirection: 'row', gap: '5px' }}>
+          {label && (
+            <label className={styles.label} htmlFor={name}>
+              {label}
+            </label>
+          )}
           <Select
-            variant='standard'
+            labelId={`select-${name}`}
+            variant={variant}
             size='small'
             className={styles.select}
             // onChange={(e) => setCurrency(e.target.value)}
-            onChange={onChange}
+            onChange={onChange as PathValue<T, Path<T>>}
             value={value}
             onBlur={onBlur}
             autoWidth={true}
-            sx={{ width: 70, fontSize: '10px', border: 0, margin: 0 }}
-
-            // MenuProps={{ anchorOrigin: { vertical: 'bottom', horizontal: 'center' } }}
+            sx={sx}
+            MenuProps={{ MenuListProps: { style: { maxHeight: '150px' } } }}
           >
-            {options.map((option: string) => (
-              <MenuItem key={option} value={option}>
+            {options.map((option: string | number) => (
+              <MenuItem sx={{ fontSize: '10px' }} key={option} value={option}>
                 {option}
               </MenuItem>
             ))}

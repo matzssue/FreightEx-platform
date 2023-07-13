@@ -1,0 +1,5 @@
+@import '../../styles/variables.scss';
+@import '../../styles/error.module.scss';
+.error {
+  @extend .error;
+}

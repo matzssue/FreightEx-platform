@@ -1,9 +1,14 @@
-@import '../../../../styles/variables.scss';
+@import '../../../../../styles/variables.scss';
+
+.navigation {
+  padding: 0;
+}
 .load {
   display: grid;
   grid-template-columns: 1fr 1fr 0.6fr 0.8fr 0.6fr 0.6fr 1.2fr 0.6fr;
   background-color: $secondary-color;
-
+  font-size: 0.8rem;
+  width: 100%;
   cursor: pointer;
   &:hover {
     background-color: $primary-color;
@@ -16,19 +21,15 @@
   span {
     padding-left: 0.5rem;
   }
-  .country {
-    font-weight: 700;
-  }
-  .post-code {
-    font-size: 0.7rem;
-    color: $primary-text-color;
-    padding-top: 0;
-  }
+
   .salary {
     font-weight: 700;
   }
+  .vehicles {
+    font-size: 0.6rem;
+  }
   .term {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     padding-top: 0;
   }
   .cargo {
@@ -46,7 +47,7 @@
   .company {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     position: relative;
     padding: 0;
     .name {
@@ -76,15 +77,15 @@
     justify-self: center;
     align-items: center;
     justify-content: center;
+    height: 25px;
+    width: 100px;
     color: white;
-    font-weight: 700;
-    width: 110px;
-    font-size: 0.8rem;
-    height: 30px;
     background-color: $secondary-button-color;
+    font-weight: 700;
+    font-size: 0.6rem;
     border-radius: 1rem;
-    box-shadow: 8px 8px 22px -11px rgba(136, 136, 136, 1);
     border: none;
+    box-shadow: 8px 8px 22px -11px rgba(136, 136, 136, 1);
     cursor: pointer;
     &:hover {
       background-color: #35bb3a;

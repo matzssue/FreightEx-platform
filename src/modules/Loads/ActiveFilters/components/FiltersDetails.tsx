@@ -1,13 +1,30 @@
+import { useAppSelector } from '../../../../store/hooks';
 import styles from './FiltersDetails.module.scss';
+import { useParams } from 'react-router-dom';
 
 export const FilterDetails = () => {
+  const { filterId } = useParams();
+
+  const filters = useAppSelector((state) => state.loadsFilters.filters);
+  const currentFilter = filters.filter((filter) => filter.id === filterId)[0];
+  console.log(currentFilter);
+  if (!currentFilter) return;
+  const { minWeight, maxWeight, minLength, maxLength, loadingAddress, unloadingAddress } =
+    currentFilter;
   return (
     <div className={styles.container}>
-      <ul>
-        <li>Weight: from 1T to 6T</li>
-        <li>Length: from 1ldm to 7ldm</li>
-        <li>Type:pallets</li>
-      </ul>
+      {currentFilter && (
+        <ul>
+          <li>
+            Weight: {minWeight && `from ${minWeight}T`} {maxWeight && `to ${maxWeight}T`}
+          </li>
+          <li>
+            Length: {minLength && `from ${minLength}ldm`} {maxLength && `to ${maxLength}ldm`}
+          </li>
+          <li>{loadingAddress}</li>
+          {unloadingAddress && <li>{unloadingAddress}</li>}
+        </ul>
+      )}
     </div>
   );
 };
