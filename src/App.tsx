@@ -10,7 +10,7 @@ import { News } from './Views/News';
 import { Loader } from '@googlemaps/js-api-loader';
 import { QueryClient, QueryClientProvider, QueryCache } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Loads } from './modules/Loads/Loads/components/Loads';
+import { Loads } from './modules/Loads/Loads/components/Loads/Loads';
 
 // const loader = new Loader({
 //   apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
@@ -37,9 +37,9 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        {process.env.NODE_ENV === 'development' && (
+        {/* {process.env.NODE_ENV === 'development' && (
           <ReactQueryDevtools position='top-right' initialIsOpen={false} />
-        )}
+        )} */}
         <Suspense fallback='Loading...'>
           <BrowserRouter>
             <UserBar setShowMenu={setShowMenu} />
@@ -49,9 +49,9 @@ function App() {
                 <Routes>
                   <Route path='/loads'>
                     <Route index element={<Home />} />
-                    <Route path='/loads/:id'>
+                    <Route path='/loads/:filterId'>
                       <Route index element={<Home />} />
-                      <Route element={<Home />} path='/loads/:id/:loadId' />
+                      <Route element={<Home />} path='/loads/:filterId/:loadId' />
                     </Route>
                   </Route>
                   <Route element={<News />} path='/news' />
