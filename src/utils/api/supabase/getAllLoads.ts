@@ -1,14 +1,14 @@
 import supabase from '../../../config/supabase';
 import { LoadData } from './types';
 
-export const getLoadDetails = async (id: string) => {
+export const getAllLoads = async () => {
   const { data, error } = await supabase
     .from('loads')
     .select(`*, unloading_address_id(*), loading_address_id(*)`)
-    .eq('id', id)
+    .order('created_at', { ascending: false })
     .returns<LoadData[]>();
+
   if (error) throw new Error();
-  console.log(data);
   const loads = data.map((load) => {
     return {
       id: load.id,
@@ -24,5 +24,7 @@ export const getLoadDetails = async (id: string) => {
       currency: load.currency,
     };
   });
+  // console.log(data);
+
   return loads;
 };
