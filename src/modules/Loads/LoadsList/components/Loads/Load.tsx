@@ -1,8 +1,10 @@
-import { Json } from '../../../../types/supabase';
 import styles from './Load.module.scss';
 import Avatar from '@mui/material/Avatar';
-import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { noFilterTab } from '../../loadData';
+import { NavLink } from 'react-router-dom';
+import { LoadAddress } from './LoadAddress';
+
 export type Vehicles = {
   [key: string]: boolean;
 };
@@ -42,22 +44,16 @@ export const Load = ({
   vehicles,
   loadId,
 }: Load) => {
-  const { id } = useParams();
+  const { filterId } = useParams();
+
   return (
-    <Link to={`/loads/${id}/${loadId}`}>
+    <NavLink
+      className={styles.navigation}
+      to={`/loads/${filterId ? filterId : noFilterTab}/${loadId}`}
+    >
       <div className={styles.load}>
-        <span>
-          <p className={styles.country}>{loadingCountry}</p>
-          <p className={styles['post-code']}>
-            {loadingPostCode} {loadingCity}
-          </p>
-        </span>
-        <span>
-          <p className={styles.country}>{unloadingCountry}</p>
-          <p className={styles['post-code']}>
-            {unloadingPostCode} {unloadingCity}
-          </p>
-        </span>
+        <LoadAddress country={loadingCountry} city={loadingCity} postCode={loadingPostCode} />
+        <LoadAddress country={unloadingCountry} city={unloadingCity} postCode={unloadingPostCode} />
         <span>
           <p className={styles.salary}>{`${price} ${currency}`}</p>
           <p className={styles.term}>payment term: {paymentTerm}d</p>
@@ -90,6 +86,6 @@ export const Load = ({
         </span>
         <button className={styles['accept-button']}>Accept Order</button>
       </div>
-    </Link>
+    </NavLink>
   );
 };

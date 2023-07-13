@@ -1,28 +1,29 @@
 import styles from './Loads.module.scss';
-import { List } from '../../../../common/Lists/List';
-import { sortData } from '../loadData';
+import { List } from '../../../../../common/Lists/List';
+import { noFilterTab, sortData } from '../../loadData';
 import { Load, Vehicles } from './Load';
-import { getAllLoads, getFilteredLoads } from '../../../../utils/api/supabase/load';
+import { getAllLoads } from '../../../../../utils/api/supabase/getAllLoads';
+import { getFilteredLoads } from '../../../../../utils/api/supabase/getFilteredLoads';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppSelector } from '../../../../../store/hooks';
 export const Loads = () => {
-  const { id } = useParams<string>();
-  console.log(id);
-  // console.log(id);
+  const { filterId } = useParams<string>();
+  console.log(filterId);
+
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
   const { data: allLoads } = useQuery(['loads'], async () => await getAllLoads());
-
-  const { data: filteredLoads, isLoading } = useQuery(['loads', id], async () => {
-    if (!filters || !id) return [];
-    const foundFilter = filters.find((filter) => filter.id === id);
+  /// czy na pewno nie da sie tego lepiej napisac?
+  const { data: filteredLoads, isLoading } = useQuery(['loads', filterId], async () => {
+    if (!filters || !filterId || filterId === noFilterTab) return [];
+    const foundFilter = filters.find((filter) => filter.id === filterId);
     if (!foundFilter) return;
     return await getFilteredLoads(foundFilter);
   });
 
-  const loads = id ? filteredLoads : allLoads;
+  const loads = filterId && filterId !== noFilterTab ? filteredLoads : allLoads;
   console.log(loads);
   return (
     <div>

@@ -47,7 +47,7 @@
     background-color: $primary-blue-color;
     &:hover {
       color: white;
-      background-color: #1c50be;
+      background-color: $primary-button-color;
     }
     &.hidden {
       display: none;

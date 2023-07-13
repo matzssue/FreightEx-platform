@@ -1,0 +1,10 @@
+@import '../../../../../styles/variables.scss';
+
+.country {
+  font-weight: 700;
+}
+.post-code {
+  font-size: 0.7rem;
+  color: $primary-text-color;
+  padding-top: 0;
+}

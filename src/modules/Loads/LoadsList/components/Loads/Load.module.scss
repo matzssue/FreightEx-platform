@@ -1,9 +1,14 @@
-@import '../../../../styles/variables.scss';
+@import '../../../../../styles/variables.scss';
+
+.navigation {
+  padding: 0;
+}
 .load {
   display: grid;
   grid-template-columns: 1fr 1fr 0.6fr 0.8fr 0.6fr 0.6fr 1.2fr 0.6fr;
   background-color: $secondary-color;
   font-size: 0.8rem;
+  width: 100%;
   cursor: pointer;
   &:hover {
     background-color: $primary-color;
@@ -16,14 +21,7 @@
   span {
     padding-left: 0.5rem;
   }
-  .country {
-    font-weight: 700;
-  }
-  .post-code {
-    font-size: 0.7rem;
-    color: $primary-text-color;
-    padding-top: 0;
-  }
+
   .salary {
     font-weight: 700;
   }
