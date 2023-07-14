@@ -3,7 +3,7 @@ import styles from './UserBar.module.scss';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 import { useDisclosure } from '../../../hooks/useDisclosure';
-import { AddLoad } from '../../Loads/Loads/components/AddLoad/AddLoad';
+import { AddLoad } from '../../Loads/LoadsList/components/AddLoad/AddLoad';
 import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
