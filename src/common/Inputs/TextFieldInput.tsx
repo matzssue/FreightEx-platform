@@ -45,6 +45,7 @@ export const TextFieldInput = <T extends FieldValues>({
           </label>
 
           <TextField
+            id={name}
             helperText={error ? error.message : null}
             size={size}
             error={touchedFields && !!error}

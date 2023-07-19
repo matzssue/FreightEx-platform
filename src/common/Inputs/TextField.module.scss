@@ -1,12 +1,14 @@
 .container {
   display: flex;
-
+  &.row {
+    flex-direction: column;
+  }
   .label {
-    padding-top: 0.4rem;
     min-width: 50px;
   }
   .helperText {
     width: max-content;
-    font-size: 0.6rem;
+    font-family: 'Nunito', sans-serif;
+    color: #d32f2f;
   }
 }
