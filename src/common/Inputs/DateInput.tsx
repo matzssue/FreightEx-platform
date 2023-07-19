@@ -28,7 +28,6 @@ export const DateInput = <T extends FieldValues>({
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div className={styles.container}>
-            <label htmlFor={name}>{label}</label>
             <DatePicker
               onChange={(date) => {
                 onChange(date as PathValue<T, Path<T>> | ChangeEvent<Element>);
@@ -40,6 +39,7 @@ export const DateInput = <T extends FieldValues>({
                 '.css-1wc848c-MuiFormHelperText-root': {
                   fontFamily: 'Nunito, sans-serif',
                 },
+                backgroundColor: 'transparent',
               }}
               className={styles.input}
               value={value}
@@ -51,7 +51,6 @@ export const DateInput = <T extends FieldValues>({
                   helperText: error?.message,
                 },
               }}
-              // sx={sx}
             />
           </div>
         </LocalizationProvider>
