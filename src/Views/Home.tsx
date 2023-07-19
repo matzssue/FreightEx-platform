@@ -5,15 +5,19 @@ import { Loads } from '../modules/Loads/LoadsList/components/Loads/Loads';
 import { AllNews } from '../modules/News/NewsCard/components/AllNews';
 
 import { LoadDetails } from '../modules/Loads/LoadDetails/LoadDetails';
+import { LayoutWrapper } from '../common/LayoutWrapper';
 
 export const Home = () => {
   return (
     <>
-      <FiltersMenu />
-      <FilterDetails />
-      <ActiveFilters />
-      <Loads />
-      <LoadDetails />
+      <LayoutWrapper>
+        <FiltersMenu />
+        <FilterDetails />
+        <ActiveFilters />
+        <Loads />
+      </LayoutWrapper>
+
+      {/* <LoadDetails /> */}
     </>
   );
 };
