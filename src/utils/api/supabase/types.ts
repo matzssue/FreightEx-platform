@@ -11,7 +11,7 @@ export type LoadData = Loads & {
   loading_address_id: AddressesDatabase;
 };
 
-export type AddLoadData = AddLoadValues & {
+export type Load = AddLoadValues & {
   loadingAddressData: Addresses;
   unloadingAddressData: Addresses;
 };
