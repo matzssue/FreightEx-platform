@@ -10,7 +10,9 @@ import { News } from './Views/News';
 import { Loader } from '@googlemaps/js-api-loader';
 import { QueryClient, QueryClientProvider, QueryCache } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Loads } from './modules/Loads/Loads/components/Loads/Loads';
+import { LoadDetails } from './modules/Loads/LoadDetails/LoadDetails';
+import { LoginForm } from './modules/Auth/LoginForm';
+import { RegisterForm } from './modules/Auth/RegisterForm';
 
 // const loader = new Loader({
 //   apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
@@ -32,8 +34,6 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const [showMenu, setShowMenu] = useState<boolean>(true);
-
   return (
     <>
       <QueryClientProvider client={queryClient}>
@@ -42,22 +42,37 @@ function App() {
         )} */}
         <Suspense fallback='Loading...'>
           <BrowserRouter>
-            <UserBar setShowMenu={setShowMenu} />
-            <div className={'box'}>
-              <AsideMenu showMenu={showMenu} />
-              <Wrapper showMenu={showMenu}>
-                <Routes>
-                  <Route path='/loads'>
-                    <Route index element={<Home />} />
-                    <Route path='/loads/:filterId'>
-                      <Route index element={<Home />} />
-                      <Route element={<Home />} path='/loads/:filterId/:loadId' />
-                    </Route>
-                  </Route>
-                  <Route element={<News />} path='/news' />
-                </Routes>
-              </Wrapper>
-            </div>
+            <Routes>
+              <Route path='/' element={<LoginForm />} />
+              <Route path='/register' element={<RegisterForm />} />
+              <Route path='loads'>
+                <Route index element={<Home />} />
+                <Route path=':loadId'>
+                  <Route
+                    index
+                    element={
+                      <>
+                        <Home />
+                        <LoadDetails />
+                      </>
+                    }
+                  />
+                </Route>
+                <Route path='filters'>
+                  <Route element={<Home />} path=':filterId' />
+                  <Route
+                    element={
+                      <>
+                        <Home />
+                        <LoadDetails />
+                      </>
+                    }
+                    path=':filterId/:loadId'
+                  />
+                </Route>
+              </Route>
+              <Route element={<News />} path='/news' />
+            </Routes>
           </BrowserRouter>
         </Suspense>
       </QueryClientProvider>
