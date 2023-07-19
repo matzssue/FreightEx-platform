@@ -17,7 +17,7 @@ export const Loads = () => {
   const { data: allLoads } = useQuery(['loads'], async () => await getAllLoads());
   /// czy na pewno nie da sie tego lepiej napisac?
   const { data: filteredLoads, isLoading } = useQuery(['loads', filterId], async () => {
-    if (!filters || !filterId || filterId === noFilterTab) return [];
+    if (!filters || !filterId) return [];
     const foundFilter = filters.find((filter) => filter.id === filterId);
     if (!foundFilter) return;
     return await getFilteredLoads(foundFilter);
