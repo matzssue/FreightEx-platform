@@ -5,17 +5,17 @@ import { Loads } from '../modules/Loads/LoadsList/components/Loads/Loads';
 import { AllNews } from '../modules/News/NewsCard/components/AllNews';
 
 import { LoadDetails } from '../modules/Loads/LoadDetails/LoadDetails';
-import { LayoutWrapper } from '../common/LayoutWrapper';
+import { PageLayout } from '../common/PageLayout';
 
 export const Home = () => {
   return (
     <>
-      <LayoutWrapper>
+      <PageLayout>
         <FiltersMenu />
         <FilterDetails />
         <ActiveFilters />
         <Loads />
-      </LayoutWrapper>
+      </PageLayout>
 
       {/* <LoadDetails /> */}
     </>
