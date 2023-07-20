@@ -10,7 +10,7 @@
   .content {
     display: grid;
     grid-template-columns: 0.7fr 1fr;
-    height: 70%;
+    height: 80%;
     min-width: 60%;
     background-color: rgb(209, 207, 207);
     border-radius: 1rem;
@@ -19,13 +19,13 @@
     .background-image {
       background: url('../assets/auth-form-background.jpg') center/cover no-repeat;
     }
-
     .form-container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-evenly;
       .logo {
         height: 200px;
+        // justify-self: flex-start;
         &.hidden {
           display: none;
         }
