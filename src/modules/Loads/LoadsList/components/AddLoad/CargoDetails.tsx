@@ -1,6 +1,6 @@
 import styles from './CargoDetails.module.scss';
 
-import { TextFieldInput } from '../../../../../common/Inputs/TextField';
+import { TextFieldInput } from '../../../../../common/Inputs/TextFieldInput';
 
 import { AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
 

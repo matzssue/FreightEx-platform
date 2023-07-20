@@ -1,0 +1,35 @@
+@import '../../styles/variables.scss';
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  button {
+    color: $secondary-text-color;
+  }
+  .submit,
+  .back {
+    background-color: $primary-blue-color;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+    width: 50%;
+    &:hover {
+      background-color: $primary-hover-button-color;
+    }
+  }
+  .register {
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    a {
+      margin: 0;
+      padding: 0;
+      color: $primary-blue-color;
+      font-weight: 700;
+    }
+  }
+}

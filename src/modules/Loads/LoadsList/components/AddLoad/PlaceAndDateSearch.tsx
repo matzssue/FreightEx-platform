@@ -21,11 +21,12 @@ export const PlaceAndDateSearch = ({
           control={control}
           name='loadingAddress'
           label='Address'
+          errorLabel='Loading address'
           sx={{
             width: '100%',
             padding: '1rem',
             boxSizing: 'border-box',
-            margin: '5px 0px',
+            margin: '0px 0px 5px 0px',
             fontSize: '17px',
           }}
         />
@@ -39,11 +40,12 @@ export const PlaceAndDateSearch = ({
           setValueKey='unloadingAddressData'
           name='unloadingAddress'
           label='Address'
+          errorLabel='Unloading address'
           sx={{
             width: '100%',
             padding: '1rem',
             boxSizing: 'border-box',
-            margin: '5px 0px',
+            margin: '0px 0px 5px 0px',
             fontSize: '17px',
           }}
         />

@@ -7,7 +7,7 @@ export const DateFilter = ({ control }) => {
       <div className={styles['date-inputs']}>
         <fieldset className={styles['date-fieldset']}>
           <legend>Loading</legend>
-          <label htmlFor='loadingDate'>Min</label>
+          <span>Min</span>
           <DateInput
             fontSize='15px'
             size='small'
@@ -15,7 +15,7 @@ export const DateFilter = ({ control }) => {
             name='startLoadingDate'
             label=''
           />
-          <label htmlFor='loadingDate'>Max</label>
+          <span>Max</span>
           <DateInput
             fontSize='15px'
             size='small'
@@ -28,7 +28,7 @@ export const DateFilter = ({ control }) => {
         <div>
           <fieldset className={styles['date-fieldset']}>
             <legend>Unloading</legend>
-            <label htmlFor='startUnloadingDate'>Min</label>
+            <span>Min</span>
             <DateInput
               fontSize='15px'
               size='small'
@@ -36,7 +36,7 @@ export const DateFilter = ({ control }) => {
               name='startUnloadingDate'
               label=''
             />
-            <label htmlFor='endUnloadingDate'>Max</label>
+            <span>Max</span>
             <DateInput
               fontSize='15px'
               size='small'

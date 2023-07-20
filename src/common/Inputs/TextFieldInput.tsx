@@ -3,7 +3,7 @@ import TextField, { TextFieldProps, TextFieldVariants } from '@mui/material/Text
 import styles from './TextField.module.scss';
 import { HTMLInputTypeAttribute, InputHTMLAttributes, useState } from 'react';
 import { FieldValues, Controller, Control, Path, PathValue } from 'react-hook-form';
-import { InputBaseComponentProps, InputBaseProps } from '@mui/material';
+import { InputBaseComponentProps, InputBaseProps, InputLabel } from '@mui/material';
 type FormInputProps<T extends FieldValues> = {
   name: Path<T>;
   control: Control<T>;
@@ -12,6 +12,9 @@ type FormInputProps<T extends FieldValues> = {
   sx?: Record<string, any>;
   variant?: TextFieldVariants;
   type?: HTMLInputTypeAttribute;
+  size?: 'small' | 'medium';
+  placeholder?: string;
+  row?: boolean;
 };
 
 export const TextFieldInput = <T extends FieldValues>({
@@ -22,6 +25,9 @@ export const TextFieldInput = <T extends FieldValues>({
   sx,
   variant,
   type = 'text',
+  size = 'small',
+  placeholder,
+  row = false,
 }: FormInputProps<T>) => {
   return (
     <Controller
@@ -33,19 +39,29 @@ export const TextFieldInput = <T extends FieldValues>({
         fieldState: { error },
         formState: { touchedFields },
       }) => (
-        <div className={styles.container}>
-          <label className={styles.label}>{label}</label>
+        <div className={`${styles.container} ${row ? styles.row : ''}`}>
+          <label htmlFor={name} className={styles.label}>
+            {label}
+          </label>
+
           <TextField
+            id={name}
             helperText={error ? error.message : null}
-            size='small'
+            size={size}
             error={touchedFields && !!error}
+            InputLabelProps={{ shrink: false }}
             onChange={onChange}
+            placeholder={placeholder}
             value={value}
-            label={null}
             FormHelperTextProps={{
               className: styles.helperText,
             }}
-            sx={sx}
+            sx={{
+              '& legend': { display: 'none' },
+              '& fieldset': { top: 0 },
+              display: 'flex',
+              flexDirection: 'column',
+            }}
             variant={variant}
             type={type}
           />

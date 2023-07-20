@@ -1,6 +1,6 @@
 import styles from './PaymentDetails.module.scss';
 
-import { TextFieldInput } from '../../../../../common/Inputs/TextField';
+import { TextFieldInput } from '../../../../../common/Inputs/TextFieldInput';
 import { SelectInput } from '../../../../../common/Inputs/Select';
 
 import { AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';

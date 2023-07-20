@@ -46,11 +46,10 @@ export const Load = ({
 }: Load) => {
   const { filterId } = useParams();
 
+  const navigateTo = filterId ? `/loads/filters/${filterId}/${loadId}` : `/loads/${loadId}`;
+
   return (
-    <NavLink
-      className={styles.navigation}
-      to={`/loads/${filterId ? filterId : noFilterTab}/${loadId}`}
-    >
+    <NavLink className={styles.navigation} to={navigateTo}>
       <div className={styles.load}>
         <LoadAddress country={loadingCountry} city={loadingCity} postCode={loadingPostCode} />
         <LoadAddress country={unloadingCountry} city={unloadingCity} postCode={unloadingPostCode} />
