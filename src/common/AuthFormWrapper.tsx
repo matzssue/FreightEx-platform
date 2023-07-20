@@ -4,11 +4,11 @@ import styles from './AuthFormWrapper.module.scss';
 
 type AuthFormWrapper = {
   children: ReactNode;
-  onSubmit: (e: SyntheticEvent) => void;
+  // onSubmit: (e: SyntheticEvent) => void;
   hideLogo?: boolean;
 };
 
-export const AuthFormWrapper = ({ children, onSubmit, hideLogo = false }: AuthFormWrapper) => {
+export const AuthFormWrapper = ({ children, hideLogo = false }: AuthFormWrapper) => {
   return (
     <section className={styles.container}>
       <div className={styles.content}>
@@ -19,9 +19,7 @@ export const AuthFormWrapper = ({ children, onSubmit, hideLogo = false }: AuthFo
             className={`${styles.logo} ${hideLogo ? styles.hidden : ''}`}
             src={logo}
           />
-          <form onSubmit={onSubmit} className={styles.form}>
-            {children}
-          </form>
+          {children}
         </div>
       </div>
     </section>

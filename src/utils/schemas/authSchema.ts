@@ -7,7 +7,7 @@ export const loginSchema = yup.object().shape({
   email: yup.string().email().required('Email is required'),
   password: yup.string().required('No password provided.'),
 });
-export const registerUserSchema = yup.object().shape({
+const registerUserSchema = yup.object({
   name: yup.string().required('Name is required').min(3),
   surname: yup.string().required('Surname is required').min(3),
   imgUrl: yup.string().optional(),
@@ -21,7 +21,9 @@ export const registerUserSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref('password'), undefined], 'Passwords must match'),
 });
-export const registerCompanySchema = yup.object().shape({
+const registerCompanySchema = yup.object({
   companyName: yup.string().required('Name is required').min(3),
   vatId: yup.string().required().min(3).max(12),
 });
+
+export const registerSchema = [registerUserSchema, registerCompanySchema];
