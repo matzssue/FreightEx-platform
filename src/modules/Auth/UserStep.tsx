@@ -1,6 +1,6 @@
 import styles from './UserStep.module.scss';
 import PasswordInput from '../../common/Inputs/PasswordInput';
-import { useForm } from 'react-hook-form';
+import { useForm, useFormContext } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerUserSchema } from '../../utils/schemas/authSchema';
 import { RegisterUserFormValues } from '../../utils/schemas/authSchema';
@@ -11,33 +11,10 @@ import { useDispatch } from 'react-redux';
 import { nextStep, setData } from '../../store/reducers/registerUserSlice';
 import { useAppSelector } from '../../store/hooks';
 export const UserStep = () => {
-  const dispatch = useDispatch();
-  const { user, currentStep } = useAppSelector((state) => state.register);
-  const { handleSubmit, control } = useForm({
-    resolver: yupResolver<RegisterUserFormValues>(registerUserSchema),
-  });
-
-  const onSubmit = (data: RegisterUserFormValues) => {
-    dispatch(
-      setData({
-        entityType: 'user',
-        data: {
-          email: data.email,
-          imgUrl: '',
-          name: data.name,
-          password: data.password,
-          surname: data.surname,
-        },
-      }),
-    );
-    console.log(data);
-    console.log(user);
-    console.log(currentStep);
-    dispatch(nextStep());
-  };
+  const { control } = useFormContext();
 
   return (
-    <AuthFormWrapper hideLogo={true} onSubmit={handleSubmit(onSubmit)}>
+    <>
       <TextFieldInput
         defaultValue={''}
         label={'Email'}
@@ -56,14 +33,6 @@ export const UserStep = () => {
       />
       <PasswordInput label={'Password'} control={control} name='password' />
       <PasswordInput label={'Confirm Password'} control={control} name='passwordConfirmation' />
-      <div className={styles.buttons}>
-        <button type='submit' className={styles.submit}>
-          Continue
-        </button>
-        <p className={styles.register}>
-          Arleady registered? <Link to={'/'}>Log In</Link>
-        </p>
-      </div>
-    </AuthFormWrapper>
+    </>
   );
 };
