@@ -6,16 +6,19 @@ import { AllNews } from '../modules/News/NewsCard/components/AllNews';
 
 import { LoadDetails } from '../modules/Loads/LoadDetails/LoadDetails';
 import { PageLayout } from '../common/PageLayout';
+import { ProtectedWrapper } from '../common/ProtectedWrapper';
 
 export const Home = () => {
   return (
     <>
-      <PageLayout>
-        <FiltersMenu />
-        <FilterDetails />
-        <ActiveFilters />
-        <Loads />
-      </PageLayout>
+      <ProtectedWrapper>
+        <PageLayout>
+          <FiltersMenu />
+          <FilterDetails />
+          <ActiveFilters />
+          <Loads />
+        </PageLayout>
+      </ProtectedWrapper>
 
       {/* <LoadDetails /> */}
     </>
