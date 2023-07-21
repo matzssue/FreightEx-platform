@@ -21,6 +21,7 @@ type PlacesInputProps<T extends FieldValues> = {
   placeholder?: string;
   setValue: UseFormSetValue<T>;
   setValueKey: Path<T>;
+  errorLabel: string;
 };
 
 export const PlacesAutocompleteInput = <T extends FieldValues>({
@@ -32,6 +33,7 @@ export const PlacesAutocompleteInput = <T extends FieldValues>({
   placeholder = 'Search location, use postal code',
   label,
   setValueKey,
+  errorLabel,
 }: PlacesInputProps<T>) => {
   const handleChange = (
     value: React.FormEvent<HTMLInputElement>,
@@ -75,19 +77,23 @@ export const PlacesAutocompleteInput = <T extends FieldValues>({
       render={({ field, formState: { errors } }) => (
         <>
           {label && <label htmlFor={name}>{label}</label>}
-          <Autocomplete
-            id={name}
-            placeholder={placeholder}
-            inputAutocompleteValue={field.value}
-            apiKey={import.meta.env.VITE_GOOGLE_API_KEY}
-            onChange={(value) => handleChange(value, field)}
-            style={sx}
-            onPlaceSelected={(value) => onSelectHandler(value, field)}
-            options={{
-              types: [filterType],
-            }}
-          />
-          {errors[name] && <p className={styles.error}>{errors[name]?.message as ReactNode}</p>}
+          <div className={styles.container}>
+            <Autocomplete
+              id={name}
+              placeholder={placeholder}
+              inputAutocompleteValue={field.value}
+              apiKey={import.meta.env.VITE_GOOGLE_API_KEY}
+              onChange={(value) => handleChange(value, field)}
+              style={sx}
+              onPlaceSelected={(value) => onSelectHandler(value, field)}
+              options={{
+                types: [filterType],
+              }}
+            />
+            {errors[name] && (
+              <p className={styles.error}>{`${errorLabel} is required field` as ReactNode}</p>
+            )}
+          </div>
         </>
       )}
     />

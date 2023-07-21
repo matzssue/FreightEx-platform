@@ -23,8 +23,9 @@ export const LocationFilter = ({ setValue, control, register, errors }) => {
             fontSize: '0.7rem',
             height: '15px',
           }}
+          errorLabel='Loading address'
         />
-        {errors.loadingAddress && <p role='alert'>{errors.loadingAddress?.message}</p>}
+        {/* {errors.loadingAddress && <p role='alert'>{errors.loadingAddress?.message}</p>} */}
 
         {/* <input {...register('loadingArea')} defaultValue={5} min={5} max={500000} type='number' /> */}
         <SelectInput
@@ -38,7 +39,7 @@ export const LocationFilter = ({ setValue, control, register, errors }) => {
             width: '60px',
             fontSize: '10px',
             backgroundColor: 'white',
-            height: 'auto',
+            height: 'min-content',
           }}
         />
       </div>
@@ -52,6 +53,7 @@ export const LocationFilter = ({ setValue, control, register, errors }) => {
           sx={{ width: '200px', padding: '0.5rem', fontSize: '0.7rem', height: '15px' }}
           filterType='country'
           placeholder='Search country of unloading'
+          errorLabel='Unloading address'
         />
       </div>
     </FilterCard>

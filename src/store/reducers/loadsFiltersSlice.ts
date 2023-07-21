@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 // import { LoadsFiltersValues } from '../../utils/schemas/loadsFilters';
-import { Addresses } from '../../utils/api/supabase/load';
+
+import { Addresses } from '../../utils/api/supabase/types';
 
 type UnloadingData = {
   country: string | undefined | null;

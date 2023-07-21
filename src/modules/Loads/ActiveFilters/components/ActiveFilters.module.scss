@@ -4,7 +4,15 @@
   display: flex;
   gap: 5px;
   margin: 0.5rem 1rem 0rem 0rem;
-
+  ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+    li {
+      position: relative;
+    }
+  }
   a {
     background-color: $secondary-color;
     font-size: 0.8rem;
@@ -15,6 +23,20 @@
     cursor: pointer;
     &:hover {
       background-color: $primary-color;
+    }
+  }
+  .close {
+    position: absolute;
+    top: 0px;
+    right: -10px;
+    border: none;
+    background-color: transparent;
+    svg {
+      scale: 1.5;
+      color: $primary-blue-color;
+      &:hover {
+        color: rgb(179, 31, 5);
+      }
     }
   }
 }

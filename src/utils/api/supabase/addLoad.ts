@@ -1,6 +1,6 @@
 import supabase from '../../../config/supabase';
-import { AddLoadData } from './types';
-export const addLoad = async (data: AddLoadData) => {
+import { Load } from './types';
+export const addLoad = async (data: Load) => {
   const loadingId = +data.loadingAddressData.postal_code.replace(/-/g, '');
   const unloadingId = +data.unloadingAddressData.postal_code.replace(/-/g, '');
 
@@ -21,6 +21,7 @@ export const addLoad = async (data: AddLoadData) => {
     term: data.term,
     length: data.length,
     vehicle_types: data.multiCheckbox,
+    user_id: data.userId,
   };
 
   const { data: load, error: loadError } = await supabase.from('loads').insert(loadData);

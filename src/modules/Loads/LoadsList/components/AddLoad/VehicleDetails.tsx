@@ -25,7 +25,7 @@ export const VehicleDetails = ({
         name={'multiCheckbox.doubleTrailer'}
       />
       {errors?.multiCheckbox && (
-        <p className={styles.error}>{`Error: ${errors?.multiCheckbox?.message}`}</p>
+        <p className={styles.error}>{`${errors?.multiCheckbox?.message}`}</p>
       )}
     </div>
   );

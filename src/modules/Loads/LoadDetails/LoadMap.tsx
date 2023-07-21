@@ -1,35 +1,47 @@
 import { useJsApiLoader, GoogleMap, DirectionsRenderer } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
 
-import { useParams } from 'react-router-dom';
-export const LoadMap = ({ address, setDistance, setDuration }) => {
-  const { loadId } = useParams();
-  // const { isLoaded } = useJsApiLoader({
-  //   googleMapsApiKey: import.meta.env.VITE_GOOGLE_API_KEY,
-  // });
+import { Load } from '../../../utils/api/supabase/types';
 
-  const [directionsResponse, setDirectionsResponse] = useState();
+type LoadMap = {
+  address: Partial<Load>;
+  setDistance: (value: string | undefined) => void;
+  setDuration: (value: string | undefined) => void;
+};
 
-  const calculateRoute = async (address) => {
+export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+    libraries: ['places'],
+  });
+
+  const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult>();
+  const [directionsRenderer, setDirectionsRenderer] =
+    useState<google.maps.DirectionsRenderer | null>(null);
+  const calculateRoute = async (address: Load) => {
     try {
       if (!address) return;
-      const { loadingAddress, unloadingAddress } = address[0];
+
+      const { loadingAddressData, unloadingAddressData } = address;
       const loadingAddressCords = new google.maps.LatLng(
-        loadingAddress.latitude,
-        loadingAddress.longitude,
+        loadingAddressData.latitude,
+        loadingAddressData.longitude,
       );
+      console.log(loadingAddressCords);
       const unloadingAddressCords = new google.maps.LatLng(
-        unloadingAddress.latitude,
-        unloadingAddress.longitude,
+        unloadingAddressData.latitude,
+        unloadingAddressData.longitude,
       );
+      console.log(unloadingAddressCords);
+
       const directionsService = new google.maps.DirectionsService();
       const results = await directionsService.route({
         origin: loadingAddressCords,
         destination: unloadingAddressCords,
         travelMode: google.maps.TravelMode.DRIVING,
-        optimizeWaypoints: true,
       });
 
+      console.log(results);
       setDirectionsResponse(results);
       setDistance(results.routes[0].legs[0].distance?.text);
       setDuration(results.routes[0].legs[0].duration?.text);
@@ -40,13 +52,29 @@ export const LoadMap = ({ address, setDistance, setDuration }) => {
       setDirectionsResponse(undefined);
     }
   };
-
   useEffect(() => {
-    calculateRoute(address);
-  }, [address, loadId]);
+    const clearDirections = () => {
+      if (directionsRenderer) {
+        directionsRenderer.setDirections({ routes: [] });
+      }
+    };
 
-  // const { directionsResponse } = useCalculateRoute(address);
-  // if (!isLoaded) return <div>Loading...</div>;
+    const updateRoute = async () => {
+      clearDirections();
+      setDistance(undefined);
+      setDuration(undefined);
+      calculateRoute(address as Load);
+    };
+
+    updateRoute();
+  }, [address, directionsRenderer]);
+
+  const directionsRendererOptions = {
+    directions: directionsResponse,
+  };
+
+  if (!isLoaded) return <div>Loading</div>;
+
   return (
     <>
       <GoogleMap
@@ -60,9 +88,10 @@ export const LoadMap = ({ address, setDistance, setDuration }) => {
         }}
       >
         {directionsResponse && (
-          <>
-            <DirectionsRenderer directions={directionsResponse} />
-          </>
+          <DirectionsRenderer
+            options={directionsRendererOptions}
+            onLoad={(directionsRenderer) => setDirectionsRenderer(directionsRenderer)}
+          />
         )}
       </GoogleMap>
     </>

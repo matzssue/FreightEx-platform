@@ -8,6 +8,11 @@
   border: 0;
   color: black;
 }
+
+* {
+  font-family: $font-family;
+}
+
 html,
 body {
   box-sizing: border-box;

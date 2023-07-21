@@ -10,7 +10,11 @@ import { News } from './Views/News';
 import { Loader } from '@googlemaps/js-api-loader';
 import { QueryClient, QueryClientProvider, QueryCache } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Loads } from './modules/Loads/Loads/components/Loads/Loads';
+import { LoadDetails } from './modules/Loads/LoadDetails/LoadDetails';
+import { LoginForm } from './modules/Auth/LoginForm';
+import { RegisterForm } from './modules/Auth/RegisterForm';
+import ErrorBoundary from './utils/helpers/ErrorBoundary';
+import { UserContextProvider } from './store/contexts/UserContext';
 
 // const loader = new Loader({
 //   apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
@@ -32,34 +36,51 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const [showMenu, setShowMenu] = useState<boolean>(true);
-
   return (
     <>
       <QueryClientProvider client={queryClient}>
         {/* {process.env.NODE_ENV === 'development' && (
           <ReactQueryDevtools position='top-right' initialIsOpen={false} />
         )} */}
-        <Suspense fallback='Loading...'>
+        <ErrorBoundary>
           <BrowserRouter>
-            <UserBar setShowMenu={setShowMenu} />
-            <div className={'box'}>
-              <AsideMenu showMenu={showMenu} />
-              <Wrapper showMenu={showMenu}>
+            <UserContextProvider>
+              <Suspense fallback='Loading...'>
                 <Routes>
-                  <Route path='/loads'>
+                  <Route path='/' element={<LoginForm />} />
+                  <Route path='/register' element={<RegisterForm />} />
+                  <Route path='loads'>
                     <Route index element={<Home />} />
-                    <Route path='/loads/:filterId'>
-                      <Route index element={<Home />} />
-                      <Route element={<Home />} path='/loads/:filterId/:loadId' />
+                    <Route path=':loadId'>
+                      <Route
+                        index
+                        element={
+                          <>
+                            <Home />
+                            <LoadDetails />
+                          </>
+                        }
+                      />
+                    </Route>
+                    <Route path='filters'>
+                      <Route element={<Home />} path=':filterId' />
+                      <Route
+                        element={
+                          <>
+                            <Home />
+                            <LoadDetails />
+                          </>
+                        }
+                        path=':filterId/:loadId'
+                      />
                     </Route>
                   </Route>
                   <Route element={<News />} path='/news' />
                 </Routes>
-              </Wrapper>
-            </div>
+              </Suspense>
+            </UserContextProvider>
           </BrowserRouter>
-        </Suspense>
+        </ErrorBoundary>
       </QueryClientProvider>
     </>
   );
