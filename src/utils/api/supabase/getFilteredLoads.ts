@@ -59,7 +59,7 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
   const { data, error } = await query.returns<LoadData[]>();
 
   if (error) throw new Error();
-
+  console.log(error);
   console.log(data);
   const loads = data.map((load) => {
     return {
@@ -74,6 +74,9 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
       paymentTerm: load.term,
       price: load.price,
       currency: load.currency,
+      user: load.user_data,
+      company: load.company_data,
+      createtAt: load.created_at,
     };
   });
 
