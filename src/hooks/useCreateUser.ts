@@ -1,28 +1,21 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import supabase from '../config/supabase';
 // import { useNotificationContext } from '../components/contexts/NotificationContext';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-// import { useUserContext } from '../components/contexts/UserContext';
+import { RegisterCompanyFormValues, RegisterUserFormValues } from '../utils/schemas/authSchema';
 
-type User = {
-  userId?: string;
-  email: string;
-  name?: string;
-  surname: string;
-  password: string;
-};
+export type UserData = RegisterCompanyFormValues & RegisterUserFormValues;
 
-const createUser = async (user: User) => {
+const createUser = async (user: UserData) => {
   // Check if email exists
 
-  const { data, error: signUpError } = await supabase.auth.signUp({
+  const { data, error: registerError } = await supabase.auth.signUp({
     email: user.email,
     password: user.password,
   });
 
-  if (signUpError) {
-    throw signUpError;
+  if (registerError) {
+    throw registerError;
   }
 
   return data;
@@ -33,9 +26,11 @@ export default function useCreateUser() {
   //   const notificationCtx = useNotificationContext();
   const standardAvatar =
     'https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80';
+
   const navigate = useNavigate();
-  return useMutation((user: User) => createUser(user), {
-    onSuccess: async (data, user) => {
+
+  return useMutation((user: UserData) => createUser(user), {
+    onSuccess: async (data, user: UserData) => {
       console.log(`data:`, data, `user:`, user);
       const { error } = await supabase
         .from('companies')
@@ -51,12 +46,6 @@ export default function useCreateUser() {
         avatar: standardAvatar,
         company_vat_id: user.vatId,
       });
-      //   setUser({
-      //     userId: data?.user?.id!,
-      //     name: user.name,
-      //     surname: user.surname,
-      //     avatar: standardAvatar,
-      //   });
 
       navigate('/');
 
@@ -66,8 +55,6 @@ export default function useCreateUser() {
       return insertData;
     },
     onError: (error: { message: string }) => {
-      //   notificationCtx?.error(`sorry ${error.message}`);
-
       console.log(error);
     },
   });

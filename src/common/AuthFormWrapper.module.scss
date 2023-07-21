@@ -22,10 +22,10 @@
     .form-container {
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
+      justify-content: center;
       .logo {
         height: 200px;
-        // justify-self: flex-start;
+        justify-self: flex-start;
         &.hidden {
           display: none;
         }

@@ -15,14 +15,17 @@ import { PlaceAndDateSearch } from './PlaceAndDateSearch';
 import { CargoDetails } from './CargoDetails';
 import { VehicleDetails } from './VehicleDetails';
 import { PaymentDetails } from './PaymentDetails';
-
+import { useUser } from '../../../../../hooks/useUser';
+import { useUserContext } from '../../../../../store/contexts/UserContext';
 export const AddLoad = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
-
+  const { user, isLoggedIn } = useUserContext();
+  const userData = useUser(user);
+  console.log(isLoggedIn);
   const isModalOpen = useAppSelector((state) => state.modal.isLoadModalOpen);
   const isDialogOpen = useAppSelector((state) => state.modal.isLoadDialogOpen);
-
+  console.log(user);
   const {
     handleSubmit,
     control,
@@ -48,8 +51,11 @@ export const AddLoad = () => {
     dispatch(closeModal());
   };
   const onSubmit = async (data: AddLoadData) => {
+    console.log(userData);
     console.log(data);
-    mutation.mutate(data);
+    const load = { ...data, userId: userData.id };
+    console.log(load);
+    mutation.mutate(load);
     closeAllHandler();
   };
 

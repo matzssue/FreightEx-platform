@@ -8,21 +8,20 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../../store/hooks';
+import { useUserContext } from '../../../../../store/contexts/UserContext';
 export const Loads = () => {
   const { filterId } = useParams<string>();
-  console.log(filterId);
 
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
   const { data: allLoads } = useQuery(['loads'], async () => await getAllLoads());
-  /// czy na pewno nie da sie tego lepiej napisac?
+
   const { data: filteredLoads, isLoading } = useQuery(['loads', filterId], async () => {
     if (!filters || !filterId) return [];
     const foundFilter = filters.find((filter) => filter.id === filterId);
     if (!foundFilter) return;
     return await getFilteredLoads(foundFilter);
   });
-
   const loads = filterId && filterId !== noFilterTab ? filteredLoads : allLoads;
   console.log(loads);
   return (
@@ -36,7 +35,7 @@ export const Loads = () => {
             <p>loading</p>
           ) : (
             loads?.map((load) => (
-              <li key={load.id}>
+              <li id={`${load.id}`} key={load.id}>
                 <Load
                   loadId={load.id}
                   loadingCity={load.loadingAddress.city}
@@ -46,6 +45,9 @@ export const Loads = () => {
                   unloadingCity={load.unloadingAddress.city}
                   unloadingPostCode={load.unloadingAddress.postal_code}
                   vehicles={load.vehicleTypes as Vehicles}
+                  publisher={`${load.user.name} ${load.user.surname}`}
+                  companyName={load.company.name}
+                  publishedAt={load.createdAt}
                   {...load}
                 />
               </li>

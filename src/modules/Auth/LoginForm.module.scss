@@ -1,5 +1,5 @@
 @import '../../styles/variables.scss';
-
+@import '../../styles/error.module.scss';
 .buttons {
   display: flex;
   flex-direction: column;
@@ -29,5 +29,8 @@
       color: $primary-blue-color;
       font-weight: 700;
     }
+  }
+  .error {
+    @import '../../styles/error.module.scss';
   }
 }

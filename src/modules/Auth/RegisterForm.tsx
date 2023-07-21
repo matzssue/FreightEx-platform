@@ -3,13 +3,17 @@ import { CompanyStep } from './CompanyStep';
 import styles from './RegisterForm.module.scss';
 
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
+import { ReactNode, useState } from 'react';
+import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { AuthFormWrapper } from '../../common/AuthFormWrapper';
-import { registerSchema } from '../../utils/schemas/authSchema';
+import {
+  RegisterCompanyFormValues,
+  RegisterUserFormValues,
+  registerSchema,
+} from '../../utils/schemas/authSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stepper, Step, StepLabel } from '@mui/material';
-import useCreateUser from '../../hooks/useCreateUser';
+import useCreateUser, { UserData } from '../../hooks/useCreateUser';
 
 export const RegisterForm = () => {
   const steps = ['User', 'Company'];
@@ -29,12 +33,12 @@ export const RegisterForm = () => {
   const methods = useForm({
     shouldUnregister: false,
     defaultValues,
+    resolver: yupResolver<RegisterCompanyFormValues | RegisterUserFormValues>(currentSchema),
     mode: 'onChange',
-    resolver: yupResolver(currentSchema),
   });
-  const { handleSubmit, reset, trigger } = methods;
+  const { handleSubmit, trigger } = methods;
 
-  function getStepContent(step) {
+  function getStepContent(step: ReactNode | string) {
     switch (step) {
       case 0:
         return <UserStep />;
@@ -46,7 +50,7 @@ export const RegisterForm = () => {
     }
   }
 
-  const handleNext = async (e) => {
+  const handleNext = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const isStepValid = await trigger();
     if (isStepValid) setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -54,15 +58,15 @@ export const RegisterForm = () => {
   const handlePrev = async () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<UserData> = (data) => {
     createUserMutation.mutateAsync(data);
   };
-  // return <>{Steps[currentStep as keyof typeof Steps]}</>;
+
   console.log(activeStep);
   return (
     <AuthFormWrapper hideLogo={true}>
       <Stepper sx={{ width: '60%', alignSelf: 'center', padding: '1rem' }} activeStep={activeStep}>
-        {steps.map((label, index) => {
+        {steps.map((label) => {
           const stepProps = {};
           const labelProps = {};
           return (

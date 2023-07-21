@@ -36,11 +36,29 @@ export interface Database {
         }
         Relationships: []
       }
+      companies: {
+        Row: {
+          id: string
+          name: string
+          vat_id: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          vat_id: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          vat_id?: string
+        }
+        Relationships: []
+      }
       loads: {
         Row: {
           created_at: string
           currency: string
-          id: number
+          id: string
           length: number | null
           loading_address_id: number | null
           loading_date: string
@@ -48,13 +66,14 @@ export interface Database {
           term: string
           unloading_address_id: number | null
           unloading_date: string
+          user_id: string
           vehicle_types: Json
           weight: number | null
         }
         Insert: {
           created_at?: string
           currency: string
-          id?: number
+          id?: string
           length?: number | null
           loading_address_id?: number | null
           loading_date: string
@@ -62,13 +81,14 @@ export interface Database {
           term: string
           unloading_address_id?: number | null
           unloading_date: string
+          user_id: string
           vehicle_types: Json
           weight?: number | null
         }
         Update: {
           created_at?: string
           currency?: string
-          id?: number
+          id?: string
           length?: number | null
           loading_address_id?: number | null
           loading_date?: string
@@ -76,6 +96,7 @@ export interface Database {
           term?: string
           unloading_address_id?: number | null
           unloading_date?: string
+          user_id?: string
           vehicle_types?: Json
           weight?: number | null
         }
@@ -91,6 +112,46 @@ export interface Database {
             columns: ["unloading_address_id"]
             referencedRelation: "addresses"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "loads_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      users: {
+        Row: {
+          avatar: string | null
+          company_vat_id: string | null
+          email: string
+          id: string
+          name: string
+          surname: string
+        }
+        Insert: {
+          avatar?: string | null
+          company_vat_id?: string | null
+          email: string
+          id?: string
+          name: string
+          surname: string
+        }
+        Update: {
+          avatar?: string | null
+          company_vat_id?: string | null
+          email?: string
+          id?: string
+          name?: string
+          surname?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_company_vat_id_fkey"
+            columns: ["company_vat_id"]
+            referencedRelation: "companies"
+            referencedColumns: ["vat_id"]
           }
         ]
       }
@@ -106,18 +167,20 @@ export interface Database {
           distance: number
         }
         Returns: {
-          created_at: string
-          currency: string
-          id: number
-          length: number | null
-          loading_address_id: number | null
+          load_id: string
+          user_data: unknown
+          company_data: unknown
+          loading_address_id: unknown
+          unloading_address_id: unknown
           loading_date: string
+          unloading_date: string
           price: string
           term: string
-          unloading_address_id: number | null
-          unloading_date: string
+          currency: string
+          length: number
+          weight: number
           vehicle_types: Json
-          weight: number | null
+          created_at: string
         }[]
       }
     }

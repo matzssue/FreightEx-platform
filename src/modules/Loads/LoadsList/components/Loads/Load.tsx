@@ -43,11 +43,14 @@ export const Load = ({
   cargoWeight,
   vehicles,
   loadId,
+  companyName,
+  publisher,
+  publishedAt,
 }: Load) => {
   const { filterId } = useParams();
 
   const navigateTo = filterId ? `/loads/filters/${filterId}/${loadId}` : `/loads/${loadId}`;
-
+  const publishDate = new Date(publishedAt).toDateString();
   return (
     <NavLink className={styles.navigation} to={navigateTo}>
       <div className={styles.load}>
@@ -70,10 +73,10 @@ export const Load = ({
         <p className={styles.date}>{loadingDate}</p>
         <p className={styles.date}>{unloadingDate}</p>
         <span className={styles.company}>
-          <p className={styles.name}>Firma Lubuska S.A</p>
+          <p className={styles.name}>{companyName}</p>
           <div>
-            <p className={styles.publisher}>Mateusz Kluska</p>
-            <p className={styles.time}>Published: 13.06.2023 16:52 </p>
+            <p className={styles.publisher}>{publisher}</p>
+            <p className={styles.time}>Published: {publishDate} </p>
           </div>
           <div className={styles.avatar}>
             <Avatar
