@@ -8,14 +8,12 @@ import AlertDialog from '../../../../../common/Dialog/AlertDialog';
 import { useAppSelector, useAppDispatch } from '../../../../../store/hooks';
 import { closeModal, openDialog, closeDialog } from '../../../../../store/reducers/modalSlice';
 import { addLoadSchema, AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
-import { AddLoadData } from '../../../../../utils/api/supabase/types';
 import { addLoad } from '../../../../../utils/api/supabase/addLoad';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { PlaceAndDateSearch } from './PlaceAndDateSearch';
 import { CargoDetails } from './CargoDetails';
 import { VehicleDetails } from './VehicleDetails';
 import { PaymentDetails } from './PaymentDetails';
-import { useUser } from '../../../../../hooks/useUser';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
 export const AddLoad = () => {
   const queryClient = useQueryClient();
