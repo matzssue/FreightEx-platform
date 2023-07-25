@@ -14,7 +14,7 @@ export const TruckFilter = ({ register, errors }) => {
         -
         <div className={styles.inputs}>
           {/* <label htmlFor='maxWeight'>Max</label> */}
-          <input placeholder='max' {...register('maxWeight')} type='text' />
+          <input placeholder='max' {...register('maxWeight')} type='number' />
           {errors.maxWeight && <p role='alert'>{errors.maxWeight?.message}</p>}
         </div>
       </fieldset>
@@ -22,13 +22,13 @@ export const TruckFilter = ({ register, errors }) => {
         <legend>Length(m)</legend>
         <div className={styles.inputs}>
           {/* <label htmlFor='minLength'>Min</label> */}
-          <input placeholder='max' {...register('minLength')} type='text' />
+          <input placeholder='max' {...register('minLength')} type='number' />
           {errors.minLength && <p role='alert'>{errors.minLength?.message}</p>}
         </div>
         -
         <div className={styles.inputs}>
           {/* <label htmlFor='maxLength'>Max</label> */}
-          <input placeholder='max' {...register('maxLength')} type='text' />
+          <input placeholder='max' {...register('maxLength')} type='number' />
           {errors.maxLength && <p role='alert'>{errors.maxLength?.message}</p>}
         </div>
       </fieldset>
