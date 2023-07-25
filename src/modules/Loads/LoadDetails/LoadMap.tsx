@@ -12,7 +12,6 @@ type LoadMap = {
 export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_API_KEY,
-    libraries: ['places'],
   });
 
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult>();
