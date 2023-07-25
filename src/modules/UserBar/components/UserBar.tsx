@@ -15,8 +15,8 @@ import { useUser } from '../../../hooks/useUser';
 export const UserBar = ({ setShowMenu }) => {
   const dispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.modal.isLoadModalOpen);
-  const { user } = useUserContext();
-  const userData = useUser(user);
+  const { userData } = useUserContext();
+  // const userData = useUser(user);
   console.log('userData', userData);
   return (
     <div className={styles.container}>
