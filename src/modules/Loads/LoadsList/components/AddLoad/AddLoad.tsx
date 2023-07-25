@@ -20,12 +20,12 @@ import { useUserContext } from '../../../../../store/contexts/UserContext';
 export const AddLoad = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
-  const { user, isLoggedIn } = useUserContext();
-  const userData = useUser(user);
+  const { userData, isLoggedIn } = useUserContext();
   console.log(isLoggedIn);
   const isModalOpen = useAppSelector((state) => state.modal.isLoadModalOpen);
   const isDialogOpen = useAppSelector((state) => state.modal.isLoadDialogOpen);
-  console.log(user);
+  // const userData = useUser(user);
+  // console.log(user);
   const {
     handleSubmit,
     control,

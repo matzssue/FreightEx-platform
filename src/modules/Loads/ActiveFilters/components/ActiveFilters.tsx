@@ -10,10 +10,8 @@ export const ActiveFilters = () => {
     <div className={styles['list-container']}>
       <ul>
         {filters.map((filter, i) => (
-          <li>
-            <Link key={i} to={`/loads/filters/${filter.id}`}>
-              {filter.loadingAddressData.city}
-            </Link>
+          <li key={i}>
+            <Link to={`/loads/filters/${filter.id}`}>{filter.loadingAddressData.city}</Link>
             <button onClick={deleteFilterHandler} className={styles.close}>
               <IoCloseCircleSharp />
             </button>

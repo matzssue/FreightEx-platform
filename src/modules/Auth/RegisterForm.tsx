@@ -18,6 +18,11 @@ import useCreateUser, { UserData } from '../../hooks/useCreateUser';
 export const RegisterForm = () => {
   const steps = ['User', 'Company'];
   const [activeStep, setActiveStep] = useState(0);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const createUserMutation = useCreateUser();
+  const currentSchema = registerSchema[activeStep];
+
   const defaultValues = {
     name: '',
     surname: '',
@@ -28,8 +33,6 @@ export const RegisterForm = () => {
     companyName: '',
     vatId: '',
   };
-  const createUserMutation = useCreateUser();
-  const currentSchema = registerSchema[activeStep];
   const methods = useForm({
     shouldUnregister: false,
     defaultValues,
@@ -58,8 +61,16 @@ export const RegisterForm = () => {
   const handlePrev = async () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const onSubmit: SubmitHandler<UserData> = (data) => {
-    createUserMutation.mutateAsync(data);
+  const onSubmit: SubmitHandler<UserData> = async (data) => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      createUserMutation.mutateAsync(data);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+    setIsLoading(false);
   };
 
   console.log(activeStep);

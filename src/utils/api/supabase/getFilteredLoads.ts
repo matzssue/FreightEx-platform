@@ -62,6 +62,7 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
   console.log(error);
   console.log(data);
   const loads = data.map((load) => {
+    console.log('load', load);
     return {
       id: load.id,
       loadingAddress: load.loading_address_id,
@@ -76,7 +77,7 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
       currency: load.currency,
       user: load.user_data,
       company: load.company_data,
-      createtAt: load.created_at,
+      createdAt: load.created_at,
     };
   });
 
