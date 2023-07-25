@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { noFilterTab } from '../../loadData';
 import { NavLink } from 'react-router-dom';
 import { LoadAddress } from './LoadAddress';
+import { useUserContext } from '../../../../../store/contexts/UserContext';
 
 export type Vehicles = {
   [key: string]: boolean;
@@ -24,38 +25,55 @@ type Load = {
   cargoLength: number | null;
   cargoWeight: number | null;
   vehicles: Vehicles;
-  loadId: number;
+  load: number;
 };
 
-export const Load = ({
-  loadingCity,
-  loadingPostCode,
-  loadingCountry,
-  unloadingCity,
-  unloadingPostCode,
-  unloadingCountry,
-  price,
-  currency,
-  paymentTerm,
-  loadingDate,
-  unloadingDate,
-  cargoLength,
-  cargoWeight,
-  vehicles,
-  loadId,
-  companyName,
-  publisher,
-  publishedAt,
-}: Load) => {
-  const { filterId } = useParams();
+type LoadProps = {
+  data: Load;
+  onAccept: () => void;
+};
 
-  const navigateTo = filterId ? `/loads/filters/${filterId}/${loadId}` : `/loads/${loadId}`;
-  const publishDate = new Date(publishedAt).toDateString();
+export const Load = ({ data, onAccept }: LoadProps) => {
+  const { filterId } = useParams();
+  const { userData } = useUserContext();
+  const {
+    cargoLength,
+    cargoWeight,
+    company,
+    createdAt,
+    currency,
+    id,
+    loadingAddress,
+    loadingDate,
+    unloadingAddress,
+    unloadingDate,
+    paymentTerm,
+    price,
+    user,
+    vehicleTypes,
+  } = data;
+  // console.log(data);
+  // console.log(userData);
+  // console.log(data.createdAt);
+  if (!userData) return;
+  const navigateTo = filterId ? `/loads/filters/${filterId}/${id}` : `/loads/${id}`;
+  // console.log(data, data.createdtAt);
+  // console.log('data', createdAt);
+  const publishDate = new Date(createdAt).toDateString();
+  // console.log(publishDate);
   return (
     <NavLink className={styles.navigation} to={navigateTo}>
       <div className={styles.load}>
-        <LoadAddress country={loadingCountry} city={loadingCity} postCode={loadingPostCode} />
-        <LoadAddress country={unloadingCountry} city={unloadingCity} postCode={unloadingPostCode} />
+        <LoadAddress
+          country={loadingAddress.country}
+          city={loadingAddress.city}
+          postCode={loadingAddress.postal_code}
+        />
+        <LoadAddress
+          country={unloadingAddress.country}
+          city={unloadingAddress.city}
+          postCode={unloadingAddress.postal_code}
+        />
         <span>
           <p className={styles.salary}>{`${price} ${currency}`}</p>
           <p className={styles.term}>payment term: {paymentTerm}d</p>
@@ -65,17 +83,19 @@ export const Load = ({
           <span>Weight: {cargoWeight}t</span>
           <p className={styles.vehicles}>
             Vehicle:
-            {Object.keys(vehicles)
-              .filter((key) => vehicles[key])
+            {Object.keys(vehicleTypes)
+              .filter((key) => vehicleTypes[key])
               .join(', ')}
           </p>
         </span>
         <p className={styles.date}>{loadingDate}</p>
         <p className={styles.date}>{unloadingDate}</p>
         <span className={styles.company}>
-          <p className={styles.name}>{companyName}</p>
+          <p className={styles.name}>{company.name}</p>
           <div>
-            <p className={styles.publisher}>{publisher}</p>
+            <p className={styles.publisher}>
+              {user.name} {user.surname}
+            </p>
             <p className={styles.time}>Published: {publishDate} </p>
           </div>
           <div className={styles.avatar}>
@@ -86,7 +106,13 @@ export const Load = ({
             />
           </div>
         </span>
-        <button className={styles['accept-button']}>Accept Order</button>
+        {userData.id !== user.id ? (
+          <button type='button' onClick={onAccept} className={styles['accept-button']}>
+            Accept Order
+          </button>
+        ) : (
+          ''
+        )}
       </div>
     </NavLink>
   );
