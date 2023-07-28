@@ -1,6 +1,7 @@
 import supabase from '../../../config/supabase';
-import { Load } from './types';
-export const addLoad = async (data: Load) => {
+import { AddLoadData, Load } from './types';
+export const addLoad = async (data: AddLoadData) => {
+  console.log('add load data', data);
   const loadingId = +data.loadingAddressData.postal_code.replace(/-/g, '');
   const unloadingId = +data.unloadingAddressData.postal_code.replace(/-/g, '');
 
@@ -20,7 +21,7 @@ export const addLoad = async (data: Load) => {
     price: data.price,
     term: data.term,
     length: data.length,
-    vehicle_types: data.multiCheckbox,
+    vehicle_types: data.vehicles,
     user_id: data.userId,
   };
 

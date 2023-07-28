@@ -1,16 +1,15 @@
 import supabase from '../../../config/supabase';
-import { LoadData } from './types';
+import { GetLoadsData, Load, LoadsData } from './types';
 
 export const getAllLoads = async () => {
   const { data, error } = await supabase
     .from('loads')
     .select(`*, unloading_address_id(*), loading_address_id(*), user_id(*, company_vat_id(*))`)
     .order('created_at', { ascending: false })
-    .returns<LoadData[]>();
+    .returns<GetLoadsData[]>();
 
   if (error) throw new Error();
   const loads = data.map((load) => {
-    console.log(load);
     return {
       id: load.id,
       loadingAddress: load.loading_address_id,
@@ -33,8 +32,7 @@ export const getAllLoads = async () => {
       company: load.user_id.company_vat_id,
       createdAt: load.created_at,
     };
-  });
-  // console.log(data);
+  }) as Load[];
 
   return loads;
 };

@@ -1,36 +1,16 @@
 import styles from './Load.module.scss';
 import Avatar from '@mui/material/Avatar';
 import { useParams } from 'react-router-dom';
-import { noFilterTab } from '../../loadData';
 import { NavLink } from 'react-router-dom';
 import { LoadAddress } from './LoadAddress';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
+import { Load as TLoad } from '../../../../../utils/api/supabase/types';
 
-export type Vehicles = {
-  [key: string]: boolean;
-};
-
-type Load = {
-  loadingCity: string;
-  loadingPostCode: string;
-  loadingCountry: string;
-  unloadingCity: string;
-  unloadingPostCode: string;
-  unloadingCountry: string;
-  price: string;
-  currency: string;
-  paymentTerm: string;
-  loadingDate: string;
-  unloadingDate: string;
-  cargoLength: number | null;
-  cargoWeight: number | null;
-  vehicles: Vehicles;
-  load: number;
-};
+import { MouseEventHandler } from 'react';
 
 type LoadProps = {
-  data: Load;
-  onAccept: () => void;
+  data: TLoad;
+  onAccept: MouseEventHandler<HTMLButtonElement>;
 };
 
 export const Load = ({ data, onAccept }: LoadProps) => {
@@ -57,8 +37,6 @@ export const Load = ({ data, onAccept }: LoadProps) => {
   // console.log(data.createdAt);
   if (!userData) return;
   const navigateTo = filterId ? `/loads/filters/${filterId}/${id}` : `/loads/${id}`;
-  // console.log(data, data.createdtAt);
-  // console.log('data', createdAt);
   const publishDate = new Date(createdAt).toDateString();
   // console.log(publishDate);
   return (
