@@ -1,6 +1,6 @@
 import supabase from '../../../config/supabase';
 import { LoadsFilters } from '../../../store/reducers/loadsFiltersSlice';
-import { LoadData } from './types';
+import { GetLoadsData, Load } from './types';
 export const getFilteredLoads = async (filter: LoadsFilters) => {
   if (!filter) return;
   const {
@@ -56,11 +56,10 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
     query = query.lte('unloading_date', endUnloadingDate);
   }
 
-  const { data, error } = await query.returns<LoadData[]>();
+  const { data, error } = await query.returns<GetLoadsData[]>();
 
   if (error) throw new Error();
-  console.log(error);
-  console.log(data);
+
   const loads = data.map((load) => {
     console.log('load', load);
     return {
@@ -75,11 +74,17 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
       paymentTerm: load.term,
       price: load.price,
       currency: load.currency,
-      user: load.user_data,
-      company: load.company_data,
+      user: {
+        avatar: load.user_id.avatar,
+        email: load.user_id.email,
+        id: load.user_id.id,
+        name: load.user_id.name,
+        surname: load.user_id.surname,
+      },
+      company: load.user_id.company_vat_id,
       createdAt: load.created_at,
     };
-  });
+  }) as Load[];
 
   return loads;
 };
