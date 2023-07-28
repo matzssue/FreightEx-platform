@@ -1,28 +1,27 @@
 import supabase from '../../../config/supabase';
-import { LoadData } from './types';
+import { GetLoadsData } from './types';
 
 export const getLoadDetails = async (id: string) => {
-  const { data, error } = await supabase
+  const { data: loadData, error } = await supabase
     .from('loads')
     .select(`*, unloading_address_id(*), loading_address_id(*)`)
     .eq('id', id)
-    .returns<LoadData[]>();
+    .returns<GetLoadsData[]>()
+    .single();
   if (error) throw new Error();
-  console.log(data);
-  const loads = data.map((load) => {
-    return {
-      id: load.id,
-      loadingAddressData: load.loading_address_id,
-      unloadingAddressData: load.unloading_address_id,
-      loadingDate: load.loading_date,
-      unloadingDate: load.unloading_date,
-      vehicleTypes: load.vehicle_types,
-      cargoLength: load.length,
-      cargoWeight: load.weight,
-      term: load.term,
-      price: load.price,
-      currency: load.currency,
-    };
-  });
+
+  const loads = {
+    id: loadData.id,
+    loadingAddress: loadData.loading_address_id,
+    unloadingAddress: loadData.unloading_address_id,
+    loadingDate: loadData.loading_date,
+    unloadingDate: loadData.unloading_date,
+    vehicleTypes: loadData.vehicle_types,
+    cargoLength: loadData.length,
+    cargoWeight: loadData.weight,
+    term: loadData.term,
+    price: loadData.price,
+    currency: loadData.currency,
+  };
   return loads;
 };
