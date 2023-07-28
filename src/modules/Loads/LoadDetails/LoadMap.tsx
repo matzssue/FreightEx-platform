@@ -21,15 +21,15 @@ export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
     try {
       if (!address) return;
 
-      const { loadingAddressData, unloadingAddressData } = address;
+      const { loadingAddress, unloadingAddress } = address;
       const loadingAddressCords = new google.maps.LatLng(
-        loadingAddressData.latitude,
-        loadingAddressData.longitude,
+        loadingAddress.latitude,
+        loadingAddress.longitude,
       );
       console.log(loadingAddressCords);
       const unloadingAddressCords = new google.maps.LatLng(
-        unloadingAddressData.latitude,
-        unloadingAddressData.longitude,
+        unloadingAddress.latitude,
+        unloadingAddress.longitude,
       );
       console.log(unloadingAddressCords);
 
