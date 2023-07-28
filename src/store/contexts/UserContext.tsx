@@ -2,33 +2,25 @@ import { Dispatch, SetStateAction, createContext, useEffect, useState } from 're
 
 import { getSafeContext } from '../../utils/helpers/getSateContext';
 import { useUser } from '../../hooks/useUser';
-// import { useUser } from '../../hooks/useUser';
-type User = {
-  email?: string;
-  name?: string | undefined;
-  surname?: string | undefined;
-  avatar: string;
-  userId: string;
-  password?: string | undefined;
-};
+import { UserDatabase } from '../../utils/api/supabase/types';
 
 type UserContextProps = {
   isLoggedIn: boolean;
+  user: string | undefined;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-  logIn: (loginData: User) => void;
+  logIn: () => void;
   logOut: () => void;
-  user: User;
-
-  setUser: Dispatch<SetStateAction<User>>;
+  setUser: Dispatch<SetStateAction<string | undefined>>;
+  userData: UserDatabase | undefined;
 };
 
 export const UserContext = createContext<UserContextProps | null>(null);
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User>();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState();
-  console.log(user);
+  const [user, setUser] = useState<string | undefined>();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [userData, setUserData] = useState<UserDatabase | undefined>();
+
   const logOut = () => {
     setIsLoggedIn(false);
   };
