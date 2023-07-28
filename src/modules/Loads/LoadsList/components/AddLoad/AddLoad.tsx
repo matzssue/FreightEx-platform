@@ -15,6 +15,7 @@ import { CargoDetails } from './CargoDetails';
 import { VehicleDetails } from './VehicleDetails';
 import { PaymentDetails } from './PaymentDetails';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
+import { AddLoadData } from '../../../../../utils/api/supabase/types';
 export const AddLoad = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
@@ -48,9 +49,8 @@ export const AddLoad = () => {
     reset();
     dispatch(closeModal());
   };
-  const onSubmit = async (data: AddLoadData) => {
-    console.log(userData);
-    console.log(data);
+  const onSubmit = async (data: AddLoadValues) => {
+    if (!userData) return;
     const load = { ...data, userId: userData.id };
     console.log(load);
     mutation.mutate(load);
