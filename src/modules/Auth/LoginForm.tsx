@@ -12,17 +12,19 @@ import { useEffect, useState } from 'react';
 import { useUserContext } from '../../store/contexts/UserContext';
 
 export const LoginForm = () => {
-  const navigate = useNavigate();
-  const { isLoggedIn } = useUserContext();
-  if (isLoggedIn) navigate('/loads');
+  const navigator = useNavigate();
   const loginMutation = useLogin();
-
+  const { isLoggedIn } = useUserContext();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  useEffect(() => {
+    if (isLoggedIn) navigator('/loads');
+  }, [isLoggedIn]);
+  console.log(isLoggedIn);
   const { handleSubmit, control, setValue } = useForm({
     resolver: yupResolver<LoginFormValues>(loginSchema),
   });
+
   const onSubmit = async (data: LoginFormValues) => {
     try {
       setIsLoading(true);
