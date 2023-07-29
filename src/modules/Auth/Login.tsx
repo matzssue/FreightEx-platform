@@ -15,15 +15,14 @@ function Login() {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user.id);
-      setIsLoggedIn(true);
-      console.log(session);
-      navigate('/loads');
-
       if (session && session.user) {
         console.log(session.user);
+        setUser(session?.user.id);
+        setIsLoggedIn(true);
+        navigate('/loads');
       }
       if (!session) {
+        setIsLoggedIn(false);
         navigate('/login');
       }
     });
