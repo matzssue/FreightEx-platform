@@ -87,7 +87,7 @@ export const PlacesAutocompleteInput = <T extends FieldValues>({
               style={{
                 outlineColor: '#1976d2',
                 borderRadius: '3px',
-                border: '2px solid #b1b1b1',
+                border: '1px solid #b1b1b1',
                 ...sx,
               }}
               onPlaceSelected={(value) => onSelectHandler(value, field)}
