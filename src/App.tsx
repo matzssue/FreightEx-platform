@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 
 import { Home } from './Views/Home';
@@ -11,6 +11,8 @@ import { LoadDetails } from './modules/Loads/LoadDetails/LoadDetails';
 import { LoginForm } from './modules/Auth/LoginForm';
 import { RegisterForm } from './modules/Auth/RegisterForm';
 import ErrorBoundary from './utils/helpers/ErrorBoundary';
+
+import Login from './modules/Auth/Login';
 import { UserContextProvider } from './store/contexts/UserContext';
 
 const queryClient = new QueryClient({
@@ -34,7 +36,8 @@ function App() {
             <UserContextProvider>
               <Suspense fallback='Loading...'>
                 <Routes>
-                  <Route path='/' element={<LoginForm />} />
+                  <Route path='/' element={<Login />} />
+                  <Route path='/login' element={<LoginForm />} />
                   <Route path='/register' element={<RegisterForm />} />
                   <Route path='loads'>
                     <Route index element={<Home />} />
