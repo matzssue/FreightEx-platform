@@ -7,7 +7,7 @@ export const FilterDetails = () => {
 
   const filters = useAppSelector((state) => state.loadsFilters.filters);
   const currentFilter = filters.filter((filter) => filter.id === filterId)[0];
-  console.log(currentFilter);
+
   if (!currentFilter) return;
   const { minWeight, maxWeight, minLength, maxLength, loadingAddress, unloadingAddress } =
     currentFilter;
