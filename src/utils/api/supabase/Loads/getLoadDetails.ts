@@ -1,6 +1,6 @@
 import supabase from '../../../../config/supabase';
 import { GetLoadsData } from '../types';
-
+import { Load } from '../types';
 export const getLoadDetails = async (id: string) => {
   const { data: loadData, error } = await supabase
     .from('loads')
@@ -22,6 +22,6 @@ export const getLoadDetails = async (id: string) => {
     term: loadData.term,
     price: loadData.price,
     currency: loadData.currency,
-  };
+  } as Partial<Load>;
   return loads;
 };

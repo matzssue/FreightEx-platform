@@ -200,7 +200,7 @@ export interface Database {
       users: {
         Row: {
           avatar: string | null
-          company_vat_id: string | null
+          company_vat_id: string
           email: string
           id: string
           name: string
@@ -208,7 +208,7 @@ export interface Database {
         }
         Insert: {
           avatar?: string | null
-          company_vat_id?: string | null
+          company_vat_id: string
           email: string
           id?: string
           name: string
@@ -216,7 +216,7 @@ export interface Database {
         }
         Update: {
           avatar?: string | null
-          company_vat_id?: string | null
+          company_vat_id?: string
           email?: string
           id?: string
           name?: string
@@ -244,8 +244,7 @@ export interface Database {
         }
         Returns: {
           id: string
-          user_id: unknown
-          company: unknown
+          user_id: Json
           loading_address_id: unknown
           unloading_address_id: unknown
           loading_date: string
