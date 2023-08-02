@@ -1,5 +1,5 @@
-import supabase from '../../../config/supabase';
-import { GetLoadsData } from './types';
+import supabase from '../../../../config/supabase';
+import { GetLoadsData } from '../types';
 
 export const getCompany = async (id: string) => {
   console.log(id);

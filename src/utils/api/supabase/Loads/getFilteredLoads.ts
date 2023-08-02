@@ -1,6 +1,6 @@
-import supabase from '../../../config/supabase';
-import { LoadsFilters } from '../../../store/reducers/loadsFiltersSlice';
-import { GetLoadsData, Load } from './types';
+import supabase from '../../../../config/supabase';
+import { LoadsFilters } from '../../../../store/reducers/loadsFiltersSlice';
+import { GetLoadsData, Load } from '../types';
 export const getFilteredLoads = async (filter: LoadsFilters) => {
   if (!filter) return;
   const {
