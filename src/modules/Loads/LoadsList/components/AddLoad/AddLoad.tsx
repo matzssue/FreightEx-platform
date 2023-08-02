@@ -8,7 +8,7 @@ import AlertDialog from '../../../../../common/Dialog/AlertDialog';
 import { useAppSelector, useAppDispatch } from '../../../../../store/hooks';
 import { closeModal, openDialog, closeDialog } from '../../../../../store/reducers/modalSlice';
 import { addLoadSchema, AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
-import { addLoad } from '../../../../../utils/api/supabase/addLoad';
+import { addLoad } from '../../../../../utils/api/supabase/Loads/addLoad';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { PlaceAndDateSearch } from './PlaceAndDateSearch';
 import { CargoDetails } from './CargoDetails';

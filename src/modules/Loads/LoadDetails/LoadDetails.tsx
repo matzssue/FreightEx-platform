@@ -1,6 +1,6 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
-import { getLoadDetails } from '../../../utils/api/supabase/getLoadDetails';
+import { getLoadDetails } from '../../../utils/api/supabase/Loads/getLoadDetails';
 import { useQuery } from '@tanstack/react-query';
 
 import styles from './LoadDetails.module.scss';
