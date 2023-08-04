@@ -101,7 +101,7 @@ export const RegisterForm = () => {
         })}
       </Stepper>
       <FormProvider {...methods}>
-        <form>
+        <form onClick={handleSubmit(onSubmit)}>
           {getStepContent(activeStep)}
           <div className={styles.buttons}>
             <button className={styles.submit} onClick={handlePrev} disabled={activeStep === 0}>
@@ -112,12 +112,12 @@ export const RegisterForm = () => {
                 Next
               </button>
             ) : (
-              <button className={styles.submit} type='submit' onClick={handleSubmit(onSubmit)}>
+              <button className={styles.submit} type='submit'>
                 Submit
               </button>
             )}
             <p className={styles.register}>
-              Arleady registered? <Link to={'/'}>Log In</Link>
+              Arleady registered? <Link to={'/login'}>Log In</Link>
             </p>
           </div>
         </form>

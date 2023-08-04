@@ -10,7 +10,6 @@ export const loginSchema = yup.object().shape({
 const registerUserSchema = yup.object({
   name: yup.string().required('Name is required').min(3),
   surname: yup.string().required('Surname is required').min(3),
-  imgUrl: yup.string().optional(),
   email: yup.string().email().required('Email is required'),
   password: yup
     .string()
