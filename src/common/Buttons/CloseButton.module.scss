@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.close-button {
+  height: max-content;
+  width: max-content;
+  padding-top: 1rem;
+  border: none;
+  color: $primary-blue-color;
+
+  svg {
+    padding: 0.2rem;
+    &:hover {
+      background-color: $primary-color;
+      border-radius: 30%;
+    }
+  }
+}
