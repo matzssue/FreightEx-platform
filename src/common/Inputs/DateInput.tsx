@@ -35,12 +35,6 @@ export const DateInput = <T extends FieldValues>({
               sx={{
                 '& .MuiOutlinedInput-input': {
                   fontSize: fontSize,
-                  borderWidth: '15px',
-                },
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused fieldset': {
-                    borderWidth: '3px',
-                  },
                 },
                 '.css-1wc848c-MuiFormHelperText-root': {
                   fontFamily: 'Nunito, sans-serif',

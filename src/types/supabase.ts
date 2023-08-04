@@ -9,82 +9,6 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      accepted_loads: {
-        Row: {
-          accepted_by: string | null
-          created_at: string
-          currency: string
-          id: string
-          length: number | null
-          loading_address_id: number | null
-          loading_date: string
-          price: string
-          term: string
-          unloading_address_id: number | null
-          unloading_date: string
-          user_id: string
-          vehicle_types: Json
-          weight: number | null
-        }
-        Insert: {
-          accepted_by?: string | null
-          created_at?: string
-          currency: string
-          id?: string
-          length?: number | null
-          loading_address_id?: number | null
-          loading_date: string
-          price: string
-          term: string
-          unloading_address_id?: number | null
-          unloading_date: string
-          user_id: string
-          vehicle_types: Json
-          weight?: number | null
-        }
-        Update: {
-          accepted_by?: string | null
-          created_at?: string
-          currency?: string
-          id?: string
-          length?: number | null
-          loading_address_id?: number | null
-          loading_date?: string
-          price?: string
-          term?: string
-          unloading_address_id?: number | null
-          unloading_date?: string
-          user_id?: string
-          vehicle_types?: Json
-          weight?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "accepted_loads_accepted_by_fkey"
-            columns: ["accepted_by"]
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "accepted_loads_loading_address_id_fkey"
-            columns: ["loading_address_id"]
-            referencedRelation: "addresses"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "accepted_loads_unloading_address_id_fkey"
-            columns: ["unloading_address_id"]
-            referencedRelation: "addresses"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "accepted_loads_user_id_fkey"
-            columns: ["user_id"]
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
       addresses: {
         Row: {
           city: string
@@ -200,7 +124,7 @@ export interface Database {
       users: {
         Row: {
           avatar: string | null
-          company_vat_id: string
+          company_vat_id: string | null
           email: string
           id: string
           name: string
@@ -208,7 +132,7 @@ export interface Database {
         }
         Insert: {
           avatar?: string | null
-          company_vat_id: string
+          company_vat_id?: string | null
           email: string
           id?: string
           name: string
@@ -216,7 +140,7 @@ export interface Database {
         }
         Update: {
           avatar?: string | null
-          company_vat_id?: string
+          company_vat_id?: string | null
           email?: string
           id?: string
           name?: string
@@ -243,8 +167,9 @@ export interface Database {
           distance: number
         }
         Returns: {
-          id: string
-          user_id: Json
+          load_id: string
+          user_data: unknown
+          company_data: unknown
           loading_address_id: unknown
           unloading_address_id: unknown
           loading_date: string

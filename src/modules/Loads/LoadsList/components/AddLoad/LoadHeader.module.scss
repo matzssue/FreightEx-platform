@@ -30,8 +30,8 @@
     color: $secondary-text-color;
 
     &:hover {
-      background-color: #af4646;
-
+      background-color: $bacground-color;
+      color: rgb(187, 22, 22);
       border-radius: 50%;
     }
   }

@@ -50,13 +50,7 @@ export const LocationFilter = ({ setValue, control, register, errors }) => {
           control={control}
           setValueKey='unloadingAddressData'
           name='unloadingAddress'
-          sx={{
-            width: '200px',
-            padding: '0.5rem',
-            fontSize: '0.7rem',
-            height: '15px',
-            outlineColor: '#1976d2',
-          }}
+          sx={{ width: '200px', padding: '0.5rem', fontSize: '0.7rem', height: '15px' }}
           filterType='country'
           placeholder='Search country of unloading'
           errorLabel='Unloading address'

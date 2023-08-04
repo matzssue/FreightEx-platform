@@ -12,6 +12,7 @@ type LoadMap = {
 export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+    libraries: ['places'],
   });
 
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult>();
@@ -21,15 +22,15 @@ export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
     try {
       if (!address) return;
 
-      const { loadingAddress, unloadingAddress } = address;
+      const { loadingAddressData, unloadingAddressData } = address;
       const loadingAddressCords = new google.maps.LatLng(
-        loadingAddress.latitude,
-        loadingAddress.longitude,
+        loadingAddressData.latitude,
+        loadingAddressData.longitude,
       );
       console.log(loadingAddressCords);
       const unloadingAddressCords = new google.maps.LatLng(
-        unloadingAddress.latitude,
-        unloadingAddress.longitude,
+        unloadingAddressData.latitude,
+        unloadingAddressData.longitude,
       );
       console.log(unloadingAddressCords);
 

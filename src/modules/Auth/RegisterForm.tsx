@@ -17,27 +17,23 @@ import useCreateUser, { UserData } from '../../hooks/useCreateUser';
 
 export const RegisterForm = () => {
   const steps = ['User', 'Company'];
-  const [activeStep, setActiveStep] = useState<number>(0);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const createUserMutation = useCreateUser();
-  const currentSchema = registerSchema[activeStep];
-
+  const [activeStep, setActiveStep] = useState(0);
   const defaultValues = {
     name: '',
     surname: '',
+    imgUrl: '',
     email: '',
     password: '',
     passwordConfirmation: '',
     companyName: '',
     vatId: '',
   };
-
-  const methods = useForm<typeof defaultValues>({
+  const createUserMutation = useCreateUser();
+  const currentSchema = registerSchema[activeStep];
+  const methods = useForm({
     shouldUnregister: false,
     defaultValues,
-    //@ts-ignore
-    resolver: yupResolver<RegisterUserFormValues | RegisterCompanyFormValues>(currentSchema),
+    resolver: yupResolver<RegisterCompanyFormValues | RegisterUserFormValues>(currentSchema),
     mode: 'onChange',
   });
   const { handleSubmit, trigger } = methods;
@@ -62,17 +58,8 @@ export const RegisterForm = () => {
   const handlePrev = async () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-  const onSubmit: SubmitHandler<UserData> = async (data) => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      createUserMutation.mutateAsync(data);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-    setIsLoading(false);
+  const onSubmit: SubmitHandler<UserData> = (data) => {
+    createUserMutation.mutateAsync(data);
   };
 
   console.log(activeStep);
@@ -103,7 +90,7 @@ export const RegisterForm = () => {
         })}
       </Stepper>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form>
           {getStepContent(activeStep)}
           <div className={styles.buttons}>
             <button className={styles.submit} onClick={handlePrev} disabled={activeStep === 0}>
@@ -114,12 +101,12 @@ export const RegisterForm = () => {
                 Next
               </button>
             ) : (
-              <button className={styles.submit} type='submit'>
+              <button className={styles.submit} type='submit' onClick={handleSubmit(onSubmit)}>
                 Submit
               </button>
             )}
             <p className={styles.register}>
-              Arleady registered? <Link to={'/login'}>Log In</Link>
+              Arleady registered? <Link to={'/'}>Log In</Link>
             </p>
           </div>
         </form>

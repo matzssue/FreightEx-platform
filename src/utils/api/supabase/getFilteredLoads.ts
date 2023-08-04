@@ -1,6 +1,6 @@
-import supabase from '../../../../config/supabase';
-import { LoadsFilters } from '../../../../store/reducers/loadsFiltersSlice';
-import { GetLoadsData, Load } from '../types';
+import supabase from '../../../config/supabase';
+import { LoadsFilters } from '../../../store/reducers/loadsFiltersSlice';
+import { LoadData } from './types';
 export const getFilteredLoads = async (filter: LoadsFilters) => {
   if (!filter) return;
   const {
@@ -15,6 +15,11 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
     loadingArea,
     loadingAddressData,
   } = filter;
+
+  // if (!loadingArea) {
+  //   query = supabase.from('loads').select(`*, unloading_address_id(*), loading_address_id(*)`);
+  //   console.log('noLoadingArea', query);
+  // }
 
   const dinstanceInKm = loadingArea * 1000;
   let query = supabase.rpc('get_entries_within_distance', {
@@ -51,12 +56,12 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
     query = query.lte('unloading_date', endUnloadingDate);
   }
 
-  const { data, error } = await query.returns<GetLoadsData[]>();
+  const { data, error } = await query.returns<LoadData[]>();
 
   if (error) throw new Error();
-
+  console.log(error);
+  console.log(data);
   const loads = data.map((load) => {
-    console.log('load', load);
     return {
       id: load.id,
       loadingAddress: load.loading_address_id,
@@ -69,17 +74,11 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
       paymentTerm: load.term,
       price: load.price,
       currency: load.currency,
-      user: {
-        avatar: load.user_id.avatar,
-        email: load.user_id.email,
-        id: load.user_id.id,
-        name: load.user_id.name,
-        surname: load.user_id.surname,
-      },
-      company: load.user_id.company_vat_id,
-      createdAt: load.created_at,
+      user: load.user_data,
+      company: load.company_data,
+      createtAt: load.created_at,
     };
-  }) as Load[];
+  });
 
   return loads;
 };
