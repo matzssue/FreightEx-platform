@@ -17,26 +17,27 @@ import useCreateUser, { UserData } from '../../hooks/useCreateUser';
 
 export const RegisterForm = () => {
   const steps = ['User', 'Company'];
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const createUserMutation = useCreateUser();
   const currentSchema = registerSchema[activeStep];
 
   const defaultValues = {
     name: '',
     surname: '',
-    imgUrl: '',
     email: '',
     password: '',
     passwordConfirmation: '',
     companyName: '',
     vatId: '',
   };
-  const methods = useForm({
+
+  const methods = useForm<typeof defaultValues>({
     shouldUnregister: false,
     defaultValues,
-    resolver: yupResolver<RegisterCompanyFormValues | RegisterUserFormValues>(currentSchema),
+    //@ts-ignore
+    resolver: yupResolver<RegisterUserFormValues | RegisterCompanyFormValues>(currentSchema),
     mode: 'onChange',
   });
   const { handleSubmit, trigger } = methods;
@@ -61,6 +62,7 @@ export const RegisterForm = () => {
   const handlePrev = async () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
   const onSubmit: SubmitHandler<UserData> = async (data) => {
     try {
       setIsLoading(true);
@@ -101,7 +103,7 @@ export const RegisterForm = () => {
         })}
       </Stepper>
       <FormProvider {...methods}>
-        <form onClick={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {getStepContent(activeStep)}
           <div className={styles.buttons}>
             <button className={styles.submit} onClick={handlePrev} disabled={activeStep === 0}>
