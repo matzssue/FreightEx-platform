@@ -5,10 +5,6 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { Addresses } from '../../utils/api/supabase/types';
 
-type UnloadingData = {
-  country: string | undefined | null;
-};
-
 export type LoadsFilters = {
   loadingAddress: string;
   unloadingAddress?: string | null | undefined;

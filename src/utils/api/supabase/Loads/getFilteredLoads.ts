@@ -1,6 +1,6 @@
-import supabase from '../../../config/supabase';
-import { LoadsFilters } from '../../../store/reducers/loadsFiltersSlice';
-import { GetLoadsData, Load } from './types';
+import supabase from '../../../../config/supabase';
+import { LoadsFilters } from '../../../../store/reducers/loadsFiltersSlice';
+import { GetLoadsData, Load } from '../types';
 export const getFilteredLoads = async (filter: LoadsFilters) => {
   if (!filter) return;
   const {
@@ -15,11 +15,6 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
     loadingArea,
     loadingAddressData,
   } = filter;
-
-  // if (!loadingArea) {
-  //   query = supabase.from('loads').select(`*, unloading_address_id(*), loading_address_id(*)`);
-  //   console.log('noLoadingArea', query);
-  // }
 
   const dinstanceInKm = loadingArea * 1000;
   let query = supabase.rpc('get_entries_within_distance', {

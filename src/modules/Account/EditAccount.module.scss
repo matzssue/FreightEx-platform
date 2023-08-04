@@ -1,0 +1,52 @@
+@import '../../styles/variables.scss';
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-buttons {
+  display: flex;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background-color: $secondary-color;
+  gap: 5px;
+  box-shadow: 4px 6px 10px 1px rgb(139 139 139 / 33%);
+  //   .close {
+  //     position: absolute;
+  //   }
+  input[type='file'] {
+    display: none;
+  }
+  .avatar-label {
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  button,
+  .avatar-label {
+    background-color: $primary-blue-color;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    &:hover {
+      background-color: $primary-hover-button-color;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 0rem;
+  gap: 20px;
+  button {
+    background-color: $primary-blue-color;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 0;
+    &:hover {
+      background-color: $primary-hover-button-color;
+    }
+  }
+}
