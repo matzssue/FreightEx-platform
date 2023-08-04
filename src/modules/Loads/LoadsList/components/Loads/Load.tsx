@@ -7,6 +7,7 @@ import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { Load as TLoad } from '../../../../../utils/api/supabase/types';
 
 import { MouseEventHandler } from 'react';
+import { avatarLink } from '../../../../../constants/avatarLink';
 
 type LoadProps = {
   data: TLoad;
@@ -16,6 +17,8 @@ type LoadProps = {
 export const Load = ({ data, onAccept }: LoadProps) => {
   const { filterId } = useParams();
   const { userData } = useUserContext();
+  // console.log(userData);
+  // console.log(data);
   const {
     cargoLength,
     cargoWeight,
@@ -79,7 +82,7 @@ export const Load = ({ data, onAccept }: LoadProps) => {
           <div className={styles.avatar}>
             <Avatar
               alt={`Mateusz photo`}
-              src='https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80'
+              src={`${avatarLink}${user.avatar}`}
               sx={{ width: 40, height: 40 }}
             />
           </div>
