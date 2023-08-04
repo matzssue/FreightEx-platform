@@ -1,0 +1,18 @@
+@import '../../styles/variables.scss';
+
+.information {
+  display: flex;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  background-color: $secondary-color;
+  // box-shadow: 8px 8px 24px -12px rgb(139, 139, 139);
+  box-shadow: 4px 6px 10px 1px rgb(139 139 139 / 33%);
+  p {
+    margin: 0;
+    font-weight: 700;
+  }
+  span {
+    font-weight: 500;
+  }
+}
