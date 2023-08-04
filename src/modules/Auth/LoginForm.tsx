@@ -4,10 +4,9 @@ import { TextFieldInput } from '../../common/Inputs/TextFieldInput';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginFormValues, loginSchema } from '../../utils/schemas/authSchema';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthFormWrapper } from '../../common/AuthFormWrapper';
 import { useLogin } from '../../hooks/useLogin';
-import supabase from '../../config/supabase';
 import { useEffect, useState } from 'react';
 import { useUserContext } from '../../store/contexts/UserContext';
 

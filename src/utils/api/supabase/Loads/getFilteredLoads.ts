@@ -16,11 +16,6 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
     loadingAddressData,
   } = filter;
 
-  // if (!loadingArea) {
-  //   query = supabase.from('loads').select(`*, unloading_address_id(*), loading_address_id(*)`);
-  //   console.log('noLoadingArea', query);
-  // }
-
   const dinstanceInKm = loadingArea * 1000;
   let query = supabase.rpc('get_entries_within_distance', {
     distance: dinstanceInKm,

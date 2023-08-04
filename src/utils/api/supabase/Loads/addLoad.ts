@@ -1,5 +1,5 @@
 import supabase from '../../../../config/supabase';
-import { AddLoadData, Load } from '../types';
+import { AddLoadData } from '../types';
 export const addLoad = async (data: AddLoadData) => {
   console.log('add load data', data);
   const loadingId = +data.loadingAddressData.postal_code.replace(/-/g, '');

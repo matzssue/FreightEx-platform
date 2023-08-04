@@ -1,5 +1,5 @@
 import supabase from '../../../../config/supabase';
-import { GetLoadsData, Load, LoadsData } from '../types';
+import { GetLoadsData, Load } from '../types';
 
 export const getAllLoads = async () => {
   const { data, error } = await supabase

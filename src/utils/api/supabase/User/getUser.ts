@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import supabase from '../../../../config/supabase';
-import { useUserContext } from '../../../../store/contexts/UserContext';
 
 export const getUser = async (userId: string) => {
   if (!userId) return;
