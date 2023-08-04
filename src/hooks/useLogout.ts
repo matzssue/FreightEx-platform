@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export const useLogout = () => {
   const navigation = useNavigate();
 
-  const { setIsLoggedIn, setUser } = useUserContext();
+  const { setIsLoggedIn, setUserId } = useUserContext();
   async function logout() {
     // console.log(email, password);
 
@@ -18,7 +18,7 @@ export const useLogout = () => {
 
   return useMutation(async () => await logout(), {
     onSuccess: () => {
-      setUser(undefined);
+      setUserId(undefined);
       setIsLoggedIn(false);
       navigation('/');
     },
