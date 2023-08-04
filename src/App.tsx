@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
 import { Home } from './Views/Home';
@@ -12,8 +12,10 @@ import { LoginForm } from './modules/Auth/LoginForm';
 import { RegisterForm } from './modules/Auth/RegisterForm';
 import ErrorBoundary from './utils/helpers/ErrorBoundary';
 
-import Login from './modules/Auth/Login';
+import Login from './modules/Auth/ProtectedLoader';
 import { UserContextProvider } from './store/contexts/UserContext';
+
+import { Account } from './Views/Account';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -39,6 +41,10 @@ function App() {
                   <Route path='/' element={<Login />} />
                   <Route path='/login' element={<LoginForm />} />
                   <Route path='/register' element={<RegisterForm />} />
+                  <Route path='account'>
+                    <Route index element={<Navigate to=':accountId' />} />
+                    <Route path=':accountId' element={<Account />} />
+                  </Route>
                   <Route path='loads'>
                     <Route index element={<Home />} />
                     <Route path=':loadId'>
