@@ -84,12 +84,7 @@ export const PlacesAutocompleteInput = <T extends FieldValues>({
               inputAutocompleteValue={field.value}
               apiKey={import.meta.env.VITE_GOOGLE_API_KEY}
               onChange={(value) => handleChange(value, field)}
-              style={{
-                outlineColor: '#1976d2',
-                borderRadius: '3px',
-                border: '1px solid #b1b1b1',
-                ...sx,
-              }}
+              style={sx}
               onPlaceSelected={(value) => onSelectHandler(value, field)}
               options={{
                 types: [filterType],

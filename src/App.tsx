@@ -1,21 +1,30 @@
-import { Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useState, Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import Wrapper from './common/Wrapper';
+import { AsideMenu } from './modules/Home/AsideMenu/components/AsideMenu';
+import { UserBar } from './modules/UserBar/components/UserBar';
 
 import { Home } from './Views/Home';
 import { News } from './Views/News';
-
+import { Loader } from '@googlemaps/js-api-loader';
 import { QueryClient, QueryClientProvider, QueryCache } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { LoadDetails } from './modules/Loads/LoadDetails/LoadDetails';
 import { LoginForm } from './modules/Auth/LoginForm';
 import { RegisterForm } from './modules/Auth/RegisterForm';
 import ErrorBoundary from './utils/helpers/ErrorBoundary';
-
-import Login from './modules/Auth/ProtectedLoader';
 import { UserContextProvider } from './store/contexts/UserContext';
 
-import { Account } from './Views/Account';
+// const loader = new Loader({
+//   apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+//   version: 'weekly',
+// });
+
+// loader.load().then(async () => {
+//   const data = (await google.maps.importLibrary('places')) as google.maps.MapsLibrary;
+//   console.log('test', data);
+// });
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -38,13 +47,8 @@ function App() {
             <UserContextProvider>
               <Suspense fallback='Loading...'>
                 <Routes>
-                  <Route path='/' element={<Login />} />
-                  <Route path='/login' element={<LoginForm />} />
+                  <Route path='/' element={<LoginForm />} />
                   <Route path='/register' element={<RegisterForm />} />
-                  <Route path='account'>
-                    <Route index element={<Navigate to=':accountId' />} />
-                    <Route path=':accountId' element={<Account />} />
-                  </Route>
                   <Route path='loads'>
                     <Route index element={<Home />} />
                     <Route path=':loadId'>

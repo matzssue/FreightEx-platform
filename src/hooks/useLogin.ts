@@ -27,6 +27,7 @@ export const useLogin = () => {
       onSuccess: (data) => {
         setUser(data.user.id);
         setIsLoggedIn(true);
+        localStorage.setItem('user', data.user.id);
 
         navigation('/loads');
       },
