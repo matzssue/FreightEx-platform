@@ -1,34 +1,31 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
-import { getLoadDetails } from '../../../utils/api/supabase/getLoadDetails';
+import { getLoadDetails } from '../../../utils/api/supabase/Loads/getLoadDetails';
 import { useQuery } from '@tanstack/react-query';
-import supabase from '../../../config/supabase';
 
 import styles from './LoadDetails.module.scss';
 import { LoadMap } from './LoadMap';
 import { LoadAddress } from '../LoadsList/components/Loads/LoadAddress';
 import { NavLink } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export const LoadDetails = () => {
   const { loadId, filterId } = useParams();
-  console.log(loadId);
-  if (!loadId) return;
 
+  if (!loadId) return;
   const { data: loadDetails, isLoading } = useQuery(
     ['loads', loadId],
     async () => await getLoadDetails(loadId),
   );
-  console.log(loadDetails);
 
   const [distance, setDistance] = useState<string | undefined>(undefined);
   const [duration, setDuration] = useState<string | undefined>(undefined);
 
   if (!loadDetails) return;
-  const { loadingAddressData, unloadingAddressData, price, term, currency } = loadDetails[0];
+  if (isLoading) return <div>Loading...</div>;
+  const { loadingAddress, unloadingAddress, price, term, currency } = loadDetails;
 
   const closeLink = filterId ? `/loads/filters/${filterId}` : '/loads';
-  if (isLoading) return <div>Loading...</div>;
   return (
     <div className={styles.container}>
       <NavLink className={styles['close-button']} to={closeLink}>
@@ -37,16 +34,16 @@ export const LoadDetails = () => {
       <div className={styles['load-details']}>
         <div className={styles['details-container']}>
           <LoadAddress
-            country={loadingAddressData!.country}
-            postCode={loadingAddressData!.postal_code}
-            city={loadingAddressData!.city}
+            country={loadingAddress.country}
+            postCode={loadingAddress.postal_code}
+            city={loadingAddress.city}
           />
         </div>
         <div className={styles['details-container']}>
           <LoadAddress
-            country={unloadingAddressData!.country}
-            postCode={unloadingAddressData!.postal_code}
-            city={unloadingAddressData!.city}
+            country={unloadingAddress.country}
+            postCode={unloadingAddress.postal_code}
+            city={unloadingAddress.city}
           />
         </div>
         <div className={`${styles['details-container']} ${styles.route}`}>
@@ -61,7 +58,7 @@ export const LoadDetails = () => {
         </div>
         <button className={styles['accept-button']}>Accept Offer</button>
       </div>
-      <LoadMap setDistance={setDistance} setDuration={setDuration} address={loadDetails[0]} />
+      <LoadMap setDistance={setDistance} setDuration={setDuration} address={loadDetails} />
     </div>
   );
 };

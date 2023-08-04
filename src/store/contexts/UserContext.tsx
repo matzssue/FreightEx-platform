@@ -1,46 +1,58 @@
 import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
 
 import { getSafeContext } from '../../utils/helpers/getSateContext';
-import { useUser } from '../../hooks/useUser';
-// import { useUser } from '../../hooks/useUser';
-type User = {
-  email?: string;
-  name?: string | undefined;
-  surname?: string | undefined;
-  avatar: string;
-  userId: string;
-  password?: string | undefined;
-};
+import { getUser } from '../../utils/api/supabase/User/getUser';
+import { UserDatabase } from '../../utils/api/supabase/types';
+import { changeAvatar } from '../../utils/api/supabase/User/changeAvatar';
 
 type UserContextProps = {
   isLoggedIn: boolean;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-  logIn: (loginData: User) => void;
+  userId: string | undefined;
+  setUserId: Dispatch<SetStateAction<string | undefined>>;
+  logIn: () => void;
   logOut: () => void;
-  user: User;
-
-  setUser: Dispatch<SetStateAction<User>>;
+  userData: UserDatabase | undefined;
+  changeUserAvatar: (file: any) => Promise<void>;
 };
 
 export const UserContext = createContext<UserContextProps | null>(null);
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User>();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log(user);
+  const [userId, setUserId] = useState<string | undefined>();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [userData, setUserData] = useState<UserDatabase | undefined>();
+
   const logOut = () => {
     setIsLoggedIn(false);
   };
   const logIn = () => {
     setIsLoggedIn(true);
   };
+  const changeUserAvatar = async (file: File) => {
+    if (!userId) return;
+    const change = await changeAvatar(file, userId);
+    setUserData(change);
+  };
+
+  useEffect(() => {
+    const getUserData = async () => {
+      if (!userId) return;
+      const userData = await getUser(userId);
+      setUserData(userData);
+    };
+    getUserData();
+  }, [userId]);
+
   const valueContext = {
-    user,
+    userId,
     isLoggedIn,
     logOut,
-    setUser,
+    setUserId,
     logIn,
     setIsLoggedIn,
+    userData,
+    changeUserAvatar,
   };
 
   return <UserContext.Provider value={valueContext}>{children}</UserContext.Provider>;

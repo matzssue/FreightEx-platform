@@ -8,24 +8,23 @@ import AlertDialog from '../../../../../common/Dialog/AlertDialog';
 import { useAppSelector, useAppDispatch } from '../../../../../store/hooks';
 import { closeModal, openDialog, closeDialog } from '../../../../../store/reducers/modalSlice';
 import { addLoadSchema, AddLoadValues } from '../../../../../utils/schemas/addLoadSchema';
-import { AddLoadData } from '../../../../../utils/api/supabase/types';
-import { addLoad } from '../../../../../utils/api/supabase/addLoad';
+import { addLoad } from '../../../../../utils/api/supabase/Loads/addLoad';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { PlaceAndDateSearch } from './PlaceAndDateSearch';
 import { CargoDetails } from './CargoDetails';
 import { VehicleDetails } from './VehicleDetails';
 import { PaymentDetails } from './PaymentDetails';
-import { useUser } from '../../../../../hooks/useUser';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
+import { AddLoadData } from '../../../../../utils/api/supabase/types';
 export const AddLoad = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
-  const { user, isLoggedIn } = useUserContext();
-  const userData = useUser(user);
+  const { userData, isLoggedIn } = useUserContext();
   console.log(isLoggedIn);
   const isModalOpen = useAppSelector((state) => state.modal.isLoadModalOpen);
   const isDialogOpen = useAppSelector((state) => state.modal.isLoadDialogOpen);
-  console.log(user);
+  // const userData = useUser(user);
+  // console.log(user);
   const {
     handleSubmit,
     control,
@@ -50,9 +49,8 @@ export const AddLoad = () => {
     reset();
     dispatch(closeModal());
   };
-  const onSubmit = async (data: AddLoadData) => {
-    console.log(userData);
-    console.log(data);
+  const onSubmit = async (data: AddLoadValues) => {
+    if (!userData) return;
     const load = { ...data, userId: userData.id };
     console.log(load);
     mutation.mutate(load);

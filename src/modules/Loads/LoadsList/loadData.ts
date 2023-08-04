@@ -9,5 +9,3 @@ export const sortData = [
 ];
 
 export const currencies = ['EUR', 'PLN'];
-
-export const noFilterTab = 'all-loads';

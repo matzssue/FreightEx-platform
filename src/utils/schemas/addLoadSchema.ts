@@ -35,19 +35,20 @@ export const addLoadSchema = yup.object().shape({
     longitude: yup.number().required(),
     postal_code: yup.string().required(),
   }),
-  multiCheckbox: yup
+  vehicles: yup
     .object()
     .shape({
       bus: yup.boolean().default(false),
       solo: yup.boolean().default(false),
-      semiTrailer: yup.boolean().default(false),
-      doubleTrailer: yup.boolean().default(false),
+      'semi trailer': yup.boolean().default(false),
+      'double trailer': yup.boolean().default(false),
     })
-    .test('multiCheckbox', 'At least one of the checkbox is required', (options) => {
+    .test('vehicles', 'At least one of the checkbox is required', (options) => {
+      console.log(options);
       console.log(
-        options.bus || options.solo || options.semiTrailer || options.doubleTrailer,
-        'yup multiCheckbox result',
+        options.bus || options.solo || options['semi trailer'] || options['double trailer'],
+        'yup vehicles result',
       );
-      return options.bus || options.solo || options.semiTrailer || options.doubleTrailer;
+      return options.bus || options.solo || options['semi trailer'] || options['double trailer'];
     }),
 });

@@ -84,7 +84,7 @@ export const FiltersMenu = () => {
           {showFilersMenu ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />}
         </button>
         <button
-          className={`${styles['submit-button']} ${showFilersMenu ? '' : styles.hidden}`}
+          className={`${styles['apply-button']} ${showFilersMenu ? '' : styles.hidden}`}
           type='submit'
         >
           Aplly filters

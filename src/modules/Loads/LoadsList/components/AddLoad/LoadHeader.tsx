@@ -1,7 +1,11 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import styles from './LoadHeader.module.scss';
 
-export const LoadHeader = ({ onClick }) => {
+export const LoadHeader = ({
+  onClick,
+}: {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}) => {
   return (
     <header className={styles.header}>
       <p>Add Load</p>
