@@ -22,6 +22,6 @@ export const getLoadDetails = async (id: string) => {
     term: loadData.term,
     price: loadData.price,
     currency: loadData.currency,
-  } as Partial<Load>;
+  };
   return loads;
 };
