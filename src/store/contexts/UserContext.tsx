@@ -1,23 +1,25 @@
 import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
 
 import { getSafeContext } from '../../utils/helpers/getSateContext';
-import { useUser } from '../../hooks/useUser';
+import { getUser } from '../../utils/api/supabase/User/getUser';
 import { UserDatabase } from '../../utils/api/supabase/types';
+import { changeAvatar } from '../../utils/api/supabase/User/changeAvatar';
 
 type UserContextProps = {
   isLoggedIn: boolean;
-  user: string | undefined;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
+  userId: string | undefined;
+  setUserId: Dispatch<SetStateAction<string | undefined>>;
   logIn: () => void;
   logOut: () => void;
-  setUser: Dispatch<SetStateAction<string | undefined>>;
   userData: UserDatabase | undefined;
+  changeUserAvatar: (file: any) => Promise<void>;
 };
 
 export const UserContext = createContext<UserContextProps | null>(null);
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<string | undefined>();
+  const [userId, setUserId] = useState<string | undefined>();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userData, setUserData] = useState<UserDatabase | undefined>();
 
@@ -27,23 +29,30 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
   const logIn = () => {
     setIsLoggedIn(true);
   };
+  const changeUserAvatar = async (file: File) => {
+    if (!userId) return;
+    const change = await changeAvatar(file, userId);
+    setUserData(change);
+  };
 
   useEffect(() => {
     const getUserData = async () => {
-      const userData = await useUser(user);
+      if (!userId) return;
+      const userData = await getUser(userId);
       setUserData(userData);
     };
     getUserData();
-  }, [user]);
+  }, [userId]);
 
   const valueContext = {
-    user,
+    userId,
     isLoggedIn,
     logOut,
-    setUser,
+    setUserId,
     logIn,
     setIsLoggedIn,
     userData,
+    changeUserAvatar,
   };
 
   return <UserContext.Provider value={valueContext}>{children}</UserContext.Provider>;
