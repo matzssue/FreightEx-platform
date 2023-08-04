@@ -1,14 +1,12 @@
-import React from 'react';
-import { createClient } from '@supabase/supabase-js';
-import { Auth } from '@supabase/auth-ui-react';
 import { useNavigate } from 'react-router-dom';
-import styles from './Login.module.scss';
+import styles from './ProtectedLoader.module.scss';
 import supabase from '../../config/supabase';
 import { useEffect } from 'react';
 import { useUserContext } from '../../store/contexts/UserContext';
 import logo from '../../assets/logo.svg';
+//TODO: change to protected loader
 function Login() {
-  const { setIsLoggedIn, setUser } = useUserContext();
+  const { setIsLoggedIn, setUserId } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +15,7 @@ function Login() {
     } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session && session.user) {
         console.log(session.user);
-        setUser(session?.user.id);
+        setUserId(session?.user.id);
         setIsLoggedIn(true);
         navigate('/loads');
       }
