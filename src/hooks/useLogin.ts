@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export const useLogin = () => {
   const navigation = useNavigate();
 
-  const { setIsLoggedIn, setUser } = useUserContext();
+  const { setIsLoggedIn, setUserId } = useUserContext();
   async function login({ email, password }: { email: string; password: string }) {
     // console.log(email, password);
 
@@ -25,7 +25,7 @@ export const useLogin = () => {
     async (values: { email: string; password: string }) => await login(values),
     {
       onSuccess: (data) => {
-        setUser(data.user.id);
+        setUserId(data.user.id);
         setIsLoggedIn(true);
 
         navigation('/loads');
