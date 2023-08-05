@@ -7,6 +7,7 @@ export const changeUserName = async (userId: string, newValue: string) => {
     .eq('id', userId)
     .select()
     .single();
+  if (error) throw error;
   return data;
 };
 export const changeUserSurname = async (userId: string, newValue: string) => {
@@ -16,5 +17,6 @@ export const changeUserSurname = async (userId: string, newValue: string) => {
     .eq('id', userId)
     .select()
     .single();
+  if (error) throw error;
   return data;
 };
