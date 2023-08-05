@@ -1,7 +1,6 @@
 import { useUserContext } from '../../store/contexts/UserContext';
 
 import { getCompany } from '../../utils/api/supabase/Company/getCompany';
-import { useState } from 'react';
 
 import styles from './UserAccount.module.scss';
 import { useQuery } from '@tanstack/react-query';
@@ -15,8 +14,8 @@ export const UserAccount = () => {
   const { userData } = useUserContext();
 
   if (!userData) return;
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentOption, setCurrentOption] = useState('');
+  // const [isOpen, setIsOpen] = useState(false);
+  // const [currentOption, setCurrentOption] = useState('');
   const { avatar, name, surname, company_vat_id } = userData;
 
   const { data: company, isLoading } = useQuery(
@@ -31,11 +30,11 @@ export const UserAccount = () => {
 
   // const { handleSubmit, control } = useForm({defaultValues:});
 
-  const handleChangeInformation = (e) => {
-    console.log(e.target);
+  const handleChangeInformation = () => {
+    console.log('check');
   };
 
-  const onSubmit = (e) => {};
+  // const onSubmit = (e) => {};
   return (
     <>
       {/* <Dialog
