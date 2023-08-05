@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
 import { Home } from './Views/Home';
-import { News } from './Views/News';
 
 import { QueryClient, QueryClientProvider, QueryCache } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -30,9 +29,9 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        {/* {process.env.NODE_ENV === 'development' && (
+        {process.env.NODE_ENV === 'development' && (
           <ReactQueryDevtools position='top-right' initialIsOpen={false} />
-        )} */}
+        )}
         <ErrorBoundary>
           <BrowserRouter>
             <UserContextProvider>
@@ -71,7 +70,6 @@ function App() {
                       />
                     </Route>
                   </Route>
-                  <Route element={<News />} path='/news' />
                 </Routes>
               </Suspense>
             </UserContextProvider>
