@@ -1,14 +1,14 @@
-import { Dialog, DialogContent, DialogTitle, Modal } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import styles from './EditAccount.module.scss';
-import { ChangeEvent, useState } from 'react';
-import { TextFieldInput } from '../../common/Inputs/TextFieldInput';
+import { useState } from 'react';
+
 import { useForm } from 'react-hook-form';
-import { changeAvatar } from '../../utils/api/supabase/User/changeAvatar';
+
 import { useUserContext } from '../../store/contexts/UserContext';
-import { deleteUser } from '../../utils/api/supabase/User/deleteUser';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ChangePasswordFormValues, changePasswordSchema } from '../../utils/schemas/authSchema';
-import { changePassword } from '../../utils/api/supabase/User/changePassword';
+
 import PasswordInput from '../../common/Inputs/PasswordInput';
 
 interface Event<T = EventTarget> {
