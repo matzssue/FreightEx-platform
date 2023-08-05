@@ -1,7 +1,13 @@
 import { FilterCard } from './FilterCard';
 import { DateInput } from '../../../../common/Inputs/DateInput';
 import styles from './DateFilter.module.scss';
-export const DateFilter = ({ control }) => {
+import { Control, FieldValues, Path } from 'react-hook-form';
+
+type DateFilterProps<T extends FieldValues> = {
+  control: Control<T>;
+};
+
+export const DateFilter = <T extends FieldValues>({ control }: DateFilterProps<T>) => {
   return (
     <FilterCard filterName={'Date'}>
       <div className={styles['date-inputs']}>
@@ -12,7 +18,7 @@ export const DateFilter = ({ control }) => {
             fontSize='15px'
             size='small'
             control={control}
-            name='startLoadingDate'
+            name={'startLoadingDate' as Path<T>}
             label=''
           />
           <span>Max</span>
@@ -20,7 +26,7 @@ export const DateFilter = ({ control }) => {
             fontSize='15px'
             size='small'
             control={control}
-            name='endLoadingDate'
+            name={'endLoadingDate' as Path<T>}
             label=''
           />
         </fieldset>
@@ -33,7 +39,7 @@ export const DateFilter = ({ control }) => {
               fontSize='15px'
               size='small'
               control={control}
-              name='startUnloadingDate'
+              name={'startUnloadingDate' as Path<T>}
               label=''
             />
             <span>Max</span>
@@ -41,7 +47,7 @@ export const DateFilter = ({ control }) => {
               fontSize='15px'
               size='small'
               control={control}
-              name='endUnloadingDate'
+              name={'endUnloadingDate' as Path<T>}
               label=''
             />
           </fieldset>
