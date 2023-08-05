@@ -1,10 +1,10 @@
 import { Control, Controller, FieldValues, Path, PathValue } from 'react-hook-form';
 import { MenuItem, SxProps } from '@mui/material';
-import { UseFormReturn } from 'react-hook-form';
-import { FormHelperText, FormControl, Select, InputLabel } from '@mui/material';
-import { useState } from 'react';
+
+import { FormControl, Select } from '@mui/material';
+
 import styles from './Select.module.scss';
-import { DeepPartial } from 'react-hook-form';
+
 type SelectInputProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;

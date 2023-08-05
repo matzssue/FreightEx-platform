@@ -1,9 +1,9 @@
-import TextField, { TextFieldProps, TextFieldVariants } from '@mui/material/TextField';
+import TextField, { TextFieldVariants } from '@mui/material/TextField';
 
 import styles from './TextField.module.scss';
-import { HTMLInputTypeAttribute, InputHTMLAttributes, useState } from 'react';
+import { HTMLInputTypeAttribute } from 'react';
 import { FieldValues, Controller, Control, Path, PathValue } from 'react-hook-form';
-import { InputBaseComponentProps, InputBaseProps, InputLabel } from '@mui/material';
+
 type FormInputProps<T extends FieldValues> = {
   name: Path<T>;
   control: Control<T>;
@@ -22,7 +22,7 @@ export const TextFieldInput = <T extends FieldValues>({
   control,
   label,
   defaultValue,
-  sx,
+
   variant,
   type = 'text',
   size = 'small',

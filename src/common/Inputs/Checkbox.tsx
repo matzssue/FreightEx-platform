@@ -1,4 +1,4 @@
-import { FormControlLabel, Checkbox, InputLabel, Select } from '@mui/material';
+import { FormControlLabel, Checkbox } from '@mui/material';
 import { Controller, Control, FieldValues, Path, PathValue } from 'react-hook-form';
 
 type CheckboxInputProps<T extends FieldValues> = {

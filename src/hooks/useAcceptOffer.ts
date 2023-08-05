@@ -29,7 +29,7 @@ export const useAcceptOffer = () => {
       await addAcceptedLoad(loadId, userId),
     {
       onSuccess: async (data, id) => {
-        console.log('succes id', id);
+        console.log('succes id', data, id);
       },
       onError: (error: { message: string }) => {
         console.log(error);

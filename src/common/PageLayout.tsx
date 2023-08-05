@@ -1,6 +1,6 @@
 import styles from './PageLayout.module.scss';
 
-import { Children, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { UserBar } from '../modules/UserBar/components/UserBar';
 import { AsideMenu } from '../modules/Home/AsideMenu/components/AsideMenu';
 import Wrapper from './Wrapper';

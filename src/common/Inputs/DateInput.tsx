@@ -1,4 +1,4 @@
-import { Control, Controller, useForm, FieldValues, PathValue, Path } from 'react-hook-form';
+import { Control, Controller, FieldValues, PathValue, Path } from 'react-hook-form';
 import styles from './DateInput.module.scss';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -16,7 +16,6 @@ type DateInputProps<T extends FieldValues> = {
 export const DateInput = <T extends FieldValues>({
   control,
   name,
-  label,
   size = 'medium',
   fontSize = '18px',
 }: DateInputProps<T>) => {

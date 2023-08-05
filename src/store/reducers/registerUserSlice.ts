@@ -11,7 +11,6 @@ const initialState: InitialState = {
   user: {
     name: '',
     surname: '',
-    imgUrl: '',
     email: '',
     password: '',
   },
