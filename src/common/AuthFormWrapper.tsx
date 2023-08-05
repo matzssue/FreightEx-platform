@@ -1,4 +1,4 @@
-import { ReactNode, SyntheticEvent } from 'react';
+import { ReactNode } from 'react';
 import logo from '../assets/logo.svg';
 import styles from './AuthFormWrapper.module.scss';
 

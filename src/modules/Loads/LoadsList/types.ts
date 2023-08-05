@@ -1,10 +1,5 @@
 import { FieldValues, Control } from 'react-hook-form';
-import {
-  Addresses,
-  CompanyDatabase,
-  UserDatabase,
-  UserDatabaseWithComp,
-} from '../../../utils/api/supabase/types';
+import { Addresses, UserDatabaseWithComp } from '../../../utils/api/supabase/types';
 
 export type ControllerProps<T extends FieldValues> = {
   control: Control<T>;

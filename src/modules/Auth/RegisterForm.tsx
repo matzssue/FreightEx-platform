@@ -74,7 +74,7 @@ export const RegisterForm = () => {
     }
     setIsLoading(false);
   };
-
+  if (isLoading) return <div>Loading..</div>;
   console.log(activeStep);
   return (
     <AuthFormWrapper hideLogo={true}>
@@ -104,6 +104,7 @@ export const RegisterForm = () => {
       </Stepper>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
+          {error && <div>{error}</div>}
           {getStepContent(activeStep)}
           <div className={styles.buttons}>
             <button className={styles.submit} onClick={handlePrev} disabled={activeStep === 0}>

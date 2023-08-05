@@ -1,11 +1,7 @@
-import styles from './CompanyStep.module.scss';
-import { useForm, useFormContext } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { RegisterCompanyFormValues, registerCompanySchema } from '../../utils/schemas/authSchema';
-import { AuthFormWrapper } from '../../common/AuthFormWrapper';
+import { useFormContext } from 'react-hook-form';
+
 import { TextFieldInput } from '../../common/Inputs/TextFieldInput';
-import { useDispatch } from 'react-redux';
-import { nextStep, prevStep, setData } from '../../store/reducers/registerUserSlice';
+
 export const CompanyStep = () => {
   const { control } = useFormContext();
   return (

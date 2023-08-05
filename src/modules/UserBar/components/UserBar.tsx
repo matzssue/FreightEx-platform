@@ -2,41 +2,43 @@ import { Avatar, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material'
 import styles from './UserBar.module.scss';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdNotificationsOutline } from 'react-icons/io';
-import { useDisclosure } from '../../../hooks/useDisclosure';
+
 import { AddLoad } from '../../Loads/LoadsList/components/AddLoad/AddLoad';
-import { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { MdLogout } from 'react-icons/md';
-import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import { useAppDispatch } from '../../../store/hooks';
 
-import { openModal, closeModal } from '../../../store/reducers/modalSlice';
+import { openModal } from '../../../store/reducers/modalSlice';
 import { useUserContext } from '../../../store/contexts/UserContext';
-import { useUser } from '../../../utils/api/supabase/User/getUser';
 import { useNavigate } from 'react-router';
 import { useLogout } from '../../../hooks/useLogout';
-export const UserBar = ({ setShowMenu }) => {
+
+export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<boolean>> }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { userData, user } = useUserContext();
+  const { userData, userId } = useUserContext();
   const logoutMutation = useLogout();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(anchorEl);
   console.log(userData);
-  const openMenuHandler = (e) => {
+  const openMenuHandler = (e: React.MouseEvent<HTMLElement>) => {
     // console.log(e.currentTarget);
+
     setAnchorEl(e.currentTarget);
     // console.log(e.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleMenuOption = (e) => {
-    switch (e.target.id) {
+  const handleMenuOption = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLButtonElement;
+    switch (target.id) {
       case 'profile':
         navigate('/profile');
         break;
       case 'account':
-        navigate(`/account/${user}`);
+        navigate(`/account/${userId}`);
         break;
       case 'signOut':
         // navigate('/signOut');
@@ -53,7 +55,7 @@ export const UserBar = ({ setShowMenu }) => {
       <button
         aria-label='toggle sidebar'
         className={styles['hamburger-button']}
-        onClick={() => setShowMenu((prevValue) => !prevValue)}
+        onClick={() => setShowMenu((prevValue: boolean) => !prevValue)}
       >
         <GiHamburgerMenu />
       </button>

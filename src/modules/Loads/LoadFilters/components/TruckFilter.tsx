@@ -1,7 +1,20 @@
+import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form';
 import { FilterCard } from './FilterCard';
 import styles from './TruckFilter.module.scss';
+import { DeepMap } from 'react-hook-form';
+import { LoadsFiltersValues } from '../../../../utils/schemas/loadsFilters';
 
-export const TruckFilter = ({ register, errors }) => {
+export type FieldErrors<TFieldValues extends FieldValues = FieldValues> = DeepMap<
+  TFieldValues,
+  FieldError
+>;
+export const TruckFilter = ({
+  register,
+  errors,
+}: {
+  register: UseFormRegister<LoadsFiltersValues>;
+  errors: FieldErrors;
+}) => {
   return (
     <FilterCard filterName={'Truck'}>
       <fieldset className={styles['truck-inputs']}>
