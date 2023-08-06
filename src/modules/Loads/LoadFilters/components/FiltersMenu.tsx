@@ -4,7 +4,7 @@ import styles from './FiltersMenu.module.scss';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { loadsFilterSchema, LoadsFiltersValues } from '../../../../utils/schemas/loadsFilters';
 import { useAppDispatch } from '../../../../store/hooks';
@@ -15,11 +15,14 @@ import moment from 'moment';
 import { TruckFilter } from './TruckFilter';
 import { LocationFilter } from './LocationFilter';
 import { DateFilter } from './DateFilter';
+import { usePaginationContext } from '../../../../store/contexts/PaginationContext';
+import { loadsPerPageWithMenu, loadsPerPageWithoutMenu } from '../../../../constants/loadsPerPage';
 
 export const FiltersMenu = () => {
   // const [loadingAddress, setLoadingAddress] = useState<Addresses | undefined>(undefined);
   // const [unloadingAddress, setUnloadingAddress] = useState<Addresses | undefined>(undefined);
   const [showFilersMenu, setShowFiltersMenu] = useState(true);
+  const { changeLoadsPerPage } = usePaginationContext();
   const dispatch = useAppDispatch();
   const filters = useAppSelector((state) => state.loadsFilters.filters);
   const {
@@ -32,6 +35,15 @@ export const FiltersMenu = () => {
   } = useForm({
     resolver: yupResolver<LoadsFiltersValues>(loadsFilterSchema),
   });
+
+  useEffect(() => {
+    if (!showFilersMenu) {
+      changeLoadsPerPage(loadsPerPageWithoutMenu);
+    }
+    if (showFilersMenu) {
+      changeLoadsPerPage(loadsPerPageWithMenu);
+    }
+  }, [showFilersMenu]);
 
   const onSubmit = async (data: LoadsFiltersValues) => {
     const unique_id = uuid();
