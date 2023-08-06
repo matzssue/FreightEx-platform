@@ -1,5 +1,4 @@
 import { FiPackage } from 'react-icons/fi';
-import { BiNews } from 'react-icons/bi';
 import { MdOutlineAssignment } from 'react-icons/md';
 import { TbTruck, TbFileInvoice } from 'react-icons/tb';
 
