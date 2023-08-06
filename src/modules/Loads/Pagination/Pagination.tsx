@@ -36,7 +36,7 @@ export const Paginate = ({
       <Pagination
         count={lastPage}
         page={currentPage}
-        onChange={changePage}
+        onChange={(_, value) => changePage(value)}
         renderItem={(item) => (
           <PaginationItem slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }} {...item} />
         )}
