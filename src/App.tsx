@@ -15,6 +15,7 @@ import Login from './modules/Auth/ProtectedLoader';
 import { UserContextProvider } from './store/contexts/UserContext';
 
 import { Account } from './Views/Account';
+import { PaginationContextProvider } from './store/contexts/PaginationContext';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -35,43 +36,45 @@ function App() {
         <ErrorBoundary>
           <BrowserRouter>
             <UserContextProvider>
-              <Suspense fallback='Loading...'>
-                <Routes>
-                  <Route path='/' element={<Login />} />
-                  <Route path='/login' element={<LoginForm />} />
-                  <Route path='/register' element={<RegisterForm />} />
-                  <Route path='account'>
-                    <Route index element={<Navigate to=':accountId' />} />
-                    <Route path=':accountId' element={<Account />} />
-                  </Route>
-                  <Route path='loads'>
-                    <Route index element={<Home />} />
-                    <Route path=':loadId'>
-                      <Route
-                        index
-                        element={
-                          <>
-                            <Home />
-                            <LoadDetails />
-                          </>
-                        }
-                      />
+              <PaginationContextProvider>
+                <Suspense fallback='Loading...'>
+                  <Routes>
+                    <Route path='/' element={<Login />} />
+                    <Route path='/login' element={<LoginForm />} />
+                    <Route path='/register' element={<RegisterForm />} />
+                    <Route path='account'>
+                      <Route index element={<Navigate to=':accountId' />} />
+                      <Route path=':accountId' element={<Account />} />
                     </Route>
-                    <Route path='filters'>
-                      <Route element={<Home />} path=':filterId' />
-                      <Route
-                        element={
-                          <>
-                            <Home />
-                            <LoadDetails />
-                          </>
-                        }
-                        path=':filterId/:loadId'
-                      />
+                    <Route path='loads'>
+                      <Route index element={<Home />} />
+                      <Route path=':loadId'>
+                        <Route
+                          index
+                          element={
+                            <>
+                              <Home />
+                              <LoadDetails />
+                            </>
+                          }
+                        />
+                      </Route>
+                      <Route path='filters'>
+                        <Route element={<Home />} path=':filterId' />
+                        <Route
+                          element={
+                            <>
+                              <Home />
+                              <LoadDetails />
+                            </>
+                          }
+                          path=':filterId/:loadId'
+                        />
+                      </Route>
                     </Route>
-                  </Route>
-                </Routes>
-              </Suspense>
+                  </Routes>
+                </Suspense>
+              </PaginationContextProvider>
             </UserContextProvider>
           </BrowserRouter>
         </ErrorBoundary>
