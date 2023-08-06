@@ -1,15 +1,26 @@
 @import '../../../../../styles/variables.scss';
 
+.loads-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
 .sort-list {
+  display: grid;
   background-color: #777777;
   color: $secondary-text-color;
   text-align: center;
   font-size: 0.8rem;
+  height: max-content;
   ul {
     display: grid;
     padding: 0;
     margin: 0;
-    grid-template-columns: 1fr 1fr 0.6fr 0.8fr 0.6fr 0.6fr 1.2fr 0.6fr;
+    grid-template-columns: 1fr 1fr 0.6fr 0.9fr 0.6fr 0.6fr 1.1fr 0.6fr;
     li {
       position: relative;
       padding: 0.5rem 0.2rem;
@@ -30,6 +41,9 @@
   }
 }
 .loads {
+  display: flex;
+  flex-grow: 1;
+  align-self: flex-start;
   ul {
     display: flex;
     flex-direction: column;
@@ -37,4 +51,13 @@
     padding: 0;
     margin: 0;
   }
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-self: flex-end;
+  justify-content: center;
+  background-color: $secondary-color;
+  border-top: 1px solid rgba(124, 124, 124, 0.479);
+  padding: 0.2rem 0;
 }

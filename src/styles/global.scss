@@ -1,7 +1,10 @@
 @import './variables.scss';
 
 #root {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  overflow: hidden;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
