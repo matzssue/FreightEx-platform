@@ -10,9 +10,14 @@ import { useAppSelector } from '../../../../../store/hooks';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { LoadingSpinner } from '../../../../../common/Spinner';
 import { useAcceptOffer } from '../../../../../hooks/useAcceptOffer';
+import { Paginate } from '../../../Pagination/Pagination';
+
+import { useState } from 'react';
+import { Load as TLoad } from '../../../../../utils/api/supabase/types';
 export const Loads = () => {
   const { filterId } = useParams<string>();
   const { userData } = useUserContext();
+  const [slicedLoads, setSlicedLoads] = useState<TLoad[] | undefined>();
 
   const acceptOfferMutation = useAcceptOffer();
   console.log(userData);
@@ -32,7 +37,9 @@ export const Loads = () => {
       return await getFilteredLoads(foundFilter);
     },
   );
+
   const loads = filterId ? filteredLoads : allLoads;
+
   // console.log(loads);
   if (!userData) return;
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
@@ -42,7 +49,7 @@ export const Loads = () => {
   };
 
   return (
-    <div>
+    <div className={styles['loads-container']}>
       <div className={styles['sort-list']}>
         <List list={sortData} />
       </div>
@@ -51,13 +58,16 @@ export const Loads = () => {
           {isAllLoading || isFilteredLoading ? (
             <LoadingSpinner />
           ) : (
-            loads?.map((load) => (
+            slicedLoads?.map((load) => (
               <li id={`${load.id}`} key={load.id}>
                 <Load onAccept={(e) => acceptOfferHandler(e, load.id)} data={load} />
               </li>
             ))
           )}
         </ul>
+      </div>
+      <div className={styles.pagination}>
+        <Paginate setSlicedLoads={setSlicedLoads} data={loads} />
       </div>
     </div>
   );
