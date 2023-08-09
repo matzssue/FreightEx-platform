@@ -4,6 +4,7 @@ import { getSafeContext } from '../../utils/helpers/getSateContext';
 import { getUser } from '../../utils/api/supabase/User/getUser';
 import { UserDatabase } from '../../utils/api/supabase/types';
 import { changeAvatar } from '../../utils/api/supabase/User/changeAvatar';
+import { updateUserField } from '../../utils/api/supabase/User/updateUserField';
 
 type UserContextProps = {
   isLoggedIn: boolean;
@@ -14,6 +15,7 @@ type UserContextProps = {
   logOut: () => void;
   userData: UserDatabase | undefined;
   changeUserAvatar: (file: any) => Promise<void>;
+  changeUserField: (field: string, newValue: string) => Promise<void>;
 };
 
 export const UserContext = createContext<UserContextProps | null>(null);
@@ -35,6 +37,12 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
     setUserData(change);
   };
 
+  const changeUserField = async (field: string, newValue: string) => {
+    if (!userId) return;
+    const newData = await updateUserField(userId, field, newValue);
+    setUserData(newData);
+  };
+
   useEffect(() => {
     const getUserData = async () => {
       if (!userId) return;
@@ -53,6 +61,7 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
     setIsLoggedIn,
     userData,
     changeUserAvatar,
+    changeUserField,
   };
 
   return <UserContext.Provider value={valueContext}>{children}</UserContext.Provider>;
