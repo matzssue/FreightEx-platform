@@ -1,2 +1,2 @@
-export const loadsPerPageWithMenu: number = 7;
-export const loadsPerPageWithoutMenu: number = 10;
+export const loadsPerPageWithMenu: number = 8;
+export const loadsPerPageWithoutMenu: number = 11;
