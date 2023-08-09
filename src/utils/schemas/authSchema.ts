@@ -3,6 +3,9 @@ export type LoginFormValues = yup.InferType<typeof loginSchema>;
 export type RegisterUserFormValues = yup.InferType<typeof registerUserSchema>;
 export type RegisterCompanyFormValues = yup.InferType<typeof registerCompanySchema>;
 export type ChangePasswordFormValues = yup.InferType<typeof changePasswordSchema>;
+export type ChangeNameFormValue = yup.InferType<typeof changeNameSchema>;
+export type ChangeSurnameFormValue = yup.InferType<typeof changeSurnameSchema>;
+
 export const loginSchema = yup.object().shape({
   email: yup.string().email().required('Email is required'),
   password: yup.string().required('No password provided.'),
@@ -35,4 +38,11 @@ export const changePasswordSchema = yup.object({
   passwordConfirmation: yup
     .string()
     .oneOf([yup.ref('password'), undefined], 'Passwords must match'),
+});
+
+export const changeNameSchema = yup.object({
+  name: yup.string().required('Name is required').min(3),
+});
+export const changeSurnameSchema = yup.object({
+  surname: yup.string().required('Surname is required').min(3),
 });
