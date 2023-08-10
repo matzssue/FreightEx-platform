@@ -20,7 +20,6 @@ export const Loads = () => {
   const [slicedLoads, setSlicedLoads] = useState<TLoad[] | undefined>();
 
   const acceptOfferMutation = useAcceptOffer();
-  console.log(userData);
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
   const { data: allLoads, isLoading: isAllLoading } = useQuery(
@@ -40,7 +39,6 @@ export const Loads = () => {
 
   const loads = filterId ? filteredLoads : allLoads;
 
-  // console.log(loads);
   if (!userData) return;
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();

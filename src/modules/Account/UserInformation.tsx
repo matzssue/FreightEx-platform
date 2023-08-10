@@ -51,8 +51,6 @@ export const UserInformation = ({
   });
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
-    console.log(type);
     if (type === 'name') {
       changeUserField('name', data.name);
       setValue('name', data.name);
