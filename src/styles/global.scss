@@ -1,7 +1,10 @@
 @import './variables.scss';
 
 #root {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  overflow: hidden;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -18,7 +21,7 @@ body {
   box-sizing: border-box;
   height: 100%;
   color: $primary-text-color;
-  background-color: $bacground-color;
+  background-color: $background-color;
   font-family: $font-family;
   margin: 0;
   padding: 0;

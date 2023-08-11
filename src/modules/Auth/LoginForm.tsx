@@ -16,10 +16,11 @@ export const LoginForm = () => {
   const { isLoggedIn } = useUserContext();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (isLoggedIn) navigator('/loads');
   }, [isLoggedIn]);
-  console.log(isLoggedIn);
+
   const { handleSubmit, control, setValue } = useForm({
     resolver: yupResolver<LoginFormValues>(loginSchema),
   });

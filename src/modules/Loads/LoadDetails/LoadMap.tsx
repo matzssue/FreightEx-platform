@@ -26,12 +26,11 @@ export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
         loadingAddress.latitude,
         loadingAddress.longitude,
       );
-      console.log(loadingAddressCords);
+
       const unloadingAddressCords = new google.maps.LatLng(
         unloadingAddress.latitude,
         unloadingAddress.longitude,
       );
-      console.log(unloadingAddressCords);
 
       const directionsService = new google.maps.DirectionsService();
       const results = await directionsService.route({
@@ -40,12 +39,10 @@ export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
         travelMode: google.maps.TravelMode.DRIVING,
       });
 
-      console.log(results);
       setDirectionsResponse(results);
       setDistance(results.routes[0].legs[0].distance?.text);
       setDuration(results.routes[0].legs[0].duration?.text);
     } catch (err) {
-      console.log(err);
       setDistance(undefined);
       setDuration(undefined);
       setDirectionsResponse(undefined);
