@@ -10,6 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ChangePasswordFormValues, changePasswordSchema } from '../../utils/schemas/authSchema';
 
 import PasswordInput from '../../common/Inputs/PasswordInput';
+import { changePassword } from '../../utils/api/supabase/User/changePassword';
 
 interface Event<T = EventTarget> {
   target: T;
@@ -50,8 +51,7 @@ export const EditAccount = () => {
   });
 
   const onSubmit = (data: ChangePasswordFormValues) => {
-    console.log(data);
-
+    changePassword(data.password);
     reset();
     handleClose();
   };
