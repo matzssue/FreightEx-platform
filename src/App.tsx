@@ -31,9 +31,9 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        {/* {process.env.NODE_ENV === 'development' && (
+        {process.env.NODE_ENV === 'development' && (
           <ReactQueryDevtools position='top-right' initialIsOpen={false} />
-        )} */}
+        )}
         <ErrorBoundary>
           <BrowserRouter>
             <UserContextProvider>
