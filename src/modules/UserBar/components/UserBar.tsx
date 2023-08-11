@@ -1,7 +1,6 @@
 import { Avatar, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import styles from './UserBar.module.scss';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { IoMdNotificationsOutline } from 'react-icons/io';
 
 import { AddLoad } from '../../Loads/LoadsList/components/AddLoad/AddLoad';
 import React, { Dispatch, SetStateAction, useState } from 'react';
@@ -13,6 +12,7 @@ import { openModal } from '../../../store/reducers/modalSlice';
 import { useUserContext } from '../../../store/contexts/UserContext';
 import { useNavigate } from 'react-router';
 import { useLogout } from '../../../hooks/useLogout';
+import { NotificationBox } from './NotificationBox';
 
 export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<boolean>> }) => {
   const navigate = useNavigate();
@@ -21,16 +21,15 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
   const logoutMutation = useLogout();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(anchorEl);
-  console.log(userData);
-  const openMenuHandler = (e: React.MouseEvent<HTMLElement>) => {
-    // console.log(e.currentTarget);
 
+  const openMenuHandler = (e: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(e.currentTarget);
-    // console.log(e.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleMenuOption = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLButtonElement;
     switch (target.id) {
@@ -48,7 +47,7 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
       // Domyślny kod, który zostanie wykonany, jeśli żadna z opcji nie zostanie dopasowana
     }
   };
-  console.log(userData);
+
   return (
     <div className={styles.container}>
       <AddLoad />
@@ -62,9 +61,10 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
       <button onClick={() => dispatch(openModal())} className={styles['freight-button']}>
         Add Freight
       </button>
-      <button className={styles['notification-button']}>
+      {/* <button onClick= className={styles['notification-button']}>
         <IoMdNotificationsOutline />
-      </button>
+      </button> */}
+      <NotificationBox />
       {userData && <span>{`${userData.name} (${userData.company_vat_id}) `}</span>}
       <IconButton onClick={openMenuHandler} size='small' sx={{ ml: 2 }}>
         <Avatar
