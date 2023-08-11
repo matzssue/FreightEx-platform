@@ -1,5 +1,5 @@
 import supabase from '../../../../config/supabase';
-
+import { toast } from 'react-toastify';
 export const changeAvatar = async (file: File, userId: string) => {
   try {
     const { error: uploadError } = await supabase.storage
@@ -14,10 +14,14 @@ export const changeAvatar = async (file: File, userId: string) => {
       .eq('id', userId)
       .select()
       .single();
-    console.log(userData);
+
+    if (userData) toast.success('Avatar updated ');
     if (error) throw error;
     return userData;
-  } catch (err) {
-    console.log(err);
+  } catch (e) {
+    if (e instanceof Error) {
+      toast.error('Something went wrong while changing avatar, please try again');
+      console.log(e);
+    }
   }
 };
