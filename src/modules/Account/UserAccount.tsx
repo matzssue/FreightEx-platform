@@ -21,8 +21,6 @@ export const UserAccount = () => {
   if (isLoading || !company) return <div>loading...</div>;
   const { name: companyName, vat_id } = company;
 
-  console.log(userData);
-
   return (
     <>
       <section className={styles['container']}>

@@ -18,7 +18,6 @@ import useCreateUser, { UserData } from '../../hooks/useCreateUser';
 export const RegisterForm = () => {
   const steps = ['User', 'Company'];
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const createUserMutation = useCreateUser();
   const currentSchema = registerSchema[activeStep];
@@ -64,18 +63,11 @@ export const RegisterForm = () => {
   };
 
   const onSubmit: SubmitHandler<UserData> = async (data) => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      createUserMutation.mutateAsync(data);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
+    setIsLoading(true);
+    await createUserMutation.mutateAsync(data);
     setIsLoading(false);
   };
-  if (isLoading) return <div>Loading..</div>;
-  console.log(activeStep);
+
   return (
     <AuthFormWrapper hideLogo={true}>
       <Stepper sx={{ width: '60%', alignSelf: 'center', padding: '1rem' }} activeStep={activeStep}>
@@ -104,7 +96,6 @@ export const RegisterForm = () => {
       </Stepper>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {error && <div>{error}</div>}
           {getStepContent(activeStep)}
           <div className={styles.buttons}>
             <button className={styles.submit} onClick={handlePrev} disabled={activeStep === 0}>
@@ -116,7 +107,7 @@ export const RegisterForm = () => {
               </button>
             ) : (
               <button className={styles.submit} type='submit'>
-                Submit
+                {isLoading ? 'Loading...' : 'Submit'}
               </button>
             )}
             <p className={styles.register}>

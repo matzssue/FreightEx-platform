@@ -16,15 +16,15 @@ import { VehicleDetails } from './VehicleDetails';
 import { PaymentDetails } from './PaymentDetails';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { AddLoadData } from '../../../../../utils/api/supabase/types';
+import { toast } from 'react-toastify';
 export const AddLoad = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
-  const { userData, isLoggedIn } = useUserContext();
-  console.log(isLoggedIn);
+  const { userData } = useUserContext();
+
   const isModalOpen = useAppSelector((state) => state.modal.isLoadModalOpen);
   const isDialogOpen = useAppSelector((state) => state.modal.isLoadDialogOpen);
-  // const userData = useUser(user);
-  // console.log(user);
+
   const {
     handleSubmit,
     control,
@@ -38,10 +38,10 @@ export const AddLoad = () => {
   const mutation = useMutation(async (values: AddLoadData) => addLoad(values), {
     onSuccess: () => {
       queryClient.invalidateQueries(['loads']);
-      console.log('load added successfully');
+      toast.success('Load successfully added');
     },
     onError: () => {
-      console.log('Cos poszlo nie tak');
+      toast.error('Something went wrong, load not added');
     },
   });
 
@@ -52,7 +52,7 @@ export const AddLoad = () => {
   const onSubmit = async (data: AddLoadValues) => {
     if (!userData) return;
     const load = { ...data, userId: userData.id };
-    console.log(load);
+
     mutation.mutate(load);
     closeAllHandler();
   };

@@ -17,8 +17,7 @@ type LoadProps = {
 export const Load = ({ data, onAccept }: LoadProps) => {
   const { filterId } = useParams();
   const { userData } = useUserContext();
-  // console.log(userData);
-  // console.log(data);
+
   const {
     cargoLength,
     cargoWeight,
@@ -35,13 +34,11 @@ export const Load = ({ data, onAccept }: LoadProps) => {
     user,
     vehicleTypes,
   } = data;
-  // console.log(data);
-  // console.log(userData);
-  // console.log(data.createdAt);
+
   if (!userData) return;
   const navigateTo = filterId ? `/loads/filters/${filterId}/${id}` : `/loads/${id}`;
   const publishDate = new Date(createdAt).toDateString();
-  // console.log(publishDate);
+
   return (
     <NavLink className={styles.navigation} to={navigateTo}>
       <div className={styles.load}>

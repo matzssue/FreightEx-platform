@@ -3,12 +3,10 @@ import supabase from '../config/supabase';
 // import { useNotificationContext } from '../components/contexts/NotificationContext';
 import { useNavigate } from 'react-router-dom';
 import { RegisterCompanyFormValues, RegisterUserFormValues } from '../utils/schemas/authSchema';
-
+import { toast } from 'react-toastify';
 export type UserData = RegisterCompanyFormValues & RegisterUserFormValues;
 
 const createUser = async (user: UserData) => {
-  // Check if email exists
-
   const { data, error: registerError } = await supabase.auth.signUp({
     email: user.email,
     password: user.password,
@@ -22,18 +20,13 @@ const createUser = async (user: UserData) => {
 };
 
 export default function useCreateUser() {
-  //   const { setUser } = useUserContext();
-  //   const notificationCtx = useNotificationContext();
-
   const navigate = useNavigate();
 
   return useMutation((user: UserData) => createUser(user), {
     onSuccess: async (data, user: UserData) => {
-      console.log(`data:`, data, `user:`, user);
       const { error } = await supabase
         .from('companies')
         .upsert([{ vat_id: user.vatId, name: user.companyName }]);
-      console.log(error);
       if (error) throw new Error();
 
       const { data: insertData, error: insertError } = await supabase.from('users').insert({
@@ -43,7 +36,7 @@ export default function useCreateUser() {
         email: user.email,
         company_vat_id: user.vatId,
       });
-
+      toast.success('Account created successfully');
       navigate('/login');
 
       if (insertError) {
@@ -53,6 +46,7 @@ export default function useCreateUser() {
     },
     onError: (error: { message: string }) => {
       console.log(error);
+      toast.error(`Something  went wrong: ${error.message}`);
     },
   });
 }

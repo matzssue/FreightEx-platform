@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import supabase from '../config/supabase';
 import { AcceptedLoad } from '../utils/api/supabase/types';
-
+import { toast } from 'react-toastify';
 const addAcceptedLoad = async (loadId: string, userId: string) => {
   if (!loadId || !userId) return;
 
@@ -30,9 +30,11 @@ export const useAcceptOffer = () => {
     {
       onSuccess: async (data, id) => {
         console.log('succes id', data, id);
+        toast.success('Offer accepted');
       },
       onError: (error: { message: string }) => {
         console.log(error);
+        toast.error('Something went wrong while accepting offer, ');
       },
     },
   );
