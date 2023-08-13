@@ -1,0 +1,43 @@
+@import '../../../../../../styles/variables.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+  width: 70vw;
+  margin: 0 auto;
+  p,
+  label {
+    font-size: 0.8rem;
+  }
+
+  form {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 1rem;
+
+    .inputs-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+  }
+}
+
+.submit {
+  background-color: $primary-button-color;
+  color: white;
+  border: none;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  color: #b1b1b1;
+  &:hover {
+    background-color: #252525;
+  }
+}

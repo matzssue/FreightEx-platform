@@ -2,7 +2,7 @@ import { createContext, useState } from 'react';
 
 import { getSafeContext } from '../../utils/helpers/getSateContext';
 
-import { loadsPerPageWithMenu } from '../../constants/loadsPerPage';
+import { loadsPerPageWithMenu } from '../../modules/Loads/constants/loadsPerPage';
 
 type PaginationContextProps = {
   changePage: (value: number) => void;

@@ -1,0 +1,11 @@
+@import '../../../../../../styles/variables.scss';
+
+.filter {
+  width: auto;
+  border-radius: 1px;
+  padding: 0.5rem 0.3rem;
+  border-right: 1px solid rgba(128, 128, 128, 0.322);
+  p {
+    font-size: 0.9rem;
+  }
+}
