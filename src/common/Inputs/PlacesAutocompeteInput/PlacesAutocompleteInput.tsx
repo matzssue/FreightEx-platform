@@ -10,12 +10,12 @@ import {
 import Autocomplete from 'react-google-autocomplete';
 import styles from './PlacesAutocompleteInput.module.scss';
 import { Properties } from 'csstype';
-import { ChangeEvent, ReactNode } from 'react';
+import { ChangeEvent } from 'react';
+
 type PlacesInputProps<T extends FieldValues> = {
   name: Path<T>;
   label?: string;
   control: Control<T>;
-  // setAddress: (adress: Addresses) => void;
   sx?: Properties<string | number, string & {}>;
   filterType?: string;
   placeholder?: string;
@@ -65,7 +65,6 @@ export const PlacesAutocompleteInput = <T extends FieldValues>({
     };
     setValue(setValueKey, address as PathValue<T, Path<T>>);
     field.onChange(value.formatted_address as PathValue<T, Path<T>> | ChangeEvent);
-    // field.onChange(address);
   };
 
   return (
@@ -95,9 +94,7 @@ export const PlacesAutocompleteInput = <T extends FieldValues>({
                 types: [filterType],
               }}
             />
-            {errors[name] && (
-              <p className={styles.error}>{`${errorLabel} is required field` as ReactNode}</p>
-            )}
+            {errors[name] && <p className={styles.error}>{`${errorLabel} is required field`}</p>}
           </div>
         </>
       )}
