@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import styles from './EditAccount.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 
@@ -8,7 +8,6 @@ import { useUserContext } from '../../../../../store/contexts/UserContext';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
-  ChangeEmailFormValue,
   ChangePasswordFormValues,
   changeEmailSchema,
   changePasswordSchema,
