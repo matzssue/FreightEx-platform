@@ -54,7 +54,6 @@ export const PlacesAutocompleteInput = <T extends FieldValues>({
       value.address_components?.find((c) => c.types.includes('locality')) || {};
     const { long_name: country = '' } =
       value.address_components?.find((c) => c.types.includes('country')) || {};
-    console.log(postalCode, town, country);
     if (!lat || !lng) return;
     const address = {
       postal_code: postalCode,

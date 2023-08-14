@@ -21,7 +21,6 @@ export const changeAvatar = async (file: File, userId: string) => {
   } catch (e) {
     if (e instanceof Error) {
       toast.error('Something went wrong while changing avatar, please try again');
-      console.log(e);
     }
   }
 };

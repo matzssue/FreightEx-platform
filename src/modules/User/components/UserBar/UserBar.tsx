@@ -40,7 +40,6 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
         navigate(`/account/${userId}`);
         break;
       case 'signOut':
-        // navigate('/signOut');
         logoutMutation.mutate();
         break;
       default:
