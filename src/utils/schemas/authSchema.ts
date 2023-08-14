@@ -39,7 +39,9 @@ export const changePasswordSchema = yup.object({
     .string()
     .oneOf([yup.ref('password'), undefined], 'Passwords must match'),
 });
-
+export const changeEmailSchema = yup.object({
+  email: yup.string().email().required('Email is required'),
+});
 export const changeNameSchema = yup.object({
   name: yup.string().required('Name is required').min(3),
 });
