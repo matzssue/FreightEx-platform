@@ -4,7 +4,6 @@ import styles from './AuthFormWrapper.module.scss';
 
 type AuthFormWrapper = {
   children: ReactNode;
-  // onSubmit: (e: SyntheticEvent) => void;
   hideLogo?: boolean;
 };
 

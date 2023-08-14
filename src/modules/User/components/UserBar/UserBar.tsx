@@ -44,7 +44,8 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
         logoutMutation.mutate();
         break;
       default:
-      // Domyślny kod, który zostanie wykonany, jeśli żadna z opcji nie zostanie dopasowana
+        navigate('/');
+        break;
     }
   };
 
@@ -61,9 +62,6 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
       <button onClick={() => dispatch(openModal())} className={styles['freight-button']}>
         Add Freight
       </button>
-      {/* <button onClick= className={styles['notification-button']}>
-        <IoMdNotificationsOutline />
-      </button> */}
       <NotificationBox />
       {userData && <span>{`${userData.name} (${userData.company_vat_id}) `}</span>}
       <IconButton onClick={openMenuHandler} size='small' sx={{ ml: 2 }}>

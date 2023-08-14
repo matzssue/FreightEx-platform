@@ -39,11 +39,9 @@ export const NotificationBox = () => {
     localStorage.setItem('notifications', JSON.stringify([]));
   };
 
-  console.log('save', savedNotifications, 'notifi', notifications);
   const selectNotifications =
     savedNotifications && savedNotifications.length > 0 ? savedNotifications : notifications;
 
-  console.log(selectNotifications);
   return (
     <div className={styles['notifications-box']}>
       <button onClick={toggleNotificationBox} className={styles['notification-button']}>
@@ -51,7 +49,6 @@ export const NotificationBox = () => {
           <IoMdNotificationsOutline />
         </Badge>
       </button>
-      <button onClick={() => toast.success('succ')}> add</button>
       {isOpen && (
         <div className={styles['notifications-container']}>
           <Title title='Notifications' />

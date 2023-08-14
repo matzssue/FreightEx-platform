@@ -22,7 +22,6 @@ export const TextFieldInput = <T extends FieldValues>({
   control,
   label,
   defaultValue,
-
   variant,
   type = 'text',
   size = 'small',

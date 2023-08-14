@@ -18,7 +18,6 @@ export const PaginationContextProvider = ({ children }: { children: React.ReactN
   const [loadsPerPage, setLoadsPerPage] = useState(loadsPerPageWithMenu);
 
   const changePage = (value: number) => {
-    console.log(currentPage);
     setCurrentPage(value);
   };
   const changeLoadsPerPage = (value: number) => {
