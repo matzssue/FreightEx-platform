@@ -17,6 +17,7 @@ import PasswordInput from '../../../../../common/Inputs/PasswordInput/PasswordIn
 
 import { TextFieldInput } from '../../../../../common/Inputs/TextField/TextFieldInput';
 import { useChangeCredientials } from '../../../../../hooks/useChangeCredentials';
+import { changeAvatar } from '../../../../../utils/api/supabase/User/changeAvatar';
 
 interface Event<T = EventTarget> {
   target: T;
@@ -29,7 +30,8 @@ type FormData = {
 };
 
 export const EditAccount = () => {
-  const { changeUserAvatar } = useUserContext();
+  // const { changeUserAvatar } = useUserContext();
+  const { changeUserInformations } = useUserContext();
 
   const [currentOption, setCurrentOption] = useState('');
   const [open, setOpen] = useState(false);
@@ -50,7 +52,8 @@ export const EditAccount = () => {
 
   const handleChangeAvatar = (e: Event<HTMLInputElement>) => {
     if (!e.target.files) return;
-    changeUserAvatar(e.target.files[0]);
+    // changeUserAvatar(e.target.files[0]);
+    changeUserInformations(changeAvatar, e.target.files[0]);
   };
 
   const handleUserCredentialsChange = (e: Event) => {
