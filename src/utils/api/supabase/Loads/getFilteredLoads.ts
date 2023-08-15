@@ -23,7 +23,6 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
     tlongitude: loadingAddressData.longitude,
   });
 
-  console.log(startLoadingDate, endLoadingDate, startLoadingDate, endUnloadingDate);
   if (!query) return;
 
   if (maxWeight) {
@@ -56,7 +55,6 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
   if (error) throw new Error();
 
   const loads = data.map((load) => {
-    console.log('load', load);
     return {
       id: load.id,
       loadingAddress: load.loading_address_id,
