@@ -31,10 +31,6 @@ const PasswordInput = <T extends FieldValues>({
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
   return (
     <Controller
       name={name}
@@ -58,7 +54,6 @@ const PasswordInput = <T extends FieldValues>({
                     aria-label='toggle password visibility'
                     edge='end'
                     onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
