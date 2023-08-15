@@ -10,6 +10,7 @@ import {
   changeSurnameSchema,
 } from '../../../../../utils/schemas/authSchema';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
+import { updateUserField } from '../../../../../utils/api/supabase/User/updateUserField';
 
 type FormData = {
   name: string;
@@ -30,7 +31,9 @@ export const UserInformation = ({
   isChangeable = true,
 }: UserInformationProps) => {
   const [open, setOpen] = useState(false);
-  const { userData, changeUserField } = useUserContext();
+
+  const { changeUserInformations, userData } = useUserContext();
+
   const schema = type === 'name' ? changeNameSchema : changeSurnameSchema;
 
   const defaultValues: FormData = {
@@ -41,7 +44,6 @@ export const UserInformation = ({
   const {
     handleSubmit,
     register,
-    reset,
     setValue,
     formState: { errors },
   } = useForm<typeof defaultValues>({
@@ -52,14 +54,15 @@ export const UserInformation = ({
 
   const onSubmit = (data: FormData) => {
     if (type === 'name') {
-      changeUserField('name', data.name);
+      changeUserInformations(updateUserField, 'name', data.name);
       setValue('name', data.name);
     }
+
     if (type === 'surname') {
-      changeUserField('surname', data.surname);
+      changeUserInformations(updateUserField, 'surname', data.surname);
       setValue('surname', data.surname);
     }
-    reset();
+
     setOpen(false);
   };
 
