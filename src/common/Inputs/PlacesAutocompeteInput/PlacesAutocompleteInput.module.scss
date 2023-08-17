@@ -1,0 +1,10 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/error.module.scss';
+.error {
+  @extend .error;
+}
+.container {
+  background-color: rgb(255, 255, 255);
+  padding: 0;
+  margin: 0;
+}

@@ -8,8 +8,6 @@ export const useLogout = () => {
 
   const { setIsLoggedIn, setUserId } = useUserContext();
   async function logout() {
-    // console.log(email, password);
-
     const { error } = await supabase.auth.signOut();
     if (error) {
       throw new Error(error.message);

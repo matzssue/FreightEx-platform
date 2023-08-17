@@ -45,7 +45,6 @@ export default function useCreateUser() {
       return insertData;
     },
     onError: (error: { message: string }) => {
-      console.log(error);
       toast.error(`Something  went wrong: ${error.message}`);
     },
   });

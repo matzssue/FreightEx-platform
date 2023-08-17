@@ -1,0 +1,8 @@
+@import '../../../../../../styles/variables.scss';
+
+.loading-inputs,
+.unloading-inputs {
+  padding: 0.5rem;
+  background-color: $secondary-color;
+  border-radius: 0.5rem;
+}

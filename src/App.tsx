@@ -1,21 +1,19 @@
+import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+import Login from './modules/Home/components/ProtectedLoader/ProtectedLoader';
+import ErrorBoundary from './utils/helpers/ErrorBoundary';
+import { Home } from './Pages/Home';
+import { Account } from './Pages/Account';
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import './App.css';
-
-import { Home } from './Views/Home';
-
 import { QueryClient, QueryClientProvider, QueryCache } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { LoadDetails } from './modules/Loads/LoadDetails/LoadDetails';
-import { LoginForm } from './modules/Auth/LoginForm';
-import { RegisterForm } from './modules/Auth/RegisterForm';
-import ErrorBoundary from './utils/helpers/ErrorBoundary';
+import { LoadDetails } from './modules/Loads/components/Load/LoadDetails/LoadDetails';
+import { LoginForm } from './modules/Auth/components/LoginBox/LoginForm';
+import { RegisterForm } from './modules/Auth/components/RegisterBox/RegisterForm';
 import { ToastContainer } from 'react-toastify';
-import Login from './modules/Auth/ProtectedLoader';
 import { UserContextProvider } from './store/contexts/UserContext';
-import 'react-toastify/dist/ReactToastify.css';
 
-import { Account } from './Views/Account';
 import { PaginationContextProvider } from './store/contexts/PaginationContext';
 
 const queryClient = new QueryClient({
