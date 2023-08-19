@@ -5,7 +5,7 @@ import { TbTruck, TbFileInvoice } from 'react-icons/tb';
 export const menuLinks = [
   { linkName: 'Loads', link: '/loads', icon: <FiPackage /> },
   { linkName: 'Orders', link: '/orders', icon: <MdOutlineAssignment /> },
-  { linkName: 'Cars', link: '/cars', icon: <TbTruck /> },
+  { linkName: 'Fleet', link: '/fleet', icon: <TbTruck /> },
   { linkName: 'Invoices', link: '/invoices', icon: <TbFileInvoice /> },
 ];
 
