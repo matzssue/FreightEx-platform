@@ -2,8 +2,8 @@ import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './modules/Home/components/ProtectedLoader/ProtectedLoader';
 import ErrorBoundary from './utils/helpers/ErrorBoundary';
-import { Home } from './Pages/Home';
-import { Account } from './Pages/Account';
+import { Home } from './Pages/Loads/Home';
+import { Account } from './Pages/Account/Account';
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider, QueryCache } from '@tanstack/react-query';
@@ -15,6 +15,8 @@ import { ToastContainer } from 'react-toastify';
 import { UserContextProvider } from './store/contexts/UserContext';
 
 import { PaginationContextProvider } from './store/contexts/PaginationContext';
+import { Vehicles } from './Pages/Fleet/Vehicles';
+import { AddVehicle } from './Pages/Fleet/AddVehicle';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -82,6 +84,12 @@ function App() {
                           }
                           path=':filterId/:loadId'
                         />
+                      </Route>
+                    </Route>
+                    <Route path='fleet'>
+                      <Route index element={<Vehicles />} />
+                      <Route path='add'>
+                        <Route index element={<AddVehicle />} />
                       </Route>
                     </Route>
                   </Routes>
