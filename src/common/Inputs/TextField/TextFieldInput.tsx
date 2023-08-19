@@ -2,12 +2,10 @@ import TextField, { TextFieldVariants } from '@mui/material/TextField';
 
 import styles from './TextField.module.scss';
 import { HTMLInputTypeAttribute } from 'react';
-import { FieldValues, Controller, Control, Path, PathValue } from 'react-hook-form';
+import { FieldValues, Controller, Path, PathValue } from 'react-hook-form';
+import { BaseInputProps } from '../types';
 
 type FormInputProps<T extends FieldValues> = {
-  name: Path<T>;
-  control: Control<T>;
-  label: string | null;
   defaultValue: PathValue<T, Path<T>> | undefined;
   sx?: Record<string, any>;
   variant?: TextFieldVariants;
@@ -15,7 +13,7 @@ type FormInputProps<T extends FieldValues> = {
   size?: 'small' | 'medium';
   placeholder?: string;
   row?: boolean;
-};
+} & BaseInputProps<T>;
 
 export const TextFieldInput = <T extends FieldValues>({
   name,

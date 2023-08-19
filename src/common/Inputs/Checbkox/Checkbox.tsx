@@ -1,13 +1,11 @@
 import { FormControlLabel, Checkbox } from '@mui/material';
-import { Controller, Control, FieldValues, Path, PathValue } from 'react-hook-form';
+import { Controller, FieldValues, Path, PathValue } from 'react-hook-form';
+import { BaseInputProps } from '../types';
 
 type CheckboxInputProps<T extends FieldValues> = {
-  name: Path<T>;
-  control: Control<T>;
-  label: string | null;
   defaultValue?: boolean | undefined;
   sx?: Record<string, any>;
-};
+} & BaseInputProps<T>;
 
 const CheckboxInput = <T extends FieldValues>({
   name,
