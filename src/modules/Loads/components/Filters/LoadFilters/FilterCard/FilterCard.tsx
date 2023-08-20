@@ -10,7 +10,7 @@ export const FilterCard = ({ children, filterName }: FilterCard) => {
   return (
     <div className={styles.filter}>
       <Title title={filterName} />
-      <div>{children}</div>
+      {children}
     </div>
   );
 };
