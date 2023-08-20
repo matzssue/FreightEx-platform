@@ -1,5 +1,4 @@
 import {
-  Control,
   Controller,
   FieldValues,
   Path,
