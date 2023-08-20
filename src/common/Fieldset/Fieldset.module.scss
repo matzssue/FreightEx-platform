@@ -2,7 +2,6 @@
 
 .fieldset-inputs {
   display: flex;
-  //   justify-content: space-around;
   gap: 15px;
   background-color: $primary-color;
   border-radius: 0.5rem;
@@ -13,5 +12,6 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 100%;
   }
 }
