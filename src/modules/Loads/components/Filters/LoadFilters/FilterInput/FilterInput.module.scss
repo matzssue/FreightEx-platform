@@ -1,0 +1,21 @@
+@import '../../../../../../styles/variables.scss';
+
+.input-container {
+  label {
+    background-color: gray;
+    width: auto;
+    color: $secondary-text-color;
+    padding: 0.2rem 0.5rem;
+    font-weight: 700;
+    border-radius: 0.3rem;
+    box-shadow: 3px 3px 7px 0px rgb(148, 148, 148);
+  }
+  input {
+    width: auto;
+    padding: 0.2rem 0.4rem;
+    border: 1px solid #b1b1b1;
+    border-radius: 3px;
+    outline-color: #1976d2;
+    box-shadow: 3px 3px 0px 0px rgba(148, 148, 148, 0.267);
+  }
+}
