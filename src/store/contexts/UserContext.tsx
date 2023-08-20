@@ -3,8 +3,6 @@ import { Dispatch, SetStateAction, createContext, useEffect, useState } from 're
 import { getSafeContext } from '../../utils/helpers/getSateContext';
 import { getUser } from '../../utils/api/supabase/User/getUser';
 import { UserDatabase } from '../../utils/api/supabase/types';
-import { changeAvatar } from '../../utils/api/supabase/User/changeAvatar';
-import { updateUserField } from '../../utils/api/supabase/User/updateUserField';
 
 type UserContextProps = {
   isLoggedIn: boolean;
@@ -14,9 +12,10 @@ type UserContextProps = {
   logIn: () => void;
   logOut: () => void;
   userData: UserDatabase | undefined;
-  changeUserAvatar: (file: any) => Promise<void>;
-  changeUserField: (field: string, newValue: string) => Promise<void>;
+  changeUserInformations: (...props: any) => void;
 };
+
+type UpdateUserCallback = (...updateData: any) => Promise<UserDatabase>;
 
 export const UserContext = createContext<UserContextProps | null>(null);
 
@@ -31,15 +30,13 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
   const logIn = () => {
     setIsLoggedIn(true);
   };
-  const changeUserAvatar = async (file: File) => {
-    if (!userId) return;
-    const change = await changeAvatar(file, userId);
-    setUserData(change);
-  };
 
-  const changeUserField = async (field: string, newValue: string) => {
+  const changeUserInformations = async (
+    updateFunction: UpdateUserCallback,
+    ...updateData: (string | File)[]
+  ) => {
     if (!userId) return;
-    const newData = await updateUserField(userId, field, newValue);
+    const newData = await updateFunction(userId, ...updateData);
     setUserData(newData);
   };
 
@@ -60,8 +57,7 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
     logIn,
     setIsLoggedIn,
     userData,
-    changeUserAvatar,
-    changeUserField,
+    changeUserInformations,
   };
 
   return <UserContext.Provider value={valueContext}>{children}</UserContext.Provider>;

@@ -1,0 +1,58 @@
+@import '../../../../../../styles/variables.scss';
+
+.form {
+  background-color: $secondary-color;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.filters-container {
+  display: grid;
+  grid-template-columns: 25% 30% 45%;
+  background-color: $secondary-color;
+  padding: 0 1rem 0.5rem 1rem;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 0.7rem;
+  &.hidden {
+    display: none;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 1rem;
+  .show-filters__button {
+    background-color: #5e5e5e;
+    &.hidden {
+      margin-top: 1rem;
+    }
+    &:hover {
+      color: white;
+      background-color: #868686;
+    }
+  }
+  .show-filters__button,
+  .apply-button {
+    color: $secondary-color;
+    font-weight: 600;
+    font-size: 0.7rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(143, 143, 143, 0.349);
+    box-shadow: 3px 2px 5px 0px rgb(117, 117, 117);
+    cursor: pointer;
+  }
+  .apply-button {
+    background-color: $primary-blue-color;
+    &:hover {
+      color: white;
+      background-color: $primary-hover-button-color;
+    }
+    &.hidden {
+      display: none;
+    }
+  }
+}

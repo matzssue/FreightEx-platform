@@ -2,7 +2,7 @@ import { createContext, useState } from 'react';
 
 import { getSafeContext } from '../../utils/helpers/getSateContext';
 
-import { loadsPerPageWithMenu } from '../../constants/loadsPerPage';
+import { loadsPerPageWithMenu } from '../../modules/Loads/constants/loadsPerPage';
 
 type PaginationContextProps = {
   changePage: (value: number) => void;
@@ -18,7 +18,6 @@ export const PaginationContextProvider = ({ children }: { children: React.ReactN
   const [loadsPerPage, setLoadsPerPage] = useState(loadsPerPageWithMenu);
 
   const changePage = (value: number) => {
-    console.log(currentPage);
     setCurrentPage(value);
   };
   const changeLoadsPerPage = (value: number) => {

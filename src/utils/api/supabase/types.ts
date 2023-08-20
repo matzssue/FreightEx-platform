@@ -6,7 +6,7 @@ export type UserDatabase = Database['public']['Tables']['users']['Row'];
 export type CompanyDatabase = Database['public']['Tables']['companies']['Row'];
 export type AcceptedLoad = Database['public']['Tables']['accepted_loads']['Row'];
 export type InsertAcceptedLoad = Database['public']['Tables']['accepted_loads']['Insert'];
-
+export type InsertVehicle = Database['public']['Tables']['vehicles']['Insert'];
 export type UserDatabaseWithComp = {
   avatar: string;
   company_vat_id: CompanyDatabase;

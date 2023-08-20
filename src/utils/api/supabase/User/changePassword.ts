@@ -11,7 +11,6 @@ export const changePassword = async (newPassword: string) => {
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message);
       toast.error('Something went wrong, please try again');
     }
   }

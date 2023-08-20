@@ -8,8 +8,6 @@ export const useLogin = () => {
 
   const { setIsLoggedIn, setUserId } = useUserContext();
   async function login({ email, password }: { email: string; password: string }) {
-    // console.log(email, password);
-
     const { data: user, error } = await supabase.auth.signInWithPassword({
       email,
       password,

@@ -32,10 +32,9 @@ const initialState: LoadsFiltersState = {
 };
 
 export const loadsFiltersSlice = createSlice({
-  name: 'loadsFilters', //nazwa reducera
+  name: 'loadsFilters',
   initialState,
   reducers: {
-    //akcje
     addFilter: (state, action: PayloadAction<LoadsFilters>) => {
       state.filters = [...state.filters, action.payload];
     },

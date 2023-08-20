@@ -11,10 +11,9 @@ const initialState: CounterState = {
 };
 
 export const modalSlice = createSlice({
-  name: 'modal', //nazwa reducera
+  name: 'modal',
   initialState,
   reducers: {
-    //akcje
     openModal: (state) => {
       state.isLoadModalOpen = true;
     },

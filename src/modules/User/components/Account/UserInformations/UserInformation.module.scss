@@ -1,0 +1,49 @@
+@import '../../../../../styles/variables.scss';
+
+.information {
+  display: flex;
+  flex-wrap: wrap;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  background-color: $secondary-color;
+  // box-shadow: 8px 8px 24px -12px rgb(139, 139, 139);
+  box-shadow: 4px 6px 10px 1px rgb(139 139 139 / 33%);
+  p {
+    margin: 0;
+    font-weight: 700;
+  }
+  span {
+    font-weight: 500;
+  }
+}
+
+.information-form {
+  display: flex;
+  gap: 0 10px;
+  width: 100%;
+  align-items: center;
+  label {
+    font-size: 0.8rem;
+  }
+  input {
+    border: none;
+    border: 1px solid rgb(117, 117, 117);
+    border-radius: 0.3rem;
+    padding: 0.1rem 0.5rem;
+    max-width: 100px;
+  }
+  .error {
+    font-size: 0.6rem;
+    color: $error-color;
+  }
+  .submit-button {
+    background-color: $primary-blue-color;
+    color: white;
+    padding: 0.1rem 0.5rem;
+    border-radius: 0.2rem;
+    &:hover {
+      background-color: $primary-hover-button-color;
+    }
+  }
+}

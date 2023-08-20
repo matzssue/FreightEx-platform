@@ -199,7 +199,7 @@ export interface Database {
       }
       users: {
         Row: {
-          avatar: string | null
+          avatar: string
           company_vat_id: string
           email: string
           id: string
@@ -207,7 +207,7 @@ export interface Database {
           surname: string
         }
         Insert: {
-          avatar?: string | null
+          avatar?: string
           company_vat_id: string
           email: string
           id?: string
@@ -215,7 +215,7 @@ export interface Database {
           surname: string
         }
         Update: {
-          avatar?: string | null
+          avatar?: string
           company_vat_id?: string
           email?: string
           id?: string
@@ -230,6 +230,30 @@ export interface Database {
             referencedColumns: ["vat_id"]
           }
         ]
+      }
+      vehicles: {
+        Row: {
+          driver_name: string
+          driver_phone_number: string
+          user_id: string | null
+          vehicle_register_number: string
+          vehicle_type: string
+        }
+        Insert: {
+          driver_name: string
+          driver_phone_number: string
+          user_id?: string | null
+          vehicle_register_number: string
+          vehicle_type: string
+        }
+        Update: {
+          driver_name?: string
+          driver_phone_number?: string
+          user_id?: string | null
+          vehicle_register_number?: string
+          vehicle_type?: string
+        }
+        Relationships: []
       }
     }
     Views: {

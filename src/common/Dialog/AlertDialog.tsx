@@ -25,24 +25,22 @@ export default function AlertDialog({
   label,
 }: AlertDialogProps) {
   return (
-    <div>
-      <Dialog
-        open={open}
-        onClose={close}
-        aria-labelledby={`alert-dialog-${title}`}
-        aria-describedby={`alert-dialog-${description}`}
-      >
-        <DialogTitle id={`alert-dialog-${title}`}>{label}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id={`alert-dialog-${description}`}>{content}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={close}>Disagree</Button>
-          <Button onClick={agreeHandler} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog
+      open={open}
+      onClose={close}
+      aria-labelledby={`alert-dialog-${title}`}
+      aria-describedby={`alert-dialog-${description}`}
+    >
+      <DialogTitle id={`alert-dialog-${title}`}>{label}</DialogTitle>
+      <DialogContent>
+        <DialogContentText id={`alert-dialog-${description}`}>{content}</DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={close}>Disagree</Button>
+        <Button onClick={agreeHandler} autoFocus>
+          Agree
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }
