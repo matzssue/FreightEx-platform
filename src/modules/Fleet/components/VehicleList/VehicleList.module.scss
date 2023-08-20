@@ -1,0 +1,16 @@
+.fleet-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1rem;
+}
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  .no-results {
+    font-size: 1.2rem;
+    text-align: center;
+    color: rgb(233, 51, 51);
+  }
+}
