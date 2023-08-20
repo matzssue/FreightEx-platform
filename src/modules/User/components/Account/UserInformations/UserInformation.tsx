@@ -8,9 +8,9 @@ import {
   ChangeSurnameFormValue,
   changeNameSchema,
   changeSurnameSchema,
-} from '../../../../../utils/schemas/authSchema';
-import { useUserContext } from '../../../../../store/contexts/UserContext';
-import { updateUserField } from '../../../../../utils/api/supabase/User/updateUserField';
+} from 'src/utils/schemas/authSchema';
+import { useUserContext } from 'src/store/contexts/UserContext';
+import { updateUserField } from 'src/utils/api/supabase/User/updateUserField';
 
 type FormData = {
   name: string;
@@ -46,7 +46,7 @@ export const UserInformation = ({
     register,
     setValue,
     formState: { errors },
-  } = useForm<typeof defaultValues>({
+  } = useForm<FormData>({
     //@ts-ignore
     resolver: yupResolver<ChangeNameFormValue | ChangeSurnameFormValue>(schema),
     defaultValues,

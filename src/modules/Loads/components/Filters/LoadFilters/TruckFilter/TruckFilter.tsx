@@ -1,9 +1,10 @@
 import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form';
 import { FilterCard } from '../FilterCard/FilterCard';
-import styles from './TruckFilter.module.scss';
 import { DeepMap } from 'react-hook-form';
 import { LoadsFiltersValues } from '../../../../../../utils/schemas/loadsFilters';
-
+import { Fieldset } from 'src/common/Fieldset/Fieldset';
+import { FilterInput } from '../FilterInput/FilterInput';
+import styles from './TruckFilter.module.scss';
 export type FieldErrors<TFieldValues extends FieldValues = FieldValues> = DeepMap<
   TFieldValues,
   FieldError
@@ -17,30 +18,47 @@ export const TruckFilter = ({
 }) => {
   return (
     <FilterCard filterName={'Truck'}>
-      <fieldset className={styles['truck-inputs']}>
-        <legend>Weight(t)</legend>
-        <div className={styles.inputs}>
-          <input placeholder='min' {...register('minWeight')} step='any' type='number' />
+      <Fieldset>
+        <FilterInput label={'Min weight'}>
+          <input
+            className={styles.input}
+            placeholder='min'
+            {...register('minWeight')}
+            step='any'
+            type='number'
+          />
           {errors.minWeight && <p role='alert'>{errors.minWeight?.message}</p>}
-        </div>
-        -
-        <div className={styles.inputs}>
-          <input placeholder='max' {...register('maxWeight')} type='number' />
+        </FilterInput>
+        <FilterInput label={'Max weight'}>
+          <input
+            className={styles.input}
+            placeholder='max'
+            {...register('maxWeight')}
+            type='number'
+          />
           {errors.maxWeight && <p role='alert'>{errors.maxWeight?.message}</p>}
-        </div>
-      </fieldset>
-      <fieldset className={styles['truck-inputs']}>
-        <legend>Length(m)</legend>
-        <div className={styles.inputs}>
-          <input placeholder='max' {...register('minLength')} type='number' />
+        </FilterInput>
+      </Fieldset>
+      <Fieldset>
+        <FilterInput label={'Min length'}>
+          <input
+            className={styles.input}
+            placeholder='max'
+            {...register('minLength')}
+            type='number'
+          />
           {errors.minLength && <p role='alert'>{errors.minLength?.message}</p>}
-        </div>
-        -
-        <div className={styles.inputs}>
-          <input placeholder='max' {...register('maxLength')} type='number' />
+        </FilterInput>
+        <FilterInput label={'Max length'}>
+          <input
+            className={styles.input}
+            placeholder='max'
+            {...register('maxLength')}
+            type='number'
+          />
           {errors.maxLength && <p role='alert'>{errors.maxLength?.message}</p>}
-        </div>
-      </fieldset>
+        </FilterInput>
+      </Fieldset>
     </FilterCard>
   );
 };

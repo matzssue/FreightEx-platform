@@ -4,11 +4,27 @@
   display: flex;
   flex-direction: row;
   gap: 5px;
-
+  background-color: $primary-color;
+  border-radius: 0.5rem;
+  box-shadow: 3px 3px 7px 0px rgb(148, 148, 148);
+  padding: 1rem 0.2rem;
+  border: none;
   .date-fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     background-color: $primary-color;
     // margin: 0.5rem 0;
     padding: 0.5rem 1rem;
     border: none;
+    label {
+      background-color: gray;
+      width: auto;
+      color: $secondary-text-color;
+      padding: 0.2rem 0.5rem;
+      font-weight: 700;
+      border-radius: 0.3rem;
+      box-shadow: 3px 3px 7px 0px rgb(148, 148, 148);
+    }
   }
 }

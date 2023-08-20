@@ -1,5 +1,4 @@
 import {
-  Control,
   Controller,
   FieldValues,
   Path,
@@ -11,18 +10,16 @@ import Autocomplete from 'react-google-autocomplete';
 import styles from './PlacesAutocompleteInput.module.scss';
 import { Properties } from 'csstype';
 import { ChangeEvent } from 'react';
+import { BaseInputProps } from '../types';
 
 type PlacesInputProps<T extends FieldValues> = {
-  name: Path<T>;
-  label?: string;
-  control: Control<T>;
   sx?: Properties<string | number, string & {}>;
   filterType?: string;
   placeholder?: string;
   setValue: UseFormSetValue<T>;
   setValueKey: Path<T>;
   errorLabel: string;
-};
+} & BaseInputProps<T>;
 
 export const PlacesAutocompleteInput = <T extends FieldValues>({
   control,

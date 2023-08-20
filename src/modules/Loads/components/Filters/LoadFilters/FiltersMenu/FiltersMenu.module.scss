@@ -8,9 +8,8 @@
 
 .filters-container {
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr;
+  grid-template-columns: 25% 30% 45%;
   background-color: $secondary-color;
-  // background-color: #ffffff;
   padding: 0 1rem 0.5rem 1rem;
   justify-content: space-between;
   gap: 15px;
@@ -56,10 +55,4 @@
       display: none;
     }
   }
-}
-legend {
-  background-color: #777777;
-  padding: 0.2rem 0.5rem;
-  color: white;
-  border-radius: 5px;
 }

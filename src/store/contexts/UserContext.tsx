@@ -15,6 +15,8 @@ type UserContextProps = {
   changeUserInformations: (...props: any) => void;
 };
 
+type UpdateUserCallback = (...updateData: any) => Promise<UserDatabase>;
+
 export const UserContext = createContext<UserContextProps | null>(null);
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -30,8 +32,8 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
   };
 
   const changeUserInformations = async (
-    updateFunction: (userId: string, ...updateData: any) => Promise<UserDatabase>,
-    ...updateData: any
+    updateFunction: UpdateUserCallback,
+    ...updateData: (string | File)[]
   ) => {
     if (!userId) return;
     const newData = await updateFunction(userId, ...updateData);

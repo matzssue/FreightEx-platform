@@ -1,0 +1,52 @@
+.add-car_button {
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+  background-color: red;
+  height: 100%;
+  width: 300px;
+  position: relative;
+
+  &:hover .icon:before {
+    transform: scale(21);
+  }
+
+  .icon {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: #d3d3d3;
+    border-radius: 50%;
+    padding: 32px;
+    margin: 12px;
+    text-decoration: none;
+    z-index: 0;
+    overflow: hidden;
+
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: -16px;
+      right: -16px;
+      background: #1bb456;
+      height: 32px;
+      width: 32px;
+      border-radius: 32px;
+      transform: scale(1);
+      transform-origin: 50% 50%;
+      transition: transform 0.7s ease-out;
+    }
+  }
+
+  svg {
+    width: 30px;
+    height: auto;
+    color: white;
+  }
+}

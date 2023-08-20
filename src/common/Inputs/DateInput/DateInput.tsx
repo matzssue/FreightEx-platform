@@ -1,23 +1,24 @@
-import { Control, Controller, FieldValues, PathValue, Path } from 'react-hook-form';
+import { Controller, FieldValues, PathValue, Path } from 'react-hook-form';
 import styles from './DateInput.module.scss';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { ChangeEvent } from 'react';
+import { BaseInputProps } from '../types';
+import { SxProps } from '@mui/material';
 
 type DateInputProps<T extends FieldValues> = {
-  name: Path<T>;
-  label: string;
-  control: Control<T>;
   size?: 'small' | 'medium';
   fontSize?: string;
-};
+  sx?: SxProps;
+} & BaseInputProps<T>;
 
 export const DateInput = <T extends FieldValues>({
   control,
   name,
   size = 'medium',
   fontSize = '18px',
+  sx,
 }: DateInputProps<T>) => {
   return (
     <Controller
@@ -45,6 +46,7 @@ export const DateInput = <T extends FieldValues>({
                   fontFamily: 'Nunito, sans-serif',
                 },
                 backgroundColor: 'transparent',
+                ...sx,
               }}
               className={styles.input}
               value={value}

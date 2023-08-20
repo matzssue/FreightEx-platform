@@ -4,13 +4,14 @@ import { Title } from '../../../../../../common/Title/Title';
 type FilterCard = {
   children: ReactNode;
   filterName: string;
+  row?: boolean;
 };
 
-export const FilterCard = ({ children, filterName }: FilterCard) => {
+export const FilterCard = ({ children, filterName, row = false }: FilterCard) => {
   return (
     <div className={styles.filter}>
       <Title title={filterName} />
-      <div>{children}</div>
+      {row ? <div className={styles.row}>{children}</div> : children}
     </div>
   );
 };

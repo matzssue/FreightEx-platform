@@ -1,10 +1,10 @@
-import supabase from '../config/supabase';
+import supabase from '../../../config/supabase';
 import { toast } from 'react-toastify';
 import { UserAttributes } from '@supabase/supabase-js';
 
 type Credentials = 'password' | 'email';
 
-export const useChangeCredientials = async (credential: Credentials, newValue: string) => {
+export const changeCredientials = async (credential: Credentials, newValue: string) => {
   const updateData = { [credential]: newValue } as UserAttributes;
 
   try {

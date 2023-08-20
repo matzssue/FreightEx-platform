@@ -1,11 +1,8 @@
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import styles from './EditAccount.module.scss';
 import { useState } from 'react';
-
 import { useForm } from 'react-hook-form';
-
-import { useUserContext } from '../../../../../store/contexts/UserContext';
-
+import { useUserContext } from 'src/store/contexts/UserContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   ChangePasswordFormValues,
@@ -13,11 +10,10 @@ import {
   changePasswordSchema,
 } from '../../../../../utils/schemas/authSchema';
 
-import PasswordInput from '../../../../../common/Inputs/PasswordInput/PasswordInput';
-
-import { TextFieldInput } from '../../../../../common/Inputs/TextField/TextFieldInput';
-import { useChangeCredientials } from '../../../../../hooks/useChangeCredentials';
-import { changeAvatar } from '../../../../../utils/api/supabase/User/changeAvatar';
+import PasswordInput from 'src/common/Inputs/PasswordInput/PasswordInput';
+import { TextFieldInput } from 'src/common/Inputs/TextField/TextFieldInput';
+import { changeCredientials } from '../../../utils/changeCredentials';
+import { changeAvatar } from 'src/utils/api/supabase/User/changeAvatar';
 
 interface Event<T = EventTarget> {
   target: T;
@@ -70,10 +66,10 @@ export const EditAccount = () => {
 
   const onSubmit = (data: FormData) => {
     if (currentOption === 'password') {
-      useChangeCredientials(currentOption, data.password);
+      changeCredientials(currentOption, data.password);
     }
     if (currentOption === 'email') {
-      useChangeCredientials(currentOption, data.email);
+      changeCredientials(currentOption, data.email);
     }
     reset();
     handleClose();

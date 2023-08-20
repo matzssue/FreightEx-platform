@@ -1,6 +1,6 @@
 import { useJsApiLoader, GoogleMap, DirectionsRenderer } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
-
+import styles from './LoadMap.module.scss';
 import { Load } from '../../../../../utils/api/supabase/types';
 
 type LoadMap = {
@@ -70,12 +70,12 @@ export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
   };
 
   if (!isLoaded) return <div>Loading</div>;
-
+  console.log(directionsResponse);
   return (
     <>
       <GoogleMap
         zoom={15}
-        mapContainerStyle={{ width: '100%', height: '100%' }}
+        mapContainerStyle={{ width: '100%', height: '70%' }}
         options={{
           zoomControl: false,
           streetViewControl: false,
@@ -88,6 +88,9 @@ export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
             options={directionsRendererOptions}
             onLoad={(directionsRenderer) => setDirectionsRenderer(directionsRenderer)}
           />
+        )}
+        {!directionsResponse && (
+          <p className={styles['no-results']}>Sorry, no routes found between these locations </p>
         )}
       </GoogleMap>
     </>

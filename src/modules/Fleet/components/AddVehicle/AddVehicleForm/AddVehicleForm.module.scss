@@ -1,0 +1,21 @@
+@import '/src/styles/variables.scss';
+.add-car-form__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: $secondary-color;
+  padding: 3rem 1rem;
+  margin: 10% auto;
+  border-radius: 1rem;
+  box-shadow: 8px 8px 24px 0px rgba(171, 171, 171, 1);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    label {
+      width: 200px;
+    }
+  }
+}

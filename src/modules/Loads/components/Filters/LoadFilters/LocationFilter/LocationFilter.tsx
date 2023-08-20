@@ -3,7 +3,9 @@ import { PlacesAutocompleteInput } from '../../../../../../common/Inputs/PlacesA
 import styles from './LocationFilter.module.scss';
 import { SelectInput } from '../../../../../../common/Inputs/Select/Select';
 import { FieldValues, Control, UseFormSetValue, PathValue, Path } from 'react-hook-form';
-
+import { searchAreaInKM } from 'src/modules/Loads/constants/searchAreaInKm';
+import { Fieldset } from 'src/common/Fieldset/Fieldset';
+import { FilterInput } from '../FilterInput/FilterInput';
 type LocationFilterProps<T extends FieldValues> = {
   control: Control<T>;
   setValue: UseFormSetValue<T>;
@@ -13,64 +15,71 @@ export const LocationFilter = <T extends FieldValues>({
   setValue,
   control,
 }: LocationFilterProps<T>) => {
-  const selectKilometers = [
-    5, 10, 25, 50, 75, 100, 125, 150, 300, 400, 500, 600, 700, 800, 900, 1000, 3000, 5000,
-  ];
+  const commonProps = {
+    sx: {
+      // maxWidth: '250px',
+
+      padding: '0.5rem',
+      fontSize: '0.7rem',
+      height: '15px',
+      outlineColor: '#1976d2',
+    },
+  };
 
   return (
     <FilterCard filterName={'Location'}>
-      <div className={styles['address-inputs']}>
-        <label htmlFor='loadingAddress'>Loading</label>
+      <Fieldset>
+        <FilterInput label={'Loading address'}>
+          <PlacesAutocompleteInput
+            {...commonProps}
+            name={'loadingAddress' as Path<T>}
+            setValue={setValue}
+            control={control}
+            setValueKey={'loadingAddressData' as Path<T>}
+            errorLabel='Loading address'
+          />
+        </FilterInput>
+        <div className={styles.select}>
+          <FilterInput label={'+KM'}>
+            <SelectInput
+              name={'loadingArea' as Path<T>}
+              control={control}
+              defaultValue={5 as PathValue<T, Path<T>>}
+              options={searchAreaInKM}
+              variant='outlined'
+              sx={{
+                // maxWidth: '70px',
+                width: '30%',
+                fontSize: '11px',
+                backgroundColor: 'white',
+                height: 'min-content',
+                boxShadow: '3px 3px 0px 0px rgba(148, 148, 148, 0.267)',
+                '.css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
+                  width: '15px',
+                  color: 'gray',
+                },
+              }}
+            />
+          </FilterInput>
+        </div>
+      </Fieldset>
 
-        <PlacesAutocompleteInput
-          name={'loadingAddress' as Path<T>}
-          setValue={setValue}
-          control={control}
-          setValueKey={'loadingAddressData' as Path<T>}
-          sx={{
-            width: '200px',
-            padding: '0.5rem',
-            fontSize: '0.7rem',
-            height: '15px',
-          }}
-          errorLabel='Loading address'
-        />
-        {/* {errors.loadingAddress && <p role='alert'>{errors.loadingAddress?.message}</p>} */}
+      {/* {errors.loadingAddress && <p role='alert'>{errors.loadingAddress?.message}</p>} */}
 
-        <SelectInput
-          name={'loadingArea' as Path<T>}
-          label='+KM'
-          control={control}
-          defaultValue={5 as PathValue<T, Path<T>>}
-          options={selectKilometers}
-          variant='outlined'
-          sx={{
-            width: '60px',
-            fontSize: '10px',
-            backgroundColor: 'white',
-            height: 'min-content',
-          }}
-        />
-      </div>
-      <div className={styles['address-inputs']}>
-        <label htmlFor='unloadingAddress'>Unloading</label>
-        <PlacesAutocompleteInput
-          setValue={setValue}
-          control={control}
-          setValueKey={'unloadingAddressData' as Path<T>}
-          name={'unloadingAddress' as Path<T>}
-          sx={{
-            width: '200px',
-            padding: '0.5rem',
-            fontSize: '0.7rem',
-            height: '15px',
-            outlineColor: '#1976d2',
-          }}
-          filterType='country'
-          placeholder='Search country of unloading'
-          errorLabel='Unloading address'
-        />
-      </div>
+      <Fieldset>
+        <FilterInput label={'Unloading address'}>
+          <PlacesAutocompleteInput
+            {...commonProps}
+            name={'unloadingAddress' as Path<T>}
+            control={control}
+            setValue={setValue}
+            setValueKey={'unloadingAddressData' as Path<T>}
+            filterType='country'
+            placeholder='Search country of unloading'
+            errorLabel='Unloading address'
+          />
+        </FilterInput>
+      </Fieldset>
     </FilterCard>
   );
 };
