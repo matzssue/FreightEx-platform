@@ -15,7 +15,7 @@ const commonProps = {
 
 export const DateFilter = <T extends FieldValues>({ control }: DateFilterProps<T>) => {
   return (
-    <FilterCard filterName={'Date'}>
+    <FilterCard row={true} filterName={'Date'}>
       <div className={styles['date-inputs']}>
         <fieldset className={styles['date-fieldset']}>
           <label htmlFor='startLoadingDate'>Min loading date</label>
@@ -23,7 +23,8 @@ export const DateFilter = <T extends FieldValues>({ control }: DateFilterProps<T
           <label htmlFor='endLoadingDate'>Max loading date</label>
           <DateInput {...commonProps} control={control} name={'endLoadingDate' as Path<T>} />
         </fieldset>
-
+      </div>
+      <div className={styles['date-inputs']}>
         <fieldset className={styles['date-fieldset']}>
           <label htmlFor='startUnloadingDate'>Min unloading date</label>
           <DateInput {...commonProps} control={control} name={'startUnloadingDate' as Path<T>} />

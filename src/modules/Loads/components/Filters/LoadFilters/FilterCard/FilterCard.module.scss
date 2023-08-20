@@ -7,6 +7,11 @@
   width: auto;
   border-radius: 1px;
   padding: 0.5rem 0.3rem;
+  .row {
+    display: flex;
+    gap: 15px;
+    flex-direction: row;
+  }
   p {
     font-size: 0.9rem;
     margin: 0;
