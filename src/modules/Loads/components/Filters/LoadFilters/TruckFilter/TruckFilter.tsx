@@ -1,8 +1,9 @@
 import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form';
 import { FilterCard } from '../FilterCard/FilterCard';
-import styles from './TruckFilter.module.scss';
 import { DeepMap } from 'react-hook-form';
 import { LoadsFiltersValues } from '../../../../../../utils/schemas/loadsFilters';
+import { Fieldset } from 'src/common/Fieldset/Fieldset';
+import { FilterInput } from '../FilterInput/FilterInput';
 
 export type FieldErrors<TFieldValues extends FieldValues = FieldValues> = DeepMap<
   TFieldValues,
@@ -17,30 +18,26 @@ export const TruckFilter = ({
 }) => {
   return (
     <FilterCard filterName={'Truck'}>
-      <fieldset className={styles['truck-inputs']}>
-        <legend>Weight(t)</legend>
-        <div className={styles.inputs}>
+      <Fieldset>
+        <FilterInput label={'Min weight'}>
           <input placeholder='min' {...register('minWeight')} step='any' type='number' />
           {errors.minWeight && <p role='alert'>{errors.minWeight?.message}</p>}
-        </div>
-        -
-        <div className={styles.inputs}>
+        </FilterInput>
+        <FilterInput label={'Max weight'}>
           <input placeholder='max' {...register('maxWeight')} type='number' />
           {errors.maxWeight && <p role='alert'>{errors.maxWeight?.message}</p>}
-        </div>
-      </fieldset>
-      <fieldset className={styles['truck-inputs']}>
-        <legend>Length(m)</legend>
-        <div className={styles.inputs}>
+        </FilterInput>
+      </Fieldset>
+      <Fieldset>
+        <FilterInput label={'Min length'}>
           <input placeholder='max' {...register('minLength')} type='number' />
           {errors.minLength && <p role='alert'>{errors.minLength?.message}</p>}
-        </div>
-        -
-        <div className={styles.inputs}>
+        </FilterInput>
+        <FilterInput label={'Max length'}>
           <input placeholder='max' {...register('maxLength')} type='number' />
           {errors.maxLength && <p role='alert'>{errors.maxLength?.message}</p>}
-        </div>
-      </fieldset>
+        </FilterInput>
+      </Fieldset>
     </FilterCard>
   );
 };
