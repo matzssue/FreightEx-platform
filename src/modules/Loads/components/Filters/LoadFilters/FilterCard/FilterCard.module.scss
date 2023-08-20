@@ -1,11 +1,15 @@
 @import '../../../../../../styles/variables.scss';
 
 .filter {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   width: auto;
   border-radius: 1px;
   padding: 0.5rem 0.3rem;
-  border-right: 1px solid rgba(128, 128, 128, 0.322);
   p {
     font-size: 0.9rem;
+    margin: 0;
+    box-shadow: 3px 3px 0px 0px rgba(148, 148, 148, 0.856);
   }
 }
