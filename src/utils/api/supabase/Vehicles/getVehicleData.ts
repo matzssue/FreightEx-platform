@@ -1,6 +1,6 @@
 import supabase from '../../../../config/supabase';
 
-export const getVehicleData = async (registerNumber: string) => {
+export const getVehicleData = async (registerNumber: string | undefined) => {
   const { data: vehicleData, error } = await supabase
     .from('vehicles')
     .select(`*`)
