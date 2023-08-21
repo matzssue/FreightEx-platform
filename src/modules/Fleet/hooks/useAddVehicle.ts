@@ -3,10 +3,10 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { InsertVehicle } from 'src/utils/api/supabase/types';
-
-export const useAddCar = () => {
+import { useQueryClient } from '@tanstack/react-query';
+export const useAddVehicle = () => {
   const navigation = useNavigate();
-
+  const queryClient = useQueryClient();
   const addVehicle = async (vehicleData: InsertVehicle, userId: string) => {
     console.log(vehicleData);
     const { data, error } = await supabase
@@ -17,14 +17,14 @@ export const useAddCar = () => {
   };
 
   return useMutation(
-    ['vehicles'],
+    ['fleet'],
     async ({ vehicleData, userId }: { vehicleData: InsertVehicle; userId: string }) =>
       await addVehicle(vehicleData, userId),
     {
-      onSuccess: async (data, id) => {
-        console.log('succes id', data, id);
+      onSuccess: async () => {
         toast.success('vehicle added to fleet');
-        navigation('/vehicles');
+        navigation('/fleet');
+        queryClient.invalidateQueries(['fleet']);
       },
       onError: (error: { message: string }) => {
         console.log(error);
