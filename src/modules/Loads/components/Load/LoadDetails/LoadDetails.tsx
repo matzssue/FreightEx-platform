@@ -12,14 +12,14 @@ import { useState } from 'react';
 export const LoadDetails = () => {
   const { loadId, filterId } = useParams();
 
-  if (!loadId) return;
+  const [distance, setDistance] = useState<string | undefined>(undefined);
+  const [duration, setDuration] = useState<string | undefined>(undefined);
+
   const { data: loadDetails, isLoading } = useQuery(
     ['loads', loadId],
     async () => await getLoadDetails(loadId),
+    { enabled: !!loadId },
   );
-
-  const [distance, setDistance] = useState<string | undefined>(undefined);
-  const [duration, setDuration] = useState<string | undefined>(undefined);
 
   if (!loadDetails) return;
   if (isLoading) return <div>Loading...</div>;

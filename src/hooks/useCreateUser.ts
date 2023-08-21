@@ -28,9 +28,9 @@ export default function useCreateUser() {
         .from('companies')
         .upsert([{ vat_id: user.vatId, name: user.companyName }]);
       if (error) throw new Error();
-
+      if (!data.user) return;
       const { data: insertData, error: insertError } = await supabase.from('users').insert({
-        id: data.user?.id!,
+        id: data.user.id,
         name: user.name,
         surname: user.surname,
         email: user.email,

@@ -11,7 +11,7 @@ import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { LoadingSpinner } from '../../../../../common/LoadingSpinner/LoadingSpinner';
 import { useAcceptOffer } from '../../../../../hooks/useAcceptOffer';
 import { Paginate } from '../../Pagination/Pagination';
-
+import { useMemo } from 'react';
 import { useState } from 'react';
 import { Load as TLoad } from '../../../../../utils/api/supabase/types';
 export const Loads = () => {
@@ -22,22 +22,23 @@ export const Loads = () => {
   const acceptOfferMutation = useAcceptOffer();
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
-  const { data: allLoads, isLoading: isAllLoading } = useQuery(
-    ['loads'],
-    async () => await getAllLoads(),
-  );
+  const { data: allLoads } = useQuery(['loads'], async () => await getAllLoads());
 
-  const { data: filteredLoads, isLoading: isFilteredLoading } = useQuery(
-    ['loads', filterId],
-    async () => {
-      if (!filters || !filterId) return [];
-      const foundFilter = filters.find((filter) => filter.id === filterId);
-      if (!foundFilter) return;
-      return await getFilteredLoads(foundFilter);
-    },
-  );
+  const fetchFilteredLoads = async () => {
+    if (!filters || !filterId) return [];
+    const foundFilter = filters.find((filter) => filter.id === filterId);
+    if (!foundFilter) return;
+    return await getFilteredLoads(foundFilter);
+  };
 
-  const loads = filterId ? filteredLoads : allLoads;
+  const { data: filteredLoads } = useQuery(['loads', filterId], fetchFilteredLoads, {
+    enabled: Boolean(filters && filterId),
+  });
+
+  const memoizedLoads = useMemo(
+    () => (filterId ? filteredLoads : allLoads),
+    [filterId, filteredLoads, allLoads],
+  );
 
   if (!userData) return;
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
@@ -53,7 +54,7 @@ export const Loads = () => {
       </div>
       <div className={styles.loads}>
         <ul>
-          {isAllLoading || isFilteredLoading ? (
+          {!slicedLoads ? (
             <LoadingSpinner />
           ) : (
             slicedLoads?.map((load) => (
@@ -65,7 +66,7 @@ export const Loads = () => {
         </ul>
       </div>
       <div className={styles.pagination}>
-        <Paginate setSlicedLoads={setSlicedLoads} data={loads} />
+        <Paginate setSlicedLoads={setSlicedLoads} data={memoizedLoads} />
       </div>
     </div>
   );
