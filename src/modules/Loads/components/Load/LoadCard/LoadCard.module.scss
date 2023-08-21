@@ -48,7 +48,7 @@
   .company {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     position: relative;
     padding: 0;
     .name {
@@ -58,7 +58,7 @@
     .publisher {
       display: flex;
       gap: 10px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: $primary-blue-color;
     }
     .avatar {
