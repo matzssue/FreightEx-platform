@@ -10,9 +10,19 @@ type LoadMap = {
 };
 
 export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_API_KEY,
-  });
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [isError, setIsError] = useState(false);
+  useEffect(() => {
+    if (typeof google !== 'object') {
+      const result = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+      });
+      setIsMapLoaded(result.isLoaded);
+    } else {
+      setIsMapLoaded(true);
+    }
+  }, []);
 
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult>();
   const [directionsRenderer, setDirectionsRenderer] =
@@ -33,6 +43,7 @@ export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
       );
 
       const directionsService = new google.maps.DirectionsService();
+
       const results = await directionsService.route({
         origin: loadingAddressCords,
         destination: unloadingAddressCords,
@@ -42,7 +53,9 @@ export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
       setDirectionsResponse(results);
       setDistance(results.routes[0].legs[0].distance?.text);
       setDuration(results.routes[0].legs[0].duration?.text);
+      setIsError(false);
     } catch (err) {
+      if (err) setIsError(true);
       setDistance(undefined);
       setDuration(undefined);
       setDirectionsResponse(undefined);
@@ -69,30 +82,32 @@ export const LoadMap = ({ address, setDistance, setDuration }: LoadMap) => {
     directions: directionsResponse,
   };
 
-  if (!isLoaded) return <div>Loading</div>;
-  console.log(directionsResponse);
   return (
     <>
-      <GoogleMap
-        zoom={15}
-        mapContainerStyle={{ width: '100%', height: '70%' }}
-        options={{
-          zoomControl: false,
-          streetViewControl: false,
-          mapTypeControl: false,
-          fullscreenControl: false,
-        }}
-      >
-        {directionsResponse && (
-          <DirectionsRenderer
-            options={directionsRendererOptions}
-            onLoad={(directionsRenderer) => setDirectionsRenderer(directionsRenderer)}
-          />
-        )}
-        {!directionsResponse && (
-          <p className={styles['no-results']}>Sorry, no routes found between these locations </p>
-        )}
-      </GoogleMap>
+      {isMapLoaded ? (
+        <GoogleMap
+          zoom={15}
+          mapContainerStyle={{ width: '100%', height: '70%' }}
+          options={{
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false,
+          }}
+        >
+          {directionsResponse && directionsRendererOptions && (
+            <DirectionsRenderer
+              options={directionsRendererOptions}
+              onLoad={(directionsRenderer) => setDirectionsRenderer(directionsRenderer)}
+            />
+          )}
+          {isError && (
+            <p className={styles['no-results']}>Sorry, no routes found between these locations </p>
+          )}
+        </GoogleMap>
+      ) : (
+        <p>Loading....</p>
+      )}
     </>
   );
 };
