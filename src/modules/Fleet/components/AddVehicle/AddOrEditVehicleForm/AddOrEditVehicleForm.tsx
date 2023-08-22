@@ -3,28 +3,27 @@ import { SelectInput } from 'src/common/Inputs/Select/Select';
 import { vehicleTypes } from '../../../constants/vehicleTypes';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { TextFieldInput } from 'src/common/Inputs/TextField/TextFieldInput';
 import { addVehicleSchema, VehicleValuesSchema } from 'src/utils/schemas/addVehicleSchema';
-
 import { useUserContext } from 'src/store/contexts/UserContext';
-import { useAddCar } from 'src/modules/Fleet/hooks/useAddCar';
+import { useAddVehicle } from 'src/modules/Fleet/hooks/useAddVehicle';
 import { LinkButton } from 'src/common/Buttons/LinkButton/LinkButton';
 import { Button } from 'src/common/Buttons/Button/Button';
+import { useUpdateVehicleData } from 'src/modules/Fleet/hooks/useUpdateVehicleData';
 
 type AddVehicleFormProps = {
   mode?: 'add' | 'edit';
-  driverName: string;
-  driverPhoneNumber: string;
-  vehicleType: string;
-  vehicleRegistrationNumber: string;
+  driverName?: string;
+  driverPhoneNumber?: string;
+  vehicleType?: string;
+  vehicleRegistrationNumber?: string;
 };
 
 export const AddOrEditVehicleForm = ({
-  driverName,
-  driverPhoneNumber,
-  vehicleRegistrationNumber,
-  vehicleType,
+  driverName = '',
+  driverPhoneNumber = '',
+  vehicleRegistrationNumber = '',
+  vehicleType = '',
   mode = 'add',
 }: AddVehicleFormProps) => {
   const { userId } = useUserContext();
@@ -48,21 +47,27 @@ export const AddOrEditVehicleForm = ({
     resolver: yupResolver<VehicleValuesSchema>(addVehicleSchema),
     defaultValues: defaultValues,
   });
-  const addCarMutation = useAddCar();
+
+  const addVehicleMutation = useAddVehicle();
+  const updateVehicleMutation = useUpdateVehicleData();
 
   const onSubmit = async (data: VehicleValuesSchema) => {
-    if (!userId) return;
-    if (mode === 'add') {
-      const upsertData = {
-        vehicle_register_number: data.vehicleRegistrationNumber,
-        vehicle_type: data.vehicleType,
-        driver_phone_number: data.driverPhoneNumber,
-        driver_name: data.driverName,
-      };
+    const upsertData = {
+      vehicle_register_number: data.vehicleRegistrationNumber,
+      vehicle_type: data.vehicleType,
+      driver_phone_number: data.driverPhoneNumber,
+      driver_name: data.driverName,
+    };
 
-      addCarMutation.mutateAsync({ vehicleData: upsertData, userId: userId });
+    if (mode === 'add') {
+      if (!userId) return;
+      addVehicleMutation.mutate({ vehicleData: upsertData, userId: userId });
     }
     if (mode === 'edit') {
+      updateVehicleMutation.mutate({
+        vehicleData: upsertData,
+        vehicleId: data.vehicleRegistrationNumber,
+      });
     }
   };
 
@@ -87,6 +92,7 @@ export const AddOrEditVehicleForm = ({
           label='Registration number'
           control={control}
           name='vehicleRegistrationNumber'
+          disabled={mode === 'edit'}
         />
         <TextFieldInput
           defaultValue={defaultValues.driverName}
