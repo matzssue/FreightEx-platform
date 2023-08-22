@@ -1,7 +1,7 @@
 import supabase from '../../../../config/supabase';
 import { GetLoadsData } from '../types';
 
-export const getLoadDetails = async (id: string) => {
+export const getLoadDetails = async (id: string | undefined) => {
   const { data: loadData, error } = await supabase
     .from('loads')
     .select(`*, unloading_address_id(*), loading_address_id(*)`)

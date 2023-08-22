@@ -1,10 +1,12 @@
 import { ReactNode } from 'react';
 import styles from './Links.module.scss';
 import { NavLink } from 'react-router-dom';
+import { Tooltip } from '@mui/material';
 type Link = {
   linkName: string;
   link: string;
   icon?: ReactNode;
+  disabled?: boolean;
 };
 
 type LinksProps = {
@@ -18,13 +20,21 @@ const Links = ({ data, activeMode = true, hidden }: LinksProps) => {
     <ul className={styles['list-container']}>
       {data.map((link) => (
         <li key={link.linkName}>
-          <NavLink
-            to={link.link}
-            className={({ isActive }) => (isActive && activeMode ? styles.active : '')}
-          >
-            {link.icon && <span className={styles.icon}>{link.icon}</span>}
-            <span className={hidden ? styles.hidden : ''}>{link.linkName}</span>
-          </NavLink>
+          {!link.disabled ? (
+            <NavLink
+              to={link.link}
+              className={({ isActive }) => (isActive && activeMode ? styles.active : '')}
+            >
+              {link.icon && <span className={styles.icon}>{link.icon}</span>}
+              <span className={hidden ? styles.hidden : ''}>{link.linkName}</span>
+            </NavLink>
+          ) : (
+            <Tooltip placement='right-start' title='coming soon'>
+              <button className={styles.disabled}>
+                {link.icon} <span className={hidden ? styles.hidden : ''}>{link.linkName}</span>
+              </button>
+            </Tooltip>
+          )}
         </li>
       ))}
     </ul>

@@ -1,10 +1,10 @@
-import { FormControlLabel, Checkbox } from '@mui/material';
+import { FormControlLabel, Checkbox, SxProps } from '@mui/material';
 import { Controller, FieldValues, Path, PathValue } from 'react-hook-form';
 import { BaseInputProps } from '../types';
 
 type CheckboxInputProps<T extends FieldValues> = {
   defaultValue?: boolean | undefined;
-  sx?: Record<string, any>;
+  sx?: SxProps;
 } & BaseInputProps<T>;
 
 const CheckboxInput = <T extends FieldValues>({

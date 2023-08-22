@@ -4,12 +4,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { ReactNode } from 'react';
 
 type AlertDialogProps = {
   open: boolean;
   close: () => void;
   agreeHandler: () => void;
-  content: string;
+  children: ReactNode;
   title: string;
   description: string;
   label: string;
@@ -19,7 +20,7 @@ export default function AlertDialog({
   open,
   close,
   agreeHandler,
-  content,
+  children,
   title,
   description,
   label,
@@ -33,7 +34,7 @@ export default function AlertDialog({
     >
       <DialogTitle id={`alert-dialog-${title}`}>{label}</DialogTitle>
       <DialogContent>
-        <DialogContentText id={`alert-dialog-${description}`}>{content}</DialogContentText>
+        <DialogContentText id={`alert-dialog-${description}`}>{children}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={close}>Disagree</Button>

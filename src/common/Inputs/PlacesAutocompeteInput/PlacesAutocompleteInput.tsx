@@ -11,9 +11,10 @@ import styles from './PlacesAutocompleteInput.module.scss';
 import { Properties } from 'csstype';
 import { ChangeEvent } from 'react';
 import { BaseInputProps } from '../types';
+import { SxProps } from '@mui/material';
 
 type PlacesInputProps<T extends FieldValues> = {
-  sx?: Properties<string | number, string & {}>;
+  sx?: Properties<string | number, string & SxProps>;
   filterType?: string;
   placeholder?: string;
   setValue: UseFormSetValue<T>;

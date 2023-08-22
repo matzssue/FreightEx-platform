@@ -11,18 +11,24 @@ type UserContextProps = {
   setUserId: Dispatch<SetStateAction<string | undefined>>;
   logIn: () => void;
   logOut: () => void;
-  userData: UserDatabase | undefined;
+  userData: UserDatabase;
   changeUserInformations: (...props: any) => void;
 };
 
 type UpdateUserCallback = (...updateData: any) => Promise<UserDatabase>;
-
 export const UserContext = createContext<UserContextProps | null>(null);
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [userId, setUserId] = useState<string | undefined>();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [userData, setUserData] = useState<UserDatabase | undefined>();
+  const [userData, setUserData] = useState<UserDatabase>({
+    avatar: '',
+    company_vat_id: '',
+    email: '',
+    id: '',
+    name: '',
+    surname: '',
+  });
 
   const logOut = () => {
     setIsLoggedIn(false);
@@ -37,14 +43,14 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
   ) => {
     if (!userId) return;
     const newData = await updateFunction(userId, ...updateData);
-    setUserData(newData);
+    if (newData) setUserData(newData);
   };
 
   useEffect(() => {
     const getUserData = async () => {
       if (!userId) return;
       const userData = await getUser(userId);
-      setUserData(userData);
+      if (userData) setUserData(userData);
     };
     getUserData();
   }, [userId]);

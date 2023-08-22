@@ -43,7 +43,6 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
         logoutMutation.mutate();
         break;
       default:
-        navigate('/');
         break;
     }
   };

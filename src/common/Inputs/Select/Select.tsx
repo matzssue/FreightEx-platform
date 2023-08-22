@@ -11,6 +11,8 @@ type SelectInputProps<T extends FieldValues> = {
   defaultValue: PathValue<T, Path<T>> | undefined;
   variant?: 'standard' | 'outlined' | 'filled';
   sx?: SxProps;
+  direction?: 'column' | 'row';
+  fontSize?: string;
 } & BaseInputProps<T>;
 
 export const SelectInput = <T extends FieldValues>({
@@ -21,6 +23,8 @@ export const SelectInput = <T extends FieldValues>({
   defaultValue,
   variant,
   sx,
+  direction = 'column',
+  fontSize = '10px',
 }: SelectInputProps<T>) => {
   return (
     <Controller
@@ -28,7 +32,7 @@ export const SelectInput = <T extends FieldValues>({
       defaultValue={defaultValue}
       control={control}
       render={({ field: { onBlur, onChange, value } }) => (
-        <FormControl style={{ flexDirection: 'column', gap: '5px' }}>
+        <FormControl style={{ flexDirection: direction }}>
           {label && (
             <label className={styles.label} htmlFor={name}>
               {label}
@@ -47,7 +51,7 @@ export const SelectInput = <T extends FieldValues>({
             MenuProps={{ MenuListProps: { style: { maxHeight: '150px' } } }}
           >
             {options.map((option: string | number) => (
-              <MenuItem sx={{ fontSize: '10px' }} key={option} value={option}>
+              <MenuItem sx={{ fontSize: fontSize }} key={option} value={option}>
                 {option}
               </MenuItem>
             ))}

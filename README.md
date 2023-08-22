@@ -4,6 +4,15 @@
 
 FreightEx is platform that connects carriers, forwarding companies and clients that are looking for transport services
 
+## Live
+
+[FreightEx Platform Vercel](https://freight-ex-platform.vercel.app)
+
+_Test Account_
+
+Login: test@transportex.com
+Password: Test123
+
 ## Installation
 
 Install my-project with npm or arn
@@ -13,10 +22,6 @@ Install my-project with npm or arn
   # or
   yarn dev
 ```
-
-## Live
-
-[FreightEx Platform Vercel](https://freight-ex-platform.vercel.app)
 
 ## Technologies
 
@@ -47,20 +52,20 @@ Install my-project with npm or arn
 
 2. Loads subpage
 
-- [ ] Add GoggleMap error handling,
+- [V] Add GoggleMap error handling,
 - [ ] Improve date filters,
+- [ ] Implement function to remove filter cards
 
 3. Orders subpage
 
 - [ ] Add list of accepted orders,
 - [ ] Add functions to edit, delete orders,
-- [ ] Add function to,
 - [ ] Add list of published orders
 
 4. Cars subpage
 
-- [ ] Add function to add,edit,delete vehicles,
-- [ ] Add fleet view
+- [V] Add function to add,edit,delete vehicles,
+- [V] Add fleet view
 
 5. Invoices subpage
 

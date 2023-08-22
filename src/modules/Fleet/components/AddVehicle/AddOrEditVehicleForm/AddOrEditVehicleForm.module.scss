@@ -1,0 +1,35 @@
+@import '/src/styles/variables.scss';
+.add-car-form__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 40%;
+  background-color: $secondary-color;
+  padding: 2rem 0.5rem;
+  margin: 10% auto;
+  border-radius: 1rem;
+  box-shadow: 8px 8px 24px 0px rgba(171, 171, 171, 1);
+  h2 {
+    background-color: $primary-blue-color;
+    padding: 0.5rem 1rem;
+    color: $secondary-color;
+    border-radius: 1rem;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background-color: $primary-color;
+    padding: 1rem;
+    border-radius: 1rem;
+    label {
+      width: 200px !important;
+      font-weight: 700;
+      margin: 0 0.5rem;
+    }
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+}
