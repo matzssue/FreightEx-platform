@@ -1,16 +1,12 @@
-// import { PageLayout } from 'src/common/PageLayout/PageLayout';
 import { PageLayout } from 'src/common/PageLayout/PageLayout';
-// import { PageLayout } from '~/common/PageLayout/PageLayout';
-// import { PageLayout } from 'src/common/PageLayout/PageLayout';
+import { AddOrEditVehicleForm } from 'src/modules/Fleet/components/AddVehicle/AddOrEditVehicleForm/AddOrEditVehicleForm';
 import { ProtectedWrapper } from 'src/common/ProtectedWrapper/ProtectedWrapper';
-
-import { AddVehicleForm } from 'src/modules/Fleet/components/AddVehicle/AddVehicleForm/AddVehicleForm';
 
 export const AddVehicle = () => {
   return (
     <ProtectedWrapper>
       <PageLayout>
-        <AddVehicleForm />
+        <AddOrEditVehicleForm />
       </PageLayout>
     </ProtectedWrapper>
   );
