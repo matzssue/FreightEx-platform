@@ -17,6 +17,7 @@ import { UserContextProvider } from './store/contexts/UserContext';
 import { PaginationContextProvider } from './store/contexts/PaginationContext';
 import { Vehicles } from './Pages/Fleet/Vehicles';
 import { AddVehicle } from './Pages/Fleet/AddVehicle';
+import { EditVehicle } from './Pages/Fleet/EditVehicle';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -90,6 +91,9 @@ function App() {
                       <Route index element={<Vehicles />} />
                       <Route path='add'>
                         <Route index element={<AddVehicle />} />
+                      </Route>
+                      <Route path='edit'>
+                        <Route element={<EditVehicle />} path=':vehicleId' />
                       </Route>
                     </Route>
                   </Routes>
