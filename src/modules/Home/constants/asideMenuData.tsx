@@ -3,10 +3,10 @@ import { MdOutlineAssignment } from 'react-icons/md';
 import { TbTruck, TbFileInvoice } from 'react-icons/tb';
 
 export const menuLinks = [
-  { linkName: 'Loads', link: '/loads', icon: <FiPackage /> },
-  { linkName: 'Orders', link: '/orders', icon: <MdOutlineAssignment /> },
-  { linkName: 'Fleet', link: '/fleet', icon: <TbTruck /> },
-  { linkName: 'Invoices', link: '/invoices', icon: <TbFileInvoice /> },
+  { linkName: 'Loads', link: '/loads', icon: <FiPackage />, disable: false },
+  { linkName: 'Fleet', link: '/fleet', icon: <TbTruck />, disabled: false },
+  { linkName: 'Orders', link: '/orders', icon: <MdOutlineAssignment />, disabled: true },
+  { linkName: 'Invoices', link: '/invoices', icon: <TbFileInvoice />, disabled: true },
 ];
 
 export const infoLinks = [
