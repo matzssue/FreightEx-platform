@@ -8,6 +8,9 @@ export const ActiveFilters = () => {
   return (
     <div className={styles['list-container']}>
       <ul>
+        <li>
+          <Link to={'/loads'}>All Loads</Link>
+        </li>
         {filters.map((filter, i) => (
           <li key={i}>
             <Link to={`/loads/filters/${filter.id}`}>{filter.loadingAddressData.city}</Link>
