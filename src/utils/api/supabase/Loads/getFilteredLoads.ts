@@ -14,6 +14,7 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
     endUnloadingDate,
     loadingArea,
     loadingAddressData,
+    unloadingAddressData,
   } = filter;
 
   const dinstanceInKm = loadingArea * 1000;
@@ -48,6 +49,9 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
   }
   if (endUnloadingDate) {
     query = query.lte('unloading_date', endUnloadingDate);
+  }
+  if (unloadingAddressData.country) {
+    query = query.eq('unloading_address_id->>country', unloadingAddressData.country);
   }
 
   const { data, error } = await query.returns<GetLoadsData[]>();
