@@ -21,10 +21,7 @@ export const loadsFilterSchema = yup.object().shape({
   startUnloadingDate: yup
     .date()
     .nullable()
-    .min(
-      yup.ref('startLoadingDate'),
-      'Start unloading date cannot be earlier than start loading date',
-    ),
+    .min(yup.ref('endLoadingDate'), 'Start unloading date cannot be earlier than end loading date'),
   endUnloadingDate: yup
     .date()
     .nullable()

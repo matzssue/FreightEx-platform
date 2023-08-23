@@ -1,8 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
-import supabase from '../config/supabase';
+import supabase from '../../../config/supabase';
 // import { useNotificationContext } from '../components/contexts/NotificationContext';
 import { useNavigate } from 'react-router-dom';
-import { RegisterCompanyFormValues, RegisterUserFormValues } from '../utils/schemas/authSchema';
+import {
+  RegisterCompanyFormValues,
+  RegisterUserFormValues,
+} from '../../../utils/schemas/authSchema';
 import { toast } from 'react-toastify';
 export type UserData = RegisterCompanyFormValues & RegisterUserFormValues;
 
@@ -37,6 +40,9 @@ export default function useCreateUser() {
         company_vat_id: user.vatId,
       });
       toast.success('Account created successfully');
+      toast.info(
+        `Please check your email inbox and click on the verification link we've sent to confirm your email address`,
+      );
       navigate('/login');
 
       if (insertError) {

@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../../../store/hooks';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { LoadingSpinner } from '../../../../../common/LoadingSpinner/LoadingSpinner';
-import { useAcceptOffer } from '../../../../../hooks/useAcceptOffer';
+import { useAcceptOffer } from '../../../hooks/useAcceptOffer';
 import { Paginate } from '../../Pagination/Pagination';
 import { useMemo } from 'react';
 import { useState } from 'react';

@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import supabase from '../config/supabase';
-import { useUserContext } from '../store/contexts/UserContext';
+import supabase from '../../../config/supabase';
+import { useUserContext } from '../../../store/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 export const useLogin = () => {

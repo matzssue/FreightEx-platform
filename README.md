@@ -49,12 +49,15 @@ Install my-project with npm or arn
 - [ ] Add admin panel,
 - [ ] Improve design,
 - [ ] Implement user guide
+- [ ] Improve responsiveness
+- [ ] Fix notifications box
 
 2. Loads subpage
 
-- [V] Add GoggleMap error handling,
-- [ ] Improve date filters,
-- [ ] Implement function to remove filter cards
+- [x] Add GoggleMap error handling,
+- [x] Improve date filters,
+- [x] Implement function to remove filter cards
+- [ ] Add funtion to remove load from list when its accepted
 
 3. Orders subpage
 
@@ -64,8 +67,8 @@ Install my-project with npm or arn
 
 4. Cars subpage
 
-- [V] Add function to add,edit,delete vehicles,
-- [V] Add fleet view
+- [x] Add function to add,edit,delete vehicles,
+- [x] Add fleet view
 
 5. Invoices subpage
 

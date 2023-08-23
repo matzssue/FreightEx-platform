@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import supabase from '../config/supabase';
-import { AcceptedLoad } from '../utils/api/supabase/types';
+import supabase from '../../../config/supabase';
+import { AcceptedLoad } from '../../../utils/api/supabase/types';
 import { toast } from 'react-toastify';
 const addAcceptedLoad = async (loadId: string, userId: string) => {
   if (!loadId || !userId) return;
