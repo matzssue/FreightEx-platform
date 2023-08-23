@@ -38,9 +38,12 @@ export const loadsFiltersSlice = createSlice({
     addFilter: (state, action: PayloadAction<LoadsFilters>) => {
       state.filters = [...state.filters, action.payload];
     },
+    removeFilter: (state, action) => {
+      state.filters = state.filters.filter((filter) => filter.id !== action.payload);
+    },
   },
 });
 
-export const { addFilter } = loadsFiltersSlice.actions;
+export const { addFilter, removeFilter } = loadsFiltersSlice.actions;
 
 export default loadsFiltersSlice.reducer;
