@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginFormValues, loginSchema } from '../../../../utils/schemas/authSchema';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthFormWrapper } from '../../../../common/AuthFormWrapper/AuthFormWrapper';
-import { useLogin } from '../../../../hooks/useLogin';
+import { useLogin } from '../../hooks/useLogin';
 import { useEffect, useState } from 'react';
 import { useUserContext } from '../../../../store/contexts/UserContext';
 
@@ -58,6 +58,11 @@ export const LoginForm = () => {
           <p className={styles.register}>
             New to our platform? <Link to={'/register'}>Sign Up</Link>
           </p>
+        </div>
+        <div className={styles['test-account']}>
+          <h4>Test Acccount</h4>
+          <p>Login : test@transportex.com</p>
+          <p>Password : Test123</p>
         </div>
       </form>
     </AuthFormWrapper>

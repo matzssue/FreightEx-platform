@@ -11,7 +11,7 @@ import { useAppDispatch } from '../../../../store/hooks';
 import { openModal } from '../../../../store/reducers/modalSlice';
 import { useUserContext } from '../../../../store/contexts/UserContext';
 import { useNavigate } from 'react-router';
-import { useLogout } from '../../../../hooks/useLogout';
+import { useLogout } from '../../../Auth/hooks/useLogout';
 import { NotificationBox } from '../NoticiationBox/NotificationBox';
 
 export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<boolean>> }) => {
