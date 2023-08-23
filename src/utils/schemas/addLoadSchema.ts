@@ -44,11 +44,6 @@ export const addLoadSchema = yup.object().shape({
       'double trailer': yup.boolean().default(false),
     })
     .test('vehicles', 'At least one of the checkbox is required', (options) => {
-      console.log(options);
-      console.log(
-        options.bus || options.solo || options['semi trailer'] || options['double trailer'],
-        'yup vehicles result',
-      );
       return options.bus || options.solo || options['semi trailer'] || options['double trailer'];
     }),
 });
