@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import supabase from '../../../config/supabase';
 import { AcceptedLoad } from '../../../utils/api/supabase/types';
-import { toast } from 'react-toastify';
+import { useNotificationContext } from 'src/store/contexts/NotficationContext';
 const addAcceptedLoad = async (loadId: string, userId: string) => {
   if (!loadId || !userId) return;
 
@@ -23,6 +23,7 @@ const addAcceptedLoad = async (loadId: string, userId: string) => {
 };
 
 export const useAcceptOffer = () => {
+  const { notify } = useNotificationContext();
   return useMutation(
     ['loads'],
     async ({ loadId, userId }: { loadId: string; userId: string }) =>
@@ -30,11 +31,11 @@ export const useAcceptOffer = () => {
     {
       onSuccess: async (data, id) => {
         console.log('succes id', data, id);
-        toast.success('Offer accepted');
+        notify('success', 'Offer accepted');
       },
       onError: (error: { message: string }) => {
         console.log(error);
-        toast.error('Something went wrong while accepting offer, ');
+        notify('error', 'Something went wrong while accepting offer');
       },
     },
   );

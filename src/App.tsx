@@ -18,6 +18,7 @@ import { PaginationContextProvider } from './store/contexts/PaginationContext';
 import { Vehicles } from './Pages/Fleet/Vehicles';
 import { AddVehicle } from './Pages/Fleet/AddVehicle';
 import { EditVehicle } from './Pages/Fleet/EditVehicle';
+import { NotificationContextProvider } from './store/contexts/NotficationContext';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -39,65 +40,67 @@ function App() {
           <BrowserRouter>
             <UserContextProvider>
               <PaginationContextProvider>
-                <ToastContainer
-                  position='top-right'
-                  autoClose={4000}
-                  limit={2}
-                  hideProgressBar={false}
-                  newestOnTop
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                  theme='light'
-                />
-                <Suspense fallback='Loading...'>
-                  <Routes>
-                    <Route path='/' element={<Login />} />
-                    <Route path='/login' element={<LoginForm />} />
-                    <Route path='/register' element={<RegisterForm />} />
-                    <Route path='account'>
-                      <Route index element={<Navigate to=':accountId' />} />
-                      <Route path=':accountId' element={<Account />} />
-                    </Route>
-                    <Route path='loads'>
-                      <Route index element={<Home />} />
-                      <Route path=':loadId'>
-                        <Route
-                          index
-                          element={
-                            <>
-                              <Home />
-                              <LoadDetails />
-                            </>
-                          }
-                        />
+                <NotificationContextProvider>
+                  <ToastContainer
+                    position='top-right'
+                    autoClose={4000}
+                    limit={2}
+                    hideProgressBar={false}
+                    newestOnTop
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme='light'
+                  />
+                  <Suspense fallback='Loading...'>
+                    <Routes>
+                      <Route path='/' element={<Login />} />
+                      <Route path='/login' element={<LoginForm />} />
+                      <Route path='/register' element={<RegisterForm />} />
+                      <Route path='account'>
+                        <Route index element={<Navigate to=':accountId' />} />
+                        <Route path=':accountId' element={<Account />} />
                       </Route>
-                      <Route path='filters'>
-                        <Route element={<Home />} path=':filterId' />
-                        <Route
-                          element={
-                            <>
-                              <Home />
-                              <LoadDetails />
-                            </>
-                          }
-                          path=':filterId/:loadId'
-                        />
+                      <Route path='loads'>
+                        <Route index element={<Home />} />
+                        <Route path=':loadId'>
+                          <Route
+                            index
+                            element={
+                              <>
+                                <Home />
+                                <LoadDetails />
+                              </>
+                            }
+                          />
+                        </Route>
+                        <Route path='filters'>
+                          <Route element={<Home />} path=':filterId' />
+                          <Route
+                            element={
+                              <>
+                                <Home />
+                                <LoadDetails />
+                              </>
+                            }
+                            path=':filterId/:loadId'
+                          />
+                        </Route>
                       </Route>
-                    </Route>
-                    <Route path='fleet'>
-                      <Route index element={<Vehicles />} />
-                      <Route path='add'>
-                        <Route index element={<AddVehicle />} />
+                      <Route path='fleet'>
+                        <Route index element={<Vehicles />} />
+                        <Route path='add'>
+                          <Route index element={<AddVehicle />} />
+                        </Route>
+                        <Route path='edit'>
+                          <Route element={<EditVehicle />} path=':vehicleId' />
+                        </Route>
                       </Route>
-                      <Route path='edit'>
-                        <Route element={<EditVehicle />} path=':vehicleId' />
-                      </Route>
-                    </Route>
-                  </Routes>
-                </Suspense>
+                    </Routes>
+                  </Suspense>
+                </NotificationContextProvider>
               </PaginationContextProvider>
             </UserContextProvider>
           </BrowserRouter>
