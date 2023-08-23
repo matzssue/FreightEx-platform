@@ -11,13 +11,12 @@ import { ChangeEvent } from 'react';
 
 export const VehicleList = () => {
   const { userId } = useUserContext();
-  if (!userId) return;
 
   const { data: allVehicles, isLoading } = useQuery(
     ['fleet'],
     async () => await getUserVehicles(userId),
+    { enabled: !!userId },
   );
-
   const { searchValue, filteredData, setSearchValue } = useSearch(allVehicles ? allVehicles : []);
 
   const searchVehicleHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,21 +24,25 @@ export const VehicleList = () => {
     if (target) setSearchValue(target.value);
   };
 
-  const vehicleList = filteredData ? filteredData : allVehicles;
+  if (isLoading) return <LoadingSpinner />;
+
+  const vehicleList = searchValue.length > 0 ? filteredData : allVehicles;
+  const noResultsMessage =
+    searchValue.length > 0 && filteredData.length === 0 ? 'No results' : null;
+  const noVehiclesMessage =
+    allVehicles?.length === 0 ? 'No vehicles added, please add vehicle' : null;
+
+  if (!userId) return;
   return (
     <div className={styles['fleet-container']}>
       <SearchVehicle value={searchValue} onChange={(e) => searchVehicleHandler(e)} />
       <div className={styles['cards-container']}>
         <AddVehicleCard />
-        {isLoading && <LoadingSpinner />}
+        {noResultsMessage && <p>{noResultsMessage}</p>}
+        {noVehiclesMessage && <p>{noVehiclesMessage}</p>}
         {vehicleList?.map((vehicles) => {
           return <VehicleCard key={vehicles.vehicleRegistrationNumber} {...vehicles} />;
         })}
-        {vehicleList && vehicleList?.length <= 0 && (
-          <p className={styles['no-results']}>
-            No results, please add vehicle or remove search filter
-          </p>
-        )}
       </div>
     </div>
   );

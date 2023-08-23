@@ -4,15 +4,17 @@ import styles from './TextField.module.scss';
 import { HTMLInputTypeAttribute } from 'react';
 import { FieldValues, Controller, Path, PathValue } from 'react-hook-form';
 import { BaseInputProps } from '../types';
+import { SxProps } from '@mui/material';
 
 type FormInputProps<T extends FieldValues> = {
   defaultValue: PathValue<T, Path<T>> | undefined;
-  sx?: Record<string, any>;
+  sx?: SxProps;
   variant?: TextFieldVariants;
   type?: HTMLInputTypeAttribute;
   size?: 'small' | 'medium';
   placeholder?: string;
   row?: boolean;
+  disabled?: boolean;
 } & BaseInputProps<T>;
 
 export const TextFieldInput = <T extends FieldValues>({
@@ -25,6 +27,7 @@ export const TextFieldInput = <T extends FieldValues>({
   size = 'small',
   placeholder,
   row = false,
+  disabled = false,
 }: FormInputProps<T>) => {
   return (
     <Controller
@@ -48,7 +51,9 @@ export const TextFieldInput = <T extends FieldValues>({
             error={touchedFields && !!error}
             InputLabelProps={{ shrink: false }}
             onChange={onChange}
+            inputProps={{ 'aria-readonly': true }}
             placeholder={placeholder}
+            disabled={disabled}
             value={value}
             FormHelperTextProps={{
               className: styles.helperText,

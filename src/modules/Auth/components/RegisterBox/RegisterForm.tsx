@@ -13,7 +13,7 @@ import {
 } from '../../../../utils/schemas/authSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stepper, Step, StepLabel } from '@mui/material';
-import useCreateUser, { UserData } from '../../../../hooks/useCreateUser';
+import useCreateUser, { UserData } from '../../hooks/useCreateUser';
 
 export const RegisterForm = () => {
   const steps = ['User', 'Company'];

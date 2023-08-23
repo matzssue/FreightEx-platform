@@ -3,7 +3,8 @@
 .list-container {
   display: flex;
   gap: 5px;
-  margin: 0.5rem 1rem 0rem 0rem;
+  margin: 0rem 0.5rem 0rem 0rem;
+
   ul {
     display: flex;
     margin: 0;
@@ -20,22 +21,35 @@
     padding: 0.5rem 1rem 0.2rem 1rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+    box-shadow: 0px -1px 14px -4px rgba(122, 122, 122, 0.719);
     cursor: pointer;
     &:hover {
       background-color: $primary-color;
     }
+    &.active {
+      background-color: $primary-blue-color;
+      color: $secondary-text-color;
+      &.close {
+        svg {
+          color: white;
+        }
+      }
+    }
   }
+
   .close {
     position: absolute;
-    top: 0px;
-    right: -10px;
+    top: -3px;
+    right: -19px;
     border: none;
     background-color: transparent;
     svg {
       scale: 1.5;
-      color: $primary-blue-color;
+      color: rgba(223, 26, 0, 0.897);
+
       &:hover {
         color: rgb(179, 31, 5);
+        scale: 1.7;
       }
     }
   }

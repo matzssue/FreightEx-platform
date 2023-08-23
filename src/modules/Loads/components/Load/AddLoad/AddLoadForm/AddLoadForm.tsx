@@ -64,12 +64,13 @@ export const AddLoadForm = () => {
         <AlertDialog
           title={'add-load-form'}
           label={'Are you sure you want to close the form?'}
-          content={'This will cause the form data to be reset'}
           description={'add-load-form-description'}
           agreeHandler={() => closeAllHandler()}
           open={isDialogOpen}
           close={() => dispatch(closeDialog())}
-        />
+        >
+          This will cause the form data to be reset
+        </AlertDialog>
         <LoadHeader onClick={() => dispatch(openDialog())} />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles['inputs-container']}>

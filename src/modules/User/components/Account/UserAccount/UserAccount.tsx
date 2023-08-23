@@ -2,23 +2,30 @@ import styles from './UserAccount.module.scss';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { getCompany } from '../../../../../utils/api/supabase/Company/getCompany';
 import { useQuery } from '@tanstack/react-query';
-import { CloseButton } from '../../../../../common/Buttons/CloseButton';
+import { CloseButton } from 'src/common/Buttons/CloseButton/CloseButton';
 import { EditAccount } from '../EditAccount/EditAccount';
 import { avatarLink } from '../../../../../constants/avatarLink';
 import { UserInformations } from '../UserInformations/UserInformations';
+import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
 
 export const UserAccount = () => {
   const { userData } = useUserContext();
-  if (!userData) return;
 
   const { avatar, name, surname, company_vat_id } = userData;
 
   const { data: company, isLoading } = useQuery(
     ['companies', company_vat_id],
     async () => await getCompany(company_vat_id),
+    { enabled: !!company_vat_id },
   );
 
-  if (isLoading || !company) return <div>loading...</div>;
+  if (!userData) {
+    return <LoadingSpinner />;
+  }
+  if (isLoading || !company) {
+    return <div>loading...</div>;
+  }
+
   const { name: companyName, vat_id } = company;
 
   return (
