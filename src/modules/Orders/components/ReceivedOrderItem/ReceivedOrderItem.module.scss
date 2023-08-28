@@ -1,0 +1,47 @@
+@import '/src/styles/variables.scss';
+
+.order {
+  td {
+    background-color: $primary-color;
+    padding: 0.3rem;
+    box-shadow: 1rem;
+    text-align: left;
+    box-shadow: 8px 8px 24px -5px rgba(150, 150, 150, 0.315);
+    &.route {
+      svg {
+        width: 70px;
+        scale: 1.1;
+      }
+    }
+  }
+  .buttons {
+    text-align: center;
+    .delete {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgb(95, 94, 94);
+      border: 1px solid white;
+      &:hover {
+        background-color: rgb(187, 63, 63);
+      }
+    }
+  }
+  .show-invoice__button {
+    button {
+      margin: 0 auto;
+      border: none;
+      padding: 1rem;
+      background-color: transparent;
+    }
+
+    svg {
+      color: black;
+    }
+  }
+  .publisher {
+    font-size: 0.8rem;
+    text-overflow: clip;
+    max-width: 200px;
+  }
+}
