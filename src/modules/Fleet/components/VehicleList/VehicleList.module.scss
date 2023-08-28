@@ -7,11 +7,10 @@
   max-height: 100%;
 }
 .cards-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   overflow: auto;
-
   padding-bottom: 5rem;
 
   .no-results {
