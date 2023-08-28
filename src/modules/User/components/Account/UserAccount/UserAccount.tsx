@@ -19,11 +19,8 @@ export const UserAccount = () => {
     { enabled: !!company_vat_id },
   );
 
-  if (!userData) {
+  if (isLoading || !company || !userData) {
     return <LoadingSpinner />;
-  }
-  if (isLoading || !company) {
-    return <div>loading...</div>;
   }
 
   const { name: companyName, vat_id } = company;
