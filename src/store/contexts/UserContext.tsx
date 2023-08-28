@@ -3,7 +3,8 @@ import { Dispatch, SetStateAction, createContext, useEffect, useState } from 're
 import { getSafeContext } from '../../utils/helpers/getSateContext';
 import { getUser } from '../../utils/api/supabase/User/getUser';
 import { UserDatabase } from '../../utils/api/supabase/types';
-
+import { useNavigate } from 'react-router-dom';
+import supabase from 'src/config/supabase';
 type UserContextProps = {
   isLoggedIn: boolean;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
@@ -13,6 +14,8 @@ type UserContextProps = {
   logOut: () => void;
   userData: UserDatabase;
   changeUserInformations: (...props: any) => void;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  isLoading: boolean;
 };
 
 type UpdateUserCallback = (...updateData: any) => Promise<UserDatabase>;
@@ -20,6 +23,7 @@ export const UserContext = createContext<UserContextProps | null>(null);
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [userId, setUserId] = useState<string | undefined>();
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userData, setUserData] = useState<UserDatabase>({
     avatar: '',
@@ -29,6 +33,7 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
     name: '',
     surname: '',
   });
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const logOut = () => {
     setIsLoggedIn(false);
@@ -47,12 +52,36 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
   };
 
   useEffect(() => {
+    setIsLoading(true);
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session && session.user) {
+        setUserId(session?.user.id);
+        setIsLoggedIn(true);
+        setIsLoading(false);
+      }
+      if (!session) {
+        setIsLoading(false);
+        setIsLoggedIn(false);
+        navigate('/login');
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
     const getUserData = async () => {
       if (!userId) return;
-      const userData = await getUser(userId);
-      if (userData) setUserData(userData);
+      try {
+        const userData = await getUser(userId);
+        if (userData) setUserData(userData);
+      } catch (err) {
+        setUserId(undefined);
+      }
     };
     getUserData();
+    console.log(isLoading);
   }, [userId]);
 
   const valueContext = {
@@ -64,6 +93,8 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
     setIsLoggedIn,
     userData,
     changeUserInformations,
+    setIsLoading,
+    isLoading,
   };
 
   return <UserContext.Provider value={valueContext}>{children}</UserContext.Provider>;
