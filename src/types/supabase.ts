@@ -5,7 +5,7 @@ export interface Database {
     Tables: {
       accepted_loads: {
         Row: {
-          accepted_by: string | null;
+          accepted_by: string;
           created_at: string;
           currency: string;
           id: string;
@@ -17,11 +17,12 @@ export interface Database {
           unloading_address_id: number | null;
           unloading_date: string;
           user_id: string;
+          vehicle_id: string | null;
           vehicle_types: Json;
           weight: number | null;
         };
         Insert: {
-          accepted_by?: string | null;
+          accepted_by: string;
           created_at?: string;
           currency: string;
           id?: string;
@@ -33,11 +34,12 @@ export interface Database {
           unloading_address_id?: number | null;
           unloading_date: string;
           user_id: string;
+          vehicle_id?: string | null;
           vehicle_types: Json;
           weight?: number | null;
         };
         Update: {
-          accepted_by?: string | null;
+          accepted_by?: string;
           created_at?: string;
           currency?: string;
           id?: string;
@@ -49,6 +51,7 @@ export interface Database {
           unloading_address_id?: number | null;
           unloading_date?: string;
           user_id?: string;
+          vehicle_id?: string | null;
           vehicle_types?: Json;
           weight?: number | null;
         };
@@ -76,6 +79,12 @@ export interface Database {
             columns: ['user_id'];
             referencedRelation: 'users';
             referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'accepted_loads_vehicle_id_fkey';
+            columns: ['vehicle_id'];
+            referencedRelation: 'vehicles';
+            referencedColumns: ['vehicle_register_number'];
           },
         ];
       };
