@@ -76,7 +76,7 @@ export const EditAccount = () => {
   };
 
   return (
-    <div>
+    <>
       <Dialog
         aria-describedby={`change-${currentOption}-dialog`}
         draggable={true}
@@ -132,6 +132,6 @@ export const EditAccount = () => {
           Change Email
         </button>
       </div>
-    </div>
+    </>
   );
 };
