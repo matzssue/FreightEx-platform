@@ -1,6 +1,5 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import supabase from '../../../config/supabase';
-import { AcceptedLoad } from '../../../utils/api/supabase/types';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
 const addAcceptedLoad = async (loadId: string, userId: string) => {
   if (!loadId || !userId) return;
@@ -9,13 +8,12 @@ const addAcceptedLoad = async (loadId: string, userId: string) => {
     .from('loads')
     .select(`*`)
     .eq('id', loadId)
-    .returns<AcceptedLoad[]>()
     .single();
 
   if (error) throw new Error();
-
   const loadWithUser = { ...loadData, accepted_by: userId };
 
+  if (!loadWithUser) return;
   const { data, error: loadError } = await supabase.from('accepted_loads').insert(loadWithUser);
   if (loadError) throw loadError;
 
@@ -24,6 +22,7 @@ const addAcceptedLoad = async (loadId: string, userId: string) => {
 
 export const useAcceptOffer = () => {
   const { notify } = useNotificationContext();
+  const queryClient = useQueryClient();
   return useMutation(
     ['loads'],
     async ({ loadId, userId }: { loadId: string; userId: string }) =>
@@ -32,6 +31,7 @@ export const useAcceptOffer = () => {
       onSuccess: async (data, id) => {
         console.log('succes id', data, id);
         notify('success', 'Offer accepted');
+        queryClient.invalidateQueries(['received']);
       },
       onError: (error: { message: string }) => {
         console.log(error);
