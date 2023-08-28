@@ -86,6 +86,13 @@ export const UserInformation = ({
             <button className={styles['submit-button']} type='submit'>
               Save
             </button>
+            <button
+              type='button'
+              className={styles['submit-button']}
+              onClick={() => setOpen(false)}
+            >
+              Cancel
+            </button>
           </form>
         )}
       </div>
