@@ -10,10 +10,11 @@ import { useAppSelector } from '../../../../../store/hooks';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { LoadingSpinner } from '../../../../../common/LoadingSpinner/LoadingSpinner';
 import { useAcceptOffer } from '../../../hooks/useAcceptOffer';
-import { Paginate } from '../../Pagination/Pagination';
+import { Paginate } from '../../../../../common/Pagination/Pagination';
 import { useMemo } from 'react';
 import { useState } from 'react';
 import { Load as TLoad } from '../../../../../utils/api/supabase/types';
+
 export const Loads = () => {
   const { filterId } = useParams<string>();
   const { userData } = useUserContext();
@@ -46,7 +47,7 @@ export const Loads = () => {
     e.preventDefault();
     acceptOfferMutation?.mutateAsync({ loadId: id, userId: userData.id });
   };
-
+  if (!memoizedLoads) return;
   return (
     <div className={styles['loads-container']}>
       <div className={styles['sort-list']}>
@@ -66,7 +67,7 @@ export const Loads = () => {
         </ul>
       </div>
       <div className={styles.pagination}>
-        <Paginate setSlicedLoads={setSlicedLoads} data={memoizedLoads} />
+        <Paginate<TLoad> setSlicedItems={setSlicedLoads} data={memoizedLoads} />
       </div>
     </div>
   );
