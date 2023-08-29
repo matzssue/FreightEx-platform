@@ -5,11 +5,14 @@ import { useUserContext } from 'src/store/contexts/UserContext';
 import { useQuery } from '@tanstack/react-query';
 import { getReceivedOrders } from 'src/utils/api/supabase/Orders/getReceivedOrders';
 import { ReceivedOrderItem } from '../ReceivedOrderItem/ReceivedOrderItem';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Paginate } from 'src/common/Pagination/Pagination';
 import { AcceptedLoad } from 'src/utils/api/supabase/types';
 import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
+import { usePaginationContext } from 'src/store/contexts/PaginationContext';
+
 export const ReceivedOrdersList = () => {
+  const { changeLoadsPerPage } = usePaginationContext();
   const { userId } = useUserContext();
   const [slicedLoads, setSlicedLoads] = useState<AcceptedLoad[] | null>(null);
   const [filteredLoads, setFilteredLoads] = useState<AcceptedLoad[] | null>(null);
@@ -22,6 +25,10 @@ export const ReceivedOrdersList = () => {
   } = useQuery(['received'], async () => await getReceivedOrders(userId), {
     enabled: !!userId,
   });
+
+  useEffect(() => {
+    changeLoadsPerPage(8);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -30,7 +30,7 @@ export const PublishedOrdersList = () => {
   });
 
   useEffect(() => {
-    changeLoadsPerPage(12);
+    changeLoadsPerPage(10);
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
