@@ -8,7 +8,6 @@ export const getVehicleData = async (registerNumber: string | undefined) => {
     .single();
 
   if (error) throw new Error();
-  console.log('inside', vehicleData);
   const vehicles = {
     vehicleRegistrationNumber: vehicleData.vehicle_register_number,
     vehicleType: vehicleData.vehicle_type,

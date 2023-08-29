@@ -1,13 +1,13 @@
 import supabase from '../../../config/supabase';
 import { InsertVehicle } from '../../../utils/api/supabase/types';
 import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { useNotificationContext } from 'src/store/contexts/NotficationContext';
 export const useUpdateVehicleData = () => {
   const navigation = useNavigate();
   const queryClient = useQueryClient();
-
+  const { notify } = useNotificationContext();
   const updateVehicle = async (updateData: InsertVehicle, vehicleId: string) => {
     if (!vehicleId) return;
     const { data, error } = await supabase
@@ -27,13 +27,13 @@ export const useUpdateVehicleData = () => {
       await updateVehicle(vehicleData, vehicleId),
     {
       onSuccess: async () => {
-        toast.success('vehicle updated');
+        notify('success', 'vehicle updated');
         navigation('/fleet');
         queryClient.invalidateQueries(['fleet']);
       },
       onError: (error: { message: string }) => {
         console.log(error);
-        toast.error('Something went wrong while updating vehicle');
+        notify('error', 'Something went wrong while updating vehicle');
       },
     },
   );

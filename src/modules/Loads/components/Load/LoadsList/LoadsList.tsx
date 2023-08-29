@@ -10,16 +10,18 @@ import { useAppSelector } from '../../../../../store/hooks';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { LoadingSpinner } from '../../../../../common/LoadingSpinner/LoadingSpinner';
 import { useAcceptOffer } from '../../../hooks/useAcceptOffer';
-import { Paginate } from '../../Pagination/Pagination';
+import { Paginate } from '../../../../../common/Pagination/Pagination';
 import { useMemo } from 'react';
 import { useState } from 'react';
 import { Load as TLoad } from '../../../../../utils/api/supabase/types';
+
 export const Loads = () => {
   const { filterId } = useParams<string>();
+  const acceptOfferMutation = useAcceptOffer();
+
   const { userData } = useUserContext();
   const [slicedLoads, setSlicedLoads] = useState<TLoad[] | undefined>();
 
-  const acceptOfferMutation = useAcceptOffer();
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
   const { data: allLoads } = useQuery(['loads'], async () => await getAllLoads());
@@ -31,7 +33,7 @@ export const Loads = () => {
     return await getFilteredLoads(foundFilter);
   };
 
-  const { data: filteredLoads } = useQuery(['loads', filterId], fetchFilteredLoads, {
+  const { data: filteredLoads } = useQuery(['filteredLoads', filterId], fetchFilteredLoads, {
     enabled: Boolean(filters && filterId),
   });
 
@@ -41,12 +43,13 @@ export const Loads = () => {
   );
 
   if (!userData) return;
+
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
-    e.stopPropagation();
     e.preventDefault();
-    acceptOfferMutation?.mutateAsync({ loadId: id, userId: userData.id });
+    acceptOfferMutation.mutate({ loadId: id, userId: userData.id });
   };
 
+  if (!memoizedLoads) return;
   return (
     <div className={styles['loads-container']}>
       <div className={styles['sort-list']}>
@@ -63,10 +66,15 @@ export const Loads = () => {
               </li>
             ))
           )}
+          {slicedLoads && slicedLoads?.length <= 0 ? (
+            <p className={styles['no-results']}>No results found</p>
+          ) : (
+            ''
+          )}
         </ul>
       </div>
       <div className={styles.pagination}>
-        <Paginate setSlicedLoads={setSlicedLoads} data={memoizedLoads} />
+        <Paginate<TLoad> setSlicedItems={setSlicedLoads} data={memoizedLoads} />
       </div>
     </div>
   );

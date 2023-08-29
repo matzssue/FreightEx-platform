@@ -7,7 +7,7 @@ export const getUserVehicles = async (id: string | undefined) => {
     .eq('user_id', id);
 
   if (error) throw new Error();
-  if (error) return;
+
   const vehicles = vehicleData.map((data) => {
     return {
       vehicleRegistrationNumber: data.vehicle_register_number,

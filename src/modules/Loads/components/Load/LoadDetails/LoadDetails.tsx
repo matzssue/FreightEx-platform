@@ -8,10 +8,13 @@ import { LoadMap } from '../LoadMap/LoadMap';
 import { LoadAddress } from '../LoadCard/LoadAddress';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-
+import { useUserContext } from 'src/store/contexts/UserContext';
+import { useAcceptOffer } from 'src/modules/Loads/hooks/useAcceptOffer';
 export const LoadDetails = () => {
   const { loadId, filterId } = useParams();
+  const acceptOfferMutation = useAcceptOffer();
 
+  const { userData } = useUserContext();
   const [distance, setDistance] = useState<string | undefined>(undefined);
   const [duration, setDuration] = useState<string | undefined>(undefined);
 
@@ -21,9 +24,14 @@ export const LoadDetails = () => {
     { enabled: !!loadId },
   );
 
+  const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.preventDefault();
+    acceptOfferMutation.mutate({ loadId: id, userId: userData.id });
+  };
+
   if (!loadDetails) return;
   if (isLoading) return <div>Loading...</div>;
-  const { loadingAddress, unloadingAddress, price, term, currency } = loadDetails;
+  const { loadingAddress, unloadingAddress, price, term, currency, id, userId } = loadDetails;
 
   const closeLink = filterId ? `/loads/filters/${filterId}` : '/loads';
   return (
@@ -56,7 +64,13 @@ export const LoadDetails = () => {
           </span>
           <span>Payment term: {term} days</span>
         </div>
-        <button className={styles['accept-button']}>Accept Offer</button>
+        <button
+          disabled={userData.id === userId}
+          onClick={(e) => acceptOfferHandler(e, id)}
+          className={styles['accept-button']}
+        >
+          Accept Offer
+        </button>
       </div>
       <LoadMap setDistance={setDistance} setDuration={setDuration} address={loadDetails} />
     </div>

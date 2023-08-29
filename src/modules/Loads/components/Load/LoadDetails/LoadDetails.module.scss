@@ -55,5 +55,8 @@
     &:hover {
       background-color: $secondary-hover-button-color;
     }
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 }

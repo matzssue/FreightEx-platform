@@ -4,7 +4,7 @@ export type AddressesDatabase = Database['public']['Tables']['addresses']['Row']
 export type LoadsDatabase = Database['public']['Tables']['loads']['Row'];
 export type UserDatabase = Database['public']['Tables']['users']['Row'];
 export type CompanyDatabase = Database['public']['Tables']['companies']['Row'];
-export type AcceptedLoad = Database['public']['Tables']['accepted_loads']['Row'];
+export type AcceptedLoadDatabase = Database['public']['Tables']['accepted_loads']['Row'];
 export type InsertAcceptedLoad = Database['public']['Tables']['accepted_loads']['Insert'];
 export type InsertVehicle = Database['public']['Tables']['vehicles']['Insert'];
 export type UserDatabaseWithComp = {
@@ -39,7 +39,38 @@ export type GetLoadsData = {
   user_id: UserDatabaseWithComp;
   created_at: string;
 };
-
+export type GetLoadsDataWithId = {
+  id: string;
+  loading_address_id: AddressesDatabase;
+  unloading_address_id: AddressesDatabase;
+  loading_date: string;
+  unloading_date: string;
+  vehicle_types: Vehicles;
+  length: number;
+  weight: number;
+  term: string;
+  price: string;
+  currency: string;
+  user_id: string;
+  created_at: string;
+};
+export type GetAcceptedLoadsData = {
+  id: string;
+  loading_address_id: AddressesDatabase;
+  unloading_address_id: AddressesDatabase;
+  loading_date: string;
+  unloading_date: string;
+  vehicle_types: Vehicles;
+  length: number;
+  weight: number;
+  term: string;
+  price: string;
+  currency: string;
+  user_id: UserDatabaseWithComp;
+  accepted_by: UserDatabaseWithComp;
+  created_at: string;
+  vehicle_id: string | null;
+};
 export type AddLoadData = {
   currency: string;
   length?: number;
@@ -86,4 +117,21 @@ export type Load = {
   user: UserDatabase;
   company: CompanyDatabase;
   createdAt: string;
+};
+export type AcceptedLoad = {
+  id: string;
+  loadingAddress: AddressesDatabase;
+  unloadingAddress: AddressesDatabase;
+  loadingDate: string;
+  unloadingDate: string;
+  vehicleTypes: Vehicles;
+  cargoLength: number;
+  cargoWeight: number;
+  paymentTerm: string;
+  price: string;
+  currency: string;
+  user: UserDatabase;
+  company: CompanyDatabase;
+  createdAt: string;
+  vehicleId: string | null;
 };

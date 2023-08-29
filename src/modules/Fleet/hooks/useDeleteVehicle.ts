@@ -4,7 +4,9 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { useNotificationContext } from 'src/store/contexts/NotficationContext';
 export const useDeleteVehicle = () => {
+  const { notify } = useNotificationContext();
   const navigation = useNavigate();
   const queryClient = useQueryClient();
   const deleteVehicle = async (vehicleId: string) => {
@@ -20,7 +22,7 @@ export const useDeleteVehicle = () => {
 
   return useMutation(['fleet'], async (vehicleId: string) => await deleteVehicle(vehicleId), {
     onSuccess: async () => {
-      toast.success('vehicle deleted');
+      notify('success', 'vehicle deleted');
       navigation('/fleet');
       queryClient.invalidateQueries(['fleet']);
     },
