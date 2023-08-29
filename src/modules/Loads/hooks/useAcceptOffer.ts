@@ -11,8 +11,9 @@ const addAcceptedLoad = async (loadId: string, userId: string) => {
     .single();
 
   if (error) throw new Error();
-  const loadWithUser = { ...loadData, accepted_by: userId };
 
+  const { id, ...loadDataWithoutId } = loadData;
+  const loadWithUser = { ...loadDataWithoutId, accepted_by: userId };
   if (!loadWithUser) return;
   const { data, error: loadError } = await supabase.from('accepted_loads').insert(loadWithUser);
   if (loadError) throw loadError;
