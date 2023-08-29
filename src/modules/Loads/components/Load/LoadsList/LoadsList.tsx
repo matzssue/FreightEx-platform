@@ -33,7 +33,7 @@ export const Loads = () => {
     return await getFilteredLoads(foundFilter);
   };
 
-  const { data: filteredLoads } = useQuery(['loads', filterId], fetchFilteredLoads, {
+  const { data: filteredLoads } = useQuery(['filteredLoads', filterId], fetchFilteredLoads, {
     enabled: Boolean(filters && filterId),
   });
 
@@ -45,7 +45,6 @@ export const Loads = () => {
   if (!userData) return;
 
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
-    e.stopPropagation();
     e.preventDefault();
     acceptOfferMutation.mutate({ loadId: id, userId: userData.id });
   };
@@ -66,6 +65,11 @@ export const Loads = () => {
                 <LoadCard onAccept={(e) => acceptOfferHandler(e, load.id)} data={load} />
               </li>
             ))
+          )}
+          {slicedLoads && slicedLoads?.length <= 0 ? (
+            <p className={styles['no-results']}>No results found</p>
+          ) : (
+            ''
           )}
         </ul>
       </div>
