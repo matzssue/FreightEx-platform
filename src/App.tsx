@@ -20,6 +20,7 @@ import { Orders } from './Pages/Orders/Orders';
 import { PublishedOrders } from './Pages/Orders/PublishedOrders';
 import { ReceivedOrders } from './Pages/Orders/ReceivedOrders';
 import { LoadDetailsPage } from './Pages/Loads/LoadDetailsPage';
+import { AcceptedOrders } from './Pages/Orders/AcceptedOrders';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -69,7 +70,8 @@ function App() {
                         <Route path=':loadId'>
                           <Route index element={<LoadDetailsPage />} />
                         </Route>
-                        <Route path='filters' element={<Home />}>
+                        <Route path='filters'>
+                          <Route index element={<Home />} />
                           <Route element={<Home />} path=':filterId' />
                           <Route element={<LoadDetailsPage />} path=':filterId/:loadId' />
                         </Route>
@@ -85,7 +87,10 @@ function App() {
                       </Route>
                       <Route path='orders'>
                         <Route index element={<Orders />} />
-                        <Route path='published' element={<PublishedOrders />} />
+                        <Route path='published'>
+                          <Route index element={<PublishedOrders />} />
+                          <Route path='accepted' element={<AcceptedOrders />} />
+                        </Route>
                         <Route path='received' element={<ReceivedOrders />} />
                       </Route>
                     </Routes>
