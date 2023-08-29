@@ -33,14 +33,14 @@ export const useAcceptOffer = () => {
   };
 
   return useMutation(
-    ['loads'],
     async ({ loadId, userId }: { loadId: string; userId: string }) =>
       await addAcceptedLoad(loadId, userId),
     {
       onSuccess: async (_, id) => {
         notify('success', 'Offer accepted');
         await deleteFromLoads(id.loadId);
-        queryClient.invalidateQueries(['received', 'loads']);
+        queryClient.invalidateQueries(['loads']);
+        queryClient.invalidateQueries(['filteredLoads']);
       },
       onError: (error: { message: string }) => {
         console.log(error);

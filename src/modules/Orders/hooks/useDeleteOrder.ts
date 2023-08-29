@@ -22,7 +22,9 @@ export const useDeleteOrder = () => {
     onSuccess: async () => {
       notify('success', 'order deleted');
       navigation('/orders/published');
-      queryClient.invalidateQueries(['loads', 'published']);
+      queryClient.invalidateQueries(['loads']);
+      queryClient.invalidateQueries(['published']);
+      queryClient.invalidateQueries(['filteredLoads']);
     },
     onError: (error: { message: string }) => {
       console.log(error);
