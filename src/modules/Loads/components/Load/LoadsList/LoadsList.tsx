@@ -17,10 +17,11 @@ import { Load as TLoad } from '../../../../../utils/api/supabase/types';
 
 export const Loads = () => {
   const { filterId } = useParams<string>();
+  const acceptOfferMutation = useAcceptOffer();
+
   const { userData } = useUserContext();
   const [slicedLoads, setSlicedLoads] = useState<TLoad[] | undefined>();
 
-  const acceptOfferMutation = useAcceptOffer();
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
   const { data: allLoads } = useQuery(['loads'], async () => await getAllLoads());
@@ -42,11 +43,13 @@ export const Loads = () => {
   );
 
   if (!userData) return;
+
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
     e.preventDefault();
-    acceptOfferMutation?.mutateAsync({ loadId: id, userId: userData.id });
+    acceptOfferMutation.mutate({ loadId: id, userId: userData.id });
   };
+
   if (!memoizedLoads) return;
   return (
     <div className={styles['loads-container']}>
