@@ -39,6 +39,21 @@ export type GetLoadsData = {
   user_id: UserDatabaseWithComp;
   created_at: string;
 };
+export type GetLoadsDataWithId = {
+  id: string;
+  loading_address_id: AddressesDatabase;
+  unloading_address_id: AddressesDatabase;
+  loading_date: string;
+  unloading_date: string;
+  vehicle_types: Vehicles;
+  length: number;
+  weight: number;
+  term: string;
+  price: string;
+  currency: string;
+  user_id: string;
+  created_at: string;
+};
 export type GetAcceptedLoadsData = {
   id: string;
   loading_address_id: AddressesDatabase;
