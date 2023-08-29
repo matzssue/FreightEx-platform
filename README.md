@@ -50,20 +50,20 @@ Install my-project with npm or arn
 - [ ] Improve design,
 - [ ] Implement user guide
 - [ ] Improve responsiveness
-- [ ] Fix notifications box
+- [x] Fix notifications box
 
 2. Loads subpage
 
 - [x] Add GoggleMap error handling,
 - [x] Improve date filters,
 - [x] Implement function to remove filter cards
-- [ ] Add funtion to remove load from list when its accepted
+- [x] Add funtion to remove load from list when its accepted
 
 3. Orders subpage
 
-- [ ] Add list of accepted orders,
-- [ ] Add functions to edit, delete orders,
-- [ ] Add list of published orders
+- [x] Add list of accepted orders,
+- [x] Add functions to edit, delete orders,
+- [x] Add list of published orders
 
 4. Cars subpage
 
