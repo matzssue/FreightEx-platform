@@ -1,7 +1,6 @@
 import supabase from 'src/config/supabase';
 import { AcceptedLoad, GetAcceptedLoadsData } from '../types';
 export const getReceivedOrders = async (userId: string | undefined) => {
-  console.log(userId);
   const { data: ordersData, error } = await supabase
     .from('accepted_loads')
     .select(`*, unloading_address_id(*), loading_address_id(*), user_id(*, company_vat_id(*))`)
@@ -31,10 +30,9 @@ export const getReceivedOrders = async (userId: string | undefined) => {
       },
       company: load.user_id.company_vat_id,
       createdAt: load.created_at,
+      vehicleId: load.vehicle_id,
     };
   }) as AcceptedLoad[];
-
-  console.log('ordersData,', ordersData);
 
   return orders;
 };
