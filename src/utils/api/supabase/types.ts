@@ -54,6 +54,7 @@ export type GetAcceptedLoadsData = {
   user_id: UserDatabaseWithComp;
   accepted_by: UserDatabaseWithComp;
   created_at: string;
+  vehicle_id: string | null;
 };
 export type AddLoadData = {
   currency: string;
@@ -117,4 +118,5 @@ export type AcceptedLoad = {
   user: UserDatabase;
   company: CompanyDatabase;
   createdAt: string;
+  vehicleId: string | null;
 };

@@ -8,7 +8,7 @@ export interface Database {
           accepted_by: string;
           created_at: string;
           currency: string;
-          id: string;
+          id: number;
           length: number | null;
           loading_address_id: number | null;
           loading_date: string;
@@ -25,7 +25,7 @@ export interface Database {
           accepted_by: string;
           created_at?: string;
           currency: string;
-          id?: string;
+          id?: number;
           length?: number | null;
           loading_address_id?: number | null;
           loading_date: string;
@@ -42,7 +42,7 @@ export interface Database {
           accepted_by?: string;
           created_at?: string;
           currency?: string;
-          id?: string;
+          id?: number;
           length?: number | null;
           loading_address_id?: number | null;
           loading_date?: string;
@@ -137,7 +137,7 @@ export interface Database {
         Row: {
           created_at: string;
           currency: string;
-          id: string;
+          id: number;
           length: number | null;
           loading_address_id: number | null;
           loading_date: string;
@@ -152,7 +152,7 @@ export interface Database {
         Insert: {
           created_at?: string;
           currency: string;
-          id?: string;
+          id?: number;
           length?: number | null;
           loading_address_id?: number | null;
           loading_date: string;
@@ -167,7 +167,7 @@ export interface Database {
         Update: {
           created_at?: string;
           currency?: string;
-          id?: string;
+          id?: number;
           length?: number | null;
           loading_address_id?: number | null;
           loading_date?: string;
@@ -270,7 +270,7 @@ export interface Database {
           distance: number;
         };
         Returns: {
-          id: string;
+          id: number;
           user_id: Json;
           loading_address_id: unknown;
           unloading_address_id: unknown;
