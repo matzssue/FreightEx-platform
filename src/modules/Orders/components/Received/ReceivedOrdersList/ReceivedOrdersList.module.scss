@@ -1,22 +1,12 @@
 @import '/src/styles/variables.scss';
 
-.pagination {
-  display: flex;
-  justify-content: center;
+.search-bar {
   background-color: $primary-color;
-  padding: 0.2rem 0;
-}
-.options {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 20px;
   padding: 0.5rem;
-  text-align: center;
-  color: $secondary-text-color;
-  background-color: $primary-color;
-  position: relative;
   form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     label {
       color: $primary-text-color;
       font-weight: 700;
@@ -39,16 +29,22 @@
       right: 200px;
       color: $primary-blue-color;
     }
-  }
-  .select {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    color: $primary-text-color;
-    label {
-      font-weight: bold;
+    .search {
+      font-weight: 700;
+      border: none;
+      padding: 0.6rem 2rem;
+      border-radius: 0.3rem;
+      background-color: $primary-blue-color;
+
+      &:hover {
+        background-color: $primary-blue-hover-color;
+      }
     }
   }
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  background-color: $primary-color;
+  padding: 0.2rem 0;
 }

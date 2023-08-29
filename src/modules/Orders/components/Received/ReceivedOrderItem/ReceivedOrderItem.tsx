@@ -7,23 +7,45 @@ import { useUserContext } from 'src/store/contexts/UserContext';
 import { LiaFileInvoiceSolid } from 'react-icons/lia';
 import { Autocomplete, TextField } from '@mui/material';
 import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
+import { useUpdateAcceptedLoad } from '../../../hooks/useUpdateAcceptedLoad';
+import { SyntheticEvent, useState } from 'react';
+import { useNotificationContext } from 'src/store/contexts/NotficationContext';
+
 export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
   const { userId } = useUserContext();
-
+  const { notify } = useNotificationContext();
+  const [lastVehicleChangeTime, setLastVehicleChangeTime] = useState<number | null>(null);
+  const updateAcceptedLoadMutation = useUpdateAcceptedLoad();
   const { data: allVehicles, isLoading } = useQuery(
     ['fleet'],
     async () => await getUserVehicles(userId),
     { enabled: !!userId },
   );
+
   if (isLoading) return <LoadingSpinner />;
-  console.log(order);
+
   const selectVehicles = allVehicles?.map((vehicle) => {
     return vehicle.vehicleRegistrationNumber;
   });
-  const selectVehicleHandler = () => {};
+
+  const selectVehicleHandler = (
+    _: SyntheticEvent,
+    registerNumber: string | null,
+    orderId: string,
+  ) => {
+    const currentTime = Date.now();
+    if (lastVehicleChangeTime && currentTime - lastVehicleChangeTime < 2 * 60 * 1000) {
+      notify('error', 'please wait 2 minutes before next change');
+    } else {
+      if (!registerNumber) return;
+      updateAcceptedLoadMutation.mutate({ registerNumber, orderId });
+    }
+    setLastVehicleChangeTime(currentTime);
+  };
 
   return (
     <tr className={styles.order}>
+      <td>{order.id}</td>
       <td className={styles['show-invoice__button']}>
         <button>
           <LiaFileInvoiceSolid />
@@ -59,7 +81,10 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
         <Autocomplete
           disablePortal
           id='select-vehicle'
-          onChange={selectVehicleHandler}
+          value={order.vehicleId ? order.vehicleId : null}
+          onChange={(_: SyntheticEvent<Element, Event>, value) =>
+            selectVehicleHandler(_, value, order.id)
+          }
           options={selectVehicles ? selectVehicles : []}
           size='small'
           sx={{ width: 200 }}

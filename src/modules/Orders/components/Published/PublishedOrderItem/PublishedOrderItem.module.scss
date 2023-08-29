@@ -1,0 +1,18 @@
+@import '/src/styles/variables.scss';
+
+.order {
+  td {
+    background-color: $primary-color;
+    padding: 0.3rem;
+    box-shadow: 1rem;
+    text-align: left;
+    box-shadow: 8px 8px 24px -5px rgba(150, 150, 150, 0.315);
+    &.route {
+      justify-content: flex-start;
+    }
+    svg {
+      width: 70px;
+      scale: 1.1;
+    }
+  }
+}

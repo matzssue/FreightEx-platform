@@ -1,23 +1,12 @@
 import styles from './PublishedOrderItem.module.scss';
-import { BsTrash } from 'react-icons/bs';
 import { Load } from 'src/utils/api/supabase/types';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
-import { useDeleteOrder } from '../../hooks/useDeleteOrder';
+import { ReactNode } from 'react';
 
-export const PublishedOrderItem = ({
-  order,
-  ordersType = 'published',
-}: {
-  order: Load;
-  ordersType?: 'published' | 'accepted';
-}) => {
-  const deleteOrderMutation = useDeleteOrder();
-  console.log('inorder', order);
-  const removeOrderHandler = (id: string) => {
-    deleteOrderMutation.mutate(id);
-  };
+export const PublishedOrderItem = ({ order, children }: { order: Load; children?: ReactNode }) => {
   return (
     <tr className={styles.order} key={order.id}>
+      <td>{order.id}</td>
       <td className={styles.route}>
         <span>
           {order.loadingAddress.country}, {order.loadingAddress.postal_code}{' '}
@@ -41,18 +30,7 @@ export const PublishedOrderItem = ({
       <td>
         {order.loadingDate} <HiOutlineArrowNarrowRight /> {order.unloadingDate}
       </td>
-      {ordersType === 'published' && (
-        <td className={styles.buttons}>
-          <button onClick={() => removeOrderHandler(order.id)} className={styles.delete}>
-            <BsTrash />
-          </button>
-        </td>
-      )}
-      {ordersType === 'accepted' && (
-        <td>
-          {order.user.name} {order.user.surname}, {order.company.name}
-        </td>
-      )}
+      {children}
     </tr>
   );
 };
