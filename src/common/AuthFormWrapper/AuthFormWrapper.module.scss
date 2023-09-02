@@ -44,3 +44,21 @@
     }
   }
 }
+@media only screen and (max-width: $breakpoint-large) {
+  .container {
+    .content {
+      width: 90%;
+      height: 90%;
+    }
+  }
+}
+@media only screen and (max-width: $breakpoint-small) {
+  .container {
+    .content {
+      grid-template-columns: 1fr;
+      .background-image {
+        display: none;
+      }
+    }
+  }
+}

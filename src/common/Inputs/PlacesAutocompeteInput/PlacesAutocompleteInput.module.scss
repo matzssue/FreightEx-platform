@@ -4,7 +4,14 @@
   @extend .error;
 }
 .container {
-  background-color: rgb(255, 255, 255);
-  padding: 0;
-  margin: 0;
+  input {
+    padding: 0.8rem !important;
+  }
+}
+@media only screen and (max-width: $breakpoint-medium) {
+  .container {
+    input {
+      padding: 0.8rem !important;
+    }
+  }
 }

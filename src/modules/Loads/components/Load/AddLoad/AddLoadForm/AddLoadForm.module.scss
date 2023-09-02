@@ -41,3 +41,18 @@
     background-color: #252525;
   }
 }
+
+@media only screen and (max-width: $breakpoint-medium) {
+  .container {
+    width: 95vw;
+    form {
+      padding: 0.5rem 1.5rem;
+      overflow: scroll;
+      .inputs-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  }
+}

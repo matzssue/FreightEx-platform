@@ -9,3 +9,13 @@
   border-radius: 15px;
   font-weight: 700;
 }
+@media only screen and (max-width: $breakpoint-medium) {
+  p .title {
+    font-size: 0.1rem;
+  }
+}
+@media only screen and (max-width: $breakpoint-small) {
+  p .title {
+    font-size: 0.5rem;
+  }
+}

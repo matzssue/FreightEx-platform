@@ -6,3 +6,15 @@
   background-color: $secondary-color;
   border-radius: 0.5rem;
 }
+@media only screen and (max-width: $breakpoint-medium) {
+  .loading-inputs,
+  .unloading-inputs {
+    padding: 0.3rem;
+    background-color: $secondary-color;
+    border-radius: 0.5rem;
+    input {
+      padding: 0.8rem;
+      font-size: 13px !important;
+    }
+  }
+}

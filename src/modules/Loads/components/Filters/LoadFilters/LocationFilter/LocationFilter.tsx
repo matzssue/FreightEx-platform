@@ -19,7 +19,7 @@ export const LocationFilter = <T extends FieldValues>({
     sx: {
       // maxWidth: '250px',
 
-      padding: '0.5rem',
+      padding: '1rem',
       fontSize: '0.7rem',
       height: '15px',
       outlineColor: '#1976d2',
@@ -48,14 +48,13 @@ export const LocationFilter = <T extends FieldValues>({
               options={searchAreaInKM}
               variant='outlined'
               sx={{
-                // maxWidth: '70px',
-                width: '30%',
+                minWidth: '30px',
+                maxWidth: '100px',
                 fontSize: '11px',
                 backgroundColor: 'white',
                 height: 'min-content',
                 boxShadow: '3px 3px 0px 0px rgba(148, 148, 148, 0.267)',
                 '.css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
-                  width: '15px',
                   color: 'gray',
                 },
               }}

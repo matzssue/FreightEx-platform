@@ -1,15 +1,14 @@
 @import '/src/styles/variables.scss';
 
-.car-container {
+.vehicle-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
   background-color: $secondary-color;
   border-radius: 1rem;
   box-shadow: 8px 8px 24px 0px rgba(171, 171, 171, 1);
-  width: 300px;
+  width: 280px;
   height: 350px;
   padding: 1rem 0;
   background-image: linear-gradient(100deg, $primary-blue-color 5%, $primary-blue-hover-color 68%);

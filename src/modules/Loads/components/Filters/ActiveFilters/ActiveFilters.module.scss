@@ -54,3 +54,8 @@
     }
   }
 }
+@media only screen and (max-width: $breakpoint-small) {
+  .list-container {
+    padding: 0 1rem;
+  }
+}

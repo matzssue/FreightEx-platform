@@ -57,7 +57,7 @@ export const ReceivedOrdersList = () => {
           <button className={styles.search}>Search</button>
         </form>
       </div>
-      <table>
+      <table className={styles['received-table']}>
         <OrdersColumns columns={receivedOrdersColumns} />
         <tbody>
           {orders?.map((order) => {

@@ -19,3 +19,12 @@
     align-items: flex-end;
   }
 }
+@media only screen and (max-width: $breakpoint-medium) {
+  .payment-inputs__container {
+    .payment {
+      gap: 20px;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

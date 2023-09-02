@@ -5,8 +5,8 @@
   margin: 0;
   border-radius: 1rem;
   background-color: red;
-
-  width: 300px;
+  height: 200px;
+  width: 280px;
   position: relative;
 
   &:hover .icon:before {
@@ -32,8 +32,8 @@
       content: '';
       position: absolute;
       z-index: -1;
-      top: -16px;
-      right: -16px;
+      top: -20px;
+      right: -20px;
       background: #1bb456;
       height: 32px;
       width: 32px;
@@ -46,7 +46,8 @@
 
   svg {
     width: 30px;
-    height: auto;
+    height: 30px;
     color: white;
+    z-index: 55;
   }
 }

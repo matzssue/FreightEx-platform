@@ -1,11 +1,24 @@
 @import './variables.scss';
 
+html,
+body {
+  position: relative;
+  box-sizing: border-box;
+  height: 100vh;
+  // width: 100vw;
+  color: $primary-text-color;
+  background-color: $background-color;
+  font-family: $font-family;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 #root {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
   box-sizing: border-box;
+  height: 100vh;
   margin: 0;
   padding: 0;
   border: 0;
@@ -14,18 +27,7 @@
 
 * {
   font-family: $font-family;
-}
-
-html,
-body {
   box-sizing: border-box;
-  height: 100%;
-  color: $primary-text-color;
-  background-color: $background-color;
-  font-family: $font-family;
-  margin: 0;
-  padding: 0;
-  border: 0;
 }
 
 a {
@@ -41,4 +43,10 @@ button {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+@media only screen and (max-width: $breakpoint-small) {
+  #root {
+    height: auto;
+    width: 100%;
+  }
 }

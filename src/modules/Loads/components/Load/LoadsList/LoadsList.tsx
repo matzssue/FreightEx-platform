@@ -14,11 +14,11 @@ import { Paginate } from '../../../../../common/Pagination/Pagination';
 import { useMemo } from 'react';
 import { useState } from 'react';
 import { Load as TLoad } from '../../../../../utils/api/supabase/types';
-
+import { useDeleteOrder } from 'src/modules/Orders/hooks/useDeleteOrder';
 export const Loads = () => {
   const { filterId } = useParams<string>();
   const acceptOfferMutation = useAcceptOffer();
-
+  const deleteOfferMutation = useDeleteOrder();
   const { userData } = useUserContext();
   const [slicedLoads, setSlicedLoads] = useState<TLoad[] | undefined>();
 
@@ -45,8 +45,13 @@ export const Loads = () => {
   if (!userData) return;
 
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.stopPropagation();
     e.preventDefault();
     acceptOfferMutation.mutate({ loadId: id, userId: userData.id });
+  };
+  const deleteOrderHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.stopPropagation();
+    deleteOfferMutation.mutate(id);
   };
 
   if (!memoizedLoads) return;
@@ -57,12 +62,16 @@ export const Loads = () => {
       </div>
       <div className={styles.loads}>
         <ul>
-          {!slicedLoads ? (
+          {!memoizedLoads ? (
             <LoadingSpinner />
           ) : (
-            slicedLoads?.map((load) => (
+            memoizedLoads?.map((load) => (
               <li id={`${load.id}`} key={load.id}>
-                <LoadCard onAccept={(e) => acceptOfferHandler(e, load.id)} data={load} />
+                <LoadCard
+                  onDelete={(e) => deleteOrderHandler(e, load.id)}
+                  onAccept={(e) => acceptOfferHandler(e, load.id)}
+                  data={load}
+                />
               </li>
             ))
           )}

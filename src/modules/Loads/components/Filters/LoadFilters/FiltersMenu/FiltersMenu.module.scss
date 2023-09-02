@@ -8,11 +8,10 @@
 
 .filters-container {
   display: grid;
-  grid-template-columns: 25% 30% 45%;
+  grid-template-columns: 15% 40% 40%;
   background-color: $secondary-color;
   padding: 0 1rem 0.5rem 1rem;
   justify-content: space-between;
-  gap: 15px;
   font-size: 0.7rem;
   &.hidden {
     display: none;
@@ -55,5 +54,30 @@
     &.hidden {
       display: none;
     }
+  }
+}
+@media only screen and (max-width: $breakpoint-large) {
+  .filters-container {
+    grid-template-columns: 0.3fr 1fr;
+    align-items: center;
+    justify-content: center;
+
+    div:nth-child(3) {
+      grid-column: span 2;
+    }
+  }
+  .buttons {
+    .show-filters__button,
+    .apply-button {
+      font-size: 0.6rem;
+      padding: 0.3rem 0.6rem;
+    }
+  }
+}
+@media only screen and (max-width: $breakpoint-small) {
+  .filters-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    font-size: 0.6rem;
   }
 }

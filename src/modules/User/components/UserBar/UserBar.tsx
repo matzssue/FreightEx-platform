@@ -61,7 +61,9 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
         Add Freight
       </button>
       <NotificationBox />
-      {userData && <span>{`${userData.name} (${userData.company_vat_id}) `}</span>}
+      {userData && (
+        <span className={styles.user}>{`${userData.name} (${userData.company_vat_id}) `}</span>
+      )}
       <IconButton onClick={openMenuHandler} size='small' sx={{ ml: 2 }}>
         <Avatar
           sx={{

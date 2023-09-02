@@ -1,17 +1,19 @@
+@import '/src/styles/variables.scss';
+
 .fleet-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px 10px;
   padding: 1rem;
-  // overflow: auto;
+  background-color: $background-color;
   max-height: 100%;
 }
 .cards-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  overflow: auto;
-  padding-bottom: 5rem;
+  overflow-y: auto;
+  gap: 15px 20px;
+  height: 770px;
 
   .no-results {
     font-size: 1.2rem;
