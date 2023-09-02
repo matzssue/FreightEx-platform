@@ -10,7 +10,9 @@
     "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc",
     "preview": "vite preview",
-    "update-types": "npx supabase gen types typescript --project-id \"cxupvaymlpdeyyrdrpkn\" > src/types/supabase.ts"
+    "update-types": "npx supabase gen types typescript --project-id \"cxupvaymlpdeyyrdrpkn\" > src/types/supabase.ts",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -48,9 +50,14 @@
     "sort-by": "^0.0.2",
     "supabase": "^1.75.2",
     "uuidv4": "^6.2.13",
+    "vite-tsconfig-paths": "^4.2.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.2",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@types/react-places-autocomplete": "^7.2.9",
@@ -67,8 +74,10 @@
     "eslint-plugin-sort-destructure-keys": "^1.5.0",
     "eslint-plugin-typescript-sort-keys": "^2.3.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "happy-dom": "^10.11.2",
     "prettier": "^2.8.8",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "vitest": "^0.34.3"
   }
 }
