@@ -2,17 +2,37 @@
 
 .vehicle-container {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: $secondary-color;
-  border-radius: 1rem;
-  box-shadow: 8px 8px 24px 0px rgba(171, 171, 171, 1);
-  width: 280px;
-  height: 350px;
-  padding: 1rem 0;
+  overflow: hidden;
   background-image: linear-gradient(100deg, $primary-blue-color 5%, $primary-blue-hover-color 68%);
   background-size: 7%;
   background-position: left;
   background-repeat: no-repeat;
+  background-color: $secondary-color;
+
+  height: $vehicle-card-height;
+  width: $vehicle-card-width;
+  border-radius: 1rem;
+  padding: 1rem 0;
+  box-shadow: 8px 8px 24px 0px rgba(171, 171, 171, 1);
+  //   .card-bg {
+  //     width: 100%;
+  //     height: 100%;
+  //     background-image: url('https://images.pexels.com/photos/93398/pexels-photo-93398.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  //     background-size: cover;
+  //     background-position: center;
+  //     filter: blur(3px);
+  //     opacity: 0.7;
+  //     position: absolute;
+  //     z-index: -1;
+  //   }
+}
+@media only screen and (max-width: $breakpoint-medium) {
+  .vehicle-container {
+    height: $vehicle-card-height-mobile;
+    width: $vehicle-card-width-mobile;
+  }
 }
