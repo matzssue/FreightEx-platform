@@ -53,7 +53,7 @@ button {
     background-color: rgb(175, 174, 174);
   }
 }
-@media only screen and (max-width: $breakpoint-small) {
+@media only screen and (max-width: $breakpoint-medium) {
   .link-name {
     display: none;
   }

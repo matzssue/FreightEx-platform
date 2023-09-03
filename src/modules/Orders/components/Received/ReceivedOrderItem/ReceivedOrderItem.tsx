@@ -34,6 +34,7 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
     orderId: string,
   ) => {
     const currentTime = Date.now();
+
     if (lastVehicleChangeTime && currentTime - lastVehicleChangeTime < 2 * 60 * 1000) {
       notify('error', 'please wait 2 minutes before next change');
     } else {
@@ -44,14 +45,14 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
   };
 
   return (
-    <tr className={styles.order}>
-      <td>{order.id}</td>
-      <td className={styles['show-invoice__button']}>
+    <li className={styles.order}>
+      <span className={styles['order-id']}>{order.id}</span>
+      <span className={styles['show-invoice__button']}>
         <button>
           <LiaFileInvoiceSolid />
         </button>
-      </td>
-      <td className={styles.route}>
+      </span>
+      <span className={styles.route}>
         <span>
           {order.loadingAddress.country}, {order.loadingAddress.postal_code}{' '}
           {order.loadingAddress.city}
@@ -61,23 +62,23 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
           {order.unloadingAddress.country}, {order.unloadingAddress.postal_code}{' '}
           {order.unloadingAddress.city}
         </span>
-      </td>
-      <td>
+      </span>
+      <span className={styles.payment}>
         {order.price} {order.currency}
-      </td>
-      <td>
+      </span>
+      <span className={styles.cargo}>
         {order.cargoLength}L {order.cargoWeight}T{' '}
         {Object.keys(order.vehicleTypes)
           .filter((key) => order.vehicleTypes[key])
           .join(', ')}
-      </td>
-      <td>
+      </span>
+      <span className={styles.date}>
         {order.loadingDate} <HiOutlineArrowNarrowRight /> {order.unloadingDate}
-      </td>
-      <td className={styles.publisher}>
+      </span>
+      <span className={styles.publisher}>
         {order.user.name} {order.user.surname}, {order.company.name}, VAT ID: {order.company.vat_id}
-      </td>
-      <td className={styles.buttons}>
+      </span>
+      <span className={styles['select-vehicle__button']}>
         <Autocomplete
           disablePortal
           id='select-vehicle'
@@ -87,12 +88,12 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
           }
           options={selectVehicles ? selectVehicles : []}
           size='small'
-          sx={{ width: 200 }}
+          sx={{ width: '100%' }}
           renderInput={(params) => (
             <TextField {...params} variant='filled' label='Select vehicle' />
           )}
         />
-      </td>
-    </tr>
+      </span>
+    </li>
   );
 };

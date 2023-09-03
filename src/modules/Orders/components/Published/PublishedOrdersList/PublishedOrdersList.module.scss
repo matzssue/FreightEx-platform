@@ -1,23 +1,40 @@
 @import '/src/styles/variables.scss';
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  background-color: $primary-color;
-  padding: 0.2rem 0;
-}
 .orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px 0px;
+  padding: 0;
+  margin: 0;
   .buttons {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     .delete {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       background-color: rgb(95, 94, 94);
-      margin: 0 auto;
       border: 1px solid white;
       &:hover {
         background-color: rgb(187, 63, 63);
+      }
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  background-color: $secondary-color;
+  padding: 0.2rem 0;
+  border-top: 1px solid rgba(134, 134, 134, 0.336);
+  border-bottom: 1px solid rgba(134, 134, 134, 0.336);
+}
+@media only screen and (max-width: $breakpoint-medium) {
+  .orders-list {
+    .buttons {
+      grid-column: span 6;
+      .delete {
+        width: 100%;
       }
     }
   }

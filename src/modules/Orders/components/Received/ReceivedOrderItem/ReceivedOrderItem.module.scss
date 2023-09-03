@@ -1,31 +1,20 @@
 @import '/src/styles/variables.scss';
 
 .order {
-  td {
-    background-color: $primary-color;
-    padding: 0.3rem;
-    box-shadow: 1rem;
-    text-align: left;
-    box-shadow: 8px 8px 24px -5px rgba(150, 150, 150, 0.315);
-    &.route {
-      svg {
-        width: 70px;
-        scale: 1.1;
-      }
-    }
+  display: grid;
+  text-align: left;
+  grid-template-columns: 0.2fr 0.3fr 2fr 0.4fr 1.2fr 0.9fr 1fr 1fr;
+  background-color: $secondary-color;
+  box-shadow: 8px 8px 24px -5px rgba(150, 150, 150, 0.315);
+  span {
+    display: flex;
+    align-items: center;
+    padding: 0.2rem;
   }
-  .buttons {
-    text-align: center;
-    .delete {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgb(95, 94, 94);
-      border: 1px solid white;
-      &:hover {
-        background-color: rgb(187, 63, 63);
-      }
-    }
+  .order-id,
+  .show-invoice__button,
+  .select-vehicle__button {
+    justify-content: center;
   }
   .show-invoice__button {
     button {
@@ -39,9 +28,80 @@
       color: black;
     }
   }
-  .publisher {
-    font-size: 0.8rem;
-    text-overflow: clip;
-    max-width: 200px;
+}
+@media only screen and (max-width: $breakpoint-medium) {
+  .order {
+    grid-template-columns: repeat(2, 1fr);
+    border: $order-border;
+    .order-id {
+      background-color: $order-first-background;
+      font-size: 1rem;
+      font-weight: 700;
+      &::before {
+        margin: 0 0.1rem;
+        content: 'ID: ';
+      }
+    }
+    .show-invoice__button {
+      background-color: $order-first-background;
+      font-size: 1rem;
+      font-weight: 700;
+
+      &::before {
+        margin: 0 0.1rem;
+        content: 'FV: ';
+      }
+      button {
+        margin: 0 0;
+      }
+    }
+    .route {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      background-color: $order-second-background;
+      grid-column: span 2;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .payment {
+      display: flex;
+      justify-content: center;
+      background-color: $order-second-background;
+      &::before {
+        content: 'Price: ';
+        margin: 0 0.1rem;
+        font-weight: 700;
+      }
+    }
+    .cargo {
+      text-align: center;
+      background-color: $order-second-background;
+      &::before {
+        content: 'Cargo: ';
+        margin: 0 0.1rem;
+        font-weight: 700;
+      }
+    }
+    .date {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+      grid-column: span 2;
+    }
+    .publisher {
+      display: flex;
+      justify-content: center;
+      grid-column: span 2;
+      &::before {
+        content: 'Publisher: ';
+        margin: 0 0.1rem;
+        font-weight: 800;
+      }
+    }
+
+    .select-vehicle__button {
+      grid-column: span 2;
+    }
   }
 }

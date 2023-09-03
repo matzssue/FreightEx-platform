@@ -1,3 +1,16 @@
-// .label {
-//   width: max-content !important;
-// }
+@import '/src/styles/variables.scss';
+
+.select {
+  width: max-content !important;
+  div {
+    font-size: 0.8rem;
+  }
+}
+@media only screen and (max-width: $breakpoint-small) {
+  .select {
+    width: max-content !important;
+    div {
+      font-size: 0.7rem;
+    }
+  }
+}

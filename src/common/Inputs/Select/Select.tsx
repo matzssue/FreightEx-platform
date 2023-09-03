@@ -51,7 +51,12 @@ export const SelectInput = <T extends FieldValues>({
             MenuProps={{ MenuListProps: { style: { maxHeight: '150px' } } }}
           >
             {options.map((option: string | number) => (
-              <MenuItem sx={{ fontSize: fontSize }} key={option} value={option}>
+              <MenuItem
+                className={styles['select-items']}
+                sx={{ fontSize: fontSize }}
+                key={option}
+                value={option}
+              >
                 {option}
               </MenuItem>
             ))}

@@ -41,10 +41,19 @@ export const ReceivedOrdersList = () => {
       setFilteredLoads(null);
     }
   };
-  if (receivedOrdersLoading) return <LoadingSpinner />;
+  if (receivedOrdersLoading)
+    return (
+      <td>
+        <LoadingSpinner />;
+      </td>
+    );
 
   if (receivedOrdersError) {
-    return <div>Error loading data</div>;
+    return (
+      <td>
+        <div>Error loading data</div>;
+      </td>
+    );
   }
   const orders = filteredLoads ? filteredLoads : slicedLoads;
 
@@ -57,14 +66,17 @@ export const ReceivedOrdersList = () => {
           <button className={styles.search}>Search</button>
         </form>
       </div>
-      <table className={styles['received-table']}>
-        <OrdersColumns columns={receivedOrdersColumns} />
-        <tbody>
+      <div className={styles['received-table']}>
+        <OrdersColumns
+          gridColumns='0.2fr 0.3fr 2fr 0.4fr 1.2fr 0.9fr 1fr 1fr'
+          columns={receivedOrdersColumns}
+        />
+        <ul className={styles['orders-list']}>
           {orders?.map((order) => {
             return <ReceivedOrderItem key={order.id} order={order} />;
           })}
-        </tbody>
-      </table>
+        </ul>
+      </div>
       <div className={styles.pagination}>
         <Paginate<AcceptedLoad> setSlicedItems={setSlicedLoads} data={acceptedOrders} />
       </div>

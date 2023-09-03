@@ -63,6 +63,9 @@ export const TextFieldInput = <T extends FieldValues>({
               '& fieldset': { top: 0 },
               display: 'flex',
               flexDirection: 'column',
+              '.css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input': {
+                fontFamily: 'Nunito, sans-serif',
+              },
             }}
             variant={variant}
             type={type}

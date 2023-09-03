@@ -2,6 +2,7 @@ import styles from './OrdersOptions.module.scss';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BsSearch } from 'react-icons/bs';
 
 type OrdersOptionsProps = {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -23,7 +24,10 @@ export const OrdersOptions = forwardRef<HTMLInputElement, OrdersOptionsProps>(
             <label htmlFor='search-order' id='search-order-label'>
               Search order id
             </label>
-            <input ref={ref} name='searchOrder' id='search-order' type='search' />
+            <div className={styles['search-input']}>
+              <BsSearch />
+              <input ref={ref} name='searchOrder' id='search-order' type='search' />
+            </div>
             <button className={styles.search} type='submit'>
               Search
             </button>
@@ -32,13 +36,21 @@ export const OrdersOptions = forwardRef<HTMLInputElement, OrdersOptionsProps>(
             <label>Select type of orders</label>
             <Select
               sx={{
-                height: '50px',
+                height: 'auto',
+                fontSize: '100%',
+                '.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
+                  padding: '13px 11px',
+                },
               }}
               onChange={selectOrdersHandler}
               defaultValue={currentUrl}
             >
-              <MenuItem value={'/orders/published'}>Published</MenuItem>
-              <MenuItem value={'/orders/published/accepted'}>Accepted</MenuItem>
+              <MenuItem sx={{ fontSize: '100%' }} value={'/orders/published'}>
+                Published
+              </MenuItem>
+              <MenuItem sx={{ fontSize: '100%' }} value={'/orders/published/accepted'}>
+                Accepted
+              </MenuItem>
             </Select>
           </FormControl>
         </div>

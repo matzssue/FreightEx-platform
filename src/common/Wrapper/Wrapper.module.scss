@@ -12,8 +12,13 @@
 .hidden {
   padding-left: 71px;
 }
+@media only screen and (max-width: $breakpoint-medium) {
+  .container {
+    padding-left: 71px;
+  }
+}
 @media only screen and (max-width: $breakpoint-small) {
   .container {
-    padding: 0;
+    padding-left: 0;
   }
 }
