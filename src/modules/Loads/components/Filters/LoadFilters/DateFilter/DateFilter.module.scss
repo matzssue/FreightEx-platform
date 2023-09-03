@@ -7,16 +7,16 @@
   background-color: $primary-color;
   border-radius: 0.5rem;
   box-shadow: 3px 3px 7px 0px rgb(148, 148, 148);
-  padding: 1rem 0.2rem;
   border: none;
   .date-fieldset {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    border-radius: 0.5rem;
     background-color: $primary-color;
-    // margin: 0.5rem 0;
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     border: none;
+    margin: 0;
     label {
       background-color: gray;
       width: auto;
@@ -25,6 +25,20 @@
       font-weight: 700;
       border-radius: 0.3rem;
       box-shadow: 3px 3px 7px 0px rgb(148, 148, 148);
+    }
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .date-inputs {
+    box-shadow: none;
+    padding: 0;
+    background-color: transparent;
+    .date-fieldset {
+      padding: 0;
+      input {
+        font-size: 0.8rem;
+      }
     }
   }
 }

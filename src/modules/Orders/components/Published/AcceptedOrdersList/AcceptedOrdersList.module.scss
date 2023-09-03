@@ -3,6 +3,16 @@
 .pagination {
   display: flex;
   justify-content: center;
-  background-color: $primary-color;
+  background-color: $secondary-color;
   padding: 0.2rem 0;
+  border-top: 1px solid rgba(134, 134, 134, 0.336);
+  border-bottom: 1px solid rgba(134, 134, 134, 0.336);
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px 0px;
+  padding: 0;
+  margin: 0;
 }

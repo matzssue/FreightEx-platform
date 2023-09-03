@@ -3,9 +3,9 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 40%;
+  width: max(40vw, 350px);
   background-color: $secondary-color;
-  padding: 2rem 0.5rem;
+  padding: 3rem 0.5rem 6rem 0.5rem;
   margin: 10% auto;
   border-radius: 1rem;
   box-shadow: 8px 8px 24px 0px rgba(171, 171, 171, 1);
@@ -14,17 +14,20 @@
     padding: 0.5rem 1rem;
     color: $secondary-color;
     border-radius: 1rem;
+    box-shadow: 8px 8px 24px 0px rgb(190, 190, 190);
   }
   form {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    background-color: $primary-color;
+    background-color: rgb(241, 241, 241);
     padding: 1rem;
     border-radius: 1rem;
+    box-shadow: 8px 8px 24px 0px rgba(187, 187, 187, 1);
     label {
-      width: 200px !important;
+      width: max(50px, 150px);
       font-weight: 700;
+
       margin: 0 0.5rem;
     }
   }

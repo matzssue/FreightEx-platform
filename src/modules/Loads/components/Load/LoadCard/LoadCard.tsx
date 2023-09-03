@@ -12,9 +12,10 @@ import { avatarLink } from '../../../../../constants/avatarLink';
 type LoadProps = {
   data: TLoad;
   onAccept: MouseEventHandler<HTMLButtonElement>;
+  onDelete: MouseEventHandler<HTMLButtonElement>;
 };
 
-export const LoadCard = ({ data, onAccept }: LoadProps) => {
+export const LoadCard = ({ data, onAccept, onDelete }: LoadProps) => {
   const { filterId } = useParams();
   const { userData } = useUserContext();
 
@@ -42,17 +43,21 @@ export const LoadCard = ({ data, onAccept }: LoadProps) => {
   return (
     <NavLink className={styles.navigation} to={navigateTo}>
       <div className={styles.load}>
-        <LoadAddress
-          country={loadingAddress.country}
-          city={loadingAddress.city}
-          postCode={loadingAddress.postal_code}
-        />
-        <LoadAddress
-          country={unloadingAddress.country}
-          city={unloadingAddress.city}
-          postCode={unloadingAddress.postal_code}
-        />
-        <span>
+        <span className={styles['loading-location']}>
+          <LoadAddress
+            country={loadingAddress.country}
+            city={loadingAddress.city}
+            postCode={loadingAddress.postal_code}
+          />
+        </span>
+        <span className={styles['unloading-location']}>
+          <LoadAddress
+            country={unloadingAddress.country}
+            city={unloadingAddress.city}
+            postCode={unloadingAddress.postal_code}
+          />
+        </span>
+        <span className={styles.payment}>
           <p className={styles.salary}>{`${price} ${currency}`}</p>
           <p className={styles.term}>payment term: {paymentTerm}d</p>
         </span>
@@ -60,13 +65,15 @@ export const LoadCard = ({ data, onAccept }: LoadProps) => {
           <span>Length: {cargoLength}ldm</span>
           <span>Weight: {cargoWeight}t</span>
           <p className={styles.vehicles}>
-            Vehicle:
+            Vehicle:{' '}
             {Object.keys(vehicleTypes)
               .filter((key) => vehicleTypes[key])
               .join(', ')}
           </p>
         </span>
-        <p className={styles.date}>{loadingDate}</p>
+        <p className={styles.date}>
+          {loadingDate} {`->`}
+        </p>
         <p className={styles.date}>{unloadingDate}</p>
         <span className={styles.company}>
           <p className={styles.name}>{company.name}</p>
@@ -74,7 +81,7 @@ export const LoadCard = ({ data, onAccept }: LoadProps) => {
             <p className={styles.publisher}>
               {user.name} {user.surname}
             </p>
-            <p className={styles.time}>Published: {publishDate} </p>
+            <p className={styles.time}>Published: {publishDate}</p>
           </div>
           <div className={styles.avatar}>
             <Avatar
@@ -89,7 +96,9 @@ export const LoadCard = ({ data, onAccept }: LoadProps) => {
             Accept Order
           </button>
         ) : (
-          ''
+          <button type='button' onClick={onDelete} className={styles['delete-button']}>
+            Delete
+          </button>
         )}
       </div>
     </NavLink>

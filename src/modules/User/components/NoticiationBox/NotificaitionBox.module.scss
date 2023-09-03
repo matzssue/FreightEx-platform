@@ -18,7 +18,6 @@
   }
   .notifications-container {
     position: absolute;
-    height: 250px;
     width: 200px;
     background-color: $secondary-color;
     padding: 1rem 0.5rem;
@@ -36,7 +35,6 @@
 
       li {
         display: flex;
-
         border-radius: 0.2rem;
         .notification {
           display: flex;
@@ -86,19 +84,23 @@
       background-color: $primary-hover-button-color;
     }
   }
-  .close-button {
+  .close-notifications-button {
     position: absolute;
     top: 20px;
     right: 10px;
     color: $primary-blue-color;
     border: none;
+    background-color: rgb(231, 44, 44);
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    color: white;
+    padding: 0;
+    &:hover {
+      background-color: rgb(245, 87, 87);
+    }
     svg {
-      background-color: rgb(204, 204, 204);
-      padding: 0.3rem;
-      border-radius: 30%;
-      &:hover {
-        background-color: $primary-color;
-      }
+      scale: 1.2;
     }
   }
 }

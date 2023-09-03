@@ -1,22 +1,25 @@
 @import '../../../../styles/variables.scss';
 
 .navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: $nav-width;
   height: 100%;
   background-color: $secondary-color;
   padding: 1rem 1rem;
+  margin: 0;
   transition: all 0.3s;
+  box-sizing: border-box;
   overflow: hidden;
+  z-index: 2;
   &.hidden {
-    width: 40px;
+    width: 71px;
   }
 }
 .nav-container {
   position: relative;
-  height: 100%;
+  height: 90%;
 
   .logo {
     position: absolute;
@@ -78,6 +81,7 @@
       display: none;
     }
   }
+
   .author {
     position: absolute;
     top: 700px;
@@ -86,6 +90,57 @@
     font-size: 0.5rem;
     width: 200px;
     &.hidden {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: $breakpoint-medium) {
+  .navbar {
+    width: 71px;
+    .logo {
+      display: none;
+    }
+
+    .info-links {
+      display: none;
+    }
+    .author {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: $breakpoint-small) {
+  .navbar {
+    display: flex;
+    width: 100%;
+    position: initial;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+    .logo {
+      display: none;
+    }
+    &.hidden {
+      width: 100%;
+    }
+    .main-links {
+      position: initial;
+      height: 40px;
+      width: 100%;
+
+      ul {
+        flex-direction: row;
+        li {
+          display: flex;
+        }
+      }
+    }
+    .info-links {
+      display: none;
+    }
+    .author {
       display: none;
     }
   }

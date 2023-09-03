@@ -4,10 +4,21 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding-left: calc($nav-width + 2rem);
+  padding-left: $nav-width;
   transition: 0.3s padding-left;
   border: 1px solid #d8d8d8;
+  height: 100%;
 }
 .hidden {
-  padding-left: calc(40px + 2rem);
+  padding-left: 71px;
+}
+@media only screen and (max-width: $breakpoint-medium) {
+  .container {
+    padding-left: 71px;
+  }
+}
+@media only screen and (max-width: $breakpoint-small) {
+  .container {
+    padding-left: 0;
+  }
 }

@@ -83,8 +83,8 @@ export const AddOrEditVehicleForm = ({
           name='vehicleType'
           label='Select vehicle'
           options={vehicleTypes}
-          sx={{ width: '200px' }}
-          fontSize='15px'
+          sx={{ width: 'auto', fontSize: '15px' }}
+          fontSize='100%'
           direction='row'
         />
         <TextFieldInput

@@ -14,41 +14,50 @@ import { Paginate } from '../../../../../common/Pagination/Pagination';
 import { useMemo } from 'react';
 import { useState } from 'react';
 import { Load as TLoad } from '../../../../../utils/api/supabase/types';
-
+import { useDeleteOrder } from 'src/modules/Orders/hooks/useDeleteOrder';
 export const Loads = () => {
   const { filterId } = useParams<string>();
   const acceptOfferMutation = useAcceptOffer();
-
+  const deleteOfferMutation = useDeleteOrder();
   const { userData } = useUserContext();
   const [slicedLoads, setSlicedLoads] = useState<TLoad[] | undefined>();
 
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
-  const { data: allLoads } = useQuery(['loads'], async () => await getAllLoads());
+  const { data: allLoads, isLoading: isAllLoading } = useQuery(
+    ['loads'],
+    async () => await getAllLoads(),
+  );
 
   const fetchFilteredLoads = async () => {
-    if (!filters || !filterId) return [];
     const foundFilter = filters.find((filter) => filter.id === filterId);
     if (!foundFilter) return;
     return await getFilteredLoads(foundFilter);
   };
 
-  const { data: filteredLoads } = useQuery(['filteredLoads', filterId], fetchFilteredLoads, {
-    enabled: Boolean(filters && filterId),
-  });
+  const { data: filteredLoads, isLoading: isFilteredLoading } = useQuery(
+    ['filteredLoads', filterId],
+    fetchFilteredLoads,
+    {
+      enabled: Boolean(filters && filterId),
+    },
+  );
 
   const memoizedLoads = useMemo(
     () => (filterId ? filteredLoads : allLoads),
     [filterId, filteredLoads, allLoads],
   );
 
-  if (!userData) return;
-
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.stopPropagation();
     e.preventDefault();
     acceptOfferMutation.mutate({ loadId: id, userId: userData.id });
   };
-
+  const deleteOrderHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.stopPropagation();
+    deleteOfferMutation.mutate(id);
+  };
+  if (isAllLoading || (filteredLoads && isFilteredLoading)) return <LoadingSpinner />;
   if (!memoizedLoads) return;
   return (
     <div className={styles['loads-container']}>
@@ -57,15 +66,15 @@ export const Loads = () => {
       </div>
       <div className={styles.loads}>
         <ul>
-          {!slicedLoads ? (
-            <LoadingSpinner />
-          ) : (
-            slicedLoads?.map((load) => (
-              <li id={`${load.id}`} key={load.id}>
-                <LoadCard onAccept={(e) => acceptOfferHandler(e, load.id)} data={load} />
-              </li>
-            ))
-          )}
+          {slicedLoads?.map((load) => (
+            <li id={`${load.id}`} key={load.id}>
+              <LoadCard
+                onDelete={(e) => deleteOrderHandler(e, load.id)}
+                onAccept={(e) => acceptOfferHandler(e, load.id)}
+                data={load}
+              />
+            </li>
+          ))}
           {slicedLoads && slicedLoads?.length <= 0 ? (
             <p className={styles['no-results']}>No results found</p>
           ) : (

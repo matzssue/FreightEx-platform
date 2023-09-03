@@ -1,12 +1,13 @@
+@import '/src/styles/variables.scss';
+
 .add-car_button {
   display: block;
   border: none;
   padding: 0;
   margin: 0;
   border-radius: 1rem;
-  background-color: red;
-
-  width: 300px;
+  height: $vehicle-card-height;
+  width: $vehicle-card-width;
   position: relative;
 
   &:hover .icon:before {
@@ -32,8 +33,8 @@
       content: '';
       position: absolute;
       z-index: -1;
-      top: -16px;
-      right: -16px;
+      top: -20px;
+      right: -20px;
       background: #1bb456;
       height: 32px;
       width: 32px;
@@ -46,7 +47,14 @@
 
   svg {
     width: 30px;
-    height: auto;
+    height: 30px;
     color: white;
+    z-index: 55;
+  }
+}
+@media only screen and (max-width: $breakpoint-medium) {
+  .add-car_button {
+    height: $vehicle-card-height-mobile;
+    width: $vehicle-card-width-mobile;
   }
 }

@@ -15,27 +15,32 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 20px;
+
     label {
       color: $primary-text-color;
       font-weight: 700;
     }
-    input {
-      width: 400px;
-      font-size: 1rem;
-      padding: 0.5rem 2.5rem;
-      margin: 0 1rem;
-      border: none;
-      color: $primary-text-color;
-      border-radius: 0.2rem;
-      background: #999a9b
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
-        no-repeat 13px center;
-    }
-    svg {
-      position: absolute;
-      top: 27px;
-      right: 200px;
-      color: $primary-blue-color;
+    .search-input {
+      position: relative;
+      input {
+        width: 100%;
+        // resize: vertical;
+        max-width: 350px;
+        font-size: 1rem;
+        padding: 0.5rem 2.5rem;
+        // margin: 0 1rem;
+        border: none;
+        color: $primary-text-color;
+        border-radius: 0.2rem;
+        background-color: #999a9b;
+      }
+      svg {
+        position: absolute;
+        top: 12px;
+        left: 10px;
+        color: $primary-blue-color;
+      }
     }
   }
   .search {
@@ -60,6 +65,27 @@
 
     label {
       font-weight: bold;
+    }
+  }
+}
+@media only screen and (max-width: $breakpoint-medium) {
+  .options {
+    form {
+      flex-direction: column;
+      gap: 5px;
+    }
+    .select {
+      display: flex;
+      flex-direction: column;
+    }
+    .select-item {
+      div {
+        font-size: 0.2rem;
+      }
+    }
+    .search {
+      padding: 0.4rem 1rem;
+      width: 100%;
     }
   }
 }

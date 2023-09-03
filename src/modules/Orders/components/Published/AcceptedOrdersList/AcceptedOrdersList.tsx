@@ -51,20 +51,23 @@ export const AcceptedOrdersList = () => {
   return (
     <>
       <OrdersOptions ref={searchOrderRef} onSubmit={handleSubmit} />
-      <table>
-        <OrdersColumns columns={acceptedOrdersColumns} />
-        <tbody className={styles['orders-list']}>
+      <div>
+        <OrdersColumns
+          gridColumns='0.2fr 2fr 0.6fr 0.8fr 1fr 0.5fr'
+          columns={acceptedOrdersColumns}
+        />
+        <ul className={styles['orders-list']}>
           {orders?.map((order) => {
             return (
               <PublishedOrderItem key={order.id} order={order}>
-                <td>
+                <li>
                   {order.user.name} {order.user.surname}, {order.company.name}
-                </td>
+                </li>
               </PublishedOrderItem>
             );
           })}
-        </tbody>
-      </table>
+        </ul>
+      </div>
       <div className={styles.pagination}>
         <Paginate<AcceptedLoad> setSlicedItems={setSlicedLoad} data={acceptedOrders} />
       </div>

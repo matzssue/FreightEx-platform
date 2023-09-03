@@ -47,10 +47,11 @@ Install my-project with npm or arn
 1. General
 
 - [ ] Add admin panel,
-- [ ] Improve design,
+- [x] Improve design,
 - [ ] Implement user guide
-- [ ] Improve responsiveness
+- [x] Improve responsiveness
 - [x] Fix notifications box
+- [ ] Fix loads pagination
 
 2. Loads subpage
 

@@ -6,12 +6,14 @@
   background-color: $primary-color;
   border-radius: 0.5rem;
   box-shadow: 3px 3px 7px 0px rgb(148, 148, 148);
-  padding: 1rem 1rem;
+  padding: 1rem;
   border: none;
-  div {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 100%;
+}
+@media only screen and (max-width: 1400px) {
+  .fieldset-inputs {
+    gap: 10px;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
   }
 }

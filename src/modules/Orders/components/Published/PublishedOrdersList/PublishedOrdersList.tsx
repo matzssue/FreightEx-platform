@@ -60,22 +60,25 @@ export const PublishedOrdersList = () => {
   return (
     <>
       <OrdersOptions ref={searchOrderRef} onSubmit={handleSubmit} />
-      <table>
-        <OrdersColumns columns={publishedOrdersColumns} />
-        <tbody className={styles['orders-list']}>
+      <div>
+        <OrdersColumns
+          gridColumns='0.2fr 2fr 0.6fr 0.8fr 1fr 0.5fr'
+          columns={publishedOrdersColumns}
+        />
+        <ul className={styles['orders-list']}>
           {orders?.map((order) => {
             return (
               <PublishedOrderItem key={order.id} order={order}>
-                <td className={styles.buttons}>
+                <span className={styles.buttons}>
                   <button onClick={() => removeOrderHandler(order.id)} className={styles.delete}>
                     <BsTrash />
                   </button>
-                </td>
+                </span>
               </PublishedOrderItem>
             );
           })}
-        </tbody>
-      </table>
+        </ul>
+      </div>
       <div className={styles.pagination}>
         <Paginate<Load> setSlicedItems={setSlicedLoads} data={publishedOrders} />
       </div>

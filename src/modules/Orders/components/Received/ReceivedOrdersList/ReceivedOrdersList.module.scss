@@ -12,7 +12,7 @@
       font-weight: 700;
     }
     input {
-      width: 400px;
+      width: auto;
       font-size: 1rem;
       padding: 0.5rem 2.5rem;
       margin: 0 1rem;
@@ -42,9 +42,32 @@
     }
   }
 }
+.received-table {
+  overflow: auto;
+  .orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px 0px;
+    padding: 0;
+    margin: 0;
+  }
+}
 .pagination {
   display: flex;
   justify-content: center;
-  background-color: $primary-color;
+  background-color: $secondary-color;
   padding: 0.2rem 0;
+  border-top: 1px solid rgba(134, 134, 134, 0.336);
+  border-bottom: 1px solid rgba(134, 134, 134, 0.336);
+}
+@media only screen and (max-width: $breakpoint-small) {
+  .search-bar {
+    form {
+      gap: 5px;
+      flex-direction: column;
+      .search {
+        padding: 0.4rem 1rem;
+      }
+    }
+  }
 }

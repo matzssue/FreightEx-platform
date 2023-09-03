@@ -16,3 +16,10 @@
     }
   }
 }
+@media only screen and (max-width: $breakpoint-medium) {
+  .cargo-dimensions {
+    .dimensions-inputs__container {
+      flex-direction: column;
+    }
+  }
+}

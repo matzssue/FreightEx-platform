@@ -8,3 +8,14 @@
   color: $primary-text-color;
   padding-top: 0;
 }
+@media only screen and (max-width: $breakpoint-small) {
+  .country {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .post-code {
+    font-size: 1rem;
+    color: $primary-text-color;
+    padding-top: 0;
+  }
+}

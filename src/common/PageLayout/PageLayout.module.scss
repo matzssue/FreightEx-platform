@@ -1,6 +1,15 @@
+@import '/src/styles/variables.scss';
+
 .box {
   display: flex;
   box-sizing: border-box;
   height: 100%;
   flex-grow: 1;
+  background-color: $primary-color;
+  overflow: auto;
+}
+@media only screen and (max-width: $breakpoint-small) {
+  .box {
+    flex-direction: column;
+  }
 }

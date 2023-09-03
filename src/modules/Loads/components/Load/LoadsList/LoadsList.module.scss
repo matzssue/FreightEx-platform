@@ -1,13 +1,13 @@
 @import '../../../../../styles/variables.scss';
 
 .loads-container {
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   flex-grow: 1;
-  overflow-y: auto;
   justify-content: flex-start;
   flex-wrap: nowrap;
   width: 100%;
+  overflow: auto;
 }
 
 .sort-list {
@@ -68,4 +68,20 @@
   background-color: $secondary-color;
   border-top: 1px solid rgba(124, 124, 124, 0.479);
   padding: 0.2rem 0;
+}
+
+@media only screen and (max-width: $breakpoint-medium) {
+  .sort-list {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: $breakpoint-small) {
+  .loads-container {
+    padding: 0 1rem;
+    background-color: $secondary-color;
+  }
+  .sort-list {
+    display: none;
+  }
 }
