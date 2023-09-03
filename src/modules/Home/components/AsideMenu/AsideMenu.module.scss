@@ -95,6 +95,22 @@
   }
 }
 
+@media only screen and (max-width: $breakpoint-medium) {
+  .navbar {
+    width: 71px;
+    .logo {
+      display: none;
+    }
+
+    .info-links {
+      display: none;
+    }
+    .author {
+      display: none;
+    }
+  }
+}
+
 @media only screen and (max-width: $breakpoint-small) {
   .navbar {
     display: flex;

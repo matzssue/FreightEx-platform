@@ -65,7 +65,7 @@ export const LoadCard = ({ data, onAccept, onDelete }: LoadProps) => {
           <span>Length: {cargoLength}ldm</span>
           <span>Weight: {cargoWeight}t</span>
           <p className={styles.vehicles}>
-            Vehicle:
+            Vehicle:{' '}
             {Object.keys(vehicleTypes)
               .filter((key) => vehicleTypes[key])
               .join(', ')}

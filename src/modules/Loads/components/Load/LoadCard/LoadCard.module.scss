@@ -26,18 +26,22 @@
   .salary {
     font-weight: 700;
   }
-  .vehicles {
-    font-size: 0.6rem;
-  }
   .term {
     font-size: 0.6rem;
     padding-top: 0;
   }
   .cargo {
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 0.7rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 0.75rem;
+    font-weight: 700;
     padding-top: 0.2rem;
+    .vehicles {
+      font-weight: 500;
+      font-size: 0.7rem;
+      grid-column: span 2;
+      width: 100%;
+    }
     span {
       margin-right: 1rem;
     }
@@ -183,6 +187,13 @@
         font-size: 1rem;
       }
     }
+
+    .cargo,
+    .date,
+    .company {
+      padding: 0.5rem 0;
+    }
+
     .cargo {
       display: flex;
       flex-wrap: wrap;
