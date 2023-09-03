@@ -11,11 +11,10 @@ import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { LoadingSpinner } from '../../../../../common/LoadingSpinner/LoadingSpinner';
 import { useAcceptOffer } from '../../../hooks/useAcceptOffer';
 import { Paginate } from '../../../../../common/Pagination/Pagination';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useState } from 'react';
 import { Load as TLoad } from '../../../../../utils/api/supabase/types';
 import { useDeleteOrder } from 'src/modules/Orders/hooks/useDeleteOrder';
-import { usePaginationContext } from 'src/store/contexts/PaginationContext';
 export const Loads = () => {
   const { filterId } = useParams<string>();
   const acceptOfferMutation = useAcceptOffer();
@@ -67,7 +66,7 @@ export const Loads = () => {
       </div>
       <div className={styles.loads}>
         <ul>
-          {memoizedLoads?.map((load) => (
+          {slicedLoads?.map((load) => (
             <li id={`${load.id}`} key={load.id}>
               <LoadCard
                 onDelete={(e) => deleteOrderHandler(e, load.id)}
@@ -76,7 +75,7 @@ export const Loads = () => {
               />
             </li>
           ))}
-          {memoizedLoads && memoizedLoads?.length <= 0 ? (
+          {slicedLoads && slicedLoads?.length <= 0 ? (
             <p className={styles['no-results']}>No results found</p>
           ) : (
             ''
