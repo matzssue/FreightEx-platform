@@ -12,6 +12,7 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
+  font-size: 100%;
 }
 
 #root {
@@ -45,6 +46,9 @@ button {
   cursor: pointer;
 }
 @media only screen and (max-width: $breakpoint-small) {
+  body {
+    font-size: 0.8rem;
+  }
   #root {
     height: auto;
     width: 100%;
