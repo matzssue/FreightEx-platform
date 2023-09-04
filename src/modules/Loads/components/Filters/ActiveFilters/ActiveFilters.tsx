@@ -6,6 +6,7 @@ import { removeFilter } from 'src/store/reducers/loadsFiltersSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { usePaginationContext } from 'src/store/contexts/PaginationContext';
 
 export const ActiveFilters = () => {
   const filters = useAppSelector((state) => state.loadsFilters.filters);
@@ -13,12 +14,14 @@ export const ActiveFilters = () => {
   const dispatch = useAppDispatch();
   const navigation = useNavigate();
   const location = useLocation();
-  console.log(location);
+  const { changePage } = usePaginationContext();
   const deleteFilterHandler = (id: string) => {
     dispatch(removeFilter(id));
     navigation('/loads');
   };
-
+  const handleChangeFilter = () => {
+    changePage(1);
+  };
   return (
     <div className={styles['list-container']}>
       <ul>
@@ -37,6 +40,7 @@ export const ActiveFilters = () => {
         {filters.map((filter, i) => (
           <li key={i}>
             <NavLink
+              onClick={handleChangeFilter}
               className={({ isActive }) => (isActive ? styles.active : '')}
               to={`/loads/filters/${filter.id}`}
             >
