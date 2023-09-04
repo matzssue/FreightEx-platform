@@ -7,28 +7,28 @@ import { loadsPerPageWithMenu } from '../../modules/Loads/constants/loadsPerPage
 type PaginationContextProps = {
   changePage: (value: number) => void;
   currentPage: number;
-  loadsPerPage: number;
-  changeLoadsPerPage: (value: number) => void;
+  itemsPerPage: number;
+  changeItemsPerPage: (value: number) => void;
 };
 
 export const PaginationContext = createContext<PaginationContextProps | null>(null);
 
 export const PaginationContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [loadsPerPage, setLoadsPerPage] = useState(loadsPerPageWithMenu);
+  const [itemsPerPage, setItemsPerPage] = useState(loadsPerPageWithMenu);
 
   const changePage = (value: number) => {
     setCurrentPage(value);
   };
-  const changeLoadsPerPage = (value: number) => {
-    setLoadsPerPage(value);
+  const changeItemsPerPage = (value: number) => {
+    setItemsPerPage(value);
   };
 
   const valueContext = {
     changePage,
     currentPage,
-    loadsPerPage,
-    changeLoadsPerPage,
+    itemsPerPage,
+    changeItemsPerPage,
   };
 
   return <PaginationContext.Provider value={valueContext}>{children}</PaginationContext.Provider>;
