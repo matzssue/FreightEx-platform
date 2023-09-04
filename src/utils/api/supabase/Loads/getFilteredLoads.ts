@@ -1,7 +1,11 @@
 import supabase from '../../../../config/supabase';
 import { LoadsFilters } from '../../../../store/reducers/loadsFiltersSlice';
 import { GetLoadsData, Load } from '../types';
-export const getFilteredLoads = async (filter: LoadsFilters) => {
+export const getFilteredLoads = async (
+  filter: LoadsFilters,
+  page: number,
+  loadsPerPage: number,
+) => {
   if (!filter) return;
   const {
     maxWeight,
@@ -18,11 +22,16 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
   } = filter;
 
   const dinstanceInKm = loadingArea * 1000;
-  let query = supabase.rpc('get_entries_within_distance', {
-    distance: dinstanceInKm,
-    tlatitude: loadingAddressData.latitude,
-    tlongitude: loadingAddressData.longitude,
-  });
+
+  let query = supabase.rpc(
+    'get_entries_within_distance',
+    {
+      distance: dinstanceInKm,
+      tlatitude: loadingAddressData.latitude,
+      tlongitude: loadingAddressData.longitude,
+    },
+    { count: 'exact' },
+  );
 
   if (!query) return;
 
@@ -53,8 +62,9 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
   if (unloadingAddressData.country) {
     query = query.eq('unloading_address_id->>country', unloadingAddressData.country);
   }
-
-  const { data, error } = await query.returns<GetLoadsData[]>();
+  const { data, error, count } = await query
+    .range((page - 1) * loadsPerPage, page * loadsPerPage - 1)
+    .returns<GetLoadsData[]>();
 
   if (error) throw new Error();
 
@@ -83,5 +93,7 @@ export const getFilteredLoads = async (filter: LoadsFilters) => {
     };
   }) as Load[];
 
-  return loads;
+  const totalPages = count && Math.ceil(count / loadsPerPage);
+  if (!totalPages) return;
+  return { loads, totalPages };
 };
