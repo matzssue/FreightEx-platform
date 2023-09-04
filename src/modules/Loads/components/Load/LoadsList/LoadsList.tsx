@@ -12,31 +12,30 @@ import { LoadingSpinner } from '../../../../../common/LoadingSpinner/LoadingSpin
 import { useAcceptOffer } from '../../../hooks/useAcceptOffer';
 import { Paginate } from '../../../../../common/Pagination/Pagination';
 import { useMemo } from 'react';
-import { useState } from 'react';
-import { Load as TLoad } from '../../../../../utils/api/supabase/types';
 import { useDeleteOrder } from 'src/modules/Orders/hooks/useDeleteOrder';
+import { usePaginationContext } from 'src/store/contexts/PaginationContext';
 export const Loads = () => {
   const { filterId } = useParams<string>();
   const acceptOfferMutation = useAcceptOffer();
   const deleteOfferMutation = useDeleteOrder();
   const { userData } = useUserContext();
-  const [slicedLoads, setSlicedLoads] = useState<TLoad[] | undefined>();
+  const { currentPage, itemsPerPage } = usePaginationContext();
 
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
   const { data: allLoads, isLoading: isAllLoading } = useQuery(
-    ['loads'],
-    async () => await getAllLoads(),
+    ['loads', currentPage],
+    async () => await getAllLoads(currentPage, itemsPerPage),
   );
 
   const fetchFilteredLoads = async () => {
     const foundFilter = filters.find((filter) => filter.id === filterId);
     if (!foundFilter) return;
-    return await getFilteredLoads(foundFilter);
+    return await getFilteredLoads(foundFilter, currentPage, itemsPerPage);
   };
 
   const { data: filteredLoads, isLoading: isFilteredLoading } = useQuery(
-    ['filteredLoads', filterId],
+    ['filteredLoads', filterId, currentPage],
     fetchFilteredLoads,
     {
       enabled: Boolean(filters && filterId),
@@ -66,7 +65,7 @@ export const Loads = () => {
       </div>
       <div className={styles.loads}>
         <ul>
-          {slicedLoads?.map((load) => (
+          {memoizedLoads.loads?.map((load) => (
             <li id={`${load.id}`} key={load.id}>
               <LoadCard
                 onDelete={(e) => deleteOrderHandler(e, load.id)}
@@ -75,7 +74,7 @@ export const Loads = () => {
               />
             </li>
           ))}
-          {slicedLoads && slicedLoads?.length <= 0 ? (
+          {memoizedLoads.loads && memoizedLoads.loads?.length <= 0 ? (
             <p className={styles['no-results']}>No results found</p>
           ) : (
             ''
@@ -83,7 +82,7 @@ export const Loads = () => {
         </ul>
       </div>
       <div className={styles.pagination}>
-        <Paginate<TLoad> setSlicedItems={setSlicedLoads} data={memoizedLoads} />
+        <Paginate lastPage={memoizedLoads.totalPages} />
       </div>
     </div>
   );
