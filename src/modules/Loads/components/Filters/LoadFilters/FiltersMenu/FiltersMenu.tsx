@@ -19,7 +19,7 @@ import { loadsPerPageWithMenu, loadsPerPageWithoutMenu } from '../../../../const
 
 export const FiltersMenu = () => {
   const [showFilersMenu, setShowFiltersMenu] = useState(true);
-  const { changeLoadsPerPage } = usePaginationContext();
+  const { changeItemsPerPage } = usePaginationContext();
   const dispatch = useAppDispatch();
 
   const {
@@ -35,10 +35,10 @@ export const FiltersMenu = () => {
 
   useEffect(() => {
     if (!showFilersMenu) {
-      changeLoadsPerPage(loadsPerPageWithoutMenu);
+      changeItemsPerPage(loadsPerPageWithoutMenu);
     }
     if (showFilersMenu) {
-      changeLoadsPerPage(loadsPerPageWithMenu);
+      changeItemsPerPage(loadsPerPageWithMenu);
     }
   }, [showFilersMenu]);
 
