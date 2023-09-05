@@ -13,35 +13,51 @@ import { Load } from 'src/utils/api/supabase/types';
 import { BsTrash } from 'react-icons/bs';
 import { useDeleteOrder } from '../../../hooks/useDeleteOrder';
 import { OrdersOptions } from '../../OrdersOptions/OrdersOptions';
+
+type FilteredOrders = {
+  orders: Load[] | null;
+  totalPages: number | null;
+};
+
 export const PublishedOrdersList = () => {
   const { userId } = useUserContext();
-  const { changeLoadsPerPage } = usePaginationContext();
+  const { changeItemsPerPage, changePage, currentPage, itemsPerPage } = usePaginationContext();
   const searchOrderRef = useRef<HTMLInputElement>(null);
-  const [slicedLoads, setSlicedLoads] = useState<Load[] | null>(null);
-  const [filteredLoads, setFilteredLoads] = useState<Load[] | null>(null);
+  const [filteredLoads, setFilteredLoads] = useState<FilteredOrders | null>({
+    orders: null,
+    totalPages: null,
+  });
   const deleteOrderMutation = useDeleteOrder();
+
+  useEffect(() => {
+    changeItemsPerPage(10);
+    changePage(1);
+  }, []);
 
   const {
     data: publishedOrders,
     isLoading: isPublishedOrdersLoading,
     error: publishedOrdersError,
-  } = useQuery(['published'], async () => await getPublishedOrders(userId), {
-    enabled: !!userId,
-  });
-
-  useEffect(() => {
-    changeLoadsPerPage(10);
-  }, []);
+  } = useQuery(
+    ['published', currentPage],
+    async () => await getPublishedOrders(userId, currentPage, itemsPerPage),
+    {
+      enabled: !!userId,
+    },
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const searchValue = searchOrderRef?.current?.value;
-    if (searchValue && slicedLoads) {
-      const filteredOrders = slicedLoads.filter((order) => order.id.toString() === searchValue);
+    if (searchValue && publishedOrders) {
+      const filteredOrders = {
+        orders: publishedOrders.orders.filter((order) => order.id.toString() === searchValue),
+        totalPages: publishedOrders.totalPages,
+      };
       setFilteredLoads(filteredOrders);
     }
     if (!searchValue) {
-      setFilteredLoads(null);
+      setFilteredLoads({ orders: null, totalPages: null });
     }
   };
 
@@ -55,8 +71,8 @@ export const PublishedOrdersList = () => {
     return <div>Error loading data</div>;
   }
 
-  const orders = filteredLoads ? filteredLoads : slicedLoads;
-  if (!publishedOrders) return;
+  const orders = filteredLoads?.orders ? filteredLoads : publishedOrders;
+  if (!orders?.orders || !orders.totalPages) return;
   return (
     <>
       <OrdersOptions ref={searchOrderRef} onSubmit={handleSubmit} />
@@ -66,7 +82,7 @@ export const PublishedOrdersList = () => {
           columns={publishedOrdersColumns}
         />
         <ul className={styles['orders-list']}>
-          {orders?.map((order) => {
+          {orders?.orders.map((order) => {
             return (
               <PublishedOrderItem key={order.id} order={order}>
                 <span className={styles.buttons}>
@@ -77,10 +93,11 @@ export const PublishedOrdersList = () => {
               </PublishedOrderItem>
             );
           })}
+          {orders.orders.length === 0 && <p>No orders found</p>}
         </ul>
       </div>
       <div className={styles.pagination}>
-        <Paginate<Load> setSlicedItems={setSlicedLoads} data={publishedOrders} />
+        <Paginate lastPage={orders?.totalPages} />
       </div>
     </>
   );

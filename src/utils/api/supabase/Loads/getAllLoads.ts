@@ -1,11 +1,14 @@
 import supabase from '../../../../config/supabase';
 import { GetLoadsData, Load } from '../types';
 
-export const getAllLoads = async () => {
-  const { data, error } = await supabase
+export const getAllLoads = async (page: number, loadsPerPage: number) => {
+  const { data, count, error } = await supabase
     .from('loads')
-    .select(`*, unloading_address_id(*), loading_address_id(*), user_id(*, company_vat_id(*))`)
+    .select(`*, unloading_address_id(*), loading_address_id(*), user_id(*, company_vat_id(*))`, {
+      count: 'exact',
+    })
     .order('created_at', { ascending: false })
+    .range((page - 1) * loadsPerPage, page * loadsPerPage - 1)
     .returns<GetLoadsData[]>();
 
   if (error) throw new Error();
@@ -33,6 +36,7 @@ export const getAllLoads = async () => {
       createdAt: load.created_at,
     };
   }) as Load[];
-
-  return loads;
+  const totalPages = count && Math.ceil(count / loadsPerPage);
+  if (!totalPages) return;
+  return { loads, totalPages };
 };

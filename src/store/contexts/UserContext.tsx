@@ -81,7 +81,6 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
       }
     };
     getUserData();
-    console.log(isLoading);
   }, [userId]);
 
   const valueContext = {

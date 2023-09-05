@@ -16,8 +16,10 @@
 
   gap: 15px 20px;
 
-  .no-results {
-    font-size: 1.2rem;
+  .no-results__information {
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
     text-align: center;
     color: rgb(233, 51, 51);
   }
