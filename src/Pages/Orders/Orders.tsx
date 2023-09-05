@@ -8,6 +8,7 @@ export const Orders = () => {
       <PageLayout>
         <OrdersWrapper>
           <OrdersMenu />
+          <div>Please select orders</div>
         </OrdersWrapper>
       </PageLayout>
     </ProtectedWrapper>

@@ -78,12 +78,10 @@ export const RegisterForm = () => {
             <Step
               sx={{
                 '.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active': { color: '#2a4354' },
-                '.MuiStepLabel-labelContainer span': {
-                  fontSize: '1.5rem',
-                },
+                '.MuiStepLabel-labelContainer span': {},
                 '.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root': {
-                  height: '2.5rem',
-                  width: '2.5rem',
+                  height: '2rem',
+                  width: '2rem',
                 },
               }}
               key={label}

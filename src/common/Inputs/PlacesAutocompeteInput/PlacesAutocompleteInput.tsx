@@ -28,7 +28,7 @@ export const PlacesAutocompleteInput = <T extends FieldValues>({
   setValue,
   sx,
   filterType = 'postal_code',
-  placeholder = 'Search location, use postal code',
+  placeholder = 'Please use postal code',
   label,
   setValueKey,
   errorLabel,

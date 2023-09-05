@@ -5,9 +5,9 @@ import { ReactNode } from 'react';
 
 export const PublishedOrderItem = ({ order, children }: { order: Load; children?: ReactNode }) => {
   return (
-    <tr className={styles.order} key={order.id}>
-      <td>{order.id}</td>
-      <td className={styles.route}>
+    <li className={styles.order} key={order.id}>
+      <span className={styles['order-id']}>{order.id}</span>
+      <span className={styles.route}>
         <span>
           {order.loadingAddress.country}, {order.loadingAddress.postal_code}{' '}
           {order.loadingAddress.city}
@@ -17,20 +17,20 @@ export const PublishedOrderItem = ({ order, children }: { order: Load; children?
           {order.unloadingAddress.country}, {order.unloadingAddress.postal_code}{' '}
           {order.unloadingAddress.city}
         </span>
-      </td>
-      <td>
+      </span>
+      <span className={styles.payment}>
         {order.price} {order.currency}
-      </td>
-      <td>
+      </span>
+      <span className={styles.cargo}>
         {order.cargoLength}L {order.cargoWeight}T{' '}
         {Object.keys(order.vehicleTypes)
           .filter((key) => order.vehicleTypes[key])
           .join(', ')}
-      </td>
-      <td>
+      </span>
+      <span className={styles.date}>
         {order.loadingDate} <HiOutlineArrowNarrowRight /> {order.unloadingDate}
-      </td>
+      </span>
       {children}
-    </tr>
+    </li>
   );
 };

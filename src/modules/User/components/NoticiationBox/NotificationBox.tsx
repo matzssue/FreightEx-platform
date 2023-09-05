@@ -48,7 +48,7 @@ export const NotificationBox = () => {
           <button className={styles['clear-button']} onClick={() => clear()}>
             Clear
           </button>
-          <button className={styles['close-button']} onClick={() => setIsOpen(false)}>
+          <button className={styles['close-notifications-button']} onClick={() => setIsOpen(false)}>
             <AiOutlineClose />
           </button>
         </div>

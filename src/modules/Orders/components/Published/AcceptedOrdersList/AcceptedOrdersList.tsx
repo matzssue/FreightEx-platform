@@ -9,35 +9,49 @@ import { getAcceptedOrders } from 'src/utils/api/supabase/Orders/getAcceptedOrde
 import { useEffect, useState, useRef } from 'react';
 import { Paginate } from 'src/common/Pagination/Pagination';
 import { usePaginationContext } from 'src/store/contexts/PaginationContext';
-import { AcceptedLoad, Load } from 'src/utils/api/supabase/types';
+import { Load } from 'src/utils/api/supabase/types';
 import { OrdersOptions } from '../../OrdersOptions/OrdersOptions';
+
+type FilteredLoads = {
+  orders: Load[] | null;
+  totalPages: number | null;
+};
 
 export const AcceptedOrdersList = () => {
   const { userId } = useUserContext();
-  const { changeLoadsPerPage } = usePaginationContext();
+  const { changeItemsPerPage, itemsPerPage, currentPage, changePage } = usePaginationContext();
   const searchOrderRef = useRef<HTMLInputElement>(null);
-  const [slicedLoads, setSlicedLoad] = useState<Load[] | null>(null);
-  const [filteredLoads, setFilteredLoads] = useState<Load[] | null>(null);
+  const [filteredLoads, setFilteredLoads] = useState<FilteredLoads>({
+    orders: null,
+    totalPages: null,
+  });
+
+  useEffect(() => {
+    changeItemsPerPage(12);
+    changePage(1);
+  }, []);
 
   const {
     data: acceptedOrders,
     isLoading: isAcceptedOrdersLoading,
     error: acceptedOrdersError,
-  } = useQuery(['accepted'], async () => await getAcceptedOrders(userId));
-
-  useEffect(() => {
-    changeLoadsPerPage(12);
-  }, []);
+  } = useQuery(
+    ['accepted'],
+    async () => await getAcceptedOrders(userId, currentPage, itemsPerPage),
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const searchValue = searchOrderRef?.current?.value;
 
-    if (searchValue && slicedLoads) {
-      const filteredOrders = slicedLoads.filter((order) => order.id.toString() === searchValue);
+    if (searchValue && acceptedOrders) {
+      const filteredOrders = {
+        orders: acceptedOrders.orders.filter((order) => order.id.toString() === searchValue),
+        totalPages: acceptedOrders.totalPages,
+      };
       setFilteredLoads(filteredOrders);
     }
-    if (!searchValue) setFilteredLoads(null);
+    if (!searchValue) setFilteredLoads({ orders: null, totalPages: null });
   };
 
   if (isAcceptedOrdersLoading) return <LoadingSpinner />;
@@ -46,27 +60,30 @@ export const AcceptedOrdersList = () => {
     return <div>Error loading data</div>;
   }
 
-  if (!acceptedOrders) return;
-  const orders = filteredLoads ? filteredLoads : slicedLoads;
+  const orders = filteredLoads.orders ? filteredLoads : acceptedOrders;
+  if (!orders?.orders || !orders?.totalPages) return;
   return (
     <>
       <OrdersOptions ref={searchOrderRef} onSubmit={handleSubmit} />
-      <table>
-        <OrdersColumns columns={acceptedOrdersColumns} />
-        <tbody className={styles['orders-list']}>
-          {orders?.map((order) => {
+      <div>
+        <OrdersColumns
+          gridColumns='0.2fr 2fr 0.6fr 0.8fr 1fr 0.5fr'
+          columns={acceptedOrdersColumns}
+        />
+        <ul className={styles['orders-list']}>
+          {orders.orders?.map((order) => {
             return (
               <PublishedOrderItem key={order.id} order={order}>
-                <td>
+                <li>
                   {order.user.name} {order.user.surname}, {order.company.name}
-                </td>
+                </li>
               </PublishedOrderItem>
             );
           })}
-        </tbody>
-      </table>
+        </ul>
+      </div>
       <div className={styles.pagination}>
-        <Paginate<AcceptedLoad> setSlicedItems={setSlicedLoad} data={acceptedOrders} />
+        <Paginate lastPage={orders.totalPages} />
       </div>
     </>
   );

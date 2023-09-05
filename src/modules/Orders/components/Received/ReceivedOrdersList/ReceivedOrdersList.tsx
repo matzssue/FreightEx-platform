@@ -11,43 +11,64 @@ import { AcceptedLoad } from 'src/utils/api/supabase/types';
 import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
 import { usePaginationContext } from 'src/store/contexts/PaginationContext';
 
+type FilteredOrders = {
+  orders: AcceptedLoad[] | null;
+  totalPages: number | null;
+};
+
 export const ReceivedOrdersList = () => {
-  const { changeLoadsPerPage } = usePaginationContext();
+  const { changeItemsPerPage, changePage, currentPage, itemsPerPage } = usePaginationContext();
   const { userId } = useUserContext();
-  const [slicedLoads, setSlicedLoads] = useState<AcceptedLoad[] | null>(null);
-  const [filteredLoads, setFilteredLoads] = useState<AcceptedLoad[] | null>(null);
+
+  useEffect(() => {
+    changeItemsPerPage(9);
+    changePage(1);
+  }, []);
+
+  const [filteredLoads, setFilteredLoads] = useState<FilteredOrders>({
+    orders: null,
+    totalPages: null,
+  });
   const searchOrderRef = useRef<HTMLInputElement>(null);
 
   const {
     data: acceptedOrders,
     isError: receivedOrdersError,
     isLoading: receivedOrdersLoading,
-  } = useQuery(['received'], async () => await getReceivedOrders(userId), {
-    enabled: !!userId,
-  });
-
-  useEffect(() => {
-    changeLoadsPerPage(8);
-  }, []);
+  } = useQuery(
+    ['received', currentPage],
+    async () => await getReceivedOrders(userId, currentPage, itemsPerPage),
+    {
+      enabled: !!userId,
+    },
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const searchValue = searchOrderRef?.current?.value;
-    if (searchValue && slicedLoads) {
-      const filteredOrders = slicedLoads.filter((order) => order.id.toString() === searchValue);
+    if (searchValue && acceptedOrders) {
+      const filteredOrders = {
+        orders: acceptedOrders?.orders.filter((order) => order.id.toString() === searchValue),
+        totalPages: acceptedOrders?.totalPages,
+      };
       setFilteredLoads(filteredOrders);
     }
     if (!searchValue) {
-      setFilteredLoads(null);
+      setFilteredLoads({ orders: null, totalPages: null });
     }
   };
-  if (receivedOrdersLoading) return <LoadingSpinner />;
+  if (receivedOrdersLoading)
+    return (
+      <td>
+        <LoadingSpinner />;
+      </td>
+    );
 
   if (receivedOrdersError) {
     return <div>Error loading data</div>;
   }
-  const orders = filteredLoads ? filteredLoads : slicedLoads;
-
+  const orders = filteredLoads.orders ? filteredLoads : acceptedOrders;
+  if (!orders?.orders || !orders.totalPages) return;
   return (
     <>
       <div className={styles['search-bar']}>
@@ -57,16 +78,19 @@ export const ReceivedOrdersList = () => {
           <button className={styles.search}>Search</button>
         </form>
       </div>
-      <table>
-        <OrdersColumns columns={receivedOrdersColumns} />
-        <tbody>
-          {orders?.map((order) => {
+      <div className={styles['received-table']}>
+        <OrdersColumns
+          gridColumns='0.2fr 0.3fr 2fr 0.4fr 1.2fr 0.9fr 1fr 1fr'
+          columns={receivedOrdersColumns}
+        />
+        <ul className={styles['orders-list']}>
+          {orders?.orders?.map((order) => {
             return <ReceivedOrderItem key={order.id} order={order} />;
           })}
-        </tbody>
-      </table>
+        </ul>
+      </div>
       <div className={styles.pagination}>
-        <Paginate<AcceptedLoad> setSlicedItems={setSlicedLoads} data={acceptedOrders} />
+        <Paginate lastPage={orders?.totalPages} />
       </div>
     </>
   );

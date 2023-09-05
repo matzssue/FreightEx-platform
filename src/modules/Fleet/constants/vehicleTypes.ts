@@ -1,1 +1,1 @@
-export const vehicleTypes = ['bus', 'solo', 'semi-trailer', 'double-trailer'];
+export const vehicleTypes: string[] = ['bus', 'solo', 'semi-trailer', 'double-trailer'];

@@ -26,12 +26,23 @@ const Links = ({ data, activeMode = true, hidden }: LinksProps) => {
               className={({ isActive }) => (isActive && activeMode ? styles.active : '')}
             >
               {link.icon && <span className={styles.icon}>{link.icon}</span>}
-              <span className={hidden ? styles.hidden : ''}>{link.linkName}</span>
+              <span
+                className={hidden ? `${styles['link-name']} ${styles.hidden}` : styles['link-name']}
+              >
+                {link.linkName}
+              </span>
             </NavLink>
           ) : (
             <Tooltip placement='right-start' title='coming soon'>
               <button className={styles.disabled}>
-                {link.icon} <span className={hidden ? styles.hidden : ''}>{link.linkName}</span>
+                {link.icon}{' '}
+                <span
+                  className={
+                    hidden ? `${styles['link-name']} ${styles.hidden}` : styles['link-name']
+                  }
+                >
+                  {link.linkName}
+                </span>
               </button>
             </Tooltip>
           )}

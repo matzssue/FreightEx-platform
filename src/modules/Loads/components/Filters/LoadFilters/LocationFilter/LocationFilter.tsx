@@ -17,12 +17,11 @@ export const LocationFilter = <T extends FieldValues>({
 }: LocationFilterProps<T>) => {
   const commonProps = {
     sx: {
-      // maxWidth: '250px',
-
-      padding: '0.5rem',
+      padding: '1rem',
       fontSize: '0.7rem',
       height: '15px',
       outlineColor: '#1976d2',
+      width: '100%',
     },
   };
 
@@ -48,14 +47,13 @@ export const LocationFilter = <T extends FieldValues>({
               options={searchAreaInKM}
               variant='outlined'
               sx={{
-                // maxWidth: '70px',
-                width: '30%',
+                minWidth: '30px',
+                maxWidth: '100px',
                 fontSize: '11px',
                 backgroundColor: 'white',
-                height: 'min-content',
+                height: '1.8rem',
                 boxShadow: '3px 3px 0px 0px rgba(148, 148, 148, 0.267)',
                 '.css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
-                  width: '15px',
                   color: 'gray',
                 },
               }}
@@ -67,7 +65,7 @@ export const LocationFilter = <T extends FieldValues>({
       {/* {errors.loadingAddress && <p role='alert'>{errors.loadingAddress?.message}</p>} */}
 
       <Fieldset>
-        <FilterInput label={'Unloading address'}>
+        <FilterInput label={'Unloading country'}>
           <PlacesAutocompleteInput
             {...commonProps}
             name={'unloadingAddress' as Path<T>}
@@ -75,7 +73,7 @@ export const LocationFilter = <T extends FieldValues>({
             setValue={setValue}
             setValueKey={'unloadingAddressData' as Path<T>}
             filterType='country'
-            placeholder='Search country of unloading'
+            placeholder='Search country'
             errorLabel='Unloading address'
           />
         </FilterInput>

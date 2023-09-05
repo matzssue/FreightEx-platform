@@ -1,18 +1,82 @@
 @import '/src/styles/variables.scss';
 
 .order {
-  td {
-    background-color: $primary-color;
-    padding: 0.3rem;
-    box-shadow: 1rem;
-    text-align: left;
-    box-shadow: 8px 8px 24px -5px rgba(150, 150, 150, 0.315);
-    &.route {
-      justify-content: flex-start;
-    }
+  display: grid;
+  text-align: left;
+  grid-template-columns: 0.2fr 2fr 0.6fr 0.8fr 1fr 0.5fr;
+  background-color: $secondary-color;
+  box-shadow: 8px 8px 24px -5px rgba(150, 150, 150, 0.315);
+
+  span {
+    display: flex;
+    align-items: center;
+    padding: 0.2rem 0.5rem;
+  }
+  .route,
+  .date {
     svg {
-      width: 70px;
-      scale: 1.1;
+      width: 50px;
+    }
+  }
+  .order-id {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: $breakpoint-medium) {
+  .order {
+    text-align: center;
+    grid-template-columns: repeat(6, 1fr);
+    border: $order-border;
+    // border-style: groove;
+    .order-id {
+      grid-column: span 6;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background-color: $order-first-background;
+      &::before {
+        content: 'ID: ';
+      }
+    }
+    .route {
+      background-color: $order-second-background;
+      grid-column: span 6;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .payment {
+      &::before {
+        content: 'Price:';
+        margin: 0 0.1rem;
+        font-weight: 800;
+      }
+    }
+    .cargo {
+      &::before {
+        content: 'Cargo:';
+        margin: 0 0.1rem;
+        font-weight: 800;
+      }
+    }
+    .payment,
+    .cargo {
+      display: flex;
+      justify-content: center;
+      grid-column: span 3;
+    }
+    .date {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // justify-content: space-around;
+      grid-column: span 6;
+      font-size: 0.7rem;
+    }
+    .route,
+    .date {
+      svg {
+        width: 20px;
+      }
     }
   }
 }

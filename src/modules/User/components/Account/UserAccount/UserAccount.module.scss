@@ -7,11 +7,13 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  background-color: $secondary-color;
   .header {
     background-color: $secondary-color;
     position: relative;
     border-radius: 0.5rem;
     padding: 0.5rem;
+    box-shadow: 5px 5px 0px 3px rgba(36, 36, 36, 0.842);
     h1 {
       margin: 0;
       color: $primary-text-color;
@@ -33,18 +35,17 @@
     border: 10px solid rgba(224, 224, 224, 0.514);
     box-shadow: 8px 8px 24px -12px rgb(0, 0, 0);
     background-clip: padding-box;
-
     overflow: hidden;
   }
   .account-container {
-    background-color: $primary-color;
+    background-color: $primary-blue-color;
     padding: 3rem 2rem;
     border-radius: 1rem;
-    box-shadow: 8px 8px 24px -12px rgba(130, 130, 130, 1);
+    box-shadow: 8px 8px 24px -12px rgb(14, 14, 14);
     position: relative;
     h2 {
       margin-top: 2rem;
-      color: $primary-blue-color;
+      color: $primary-color;
       margin-bottom: 0;
     }
   }

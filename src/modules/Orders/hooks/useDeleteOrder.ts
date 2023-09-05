@@ -2,13 +2,12 @@ import supabase from '../../../config/supabase';
 
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+
 import { useQueryClient } from '@tanstack/react-query';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
 
 export const useDeleteOrder = () => {
   const { notify } = useNotificationContext();
-  const navigation = useNavigate();
   const queryClient = useQueryClient();
 
   const deleteOrder = async (loadId: string) => {
@@ -21,7 +20,6 @@ export const useDeleteOrder = () => {
   return useMutation(['loads', 'published'], async (loadId: string) => await deleteOrder(loadId), {
     onSuccess: async () => {
       notify('success', 'order deleted');
-      navigation('/orders/published');
       queryClient.invalidateQueries(['loads']);
       queryClient.invalidateQueries(['published']);
       queryClient.invalidateQueries(['filteredLoads']);
