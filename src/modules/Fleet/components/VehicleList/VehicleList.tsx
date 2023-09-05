@@ -28,7 +28,7 @@ export const VehicleList = () => {
 
   const vehicleList = searchValue.length > 0 ? filteredData : allVehicles;
   const noResultsMessage =
-    searchValue.length > 0 && filteredData.length === 0 ? 'No results' : null;
+    searchValue.length > 0 && filteredData.length === 0 ? 'No results found' : null;
   const noVehiclesMessage =
     allVehicles?.length === 0 ? 'No vehicles added, please add vehicle' : null;
 
@@ -38,7 +38,9 @@ export const VehicleList = () => {
       <SearchVehicle value={searchValue} onChange={(e) => searchVehicleHandler(e)} />
       <div className={styles['cards-container']}>
         <AddVehicleCard />
-        {noResultsMessage && <p>{noResultsMessage}</p>}
+        {noResultsMessage && (
+          <p className={styles['no-results__information']}>{noResultsMessage}</p>
+        )}
         {noVehiclesMessage && <p>{noVehiclesMessage}</p>}
         {vehicleList?.map((vehicles) => {
           return <VehicleCard key={vehicles.vehicleRegistrationNumber} {...vehicles} />;
