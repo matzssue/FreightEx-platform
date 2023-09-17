@@ -4,7 +4,7 @@ import styles from './TextField.module.scss';
 import { HTMLInputTypeAttribute } from 'react';
 import { FieldValues, Controller, Path, PathValue } from 'react-hook-form';
 import { BaseInputProps } from '../types';
-import { SxProps } from '@mui/material';
+import { SxProps, InputProps } from '@mui/material';
 
 type FormInputProps<T extends FieldValues> = {
   defaultValue: PathValue<T, Path<T>> | undefined;
@@ -13,8 +13,10 @@ type FormInputProps<T extends FieldValues> = {
   type?: HTMLInputTypeAttribute;
   size?: 'small' | 'medium';
   placeholder?: string;
-  row?: boolean;
+  column?: boolean;
   disabled?: boolean;
+
+  props?: InputProps;
 } & BaseInputProps<T>;
 
 export const TextFieldInput = <T extends FieldValues>({
@@ -26,8 +28,9 @@ export const TextFieldInput = <T extends FieldValues>({
   type = 'text',
   size = 'small',
   placeholder,
-  row = false,
+  column = false,
   disabled = false,
+  props,
 }: FormInputProps<T>) => {
   return (
     <Controller
@@ -39,7 +42,7 @@ export const TextFieldInput = <T extends FieldValues>({
         fieldState: { error },
         formState: { touchedFields },
       }) => (
-        <div className={`${styles.container} ${row ? styles.row : ''}`}>
+        <div className={`${styles.container} ${column ? styles.column : ''}`}>
           <label htmlFor={name} className={styles.label}>
             {label}
           </label>
@@ -69,6 +72,7 @@ export const TextFieldInput = <T extends FieldValues>({
             }}
             variant={variant}
             type={type}
+            InputProps={props}
           />
         </div>
       )}
