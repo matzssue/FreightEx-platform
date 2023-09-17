@@ -11,7 +11,7 @@ export const menuLinks = [
     icon: <MdOutlineAssignment />,
     disabled: false,
   },
-  { linkName: 'Invoices', link: '/invoices', icon: <TbFileInvoice />, disabled: true },
+  { linkName: 'Invoices', link: '/invoices', icon: <TbFileInvoice />, disabled: false },
 ];
 
 export const infoLinks = [
