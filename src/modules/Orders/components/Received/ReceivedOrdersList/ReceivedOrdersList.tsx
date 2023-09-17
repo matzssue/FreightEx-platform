@@ -57,12 +57,7 @@ export const ReceivedOrdersList = () => {
       setFilteredLoads({ orders: null, totalPages: null });
     }
   };
-  if (receivedOrdersLoading)
-    return (
-      <td>
-        <LoadingSpinner />;
-      </td>
-    );
+  if (receivedOrdersLoading) return <LoadingSpinner />;
 
   if (receivedOrdersError) {
     return <div>Error loading data</div>;
