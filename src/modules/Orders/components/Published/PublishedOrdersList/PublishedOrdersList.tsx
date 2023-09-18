@@ -78,7 +78,7 @@ export const PublishedOrdersList = () => {
       <OrdersOptions ref={searchOrderRef} onSubmit={handleSubmit} />
       <div>
         <OrdersColumns
-          gridColumns='0.2fr 2fr 0.6fr 0.8fr 1fr 0.5fr'
+          gridColumns='0.2fr 1.8fr 0.4fr 0.4fr 0.8fr 0.7fr'
           columns={publishedOrdersColumns}
         />
         <ul className={styles['orders-list']}>

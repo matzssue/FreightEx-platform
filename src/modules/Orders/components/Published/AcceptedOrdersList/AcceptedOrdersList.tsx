@@ -67,16 +67,16 @@ export const AcceptedOrdersList = () => {
       <OrdersOptions ref={searchOrderRef} onSubmit={handleSubmit} />
       <div>
         <OrdersColumns
-          gridColumns='0.2fr 2fr 0.6fr 0.8fr 1fr 0.5fr'
+          gridColumns='0.2fr 1.8fr 0.4fr 0.4fr 0.8fr 0.7fr'
           columns={acceptedOrdersColumns}
         />
         <ul className={styles['orders-list']}>
           {orders.orders?.map((order) => {
             return (
               <PublishedOrderItem key={order.id} order={order}>
-                <li>
+                <span>
                   {order.user.name} {order.user.surname}, {order.company.name}
-                </li>
+                </span>
               </PublishedOrderItem>
             );
           })}
