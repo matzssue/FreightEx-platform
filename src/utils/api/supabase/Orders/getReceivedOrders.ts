@@ -16,6 +16,7 @@ export const getReceivedOrders = async (
     })
     .eq('accepted_by', userId)
     .range((page - 1) * loadsPerPage, page * loadsPerPage - 1)
+    .order('id', { ascending: true })
     .returns<GetAcceptedLoadsData[]>();
 
   if (error) throw new Error();
