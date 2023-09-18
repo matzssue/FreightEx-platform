@@ -1,0 +1,22 @@
+@import '/src/styles/variables.scss';
+
+.invoice-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 15px;
+    width: 70vw;
+    height: 50%;
+    background-color: $primary-color;
+    .invoice-date__label {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
