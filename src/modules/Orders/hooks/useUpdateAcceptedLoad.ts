@@ -22,14 +22,13 @@ export const useUpdateAcceptedLoad = () => {
   };
 
   return useMutation(
-    ['received'],
     async ({ registerNumber, orderId }: { registerNumber: string; orderId: string }) =>
       await updateAcceptedLoad(registerNumber, orderId),
     {
       onSuccess: async () => {
         notify('success', 'vehicle successfully selected');
         navigation('/orders/received');
-        queryClient.invalidateQueries(['received']);
+        queryClient.invalidateQueries(['receivedOrders']);
       },
       onError: (error: { message: string }) => {
         console.log(error);

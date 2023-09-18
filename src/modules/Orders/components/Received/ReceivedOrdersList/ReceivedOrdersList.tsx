@@ -36,7 +36,7 @@ export const ReceivedOrdersList = () => {
     isError: receivedOrdersError,
     isLoading: receivedOrdersLoading,
   } = useQuery(
-    ['received', currentPage],
+    ['receivedOrders', currentPage],
     async () => await getReceivedOrders(userId, currentPage, itemsPerPage),
     {
       enabled: !!userId,

@@ -33,6 +33,7 @@ export const useAcceptOffer = () => {
   };
 
   return useMutation(
+    ['accepted'],
     async ({ loadId, userId }: { loadId: string; userId: string }) =>
       await addAcceptedLoad(loadId, userId),
     {
