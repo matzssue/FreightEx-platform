@@ -19,7 +19,7 @@ export interface Database {
           length: number | null
           loading_address_id: number | null
           loading_date: string
-          price: string
+          price: number
           term: string
           unloading_address_id: number | null
           unloading_date: string
@@ -37,7 +37,7 @@ export interface Database {
           length?: number | null
           loading_address_id?: number | null
           loading_date: string
-          price: string
+          price: number
           term: string
           unloading_address_id?: number | null
           unloading_date: string
@@ -55,7 +55,7 @@ export interface Database {
           length?: number | null
           loading_address_id?: number | null
           loading_date?: string
-          price?: string
+          price?: number
           term?: string
           unloading_address_id?: number | null
           unloading_date?: string
@@ -202,7 +202,7 @@ export interface Database {
           length: number | null
           loading_address_id: number | null
           loading_date: string
-          price: string
+          price: number
           term: string
           unloading_address_id: number | null
           unloading_date: string
@@ -217,7 +217,7 @@ export interface Database {
           length?: number | null
           loading_address_id?: number | null
           loading_date: string
-          price: string
+          price: number
           term: string
           unloading_address_id?: number | null
           unloading_date: string
@@ -232,7 +232,7 @@ export interface Database {
           length?: number | null
           loading_address_id?: number | null
           loading_date?: string
-          price?: string
+          price?: number
           term?: string
           unloading_address_id?: number | null
           unloading_date?: string
