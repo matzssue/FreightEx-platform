@@ -28,6 +28,7 @@ export const TextFieldInput = <T extends FieldValues>({
   type = 'text',
   size = 'small',
   placeholder,
+  sx,
   column = false,
   disabled = false,
   props,
@@ -69,6 +70,7 @@ export const TextFieldInput = <T extends FieldValues>({
               '.css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input': {
                 fontFamily: 'Nunito, sans-serif',
               },
+              ...sx,
             }}
             variant={variant}
             type={type}
