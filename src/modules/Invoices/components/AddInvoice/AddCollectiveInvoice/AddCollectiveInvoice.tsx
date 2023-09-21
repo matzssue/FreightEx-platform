@@ -154,6 +154,7 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
                   '.css-k4qjio-MuiFormHelperText-root': {
                     fontFamily: 'Nunito, sans-serif',
                   },
+                  fontWeight: '100%',
                 }}
                 renderInput={(params) => (
                   <TextField
@@ -170,7 +171,7 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
 
           <div>
             <label htmlFor='invoiceDate'>Date of invoice</label>
-            <DateInput control={control} name='invoiceDate' />
+            <DateInput fontSize='100%' control={control} name='invoiceDate' />
           </div>
           <TextFieldInput
             column={true}
@@ -178,7 +179,7 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
             defaultValue={''}
             name='additionalInformations'
             control={control}
-            props={{ multiline: true, rows: 4 }}
+            props={{ multiline: true, rows: 3 }}
           />
           <ul className={styles['orders-list']}>
             {!isOrdersListLoading ? (

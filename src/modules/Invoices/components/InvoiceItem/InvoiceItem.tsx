@@ -34,7 +34,7 @@ export const InvoiceItem = ({ invoice }: { invoice: getInvoices }) => {
       </span>
       <span>{date}</span>
       <span>{endDate}</span>
-      <span>{paymentTerm}</span>
+      <span>{paymentTerm} days</span>
       <span>
         {recipient.name} {recipient.surname} {''}
         {recipient.company_vat_id.name}
@@ -45,7 +45,8 @@ export const InvoiceItem = ({ invoice }: { invoice: getInvoices }) => {
           document={<InvoicePDF invoiceData={invoiceData} />}
         >
           <Button type='button'>
-            Generate PDF <FaRegFilePdf />
+            <span className={styles['button-text']}> Generate PDF </span>
+            <FaRegFilePdf />
           </Button>
         </PDFDownloadLink>
       </span>

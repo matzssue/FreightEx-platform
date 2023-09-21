@@ -52,11 +52,16 @@
     }
   }
 }
+
 @media only screen and (max-width: $breakpoint-medium) {
-  .options {
+  .search-form {
     form {
       flex-direction: column;
       gap: 5px;
+      width: 100%;
+      label {
+        font-size: 0.9rem;
+      }
     }
 
     .search {

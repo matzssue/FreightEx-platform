@@ -21,3 +21,24 @@
     }
   }
 }
+@media only screen and (max-width: $breakpoint-medium) {
+  .invoices {
+    padding: 0.5rem;
+
+    .invoices-buttons {
+      gap: 10px;
+      margin: 0.5rem 0;
+      button {
+        background-color: $primary-button-color;
+        border: none;
+        padding: 0.5rem 0;
+        font-size: 1rem;
+        width: 100%;
+        box-shadow: 4px 6px 21px -11px rgba(66, 66, 66, 1);
+        &:hover {
+          background-color: $primary-hover-button-color;
+        }
+      }
+    }
+  }
+}
