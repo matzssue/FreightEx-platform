@@ -34,7 +34,6 @@ export const AddInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) => {
 
   const { control, handleSubmit, reset } = useForm({ resolver: yupResolver(addInvoiceSchema) });
   const onSubmit: SubmitHandler<Invoice> = async (data) => {
-    console.log(data);
     const date = new Date(data.invoiceDate);
     const endData = new Date(date.setDate(date.getDate() + 25));
     const loadsId = [data.order.id];

@@ -6,7 +6,6 @@ export const useAddInvoince = () => {
   const { notify } = useNotificationContext();
   const queryClient = useQueryClient();
   const addInvoice = async (invoiceData: InsertInvoice, loadsId: string[]) => {
-    console.log(loadsId);
     const { data: invoice, error: loadError } = await supabase
       .from('invoices')
       .insert(invoiceData)

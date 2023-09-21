@@ -16,7 +16,7 @@ export const getCompanyOrdersToFacture = async (
     .filter('user_id.company_vat_id', 'eq', companyVatId)
     .returns<GetAcceptedLoadsData[]>();
   if (error) throw new Error();
-  console.log(ordersData);
+
   const orders = ordersData.map((load) => {
     return {
       id: load.id,
