@@ -28,7 +28,7 @@ export const LocationFilter = <T extends FieldValues>({
   return (
     <FilterCard filterName={'Location'}>
       <Fieldset>
-        <FilterInput label={'Loading address'}>
+        <FilterInput labelId='loadingAddress' label={'Loading address'}>
           <PlacesAutocompleteInput
             {...commonProps}
             name={'loadingAddress' as Path<T>}
@@ -39,7 +39,7 @@ export const LocationFilter = <T extends FieldValues>({
           />
         </FilterInput>
         <div className={styles.select}>
-          <FilterInput label={'+KM'}>
+          <FilterInput labelId='loadingArea' label={'+KM'}>
             <SelectInput
               name={'loadingArea' as Path<T>}
               control={control}
@@ -65,7 +65,7 @@ export const LocationFilter = <T extends FieldValues>({
       {/* {errors.loadingAddress && <p role='alert'>{errors.loadingAddress?.message}</p>} */}
 
       <Fieldset>
-        <FilterInput label={'Unloading country'}>
+        <FilterInput labelId='unloadingAddress' label={'Unloading country'}>
           <PlacesAutocompleteInput
             {...commonProps}
             name={'unloadingAddress' as Path<T>}

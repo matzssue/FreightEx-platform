@@ -81,7 +81,7 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
       <span className={styles['select-vehicle__button']}>
         <Autocomplete
           disablePortal
-          id='select-vehicle'
+          id={`select-vehicle-${order.id}`}
           value={order.vehicleId ? order.vehicleId : null}
           onChange={(_: SyntheticEvent<Element, Event>, value) =>
             selectVehicleHandler(_, value, order.id)

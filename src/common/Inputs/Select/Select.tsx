@@ -1,7 +1,7 @@
 import { Controller, FieldValues, Path, PathValue } from 'react-hook-form';
 import { MenuItem, SxProps } from '@mui/material';
 
-import { FormControl, Select } from '@mui/material';
+import { FormControl, Select, InputLabel } from '@mui/material';
 
 import styles from './Select.module.scss';
 import { BaseInputProps } from '../types';
@@ -33,21 +33,20 @@ export const SelectInput = <T extends FieldValues>({
       control={control}
       render={({ field: { onBlur, onChange, value } }) => (
         <FormControl style={{ flexDirection: direction }}>
-          {label && (
-            <label className={styles.label} htmlFor={name}>
-              {label}
-            </label>
-          )}
+          {/* <InputLabel id={`select-${name}-label`}>{label}</InputLabel> */}
           <Select
-            labelId={`select-${name}`}
+            id={`select-${name}`}
+            // labelId={`select-${name}-label`}
             variant={variant}
             size='small'
+            label={label}
             className={styles.select}
             onChange={onChange as PathValue<T, Path<T>>}
             value={value}
             onBlur={onBlur}
             autoWidth={true}
             sx={sx}
+            inputProps={{ id: name }}
             MenuProps={{ MenuListProps: { style: { maxHeight: '150px' } } }}
           >
             {options.map((option: string | number) => (
