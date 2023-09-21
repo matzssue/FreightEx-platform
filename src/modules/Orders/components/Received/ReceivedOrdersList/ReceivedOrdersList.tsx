@@ -7,16 +7,10 @@ import { getReceivedOrders } from 'src/utils/api/supabase/Orders/getReceivedOrde
 import { ReceivedOrderItem } from '../ReceivedOrderItem/ReceivedOrderItem';
 import { useEffect } from 'react';
 import { Paginate } from 'src/common/Pagination/Pagination';
-import { AcceptedLoad } from 'src/utils/api/supabase/types';
 import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
 import { usePaginationContext } from 'src/store/contexts/PaginationContext';
 import { useSearchById } from 'src/utils/hooks/useSearchById';
 import { SearchForm } from 'src/common/SearchForm/SearchForm';
-
-type FilteredOrders = {
-  orders: AcceptedLoad[] | null;
-  totalPages: number | null;
-};
 
 export const ReceivedOrdersList = () => {
   const { changeItemsPerPage, changePage, currentPage, itemsPerPage } = usePaginationContext();
@@ -55,7 +49,7 @@ export const ReceivedOrdersList = () => {
   if (!orders?.items || !orders.totalPages) return;
   return (
     <>
-      <SearchForm ref={searchRef} handleSubmit={handleSubmit} />
+      <SearchForm itemName='orders' ref={searchRef} handleSubmit={handleSubmit} />
       <div className={styles['received-table']}>
         <OrdersColumns
           gridColumns='0.2fr 0.3fr 2fr 0.4fr 1.2fr 0.9fr 1fr 1fr'
