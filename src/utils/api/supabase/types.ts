@@ -154,3 +154,26 @@ export type GetCompaniesData = {
   created_at: string;
   vehicle_id: string | null;
 };
+export type getInvoicesDatabase = {
+  id: number;
+  cost: number;
+  date: string;
+  end_date: string;
+  payment_term: string;
+  recipient_id: UserDatabaseWithComp;
+  seller_id: UserDatabaseWithComp;
+  additional_informations: string;
+  currency: string;
+};
+
+export type getInvoices = {
+  id: number;
+  cost: number;
+  date: string;
+  endDate: string;
+  paymentTerm: string;
+  recipient: UserDatabaseWithComp;
+  seller: UserDatabaseWithComp;
+  additionalInformations: string;
+  currency: string;
+};
