@@ -5,11 +5,13 @@ import { useUserContext } from 'src/store/contexts/UserContext';
 import { useQuery } from '@tanstack/react-query';
 import { getReceivedOrders } from 'src/utils/api/supabase/Orders/getReceivedOrders';
 import { ReceivedOrderItem } from '../ReceivedOrderItem/ReceivedOrderItem';
-import { useRef, useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Paginate } from 'src/common/Pagination/Pagination';
 import { AcceptedLoad } from 'src/utils/api/supabase/types';
 import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
 import { usePaginationContext } from 'src/store/contexts/PaginationContext';
+import { useSearchById } from 'src/utils/hooks/useSearchById';
+import { SearchForm } from 'src/common/SearchForm/SearchForm';
 
 type FilteredOrders = {
   orders: AcceptedLoad[] | null;
@@ -25,12 +27,6 @@ export const ReceivedOrdersList = () => {
     changePage(1);
   }, []);
 
-  const [filteredLoads, setFilteredLoads] = useState<FilteredOrders>({
-    orders: null,
-    totalPages: null,
-  });
-  const searchOrderRef = useRef<HTMLInputElement>(null);
-
   const {
     data: acceptedOrders,
     isError: receivedOrdersError,
@@ -42,44 +38,31 @@ export const ReceivedOrdersList = () => {
       enabled: !!userId,
     },
   );
+  const { handleSubmit, filteredItems, searchRef } = useSearchById(
+    acceptedOrders?.orders,
+    acceptedOrders?.totalPages,
+  );
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const searchValue = searchOrderRef?.current?.value;
-    if (searchValue && acceptedOrders) {
-      const filteredOrders = {
-        orders: acceptedOrders?.orders.filter((order) => order.id.toString() === searchValue),
-        totalPages: acceptedOrders?.totalPages,
-      };
-      setFilteredLoads(filteredOrders);
-    }
-    if (!searchValue) {
-      setFilteredLoads({ orders: null, totalPages: null });
-    }
-  };
   if (receivedOrdersLoading) return <LoadingSpinner />;
 
   if (receivedOrdersError) {
     return <div>Error loading data</div>;
   }
-  const orders = filteredLoads.orders ? filteredLoads : acceptedOrders;
-  if (!orders?.orders || !orders.totalPages) return;
+  const orders = filteredItems.items
+    ? { items: filteredItems.items, totalPages: filteredItems.totalPages }
+    : { items: acceptedOrders?.orders, totalPages: acceptedOrders?.totalPages };
+
+  if (!orders?.items || !orders.totalPages) return;
   return (
     <>
-      <div className={styles['search-bar']}>
-        <form onSubmit={handleSubmit}>
-          <label>Search order id</label>
-          <input ref={searchOrderRef} type='search' />
-          <button className={styles.search}>Search</button>
-        </form>
-      </div>
+      <SearchForm ref={searchRef} handleSubmit={handleSubmit} />
       <div className={styles['received-table']}>
         <OrdersColumns
           gridColumns='0.2fr 0.3fr 2fr 0.4fr 1.2fr 0.9fr 1fr 1fr'
           columns={receivedOrdersColumns}
         />
         <ul className={styles['orders-list']}>
-          {orders?.orders?.map((order) => {
+          {orders?.items?.map((order) => {
             return <ReceivedOrderItem key={order.id} order={order} />;
           })}
         </ul>
