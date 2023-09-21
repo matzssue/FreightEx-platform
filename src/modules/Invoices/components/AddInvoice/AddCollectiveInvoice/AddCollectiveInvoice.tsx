@@ -102,6 +102,7 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
     const endData = new Date(date.setDate(date.getDate() + Number(data.paymentTerm)));
     const orders = data.orders ? data.orders : [];
     const { sellerId, recipientId, currency } = selectedOrders[0];
+    if (!totalAmount) return;
     const addInvoiceData = {
       seller_id: sellerId,
       recipient_id: recipientId,
@@ -112,6 +113,7 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
       end_date: endData.toDateString(),
       additional_informations: data.additionalInformations,
     };
+
     addInvoiceMutation.mutate({ invoiceData: addInvoiceData, loadsId: orders });
     resetAll();
   };
