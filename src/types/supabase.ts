@@ -151,33 +151,36 @@ export interface Database {
       invoices: {
         Row: {
           additional_informations: string | null
-          cost: number | null
-          date: string | null
-          end_date: string | null
+          cost: number
+          currency: string
+          date: string
+          end_date: string
           id: number
-          payment_term: string | null
+          payment_term: string
           recipient_id: string
-          seller_id: string | null
+          seller_id: string
         }
         Insert: {
           additional_informations?: string | null
-          cost?: number | null
-          date?: string | null
-          end_date?: string | null
+          cost: number
+          currency?: string
+          date: string
+          end_date: string
           id?: number
-          payment_term?: string | null
+          payment_term: string
           recipient_id: string
-          seller_id?: string | null
+          seller_id: string
         }
         Update: {
           additional_informations?: string | null
-          cost?: number | null
-          date?: string | null
-          end_date?: string | null
+          cost?: number
+          currency?: string
+          date?: string
+          end_date?: string
           id?: number
-          payment_term?: string | null
+          payment_term?: string
           recipient_id?: string
-          seller_id?: string | null
+          seller_id?: string
         }
         Relationships: [
           {
