@@ -46,6 +46,7 @@ export const AddInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) => {
       date: data.invoiceDate,
       end_date: endData.toDateString(),
       additional_informations: data.additionalInformations,
+      currency: data.order.currency,
     };
     addInvoiceMutation.mutate({ invoiceData, loadsId });
     reset();
