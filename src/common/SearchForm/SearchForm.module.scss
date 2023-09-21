@@ -1,0 +1,67 @@
+@import '/src/styles/variables.scss';
+
+.search-form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  padding: 0.5rem;
+  text-align: center;
+  color: $secondary-text-color;
+  background-color: $primary-color;
+  position: relative;
+  form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
+    label {
+      color: $primary-text-color;
+      font-weight: 700;
+    }
+    .search-input {
+      position: relative;
+      input {
+        width: 100%;
+        max-width: 350px;
+        font-size: 1rem;
+        padding: 0.5rem 2.5rem;
+        border: none;
+        color: $primary-text-color;
+        border-radius: 0.2rem;
+        background-color: #999a9b;
+      }
+      svg {
+        position: absolute;
+        top: 12px;
+        left: 10px;
+        color: $primary-blue-color;
+      }
+    }
+  }
+  .search {
+    font-weight: 700;
+    border: none;
+    padding: 0.6rem 2rem;
+    border-radius: 0.3rem;
+    background-color: $primary-blue-color;
+
+    &:hover {
+      background-color: $primary-blue-hover-color;
+    }
+  }
+}
+@media only screen and (max-width: $breakpoint-medium) {
+  .options {
+    form {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .search {
+      padding: 0.4rem 1rem;
+      width: 100%;
+    }
+  }
+}
