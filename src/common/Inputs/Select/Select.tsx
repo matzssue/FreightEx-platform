@@ -33,21 +33,18 @@ export const SelectInput = <T extends FieldValues>({
       control={control}
       render={({ field: { onBlur, onChange, value } }) => (
         <FormControl style={{ flexDirection: direction }}>
-          {label && (
-            <label className={styles.label} htmlFor={name}>
-              {label}
-            </label>
-          )}
           <Select
-            labelId={`select-${name}`}
+            id={`select-${name}`}
             variant={variant}
             size='small'
+            label={label}
             className={styles.select}
             onChange={onChange as PathValue<T, Path<T>>}
             value={value}
             onBlur={onBlur}
             autoWidth={true}
             sx={sx}
+            inputProps={{ id: name }}
             MenuProps={{ MenuListProps: { style: { maxHeight: '150px' } } }}
           >
             {options.map((option: string | number) => (

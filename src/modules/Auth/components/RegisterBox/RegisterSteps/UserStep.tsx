@@ -14,15 +14,21 @@ export const UserStep = () => {
         control={control}
         name='email'
         type='email'
-        row={true}
+        column={true}
       />
-      <TextFieldInput defaultValue={''} label={'Name'} control={control} name='name' row={true} />
+      <TextFieldInput
+        defaultValue={''}
+        label={'Name'}
+        control={control}
+        name='name'
+        column={true}
+      />
       <TextFieldInput
         defaultValue={''}
         label={'Surname'}
         control={control}
         name='surname'
-        row={true}
+        column={true}
       />
       <PasswordInput label={'Password'} control={control} name='password' />
       <PasswordInput label={'Confirm Password'} control={control} name='passwordConfirmation' />

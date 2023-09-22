@@ -56,6 +56,7 @@ export const DateInput = <T extends FieldValues>({
                   variant: 'outlined',
                   error: !!error,
                   helperText: error?.message,
+                  id: `${name}`,
                 },
               }}
             />

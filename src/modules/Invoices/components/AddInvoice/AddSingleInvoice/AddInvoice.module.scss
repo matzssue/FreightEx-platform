@@ -1,0 +1,30 @@
+@import '/src/styles/variables.scss';
+
+.invoice-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 15px;
+    width: 70vw;
+    height: auto;
+    background-color: $primary-color;
+    .invoice-date__label {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+@media only screen and (max-width: $breakpoint-small) {
+  .invoice-modal {
+    form {
+      width: 85vw;
+    }
+  }
+}

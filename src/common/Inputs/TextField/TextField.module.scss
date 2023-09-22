@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  &.row {
+  &.column {
     flex-direction: column;
   }
   .label {

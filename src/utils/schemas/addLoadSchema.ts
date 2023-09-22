@@ -6,7 +6,7 @@ export const addLoadSchema = yup.object().shape({
   unloadingAddress: yup.string().required('Unloading address is required'),
   loadingDate: yup.string().required('Loading date is required').min(5),
   unloadingDate: yup.string().required('Unloading date is required').min(5),
-  price: yup.string().required('Price is required'),
+  price: yup.number().required('Price is required'),
   term: yup.string().required('Payment term is required').min(1),
   currency: yup.string().required('Please select currency'),
   length: yup

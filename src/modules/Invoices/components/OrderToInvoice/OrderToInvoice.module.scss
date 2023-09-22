@@ -1,0 +1,24 @@
+@import '/src/styles/variables.scss';
+.order-to-invoice {
+  display: grid;
+  grid-template-columns: 0.1fr 0.2fr 0.7fr 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 0.2rem;
+  background-color: $primary-color;
+  input {
+    display: flex;
+    justify-self: center;
+    width: 15px;
+    height: 15px;
+  }
+}
+@media only screen and (max-width: $breakpoint-small) {
+  .order-to-invoice {
+    font-size: 0.75rem;
+    gap: 10px;
+    input {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}

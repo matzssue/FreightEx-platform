@@ -21,6 +21,7 @@ import { PublishedOrders } from './Pages/Orders/PublishedOrders';
 import { ReceivedOrders } from './Pages/Orders/ReceivedOrders';
 import { LoadDetailsPage } from './Pages/Loads/LoadDetailsPage';
 import { AcceptedOrders } from './Pages/Orders/AcceptedOrders';
+import { Invoices } from './Pages/Invoices/Invoices';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -92,6 +93,9 @@ function App() {
                           <Route path='accepted' element={<AcceptedOrders />} />
                         </Route>
                         <Route path='received' element={<ReceivedOrders />} />
+                      </Route>
+                      <Route path='invoices'>
+                        <Route index element={<Invoices />} />
                       </Route>
                     </Routes>
                   </Suspense>
