@@ -1,8 +1,8 @@
 import styles from './SearchForm.module.scss';
-import { forwardRef } from 'react';
+import { FormEventHandler, forwardRef } from 'react';
 import { BsSearch } from 'react-icons/bs';
 type SearchFormProps = {
-  handleSubmit: any;
+  handleSubmit: FormEventHandler<HTMLFormElement>;
   itemName: string;
 };
 
