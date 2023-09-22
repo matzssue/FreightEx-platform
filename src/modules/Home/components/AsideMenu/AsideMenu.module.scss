@@ -145,3 +145,11 @@
     }
   }
 }
+@media only screen and (max-height: $breakpoint-small) {
+  .navbar {
+    height: 100%;
+    .main-links {
+      top: 100px;
+    }
+  }
+}
