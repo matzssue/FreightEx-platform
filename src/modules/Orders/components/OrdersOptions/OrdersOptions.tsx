@@ -33,8 +33,9 @@ export const OrdersOptions = forwardRef<HTMLInputElement, OrdersOptionsProps>(
             </button>
           </form>
           <FormControl className={styles.select}>
-            <label>Select type of orders</label>
+            <label htmlFor='select-orders-type'>Select orders</label>
             <Select
+              id='select-orders-input'
               sx={{
                 height: 'auto',
                 fontSize: '100%',
@@ -42,8 +43,9 @@ export const OrdersOptions = forwardRef<HTMLInputElement, OrdersOptionsProps>(
                   padding: '13px 11px',
                 },
               }}
+              inputProps={{ id: 'select-orders-type' }}
               onChange={selectOrdersHandler}
-              defaultValue={currentUrl}
+              value={currentUrl}
             >
               <MenuItem sx={{ fontSize: '100%' }} value={'/orders/published'}>
                 Published

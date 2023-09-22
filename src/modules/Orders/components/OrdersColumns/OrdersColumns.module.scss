@@ -5,6 +5,7 @@
   padding: 0;
   margin: 0;
   li {
+    text-align: center;
     border-right: 1px solid white;
     background-color: rgb(77, 77, 77);
     color: $secondary-text-color;
@@ -14,6 +15,12 @@
     }
   }
 }
+@media only screen and (max-width: $breakpoint-large) {
+  .orders-columns__list {
+    font-size: 0.7rem;
+  }
+}
+
 @media only screen and (max-width: $breakpoint-medium) {
   .orders-columns__list {
     display: none;

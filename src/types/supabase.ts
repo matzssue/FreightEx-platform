@@ -9,10 +9,11 @@ export interface Database {
           created_at: string;
           currency: string;
           id: number;
+          invoice_id: number | null;
           length: number | null;
           loading_address_id: number | null;
           loading_date: string;
-          price: string;
+          price: number;
           term: string;
           unloading_address_id: number | null;
           unloading_date: string;
@@ -26,10 +27,11 @@ export interface Database {
           created_at?: string;
           currency: string;
           id?: number;
+          invoice_id?: number | null;
           length?: number | null;
           loading_address_id?: number | null;
           loading_date: string;
-          price: string;
+          price: number;
           term: string;
           unloading_address_id?: number | null;
           unloading_date: string;
@@ -43,10 +45,11 @@ export interface Database {
           created_at?: string;
           currency?: string;
           id?: number;
+          invoice_id?: number | null;
           length?: number | null;
           loading_address_id?: number | null;
           loading_date?: string;
-          price?: string;
+          price?: number;
           term?: string;
           unloading_address_id?: number | null;
           unloading_date?: string;
@@ -60,6 +63,12 @@ export interface Database {
             foreignKeyName: 'accepted_loads_accepted_by_fkey';
             columns: ['accepted_by'];
             referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'accepted_loads_invoice_id_fkey';
+            columns: ['invoice_id'];
+            referencedRelation: 'invoices';
             referencedColumns: ['id'];
           },
           {
@@ -133,6 +142,55 @@ export interface Database {
         };
         Relationships: [];
       };
+      invoices: {
+        Row: {
+          additional_informations: string | null;
+          cost: number;
+          currency: string;
+          date: string;
+          end_date: string;
+          id: number;
+          payment_term: string;
+          recipient_id: string;
+          seller_id: string;
+        };
+        Insert: {
+          additional_informations?: string | null;
+          cost: number;
+          currency?: string;
+          date: string;
+          end_date: string;
+          id?: number;
+          payment_term: string;
+          recipient_id: string;
+          seller_id: string;
+        };
+        Update: {
+          additional_informations?: string | null;
+          cost?: number;
+          currency?: string;
+          date?: string;
+          end_date?: string;
+          id?: number;
+          payment_term?: string;
+          recipient_id?: string;
+          seller_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'invoices_recipient_id_fkey';
+            columns: ['recipient_id'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'invoices_seller_id_fkey';
+            columns: ['seller_id'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       loads: {
         Row: {
           created_at: string;
@@ -141,7 +199,7 @@ export interface Database {
           length: number | null;
           loading_address_id: number | null;
           loading_date: string;
-          price: string;
+          price: number;
           term: string;
           unloading_address_id: number | null;
           unloading_date: string;
@@ -156,7 +214,7 @@ export interface Database {
           length?: number | null;
           loading_address_id?: number | null;
           loading_date: string;
-          price: string;
+          price: number;
           term: string;
           unloading_address_id?: number | null;
           unloading_date: string;
@@ -171,7 +229,7 @@ export interface Database {
           length?: number | null;
           loading_address_id?: number | null;
           loading_date?: string;
-          price?: string;
+          price?: number;
           term?: string;
           unloading_address_id?: number | null;
           unloading_date?: string;

@@ -7,6 +7,7 @@ export type CompanyDatabase = Database['public']['Tables']['companies']['Row'];
 export type AcceptedLoadDatabase = Database['public']['Tables']['accepted_loads']['Row'];
 export type InsertAcceptedLoad = Database['public']['Tables']['accepted_loads']['Insert'];
 export type InsertVehicle = Database['public']['Tables']['vehicles']['Insert'];
+export type InsertInvoice = Database['public']['Tables']['invoices']['Insert'];
 export type UserDatabaseWithComp = {
   avatar: string;
   company_vat_id: CompanyDatabase;
@@ -34,7 +35,7 @@ export type GetLoadsData = {
   length: number;
   weight: number;
   term: string;
-  price: string;
+  price: number;
   currency: string;
   user_id: UserDatabaseWithComp;
   created_at: string;
@@ -49,7 +50,7 @@ export type GetLoadsDataWithId = {
   length: number;
   weight: number;
   term: string;
-  price: string;
+  price: number;
   currency: string;
   user_id: string;
   created_at: string;
@@ -64,12 +65,13 @@ export type GetAcceptedLoadsData = {
   length: number;
   weight: number;
   term: string;
-  price: string;
+  price: number;
   currency: string;
   user_id: UserDatabaseWithComp;
   accepted_by: UserDatabaseWithComp;
   created_at: string;
   vehicle_id: string | null;
+  invoice_id: string | null;
 };
 export type AddLoadData = {
   currency: string;
@@ -80,7 +82,7 @@ export type AddLoadData = {
   loadingAddressData: Addresses;
   loadingDate: string;
   weight?: number;
-  price: string;
+  price: number;
   term: string;
   unloadingDate: string;
   vehicles: Vehicles;
@@ -96,7 +98,7 @@ export type LoadsData = {
   length: number;
   weight: number;
   term: string;
-  price: string;
+  price: number;
   currency: string;
   user_id: UserDatabaseWithComp;
   company: CompanyDatabase;
@@ -112,7 +114,7 @@ export type Load = {
   cargoLength: number;
   cargoWeight: number;
   paymentTerm: string;
-  price: string;
+  price: number;
   currency: string;
   user: UserDatabase;
   company: CompanyDatabase;
@@ -128,10 +130,64 @@ export type AcceptedLoad = {
   cargoLength: number;
   cargoWeight: number;
   paymentTerm: string;
-  price: string;
+  price: number;
   currency: string;
   user: UserDatabase;
   company: CompanyDatabase;
+  createdAt: string;
+  vehicleId: string | null;
+};
+export type GetCompaniesData = {
+  id: string;
+  loading_address_id: AddressesDatabase;
+  unloading_address_id: AddressesDatabase;
+  loading_date: string;
+  unloading_date: string;
+  vehicle_types: Vehicles;
+  length: number;
+  weight: number;
+  term: string;
+  price: number;
+  currency: string;
+  user_id: UserDatabaseWithComp;
+  accepted_by: UserDatabaseWithComp;
+  created_at: string;
+  vehicle_id: string | null;
+};
+export type GetInvoicesDatabase = {
+  id: number;
+  cost: number;
+  date: string;
+  end_date: string;
+  payment_term: string;
+  recipient_id: UserDatabaseWithComp;
+  seller_id: UserDatabaseWithComp;
+  additional_informations: string;
+  currency: string;
+};
+
+export type GetInvoices = {
+  id: number;
+  cost: number;
+  date: string;
+  endDate: string;
+  paymentTerm: string;
+  recipient: UserDatabaseWithComp;
+  seller: UserDatabaseWithComp;
+  additionalInformations: string;
+  currency: string;
+};
+export type CompanyOrdersData = {
+  id: string;
+  loadingCountry: string;
+  loadingCity: string;
+  unloadingCountry: string;
+  unloadingCity: string;
+  paymentTerm: string;
+  price: number;
+  currency: string;
+  seller: string;
+  recipient: string;
   createdAt: string;
   vehicleId: string | null;
 };

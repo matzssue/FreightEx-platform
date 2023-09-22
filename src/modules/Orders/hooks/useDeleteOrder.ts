@@ -17,7 +17,7 @@ export const useDeleteOrder = () => {
     if (error) throw error;
     return data;
   };
-  return useMutation(['loads', 'published'], async (loadId: string) => await deleteOrder(loadId), {
+  return useMutation(async (loadId: string) => await deleteOrder(loadId), {
     onSuccess: async () => {
       notify('success', 'order deleted');
       queryClient.invalidateQueries(['loads']);

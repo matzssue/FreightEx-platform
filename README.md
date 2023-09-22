@@ -51,7 +51,7 @@ Install my-project with npm or arn
 - [ ] Implement user guide
 - [x] Improve responsiveness
 - [x] Fix notifications box
-- [ ] Fix loads pagination
+- [x] Fix loads pagination
 
 2. Loads subpage
 
@@ -73,6 +73,6 @@ Install my-project with npm or arn
 
 5. Invoices subpage
 
-- [ ] Add list of invoices,
-- [ ] Add function to issue an invoice
-- [ ] Add option to generate invoices in pdf
+- [x] Add list of invoices,
+- [x] Add function to issue an invoice
+- [x] Add option to generate invoices in pdf

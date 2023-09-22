@@ -11,9 +11,15 @@ export const CompanyStep = () => {
         label={'Company name'}
         control={control}
         name='companyName'
-        row={true}
+        column={true}
       />
-      <TextFieldInput defaultValue={''} label={'VATID'} control={control} name='vatId' row={true} />
+      <TextFieldInput
+        defaultValue={''}
+        label={'VATID'}
+        control={control}
+        name='vatId'
+        column={true}
+      />
     </>
   );
 };

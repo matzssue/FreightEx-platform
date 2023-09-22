@@ -15,8 +15,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Stepper, Step, StepLabel } from '@mui/material';
 import useCreateUser, { UserData } from '../../hooks/useCreateUser';
 
+const steps = ['User', 'Company'];
+
 export const RegisterForm = () => {
-  const steps = ['User', 'Company'];
   const [activeStep, setActiveStep] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const createUserMutation = useCreateUser();

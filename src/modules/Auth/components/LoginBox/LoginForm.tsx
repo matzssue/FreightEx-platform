@@ -47,7 +47,7 @@ export const LoginForm = () => {
           label={'Email'}
           control={control}
           name='email'
-          row={true}
+          column={true}
         />
         <PasswordInput label={'Password'} size='medium' control={control} name='password' />
         <div className={styles.buttons}>

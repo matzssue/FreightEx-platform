@@ -19,8 +19,9 @@ export const TruckFilter = ({
   return (
     <FilterCard filterName={'Truck'}>
       <Fieldset>
-        <FilterInput label={'Min weight'}>
+        <FilterInput labelId='min-load-weight' label={'Min weight'}>
           <input
+            id='min-load-weight'
             className={styles.input}
             placeholder='min'
             {...register('minWeight')}
@@ -29,8 +30,9 @@ export const TruckFilter = ({
           />
           {errors.minWeight && <p role='alert'>{errors.minWeight?.message}</p>}
         </FilterInput>
-        <FilterInput label={'Max weight'}>
+        <FilterInput labelId='max-load-weight' label={'Max weight'}>
           <input
+            id='max-load-weight'
             className={styles.input}
             placeholder='max'
             {...register('maxWeight')}
@@ -40,8 +42,9 @@ export const TruckFilter = ({
         </FilterInput>
       </Fieldset>
       <Fieldset>
-        <FilterInput label={'Min length'}>
+        <FilterInput labelId='min-load-length' label={'Min length'}>
           <input
+            id='min-load-length'
             className={styles.input}
             placeholder='max'
             {...register('minLength')}
@@ -49,8 +52,9 @@ export const TruckFilter = ({
           />
           {errors.minLength && <p role='alert'>{errors.minLength?.message}</p>}
         </FilterInput>
-        <FilterInput label={'Max length'}>
+        <FilterInput labelId='max-load-length' label={'Max length'}>
           <input
+            id='max-load-length'
             className={styles.input}
             placeholder='max'
             {...register('maxLength')}
