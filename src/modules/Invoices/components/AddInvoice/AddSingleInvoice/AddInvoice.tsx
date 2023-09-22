@@ -30,9 +30,9 @@ export const AddInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) => {
     },
   );
 
-  if (isError) return <p>Sorry, something went wrong. Please try again later</p>;
-
   const { control, handleSubmit, reset } = useForm({ resolver: yupResolver(addInvoiceSchema) });
+
+  if (isError) return <p>Sorry, something went wrong. Please try again later</p>;
   const onSubmit: SubmitHandler<Invoice> = async (data) => {
     const date = new Date(data.invoiceDate);
     const endData = new Date(date.setDate(date.getDate() + 25));

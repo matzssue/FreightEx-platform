@@ -20,6 +20,7 @@ import { Button } from 'src/common/Buttons/Button/Button';
 import { InvoiceFormHeader } from '../../InvoiceFormHeader/InvoiceFormHeader';
 import { calculateTotal } from '../../../utils/calculateTotal';
 import { AddInvoiceProps } from 'src/modules/Invoices/types';
+import { CompanyOrdersData } from 'src/utils/api/supabase/types';
 
 type SelectedOrders = {
   id: string;
@@ -39,7 +40,6 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
   const { data, isError, isLoading } = useQuery(['companiesToFacture'], async () =>
     getAllCompanies(),
   );
-  if (isError) return <div>Sorry something went wrong</div>;
 
   const {
     data: companyFactures,
@@ -50,8 +50,6 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
     async () => getCompanyOrdersToFacture(userId, selectedCompany),
     { enabled: !!userId },
   );
-
-  if (ordersError) return <div>Sorry something went wrong</div>;
 
   const {
     control,
@@ -72,7 +70,10 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
     calculateTotalAmount();
   }, [selectedOrders]);
 
-  const handleOrderCheckbox = (event: ChangeEvent<HTMLInputElement>, order: any) => {
+  if (isError) return <div>Sorry something went wrong</div>;
+  if (ordersError) return <div>Sorry something went wrong</div>;
+
+  const handleOrderCheckbox = (event: ChangeEvent<HTMLInputElement>, order: CompanyOrdersData) => {
     if (event.target.checked) {
       setSelectedOrders([
         ...selectedOrders,
