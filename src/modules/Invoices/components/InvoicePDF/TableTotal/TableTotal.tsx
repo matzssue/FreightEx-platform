@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
-import { getInvoices } from 'src/utils/api/supabase/types';
+import { GetInvoices } from 'src/utils/api/supabase/types';
 const styles = StyleSheet.create({
   tbody: {
     fontSize: 9,
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   tbody2: { flex: 2, borderRightWidth: 1 },
 });
 
-export const TableTotal = ({ invoiceData }: { invoiceData: getInvoices }) => (
+export const TableTotal = ({ invoiceData }: { invoiceData: GetInvoices }) => (
   <View style={{ width: '100%', flexDirection: 'row', marginTop: 10 }}>
     <View style={styles.total}>
       <Text></Text>

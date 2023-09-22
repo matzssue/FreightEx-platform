@@ -1,5 +1,5 @@
 import { Page, Document, StyleSheet } from '@react-pdf/renderer';
-import { GetAcceptedLoadsData, getInvoices } from 'src/utils/api/supabase/types';
+import { GetAcceptedLoadsData, GetInvoices } from 'src/utils/api/supabase/types';
 import InvoiceTitle from './InvoiceHeader/InvoiceTitle';
 import { TableBody } from './TableBody/TableBody';
 import { Address } from './Address/Address';
@@ -9,7 +9,7 @@ import { TableTotal } from './TableTotal/TableTotal';
 import { InvoiceDates } from './InvoiceDates/InvoiceDates';
 
 type InvoiceData = {
-  invoice: getInvoices;
+  invoice: GetInvoices;
   invoiceOrders: GetAcceptedLoadsData[];
 };
 

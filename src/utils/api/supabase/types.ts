@@ -154,7 +154,7 @@ export type GetCompaniesData = {
   created_at: string;
   vehicle_id: string | null;
 };
-export type getInvoicesDatabase = {
+export type GetInvoicesDatabase = {
   id: number;
   cost: number;
   date: string;
@@ -166,7 +166,7 @@ export type getInvoicesDatabase = {
   currency: string;
 };
 
-export type getInvoices = {
+export type GetInvoices = {
   id: number;
   cost: number;
   date: string;
@@ -176,4 +176,18 @@ export type getInvoices = {
   seller: UserDatabaseWithComp;
   additionalInformations: string;
   currency: string;
+};
+export type CompanyOrdersData = {
+  id: string;
+  loadingCountry: string;
+  loadingCity: string;
+  unloadingCountry: string;
+  unloadingCity: string;
+  paymentTerm: string;
+  price: number;
+  currency: string;
+  seller: string;
+  recipient: string;
+  createdAt: string;
+  vehicleId: string | null;
 };

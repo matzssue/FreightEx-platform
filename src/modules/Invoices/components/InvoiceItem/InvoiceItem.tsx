@@ -1,5 +1,5 @@
 import styles from './InvoiceItem.module.scss';
-import { getInvoices } from 'src/utils/api/supabase/types';
+import { GetInvoices } from 'src/utils/api/supabase/types';
 import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
 import { FaRegFilePdf } from 'react-icons/fa';
@@ -8,7 +8,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import { InvoicePDF } from '../InvoicePDF/InvoicePDF';
 import { getInvoiceOrders } from 'src/utils/api/supabase/Invoices/getInvoiceOrders';
 
-export const InvoiceItem = ({ invoice }: { invoice: getInvoices }) => {
+export const InvoiceItem = ({ invoice }: { invoice: GetInvoices }) => {
   const { id, cost, date, endDate, paymentTerm, recipient, currency } = invoice;
 
   const {

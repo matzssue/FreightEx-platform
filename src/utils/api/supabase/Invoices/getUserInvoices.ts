@@ -1,5 +1,5 @@
 import supabase from 'src/config/supabase';
-import { getInvoices, getInvoicesDatabase } from '../types';
+import { GetInvoices, GetInvoicesDatabase } from '../types';
 
 export const getUserInvoices = async (
   id: string | undefined,
@@ -18,11 +18,11 @@ export const getUserInvoices = async (
     })
     .eq('seller_id', id)
     .range((page - 1) * itemsPerPage, page * itemsPerPage - 1)
-    .returns<getInvoicesDatabase[]>();
+    .returns<GetInvoicesDatabase[]>();
 
   if (invoiceError) throw new Error();
 
-  const invoiceData: getInvoices[] = invoices.map((invoice) => {
+  const invoiceData: GetInvoices[] = invoices.map((invoice) => {
     return {
       id: invoice.id,
       cost: invoice.cost,

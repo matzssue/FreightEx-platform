@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
-import { getInvoices } from 'src/utils/api/supabase/types';
+import { GetInvoices } from 'src/utils/api/supabase/types';
 
 const styles = StyleSheet.create({
   spaceBetween: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   date: { fontWeight: 400, fontSize: 10, textAlign: 'center' },
 });
 
-export const InvoiceDates = ({ invoiceData }: { invoiceData: getInvoices }) => {
+export const InvoiceDates = ({ invoiceData }: { invoiceData: GetInvoices }) => {
   return (
     <View style={styles.titleContainer}>
       <View style={styles.spaceBetween}>
