@@ -68,7 +68,7 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
         <GiHamburgerMenu />
       </button>
       <button className={styles['guide-button']} onClick={handleClickStart}>
-        Start the guide
+        Start guide
       </button>
       <button onClick={() => dispatch(openModal())} className={styles['freight-button']}>
         Add Freight
