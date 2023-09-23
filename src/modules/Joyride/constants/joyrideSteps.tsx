@@ -3,7 +3,7 @@ export const joyrideSteps = [
     target: 'body',
     content: (
       <>
-        <h2>Hello! This is you'r guide through the application </h2>
+        <h2>Hello! This is your guide through the application </h2>
         <p>When you click "next", it will start the tour.</p>
       </>
     ),
