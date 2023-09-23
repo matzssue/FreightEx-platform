@@ -13,6 +13,7 @@ import { useUserContext } from '../../../../store/contexts/UserContext';
 import { useNavigate } from 'react-router';
 import { useLogout } from '../../../Auth/hooks/useLogout';
 import { NotificationBox } from '../NoticiationBox/NotificationBox';
+import { useJoyrideContext } from 'src/store/contexts/JoyRideContext';
 
 export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<boolean>> }) => {
   const navigate = useNavigate();
@@ -30,20 +31,29 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
     setAnchorEl(null);
   };
 
+  const { setState } = useJoyrideContext();
+
+  const handleClickStart = () => {
+    navigate('/loads');
+    setState({ run: true, tourActive: true });
+  };
+
   const handleMenuOption = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLButtonElement;
-    switch (target.id) {
-      case 'profile':
-        navigate('/profile');
-        break;
-      case 'account':
-        navigate(`/account/${userId}`);
-        break;
-      case 'signOut':
-        logoutMutation.mutate();
-        break;
-      default:
-        break;
+    const menuItem = target.closest('li[role="menuitem"]');
+
+    if (menuItem) {
+      const menuItemId = menuItem.id;
+      switch (menuItemId) {
+        case 'account':
+          navigate(`/account/${userId}`);
+          break;
+        case 'sign-out':
+          logoutMutation.mutate();
+          break;
+        default:
+          break;
+      }
     }
   };
 
@@ -57,6 +67,9 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
       >
         <GiHamburgerMenu />
       </button>
+      <button className={styles['guide-button']} onClick={handleClickStart}>
+        Start the guide
+      </button>
       <button onClick={() => dispatch(openModal())} className={styles['freight-button']}>
         Add Freight
       </button>
@@ -64,11 +77,10 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
       {userData && (
         <span className={styles.user}>{`${userData.name} (${userData.company_vat_id}) `}</span>
       )}
-      <IconButton onClick={openMenuHandler} size='small' sx={{ ml: 2 }}>
+      <IconButton onClick={openMenuHandler} size='small'>
         <Avatar
+          className={styles['user-avatar']}
           sx={{
-            width: 30,
-            height: 30,
             cursor: 'pointer',
             border: '5px solid transparent',
             ':hover': { borderColor: '#3c5f77' },
