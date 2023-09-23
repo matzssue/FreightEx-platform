@@ -2,7 +2,6 @@
 
 .container {
   box-sizing: border-box;
-  // position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -32,6 +31,16 @@
       color: white;
     }
   }
+  .guide-button {
+    background-color: rgb(229, 44, 44);
+    color: $secondary-text-color;
+    border: none;
+    border-radius: 1rem;
+    &:hover {
+      background-color: rgb(236, 80, 80);
+      color: white;
+    }
+  }
   .freight-button {
     background-color: $secondary-button-color;
     border: none;
@@ -45,33 +54,59 @@
       background-color: rgb(28, 167, 28);
     }
   }
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+  }
 }
 @media only screen and (max-width: $breakpoint-medium) {
   .container {
+    padding-left: 4rem;
+    gap: 20px;
     .hamburger-button {
       display: none;
+    }
+    .guide-button {
+      font-size: 0.8rem;
+      padding: 0.2rem 0.7rem;
+    }
+    .freight-button {
+      font-size: 0.8rem;
+      padding: 0.2rem 0.7rem;
+    }
+    .user {
+      font-size: 0.8rem;
     }
   }
 }
 
 @media only screen and (max-width: $breakpoint-small) {
   .container {
-    justify-content: space-around;
+    justify-content: center;
     position: sticky;
     top: 0;
-    gap: 5px;
+    gap: 10px;
     height: 40px;
     padding-right: 1rem;
     z-index: 4;
+    padding-left: 0.5rem;
     .hamburger-button {
       display: none;
     }
+    .guide-button {
+      font-size: 0.6rem;
+      padding: 0.2rem 0.5rem;
+    }
     .freight-button {
-      font-size: 0.7rem;
+      font-size: 0.6rem;
       padding: 0.2rem 0.5rem;
     }
     .user {
       font-size: 0.7rem;
+    }
+    .user-avatar {
+      width: 33px;
+      height: 33px;
     }
   }
 }

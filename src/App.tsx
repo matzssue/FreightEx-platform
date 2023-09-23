@@ -22,6 +22,8 @@ import { ReceivedOrders } from './Pages/Orders/ReceivedOrders';
 import { LoadDetailsPage } from './Pages/Loads/LoadDetailsPage';
 import { AcceptedOrders } from './Pages/Orders/AcceptedOrders';
 import { Invoices } from './Pages/Invoices/Invoices';
+import { JoyRideContextProvider } from './store/contexts/JoyRideContext';
+import JoyrideWrapper from './modules/Joyride/components/JoyrideWrapper/JoyrideWrapper';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -41,67 +43,70 @@ function App() {
         )}
         <ErrorBoundary>
           <BrowserRouter>
-            <UserContextProvider>
-              <PaginationContextProvider>
-                <NotificationContextProvider>
-                  <ToastContainer
-                    position='top-right'
-                    autoClose={4000}
-                    limit={2}
-                    hideProgressBar={false}
-                    newestOnTop
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme='light'
-                  />
-                  <Suspense fallback='Loading...'>
-                    <Routes>
-                      <Route path='/' element={<Navigate to={'loads'} />} />
-                      <Route path='/login' element={<LoginForm />} />
-                      <Route path='/register' element={<RegisterForm />} />
-                      <Route path='account'>
-                        <Route index element={<Navigate to=':accountId' />} />
-                        <Route path=':accountId' element={<Account />} />
-                      </Route>
-                      <Route path='loads'>
-                        <Route index element={<Home />} />
-                        <Route path=':loadId'>
-                          <Route index element={<LoadDetailsPage />} />
+            <JoyRideContextProvider>
+              <UserContextProvider>
+                <PaginationContextProvider>
+                  <NotificationContextProvider>
+                    <ToastContainer
+                      position='top-right'
+                      autoClose={4000}
+                      limit={2}
+                      hideProgressBar={false}
+                      newestOnTop
+                      closeOnClick
+                      rtl={false}
+                      pauseOnFocusLoss
+                      draggable
+                      pauseOnHover
+                      theme='light'
+                    />
+                    <JoyrideWrapper />
+                    <Suspense fallback='Loading...'>
+                      <Routes>
+                        <Route path='/' element={<Navigate to={'loads'} />} />
+                        <Route path='/login' element={<LoginForm />} />
+                        <Route path='/register' element={<RegisterForm />} />
+                        <Route path='account'>
+                          <Route index element={<Navigate to=':accountId' />} />
+                          <Route path=':accountId' element={<Account />} />
                         </Route>
-                        <Route path='filters'>
+                        <Route path='loads'>
                           <Route index element={<Home />} />
-                          <Route element={<Home />} path=':filterId' />
-                          <Route element={<LoadDetailsPage />} path=':filterId/:loadId' />
+                          <Route path=':loadId'>
+                            <Route index element={<LoadDetailsPage />} />
+                          </Route>
+                          <Route path='filters'>
+                            <Route index element={<Home />} />
+                            <Route element={<Home />} path=':filterId' />
+                            <Route element={<LoadDetailsPage />} path=':filterId/:loadId' />
+                          </Route>
                         </Route>
-                      </Route>
-                      <Route path='fleet'>
-                        <Route index element={<Vehicles />} />
-                        <Route path='add'>
-                          <Route index element={<AddVehicle />} />
+                        <Route path='fleet'>
+                          <Route index element={<Vehicles />} />
+                          <Route path='add'>
+                            <Route index element={<AddVehicle />} />
+                          </Route>
+                          <Route path='edit'>
+                            <Route element={<EditVehicle />} path=':vehicleId' />
+                          </Route>
                         </Route>
-                        <Route path='edit'>
-                          <Route element={<EditVehicle />} path=':vehicleId' />
+                        <Route path='orders'>
+                          <Route index element={<Orders />} />
+                          <Route path='published'>
+                            <Route index element={<PublishedOrders />} />
+                            <Route path='accepted' element={<AcceptedOrders />} />
+                          </Route>
+                          <Route path='received' element={<ReceivedOrders />} />
                         </Route>
-                      </Route>
-                      <Route path='orders'>
-                        <Route index element={<Orders />} />
-                        <Route path='published'>
-                          <Route index element={<PublishedOrders />} />
-                          <Route path='accepted' element={<AcceptedOrders />} />
+                        <Route path='invoices'>
+                          <Route index element={<Invoices />} />
                         </Route>
-                        <Route path='received' element={<ReceivedOrders />} />
-                      </Route>
-                      <Route path='invoices'>
-                        <Route index element={<Invoices />} />
-                      </Route>
-                    </Routes>
-                  </Suspense>
-                </NotificationContextProvider>
-              </PaginationContextProvider>
-            </UserContextProvider>
+                      </Routes>
+                    </Suspense>
+                  </NotificationContextProvider>
+                </PaginationContextProvider>
+              </UserContextProvider>
+            </JoyRideContextProvider>
           </BrowserRouter>
         </ErrorBoundary>
       </QueryClientProvider>

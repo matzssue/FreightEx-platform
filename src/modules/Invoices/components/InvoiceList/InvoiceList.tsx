@@ -43,7 +43,7 @@ export const InvoiceList = () => {
 
   if (!invoiceList.items || !invoiceList.totalPages) return;
   return (
-    <>
+    <div id='invoice-list-container'>
       <SearchForm itemName='invoice' ref={searchRef} handleSubmit={handleSubmit} />
       <OrdersColumns gridColumns='0.2fr 0.4fr 1fr 1fr 0.5fr 1fr 0.8fr' columns={invoiceColumns} />
       <ul className={styles['invoices-list']}>
@@ -55,6 +55,6 @@ export const InvoiceList = () => {
       <div className={styles['invoice-pagination']}>
         <Paginate lastPage={invoiceList?.totalPages} />
       </div>
-    </>
+    </div>
   );
 };

@@ -65,13 +65,17 @@ export const FiltersMenu = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles['form']}>
-      <div className={`${styles['filters-container']} ${showFilersMenu ? '' : styles['hidden']}`}>
+      <div
+        id='load-filters'
+        className={`${styles['filters-container']} ${showFilersMenu ? '' : styles['hidden']}`}
+      >
         <TruckFilter errors={errors} register={register} />
         <LocationFilter setValue={setValue} control={control} />
         <DateFilter control={control} />
       </div>
       <div className={styles.buttons}>
         <button
+          id='loads'
           onClick={() => setShowFiltersMenu((prevValue) => !prevValue)}
           type='button'
           className={`${styles['show-filters__button']} ${showFilersMenu ? '' : styles.hidden}`}

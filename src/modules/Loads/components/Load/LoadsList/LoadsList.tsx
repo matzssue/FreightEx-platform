@@ -59,7 +59,7 @@ export const Loads = () => {
   if (isAllLoading || (filteredLoads && isFilteredLoading)) return <LoadingSpinner />;
   if (!memoizedLoads) return;
   return (
-    <div className={styles['loads-container']}>
+    <div id='loads-container' className={styles['loads-container']}>
       <div className={styles['sort-list']}>
         <List list={loadColumns} />
       </div>

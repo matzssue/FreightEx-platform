@@ -8,7 +8,7 @@ export const OrdersMenu = () => {
         <header>
           <h1>ORDERS</h1>
         </header>
-        <ul>
+        <ul id='select-orders'>
           <li>
             <NavLink
               className={({ isActive, isPending }) =>
