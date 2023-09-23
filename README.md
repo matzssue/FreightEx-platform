@@ -26,7 +26,7 @@ Install my-project with npm or arn
 ## Instructions
 
 "If you are using the Freight Ex platform for the first time, please consider using the tutorial.
-![Instructions](https://i.ibb.co/B4zTp29/guide.jpg)
+![Instructions](https://i.ibb.co/pwZh25t/guide.jpg)
 
 ## Technologies
 
