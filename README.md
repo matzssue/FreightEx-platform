@@ -23,24 +23,31 @@ Install my-project with npm or arn
   yarn dev
 ```
 
+## Instructions
+
+"If you are using the Freight Ex platform for the first time, please consider using the tutorial.
+![Instructions](https://i.ibb.co/B4zTp29/guide.jpg)
+
 ## Technologies
 
-- Typescript
-- PostgreSQL (supabase)
-- HTML
+- Typescript,
+- PostgreSQL (supabase),
+- HTML,
 - CSS
 
 ## Frameworks/Libraries
 
-- React - Library for building user interfaces
-- Redux - Redux is a state management library for JavaScript
-- SCSS - Advanced version of CSS
-- CSS Modules - Styles convention in React
-- React-hook-form - Forms with easy-to-use validation
-- Yup - Form validation
-- react-google-maps - Maps and search location function
-- MUI - Framework with pre-designed Material Design components
-- Toastify - Customizable notification library for React
+- React - Library for building user interfaces,
+- Redux - Redux is a state management library for JavaScript,
+- SCSS - Advanced version of CSS,
+- CSS Modules - Styles convention in React,
+- React-hook-form - Forms with easy-to-use validation,
+- Yup - Form validation,
+- react-google-maps - Maps and search location function,
+- MUI - Framework with pre-designed Material Design components,
+- Toastify - Customizable notification library for React,
+- React-pdf,
+- React-joyride
 
 ## TODO
 
@@ -48,7 +55,7 @@ Install my-project with npm or arn
 
 - [ ] Add admin panel,
 - [x] Improve design,
-- [ ] Implement user guide
+- [x] Implement user guide
 - [x] Improve responsiveness
 - [x] Fix notifications box
 - [x] Fix loads pagination
