@@ -13,6 +13,7 @@
   cursor: pointer;
   &:hover {
     background-color: $primary-color;
+    box-shadow: -1px 24px 8px -19px rgba(215, 230, 243, 1);
   }
   p {
     padding-top: 0.2rem;
@@ -98,12 +99,14 @@
   cursor: pointer;
   &:hover {
     background-color: #35bb3a;
+    box-shadow: 0px 6px 17px -8px #35bb3a;
   }
 }
 .delete-button {
   background-color: $error-color;
   &:hover {
     background-color: #df443f;
+    box-shadow: 0px 6px 17px -8px #df443f;
   }
 }
 
