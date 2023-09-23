@@ -34,7 +34,7 @@ export const VehicleList = () => {
 
   if (!userId) return;
   return (
-    <div className={styles['fleet-container']}>
+    <div id='fleet-container' className={styles['fleet-container']}>
       <SearchVehicle value={searchValue} onChange={(e) => searchVehicleHandler(e)} />
       <div className={styles['cards-container']}>
         <AddVehicleCard />

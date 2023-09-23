@@ -50,7 +50,7 @@ export const ReceivedOrdersList = () => {
   return (
     <>
       <SearchForm itemName='orders' ref={searchRef} handleSubmit={handleSubmit} />
-      <div className={styles['received-table']}>
+      <div id='received-orders-list' className={styles['received-table']}>
         <OrdersColumns
           gridColumns='0.2fr 0.3fr 2fr 0.4fr 1.2fr 0.9fr 1fr 1fr'
           columns={receivedOrdersColumns}
