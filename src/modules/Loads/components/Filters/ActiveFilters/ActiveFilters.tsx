@@ -24,7 +24,7 @@ export const ActiveFilters = () => {
   };
   return (
     <div className={styles['list-container']}>
-      <ul>
+      <ul id='filters-cards'>
         <li>
           <NavLink
             className={

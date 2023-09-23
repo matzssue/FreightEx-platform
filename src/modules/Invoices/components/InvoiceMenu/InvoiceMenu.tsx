@@ -19,7 +19,7 @@ export const InvoiceMenu = () => {
         isModalOpen={isCollectiveFactureModalOpen}
         onClose={() => setIsCollectiveFactureModalOpen(false)}
       />
-      <div className={styles['invoices-buttons']}>
+      <div id='add-invoice-container' className={styles['invoices-buttons']}>
         <button onClick={() => setIsSingleFactureModalOpen(true)}>Add invoice</button>
         <button onClick={() => setIsCollectiveFactureModalOpen(true)}>
           Add collective invoice
