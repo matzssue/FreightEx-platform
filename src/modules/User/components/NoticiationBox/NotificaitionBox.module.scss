@@ -104,3 +104,10 @@
     }
   }
 }
+@media only screen and (max-width: $breakpoint-small) {
+  .notifications-box {
+    .notification-button {
+      font-size: 1rem;
+    }
+  }
+}
