@@ -16,13 +16,12 @@ import { VehicleDetails } from '../VehicleDetails/VehicleDetails';
 import { PaymentDetails } from '../PaymentDetails/PaymentDetails';
 import { useUserContext } from '../../../../../../store/contexts/UserContext';
 import { AddLoadData } from '../../../../../../utils/api/supabase/types';
-import { toast } from 'react-toastify';
-
+import { useNotificationContext } from 'src/store/contexts/NotficationContext';
 export const AddLoadForm = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
   const { userData } = useUserContext();
-
+  const { notify } = useNotificationContext();
   const isModalOpen = useAppSelector((state) => state.modal.isLoadModalOpen);
   const isDialogOpen = useAppSelector((state) => state.modal.isLoadDialogOpen);
 
@@ -39,10 +38,10 @@ export const AddLoadForm = () => {
   const mutation = useMutation(async (values: AddLoadData) => addLoad(values), {
     onSuccess: () => {
       queryClient.invalidateQueries(['loads']);
-      toast.success('Load successfully added');
+      notify('success', 'Load successfully added');
     },
     onError: () => {
-      toast.error('Something went wrong, load not added');
+      notify('error', 'Something went wrong, load not added');
     },
   });
 

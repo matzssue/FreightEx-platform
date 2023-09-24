@@ -18,7 +18,8 @@ export const CargoDetails = ({ control }: ControllerProps<AddLoadValues>) => {
           control={control}
           defaultValue={''}
           sx={{
-            width: '40px',
+            width: 'auto',
+            maxWidth: '80px',
             '& input': {
               padding: '5px',
               margin: '0px',
@@ -33,7 +34,8 @@ export const CargoDetails = ({ control }: ControllerProps<AddLoadValues>) => {
           control={control}
           defaultValue={''}
           sx={{
-            width: '40px',
+            width: 'auto',
+            maxWidth: '80px',
             '& input': {
               padding: '5px',
               margin: '0px',

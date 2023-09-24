@@ -99,7 +99,7 @@ export interface Database {
       };
       addresses: {
         Row: {
-          city: string;
+          city: string | null;
           country: string;
           id: number;
           latitude: number;
@@ -107,7 +107,7 @@ export interface Database {
           postal_code: string;
         };
         Insert: {
-          city: string;
+          city?: string | null;
           country: string;
           id: number;
           latitude: number;
@@ -115,7 +115,7 @@ export interface Database {
           postal_code: string;
         };
         Update: {
-          city?: string;
+          city?: string | null;
           country?: string;
           id?: number;
           latitude?: number;

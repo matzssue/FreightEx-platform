@@ -16,11 +16,11 @@ export const PaymentDetails = ({
       <Title title={'Payment'} />
       <div className={styles['payment-inputs']}>
         <TextFieldInput<AddLoadValues>
-          label={'term'}
+          label={'term(days)'}
           name='term'
           control={control}
-          defaultValue=''
-          sx={{ width: '70px', helperText: { width: '300px' } }}
+          defaultValue={null}
+          sx={{ width: 'auto', maxWidth: '100px', helperText: { width: '300px' } }}
           variant='standard'
         />
 
@@ -29,8 +29,8 @@ export const PaymentDetails = ({
             label={'price'}
             name='price'
             control={control}
-            defaultValue=''
-            sx={{ width: '70px' }}
+            defaultValue={null}
+            sx={{ width: 'auto', maxWidth: '100px' }}
             variant='standard'
           />
           <SelectInput<AddLoadValues>
@@ -40,7 +40,7 @@ export const PaymentDetails = ({
             control={control}
             defaultValue='EUR'
             variant='standard'
-            sx={{ width: '50px', fontSize: '10px', marginLeft: '9px' }}
+            sx={{ width: 'auto', maxWidth: '120px', fontSize: '10px', marginLeft: '9px' }}
           />
         </div>
       </div>

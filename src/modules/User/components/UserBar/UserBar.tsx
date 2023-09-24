@@ -105,7 +105,7 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
           </ListItemIcon>
           Account
         </MenuItem>
-        <MenuItem id='signOut' onClick={handleClose}>
+        <MenuItem id='sign-out' onClick={handleClose}>
           <ListItemIcon>
             <MdLogout />
           </ListItemIcon>

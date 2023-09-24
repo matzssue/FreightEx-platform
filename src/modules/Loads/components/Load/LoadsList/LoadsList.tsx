@@ -24,7 +24,7 @@ export const Loads = () => {
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
   const { data: allLoads, isLoading: isAllLoading } = useQuery(
-    ['loads', currentPage],
+    ['loads', currentPage, itemsPerPage],
     async () => await getAllLoads(currentPage, itemsPerPage),
   );
 
@@ -48,12 +48,11 @@ export const Loads = () => {
   );
 
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
-    e.stopPropagation();
     e.preventDefault();
     acceptOfferMutation.mutate({ loadId: id, userId: userData.id });
   };
   const deleteOrderHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
-    e.stopPropagation();
+    e.preventDefault();
     deleteOfferMutation.mutate(id);
   };
   if (isAllLoading || (filteredLoads && isFilteredLoading)) return <LoadingSpinner />;

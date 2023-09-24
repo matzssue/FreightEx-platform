@@ -6,9 +6,9 @@ export const addInvoiceSchema = yup.object({
     .object({
       id: yup.string().required(),
       loadingCountry: yup.string().required(),
-      loadingCity: yup.string().required(),
+      loadingCity: yup.string().required().nullable(),
       unloadingCountry: yup.string().required(),
-      unloadingCity: yup.string().required(),
+      unloadingCity: yup.string().required().nullable(),
       paymentTerm: yup.string().required(),
       price: yup.number().required(),
       currency: yup.string().required(),

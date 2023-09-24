@@ -180,9 +180,9 @@ export type GetInvoices = {
 export type CompanyOrdersData = {
   id: string;
   loadingCountry: string;
-  loadingCity: string;
+  loadingCity: string | null;
   unloadingCountry: string;
-  unloadingCity: string;
+  unloadingCity: string | null;
   paymentTerm: string;
   price: number;
   currency: string;
