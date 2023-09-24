@@ -4,7 +4,7 @@ import { memo } from 'react';
 type LoadAddress = {
   country: string;
   postCode: string;
-  city: string;
+  city: string | null;
 };
 export const LoadAddress = memo(({ country, postCode, city }: LoadAddress) => {
   return (

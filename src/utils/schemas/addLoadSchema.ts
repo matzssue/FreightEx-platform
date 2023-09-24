@@ -6,8 +6,8 @@ export const addLoadSchema = yup.object().shape({
   unloadingAddress: yup.string().required('Unloading address is required'),
   loadingDate: yup.string().required('Loading date is required').min(5),
   unloadingDate: yup.string().required('Unloading date is required').min(5),
-  price: yup.number().required('Price is required'),
-  term: yup.string().required('Payment term is required').min(1),
+  price: yup.number().required('Price is required').typeError('Please enter number'),
+  term: yup.string().required('Payment term is required').min(1).typeError('Please enter number'),
   currency: yup.string().required('Please select currency'),
   length: yup
     .number()
@@ -22,14 +22,14 @@ export const addLoadSchema = yup.object().shape({
     .max(100)
     .optional(),
   loadingAddressData: yup.object().shape({
-    city: yup.string().required(),
+    city: yup.string().required().nullable(),
     country: yup.string().required(),
     latitude: yup.number().required(),
     longitude: yup.number().required(),
     postal_code: yup.string().required(),
   }),
   unloadingAddressData: yup.object().shape({
-    city: yup.string().required(),
+    city: yup.string().required().nullable(),
     country: yup.string().required(),
     latitude: yup.number().required(),
     longitude: yup.number().required(),
