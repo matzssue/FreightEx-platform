@@ -3,36 +3,58 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: max(40vw, 350px);
+  height: 100%;
+  width: 100%;
   background-color: $secondary-color;
   padding: 3rem 0.5rem 6rem 0.5rem;
-  margin: 10% auto;
-  border-radius: 1rem;
-  box-shadow: 8px 8px 24px 0px rgba(171, 171, 171, 1);
-  h2 {
-    background-color: $primary-blue-color;
-    padding: 0.5rem 1rem;
-    color: $secondary-color;
-    border-radius: 1rem;
-    box-shadow: 8px 8px 24px 0px rgb(190, 190, 190);
-  }
+  margin: 0;
+
   form {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    background-color: rgb(241, 241, 241);
-    padding: 1rem;
+    background-color: $primary-color;
+    padding: 1.5rem 3rem;
     border-radius: 1rem;
-    box-shadow: 8px 8px 24px 0px rgba(187, 187, 187, 1);
+    box-shadow: 3px 3px 1px 2px rgb(190, 190, 190);
+    h2 {
+      background-color: $primary-blue-color;
+      padding: 0.5rem 1rem;
+      color: $secondary-color;
+      border-radius: 1rem;
+      text-align: center;
+      width: max-content;
+      margin: 1rem auto;
+      box-shadow: 3px 3px 1px 2px rgb(190, 190, 190);
+    }
+    .select-vehicle {
+      display: flex;
+      label {
+        min-width: 50px;
+        margin-right: 1rem;
+      }
+    }
     label {
-      width: max(50px, 150px);
+      display: flex;
+      width: max(100px, 150px);
       font-weight: 700;
-
+      font-size: 0.7rem;
+      text-wrap: wrap;
+      background-color: rgb(69, 69, 69);
+      color: $secondary-text-color;
+      align-items: center;
+      padding: 0 1rem;
+      border-radius: 0.2rem;
       margin: 0 0.5rem;
+      box-shadow: 4px 6px 7px 0px rgb(190, 190, 190);
     }
   }
   .buttons {
     display: flex;
     justify-content: space-between;
+    button,
+    a {
+      box-shadow: 4px 6px 7px 0px rgb(190, 190, 190);
+    }
   }
 }
