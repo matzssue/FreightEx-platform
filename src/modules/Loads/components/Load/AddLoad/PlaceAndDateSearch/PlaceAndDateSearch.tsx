@@ -34,7 +34,7 @@ export const PlaceAndDateSearch = ({
       <div className={styles['unloading-inputs']}>
         <Title title={'Unloading'} />
         <DateInput<AddLoadValues> label={'Date'} control={control} name={'unloadingDate'} />
-        <PlacesAutocompleteInput
+        <PlacesAutocompleteInput<AddLoadValues>
           setValue={setValue}
           control={control}
           setValueKey='unloadingAddressData'

@@ -37,7 +37,8 @@ export const getUserInvoices = async (
   });
 
   const totalPages = count && Math.ceil(count / 4);
-  if (!totalPages) return;
+  const returnValue =
+    totalPages && invoices ? { invoiceData, totalPages } : { invoiceData: [], totalPages: 0 };
 
-  return { invoiceData, totalPages };
+  return returnValue;
 };

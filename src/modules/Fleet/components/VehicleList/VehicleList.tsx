@@ -12,19 +12,20 @@ import { ChangeEvent } from 'react';
 export const VehicleList = () => {
   const { userId } = useUserContext();
 
-  const { data: allVehicles, isLoading } = useQuery(
-    ['fleet'],
-    async () => await getUserVehicles(userId),
-    { enabled: !!userId },
-  );
+  const {
+    data: allVehicles,
+    isLoading,
+    isError,
+  } = useQuery(['fleet'], async () => await getUserVehicles(userId), { enabled: !!userId });
   const { searchValue, filteredData, setSearchValue } = useSearch(allVehicles ? allVehicles : []);
 
   const searchVehicleHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLButtonElement;
     if (target) setSearchValue(target.value);
   };
-
   if (isLoading) return <LoadingSpinner />;
+
+  if (isError) return <p id='fleet-container'>Sorry there was an error, please try again later</p>;
 
   const vehicleList = searchValue.length > 0 ? filteredData : allVehicles;
   const noResultsMessage =

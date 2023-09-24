@@ -25,9 +25,14 @@ export const InvoiceList = () => {
     data: invoices,
     isLoading,
     isError,
-  } = useQuery(['invoices'], async () => getUserInvoices(userId, currentPage, itemsPerPage), {
-    enabled: !!userId,
-  });
+  } = useQuery(
+    ['invoices', currentPage, itemsPerPage],
+    async () => getUserInvoices(userId, currentPage, itemsPerPage),
+    {
+      enabled: !!userId,
+    },
+  );
+
   const {
     filteredItems: filteredInvoices,
     searchRef,
@@ -41,7 +46,12 @@ export const InvoiceList = () => {
     ? { items: filteredInvoices.items, totalPages: filteredInvoices.totalPages }
     : { items: invoices?.invoiceData, totalPages: invoices?.totalPages };
 
-  if (!invoiceList.items || !invoiceList.totalPages) return;
+  if (!invoiceList.items || !invoiceList.totalPages)
+    return (
+      <p id='invoice-list-container' className={styles['no-invoices-information']}>
+        Sorry, no invoices found
+      </p>
+    );
   return (
     <div id='invoice-list-container'>
       <SearchForm itemName='invoice' ref={searchRef} handleSubmit={handleSubmit} />

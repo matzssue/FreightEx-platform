@@ -25,9 +25,8 @@ export const AcceptedOrdersList = () => {
     orders: null,
     totalPages: null,
   });
-
   useEffect(() => {
-    changeItemsPerPage(12);
+    changeItemsPerPage(8);
     changePage(1);
   }, []);
 
@@ -36,7 +35,7 @@ export const AcceptedOrdersList = () => {
     isLoading: isAcceptedOrdersLoading,
     error: acceptedOrdersError,
   } = useQuery(
-    ['accepted'],
+    ['accepted', currentPage, itemsPerPage],
     async () => await getAcceptedOrders(userId, currentPage, itemsPerPage),
   );
 

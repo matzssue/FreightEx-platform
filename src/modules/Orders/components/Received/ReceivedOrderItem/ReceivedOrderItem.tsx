@@ -6,7 +6,6 @@ import { getUserVehicles } from 'src/utils/api/supabase/Vehicles/getUserVehicles
 import { useUserContext } from 'src/store/contexts/UserContext';
 import { LiaFileInvoiceSolid } from 'react-icons/lia';
 import { Autocomplete, TextField } from '@mui/material';
-import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
 import { useUpdateAcceptedLoad } from '../../../hooks/useUpdateAcceptedLoad';
 import { SyntheticEvent, useState } from 'react';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
@@ -16,13 +15,13 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
   const { notify } = useNotificationContext();
   const [lastVehicleChangeTime, setLastVehicleChangeTime] = useState<number | null>(null);
   const updateAcceptedLoadMutation = useUpdateAcceptedLoad();
-  const { data: allVehicles, isLoading } = useQuery(
+  const { data: allVehicles, error } = useQuery(
     ['fleet'],
     async () => await getUserVehicles(userId),
     { enabled: !!userId },
   );
 
-  if (isLoading) return <LoadingSpinner />;
+  if (error) return <p>Sorry,there was an error. Please try again </p>;
 
   const selectVehicles = allVehicles?.map((vehicle) => {
     return vehicle.vehicleRegistrationNumber;

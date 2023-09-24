@@ -31,7 +31,7 @@ export const PublishedOrdersList = () => {
     isLoading: isPublishedOrdersLoading,
     error: publishedOrdersError,
   } = useQuery(
-    ['published', currentPage],
+    ['published', currentPage, itemsPerPage],
     async () => await getPublishedOrders(userId, currentPage, itemsPerPage),
     {
       enabled: !!userId,
