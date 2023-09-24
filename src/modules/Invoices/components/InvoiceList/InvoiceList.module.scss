@@ -18,6 +18,12 @@
   width: 100%;
   box-shadow: 4px 6px 21px -11px rgba(66, 66, 66, 1);
 }
+.no-invoices-information {
+  text-align: center;
+  font-weight: bold;
+  padding: 1rem;
+  background-color: rgba(252, 88, 88, 0.554);
+}
 @media only screen and (max-width: $breakpoint-small) {
   .invoice-pagination {
     padding: 0;
