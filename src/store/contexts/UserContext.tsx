@@ -16,6 +16,8 @@ type UserContextProps = {
   changeUserInformations: (...props: any) => void;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   isLoading: boolean;
+  isNavigationOpen: boolean;
+  toggleNavigation: () => void;
 };
 
 type UpdateUserCallback = (...updateData: any) => Promise<UserDatabase>;
@@ -23,7 +25,7 @@ export const UserContext = createContext<UserContextProps | null>(null);
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [userId, setUserId] = useState<string | undefined>();
-  const navigate = useNavigate();
+  const [isNavigationOpen, setIsNavigationOpen] = useState<boolean>(true);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userData, setUserData] = useState<UserDatabase>({
     avatar: '',
@@ -34,12 +36,16 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
     surname: '',
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const logOut = () => {
     setIsLoggedIn(false);
   };
   const logIn = () => {
     setIsLoggedIn(true);
+  };
+  const toggleNavigation = () => {
+    setIsNavigationOpen((prevValue) => !prevValue);
   };
 
   const changeUserInformations = async (
@@ -94,6 +100,8 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
     changeUserInformations,
     setIsLoading,
     isLoading,
+    isNavigationOpen,
+    toggleNavigation,
   };
 
   return <UserContext.Provider value={valueContext}>{children}</UserContext.Provider>;
