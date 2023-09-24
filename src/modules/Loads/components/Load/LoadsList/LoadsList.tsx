@@ -24,7 +24,7 @@ export const Loads = () => {
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
   const { data: allLoads, isLoading: isAllLoading } = useQuery(
-    ['loads', currentPage],
+    ['loads', currentPage, itemsPerPage],
     async () => await getAllLoads(currentPage, itemsPerPage),
   );
 
