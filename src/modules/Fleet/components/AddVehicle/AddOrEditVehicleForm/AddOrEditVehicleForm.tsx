@@ -75,36 +75,47 @@ export const AddOrEditVehicleForm = ({
 
   return (
     <div className={styles['add-car-form__container']}>
-      {formTitle}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <SelectInput
-          control={control}
-          defaultValue={defaultValues.vehicleType}
-          name='vehicleType'
-          label='Select vehicle'
-          options={vehicleTypes}
-          sx={{ width: 'auto', fontSize: '15px' }}
-          fontSize='100%'
-          direction='row'
-        />
+        {formTitle}
+        <div className={styles['select-vehicle']}>
+          <label htmlFor='vehicleType'>Select type of vehicle</label>
+          <SelectInput
+            control={control}
+            defaultValue={defaultValues.vehicleType}
+            name='vehicleType'
+            // label='Select vehicle'
+            options={vehicleTypes}
+            sx={{
+              width: '100%',
+              fontSize: '15px',
+              boxShadow: '4px 6px 7px 0px rgb(190, 190, 190)',
+            }}
+            fontSize='100%'
+            direction='row'
+          />
+        </div>
+
         <TextFieldInput
           defaultValue={defaultValues.vehicleRegistrationNumber}
           label='Registration number'
           control={control}
           name='vehicleRegistrationNumber'
           disabled={mode === 'edit'}
+          sx={{ boxShadow: '4px 6px 7px 0px rgb(190, 190, 190)' }}
         />
         <TextFieldInput
           defaultValue={defaultValues.driverName}
           label='Driver name'
           control={control}
           name='driverName'
+          sx={{ boxShadow: '4px 6px 7px 0px rgb(190, 190, 190)' }}
         />
         <TextFieldInput
           defaultValue={defaultValues.driverPhoneNumber}
           label='Driver phone number'
           control={control}
           name='driverPhoneNumber'
+          sx={{ boxShadow: '4px 6px 7px 0px rgb(190, 190, 190)' }}
         />
         <div className={styles.buttons}>
           <LinkButton mode='back' link='/fleet'>
