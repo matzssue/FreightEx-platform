@@ -24,6 +24,7 @@ import { AcceptedOrders } from './Pages/Orders/AcceptedOrders';
 import { Invoices } from './Pages/Invoices/Invoices';
 import { JoyRideContextProvider } from './store/contexts/JoyRideContext';
 import JoyrideWrapper from './modules/Joyride/components/JoyrideWrapper/JoyrideWrapper';
+import { Error404 } from './Pages/404/Error404';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -63,6 +64,7 @@ function App() {
                     <JoyrideWrapper />
                     <Suspense fallback='Loading...'>
                       <Routes>
+                        <Route path='*' element={<Error404 />} />
                         <Route path='/' element={<Navigate to={'loads'} />} />
                         <Route path='/login' element={<LoginForm />} />
                         <Route path='/register' element={<RegisterForm />} />
