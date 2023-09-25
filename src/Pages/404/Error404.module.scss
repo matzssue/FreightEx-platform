@@ -1,0 +1,28 @@
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  .error-icon {
+    svg {
+      font-size: 15rem;
+    }
+  }
+  h1 {
+    font-size: 7rem;
+    margin: 0;
+  }
+  p {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+  }
+  a {
+    background-color: whitesmoke;
+    border-radius: 1rem;
+    font-size: 2rem;
+    &:hover {
+      background-color: white;
+    }
+  }
+}
