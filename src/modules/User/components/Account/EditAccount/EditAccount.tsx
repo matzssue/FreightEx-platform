@@ -27,8 +27,7 @@ type FormData = {
 
 export const EditAccount = () => {
   // const { changeUserAvatar } = useUserContext();
-  const { changeUserInformations } = useUserContext();
-
+  const { changeUserInformations, userId } = useUserContext();
   const [currentOption, setCurrentOption] = useState('');
   const [open, setOpen] = useState(false);
 
@@ -125,11 +124,20 @@ export const EditAccount = () => {
           type='file'
           accept='image/*'
         />
-        <button id='password' onClick={(e) => handleUserCredentialsChange(e)}>
-          Change Password
+        <button
+          disabled={userId === import.meta.env.VITE_TEST_USERID}
+          id='password'
+          onClick={(e) => handleUserCredentialsChange(e)}
+        >
+          Change Password{' '}
+          {userId === import.meta.env.VITE_TEST_USERID && '(Disabled for test user)'}
         </button>
-        <button id='email' onClick={(e) => handleUserCredentialsChange(e)}>
-          Change Email
+        <button
+          disabled={userId === import.meta.env.VITE_TEST_USERID}
+          id='email'
+          onClick={(e) => handleUserCredentialsChange(e)}
+        >
+          Change Email {userId === import.meta.env.VITE_TEST_USERID && '(Disabled for test user)'}
         </button>
       </div>
     </>
