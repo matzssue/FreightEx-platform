@@ -10,7 +10,7 @@ FreightEx is platform that connects carriers, forwarding companies and clients t
 
 _Test Account_
 
-Login: test@transportex.com
+Login: test1@transportex.com
 Password: Test123
 
 ## Installation

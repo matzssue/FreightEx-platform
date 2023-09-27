@@ -46,7 +46,6 @@ export const ReceivedOrdersList = () => {
     ? { items: filteredItems.items, totalPages: filteredItems.totalPages }
     : { items: acceptedOrders?.orders, totalPages: acceptedOrders?.totalPages };
 
-  if (!orders?.items || !orders.totalPages) return;
   return (
     <>
       <SearchForm itemName='orders' ref={searchRef} handleSubmit={handleSubmit} />
@@ -60,9 +59,10 @@ export const ReceivedOrdersList = () => {
             return <ReceivedOrderItem key={order.id} order={order} />;
           })}
         </ul>
+        {orders.items?.length === 0 && <p>No orders found</p>}
       </div>
       <div className={styles.pagination}>
-        <Paginate lastPage={orders?.totalPages} />
+        <Paginate lastPage={orders?.totalPages ? orders.totalPages : 0} />
       </div>
     </>
   );

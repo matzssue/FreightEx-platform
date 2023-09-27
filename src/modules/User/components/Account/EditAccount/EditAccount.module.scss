@@ -29,6 +29,13 @@
     &:hover {
       background-color: $primary-hover-button-color;
     }
+    &:disabled {
+      background-color: gray;
+      cursor: not-allowed;
+      &:hover {
+        background-color: gray;
+      }
+    }
   }
 }
 

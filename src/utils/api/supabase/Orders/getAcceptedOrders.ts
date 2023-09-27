@@ -48,6 +48,6 @@ export const getAcceptedOrders = async (
     };
   }) as AcceptedLoad[];
   const totalPages = count && Math.ceil(count / loadsPerPage);
-  if (!totalPages) return;
+  if (!totalPages) return { orders: [], totalPages: 0 };
   return { orders, totalPages };
 };

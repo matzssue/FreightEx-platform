@@ -55,7 +55,7 @@ export const PublishedOrdersList = () => {
   const orders = filteredItems?.items
     ? { items: filteredItems.items, totalPages: filteredItems.totalPages }
     : { items: publishedOrders?.orders, totalPages: publishedOrders?.totalPages };
-  if (!orders?.items || !orders.totalPages) return;
+
   return (
     <>
       <OrdersOptions ref={searchRef} onSubmit={handleSubmit} />
@@ -65,7 +65,7 @@ export const PublishedOrdersList = () => {
           columns={publishedOrdersColumns}
         />
         <ul className={styles['orders-list']}>
-          {orders?.items.map((order) => {
+          {orders.items?.map((order) => {
             return (
               <PublishedOrderItem key={order.id} order={order}>
                 <span className={styles.buttons}>
@@ -76,11 +76,11 @@ export const PublishedOrdersList = () => {
               </PublishedOrderItem>
             );
           })}
-          {orders.items.length === 0 && <p>No orders found</p>}
+          {orders.items?.length === 0 && <p>No orders found</p>}
         </ul>
       </div>
       <div className={styles.pagination}>
-        <Paginate lastPage={orders?.totalPages} />
+        <Paginate lastPage={orders?.totalPages ? orders.totalPages : 0} />
       </div>
     </>
   );
