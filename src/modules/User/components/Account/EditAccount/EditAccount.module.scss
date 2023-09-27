@@ -30,6 +30,12 @@
       background-color: $primary-hover-button-color;
     }
   }
+  &:disabled {
+    background-color: gray;
+    &:hover {
+      background-color: gray;
+    }
+  }
 }
 
 .buttons {
