@@ -42,6 +42,7 @@ export const useAcceptOffer = () => {
         await deleteFromLoads(id.loadId);
         queryClient.invalidateQueries(['loads']);
         queryClient.invalidateQueries(['filteredLoads']);
+        queryClient.invalidateQueries(['receivedOrders']);
       },
       onError: (error: { message: string }) => {
         console.log(error);
