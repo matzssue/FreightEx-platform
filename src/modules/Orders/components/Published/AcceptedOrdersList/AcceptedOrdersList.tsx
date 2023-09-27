@@ -60,7 +60,8 @@ export const AcceptedOrdersList = () => {
   }
 
   const orders = filteredLoads.orders ? filteredLoads : acceptedOrders;
-  if (!orders?.orders || !orders?.totalPages) return;
+  console.log(orders);
+
   return (
     <>
       <OrdersOptions ref={searchOrderRef} onSubmit={handleSubmit} />
@@ -70,7 +71,7 @@ export const AcceptedOrdersList = () => {
           columns={acceptedOrdersColumns}
         />
         <ul className={styles['orders-list']}>
-          {orders.orders?.map((order) => {
+          {orders?.orders?.map((order) => {
             return (
               <PublishedOrderItem key={order.id} order={order}>
                 <span>
@@ -80,9 +81,10 @@ export const AcceptedOrdersList = () => {
             );
           })}
         </ul>
+        {orders?.orders?.length === 0 && <p>No orders found</p>}
       </div>
       <div className={styles.pagination}>
-        <Paginate lastPage={orders.totalPages} />
+        <Paginate lastPage={orders?.totalPages ? orders.totalPages : 0} />
       </div>
     </>
   );
