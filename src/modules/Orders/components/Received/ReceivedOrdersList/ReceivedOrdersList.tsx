@@ -17,7 +17,7 @@ export const ReceivedOrdersList = () => {
   const { userId } = useUserContext();
 
   useEffect(() => {
-    changeItemsPerPage(9);
+    changeItemsPerPage(8);
     changePage(1);
   }, []);
 
@@ -26,7 +26,7 @@ export const ReceivedOrdersList = () => {
     isError: receivedOrdersError,
     isLoading: receivedOrdersLoading,
   } = useQuery(
-    ['receivedOrders', currentPage],
+    ['receivedOrders', currentPage, itemsPerPage],
     async () => await getReceivedOrders(userId, currentPage, itemsPerPage),
     {
       enabled: !!userId,
