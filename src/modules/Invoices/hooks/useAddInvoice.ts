@@ -34,7 +34,6 @@ export const useAddInvoince = () => {
     updateLoads();
   };
   return useMutation(
-    ['invoices'],
     async ({ invoiceData, loadsId }: { invoiceData: InsertInvoice; loadsId: string[] }) =>
       await addInvoice(invoiceData, loadsId),
     {
@@ -43,6 +42,7 @@ export const useAddInvoince = () => {
         queryClient.invalidateQueries(['companyFactures']);
         queryClient.invalidateQueries(['ordersToFacture']);
         queryClient.invalidateQueries(['receivedOrders']);
+        queryClient.invalidateQueries(['invoices']);
       },
       onError: (error: { message: string }) => {
         console.log(error);
