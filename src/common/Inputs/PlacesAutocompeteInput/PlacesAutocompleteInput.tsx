@@ -60,7 +60,7 @@ export const PlacesAutocompleteInput = <T extends FieldValues>({
       longitude: lng,
       city: town ? town : null,
     };
-    console.log(address);
+
     setValue(setValueKey, address as PathValue<T, Path<T>>);
     field.onChange(value.formatted_address as PathValue<T, Path<T>> | ChangeEvent);
   };
