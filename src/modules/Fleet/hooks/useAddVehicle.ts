@@ -10,11 +10,10 @@ export const useAddVehicle = () => {
   const navigation = useNavigate();
   const queryClient = useQueryClient();
   const addVehicle = async (vehicleData: InsertVehicle, userId: string) => {
-    console.log(vehicleData);
     const { data, error } = await supabase
       .from('vehicles')
-      .upsert({ user_id: userId, ...vehicleData });
-    if (error) throw new Error();
+      .insert({ user_id: userId, ...vehicleData });
+    if (error) throw new Error(error.message);
     return data;
   };
 
@@ -29,8 +28,10 @@ export const useAddVehicle = () => {
         queryClient.invalidateQueries(['fleet']);
       },
       onError: (error: { message: string }) => {
-        console.log(error);
-        notify('error', 'Something went wrong while adding vehicle');
+        console.log(error.message);
+        if (error.message.includes('duplicate key')) {
+          notify('error', 'Vehicle with this registration number is arleady added');
+        } else notify('error', 'Something went wrong while adding vehicle');
       },
     },
   );
