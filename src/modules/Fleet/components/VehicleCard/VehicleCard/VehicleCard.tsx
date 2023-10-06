@@ -7,6 +7,7 @@ import { Button } from 'src/common/Buttons/Button/Button';
 import AlertDialog from 'src/common/Dialog/AlertDialog';
 import { useState } from 'react';
 import { useDeleteVehicle } from 'src/modules/Fleet/hooks/useDeleteVehicle';
+import { FaUserLarge } from 'react-icons/fa6';
 type VehicleData = {
   driverName: string;
   driverPhoneNumber: string;
@@ -46,7 +47,9 @@ export const VehicleCard = ({
         <p className={styles['truck-type']}>{vehicleType}</p>
         <div className={styles['truck-informations']}>
           <h1>{vehicleRegistrationNumber}</h1>
-          <p>Driver: {driverName}</p>
+          <p>
+            <FaUserLarge /> {driverName}
+          </p>
           <p>Phone Number: {driverPhoneNumber}</p>
         </div>
 
