@@ -53,7 +53,7 @@ export const AddOrEditVehicleForm = ({
 
   const onSubmit = async (data: VehicleValuesSchema) => {
     const upsertData = {
-      vehicle_register_number: data.vehicleRegistrationNumber,
+      vehicle_register_number: data.vehicleRegistrationNumber.trim(),
       vehicle_type: data.vehicleType,
       driver_phone_number: data.driverPhoneNumber,
       driver_name: data.driverName,
