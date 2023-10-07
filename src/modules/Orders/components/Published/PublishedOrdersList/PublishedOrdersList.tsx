@@ -6,7 +6,7 @@ import { getPublishedOrders } from 'src/utils/api/supabase/Orders/getPublishedOr
 import { OrdersColumns } from '../../OrdersColumns/OrdersColumns';
 import { publishedOrdersColumns } from '../../../constants/ordersColumns';
 import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Paginate } from 'src/common/Pagination/Pagination';
 import { usePaginationContext } from 'src/store/contexts/PaginationContext';
 
@@ -14,11 +14,12 @@ import { BsTrash } from 'react-icons/bs';
 import { useDeleteOrder } from '../../../hooks/useDeleteOrder';
 import { OrdersOptions } from '../../OrdersOptions/OrdersOptions';
 import { useSearchById } from 'src/utils/hooks/useSearchById';
+import AlertDialog from 'src/common/Dialog/AlertDialog';
 
 export const PublishedOrdersList = () => {
   const { userId } = useUserContext();
   const { changeItemsPerPage, changePage, currentPage, itemsPerPage } = usePaginationContext();
-
+  const [openId, setOpenId] = useState<string | null>(null);
   const deleteOrderMutation = useDeleteOrder();
 
   useEffect(() => {
@@ -56,6 +57,11 @@ export const PublishedOrdersList = () => {
     ? { items: filteredItems.items, totalPages: filteredItems.totalPages }
     : { items: publishedOrders?.orders, totalPages: publishedOrders?.totalPages };
 
+  const agreeDeleteHandler = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.preventDefault();
+    removeOrderHandler(id);
+  };
+
   return (
     <>
       <OrdersOptions ref={searchRef} onSubmit={handleSubmit} />
@@ -68,8 +74,18 @@ export const PublishedOrdersList = () => {
           {orders.items?.map((order) => {
             return (
               <PublishedOrderItem key={order.id} order={order}>
+                <AlertDialog
+                  agreeHandler={(e) => agreeDeleteHandler(e, order.id)}
+                  description='delete-order-confirmation'
+                  close={() => setOpenId(null)}
+                  title={`delete-confirmation`}
+                  open={order.id === openId}
+                  label={`Confirmation`}
+                >
+                  Are you sure you want to delete this order?
+                </AlertDialog>
                 <span className={styles.buttons}>
-                  <button onClick={() => removeOrderHandler(order.id)} className={styles.delete}>
+                  <button className={styles.delete} onClick={() => setOpenId(order.id)}>
                     <BsTrash />
                   </button>
                 </span>
