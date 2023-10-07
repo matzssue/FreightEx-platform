@@ -1,6 +1,8 @@
 @import '../../../../../styles/variables.scss';
 
 .container {
+  display: flex;
+  flex-direction: column;
   width: 400px;
   height: 100vh;
   background-color: $secondary-color;
@@ -10,12 +12,14 @@
   box-shadow: -4px 0px 22px 2px rgba(82, 82, 82, 0.51);
   z-index: 3;
   .close-button {
+    display: flex;
+    align-self: flex-end;
     height: max-content;
     width: max-content;
-    padding-top: 1rem;
-    border: none;
     color: $primary-blue-color;
     font-size: 1.4rem;
+    padding-top: 1rem;
+    border: none;
     svg {
       padding: 0.2rem;
       &:hover {

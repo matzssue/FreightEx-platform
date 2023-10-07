@@ -51,7 +51,7 @@ export const ReceivedOrdersList = () => {
       <SearchForm itemName='orders' ref={searchRef} handleSubmit={handleSubmit} />
       <div id='received-orders-list' className={styles['received-table']}>
         <OrdersColumns
-          gridColumns='0.2fr 0.3fr 2fr 0.4fr 1.2fr 0.9fr 1fr 1fr'
+          gridColumns='0.2fr 2fr 0.4fr 1.2fr 0.9fr 1fr 1fr'
           columns={receivedOrdersColumns}
         />
         <ul className={styles['orders-list']}>
