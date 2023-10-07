@@ -7,16 +7,13 @@ export const PublishedOrderItem = ({ order, children }: { order: Load; children?
   return (
     <li className={styles.order} key={order.id}>
       <span className={styles['order-id']}>{order.id}</span>
-      <span className={styles.route}>
-        <span>
-          {order.loadingAddress.country}, {order.loadingAddress.postal_code}{' '}
-          {order.loadingAddress.city}
-        </span>
-        <HiOutlineArrowNarrowRight />
-        <span>
-          {order.unloadingAddress.country}, {order.unloadingAddress.postal_code}{' '}
-          {order.unloadingAddress.city}
-        </span>
+      <span className={styles['loading-address']}>
+        {order.loadingAddress.country}, {order.loadingAddress.postal_code}{' '}
+        {order.loadingAddress.city} {<HiOutlineArrowNarrowRight />}
+      </span>
+      <span className={styles['unloading-address']}>
+        {order.unloadingAddress.country}, {order.unloadingAddress.postal_code}{' '}
+        {order.unloadingAddress.city}
       </span>
       <span className={styles.payment}>
         {order.price} {order.currency}

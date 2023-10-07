@@ -23,7 +23,9 @@
   span {
     padding-left: 0.5rem;
   }
-
+  .map-icon {
+    display: none;
+  }
   .salary {
     font-weight: 700;
   }
@@ -52,7 +54,7 @@
   }
   .company {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     font-size: 0.75rem;
     position: relative;
     padding: 0;
@@ -76,6 +78,7 @@
     font-size: 0.65rem;
     padding-top: 0;
     white-space: nowrap;
+    text-wrap: wrap;
   }
   .accept-button,
   .delete-button {
@@ -114,18 +117,22 @@
   .load {
     font-size: 0.7rem;
     height: auto;
-  }
-  .cargo {
-    display: flex;
-    flex-direction: column;
-    font-size: 0.7rem;
-    padding-top: 0.2rem;
-    span {
-      margin-right: 1rem;
+
+    .cargo {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.7rem;
+      padding-top: 0.2rem;
+      span {
+        margin-right: 1rem;
+      }
     }
-  }
-  .avatar {
-    display: none;
+    .company {
+      grid-template-columns: 1fr;
+    }
+    .avatar {
+      display: none;
+    }
   }
 }
 @media only screen and (max-width: $breakpoint-large) {
@@ -168,7 +175,18 @@
     span {
       padding-left: 0.1rem;
     }
-
+    .map-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      grid-column: span 7;
+      padding: 0.5rem 0rem;
+      background-color: rgba(104, 222, 104, 0.613);
+      svg {
+        color: green;
+        scale: 2;
+      }
+    }
     .loading-location,
     .unloading-location {
       display: flex;

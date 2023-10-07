@@ -54,33 +54,6 @@
       }
     }
   }
-  .info-links {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 500px;
-    overflow: hidden;
-    width: 300px;
-    left: -5px;
-    ul {
-      display: flex;
-      flex-direction: column;
-      padding: 0;
-      li {
-        font-size: 0.7rem;
-        line-height: 0.8;
-        a {
-          &:hover {
-            color: $primary-blue-color;
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-    &.hidden {
-      display: none;
-    }
-  }
 
   .author {
     position: absolute;
@@ -102,9 +75,6 @@
       display: none;
     }
 
-    .info-links {
-      display: none;
-    }
     .author {
       display: none;
     }
@@ -137,9 +107,7 @@
         }
       }
     }
-    .info-links {
-      display: none;
-    }
+
     .author {
       display: none;
     }

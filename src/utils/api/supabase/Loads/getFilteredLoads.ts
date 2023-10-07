@@ -94,6 +94,6 @@ export const getFilteredLoads = async (
   }) as Load[];
 
   const totalPages = count && Math.ceil(count / loadsPerPage);
-  if (!totalPages) return;
+  if (!totalPages) return { loads: [], totalPages: 0 };
   return { loads, totalPages };
 };

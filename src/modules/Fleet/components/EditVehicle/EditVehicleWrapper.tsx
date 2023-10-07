@@ -10,7 +10,5 @@ export const EditVehicleWrapper = () => {
     enabled: !!vehicleId,
   });
   if (!vehicleId) return;
-  return (
-    <div>{!isLoading ? <AddOrEditVehicleForm {...data} mode='edit' /> : <LoadingSpinner />}</div>
-  );
+  return <>{!isLoading ? <AddOrEditVehicleForm {...data} mode='edit' /> : <LoadingSpinner />}</>;
 };

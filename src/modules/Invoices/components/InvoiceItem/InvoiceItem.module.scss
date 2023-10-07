@@ -43,14 +43,19 @@
 @media only screen and (max-width: $breakpoint-small) {
   .invoice {
     font-size: 0.65rem;
+    grid-template-columns: 0.2fr 0.4fr 1fr 1fr 0.5fr 1fr;
     .invoice-options {
+      display: grid;
+      grid-column: span 6;
+      background-color: $primary-blue-color;
+      width: 100%;
       padding: 0 0.2rem;
       a {
         padding: 0.1rem 0;
       }
       button {
         font-size: 0.6rem;
-        padding: 0.5rem 1rem;
+
         .button-text {
           display: none;
         }

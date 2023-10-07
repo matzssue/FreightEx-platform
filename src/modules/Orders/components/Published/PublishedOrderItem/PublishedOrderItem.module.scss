@@ -3,7 +3,7 @@
 .order {
   display: grid;
   text-align: left;
-  grid-template-columns: 0.2fr 1.8fr 0.4fr 0.4fr 0.8fr 0.7fr;
+  grid-template-columns: 0.2fr 0.9fr 0.9fr 0.4fr 0.4fr 0.8fr 0.7fr;
   background-color: $secondary-color;
   box-shadow: 8px 8px 24px -5px rgba(150, 150, 150, 0.315);
 
@@ -12,7 +12,7 @@
     align-items: center;
     padding: 0.2rem 0.5rem;
   }
-  .route,
+  .loading-address,
   .date {
     svg {
       width: 50px;
@@ -22,13 +22,22 @@
     justify-content: center;
   }
 }
+@media only screen and (max-width: $breakpoint-large) {
+  .order {
+    font-size: 0.75rem;
+    .date {
+      svg {
+        width: 30px;
+      }
+    }
+  }
+}
 
 @media only screen and (max-width: $breakpoint-medium) {
   .order {
     text-align: center;
     grid-template-columns: repeat(6, 1fr);
     border: $order-border;
-    // border-style: groove;
     .order-id {
       grid-column: span 6;
       font-size: 1.5rem;
@@ -38,9 +47,10 @@
         content: 'ID: ';
       }
     }
-    .route {
+    .loading-address,
+    .unloading-address {
       background-color: $order-second-background;
-      grid-column: span 6;
+      grid-column: span 3;
       font-weight: 600;
       font-size: 1rem;
     }

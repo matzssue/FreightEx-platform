@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { LoadAddress } from './LoadAddress';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { Load as TLoad } from '../../../../../utils/api/supabase/types';
-
+import { FaMapMarked } from 'react-icons/fa';
 import { MouseEventHandler } from 'react';
 import { avatarLink } from '../../../../../constants/avatarLink';
 
@@ -43,6 +43,9 @@ export const LoadCard = ({ data, onAccept, onDelete }: LoadProps) => {
   return (
     <NavLink className={styles.navigation} to={navigateTo}>
       <div className={styles.load}>
+        <span className={styles['map-icon']}>
+          <FaMapMarked />
+        </span>
         <span className={styles['loading-location']}>
           <LoadAddress
             country={loadingAddress.country}

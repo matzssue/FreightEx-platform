@@ -4,7 +4,6 @@ import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { useQuery } from '@tanstack/react-query';
 import { getUserVehicles } from 'src/utils/api/supabase/Vehicles/getUserVehicles';
 import { useUserContext } from 'src/store/contexts/UserContext';
-import { LiaFileInvoiceSolid } from 'react-icons/lia';
 import { Autocomplete, TextField } from '@mui/material';
 import { useUpdateAcceptedLoad } from '../../../hooks/useUpdateAcceptedLoad';
 import { SyntheticEvent, useState } from 'react';
@@ -46,21 +45,15 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
   return (
     <li className={styles.order}>
       <span className={styles['order-id']}>{order.id}</span>
-      <span className={styles['show-invoice__button']}>
-        <button>
-          <LiaFileInvoiceSolid />
-        </button>
-      </span>
-      <span className={styles.route}>
-        <span>
-          {order.loadingAddress.country}, {order.loadingAddress.postal_code}{' '}
-          {order.loadingAddress.city}
-        </span>
+
+      <span className={styles['loading-address']}>
+        {order.loadingAddress.country}, {order.loadingAddress.postal_code}{' '}
+        {order.loadingAddress.city}
         <HiOutlineArrowNarrowRight />
-        <span>
-          {order.unloadingAddress.country}, {order.unloadingAddress.postal_code}{' '}
-          {order.unloadingAddress.city}
-        </span>
+      </span>
+      <span className={styles['unloading-address']}>
+        {order.unloadingAddress.country}, {order.unloadingAddress.postal_code}{' '}
+        {order.unloadingAddress.city}
       </span>
       <span className={styles.payment}>
         {order.price} {order.currency}
@@ -87,9 +80,31 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
           }
           options={selectVehicles ? selectVehicles : []}
           size='small'
-          sx={{ width: '100%' }}
+          sx={{
+            width: '100%',
+          }}
           renderInput={(params) => (
-            <TextField {...params} variant='filled' label='Select vehicle' />
+            <TextField
+              {...params}
+              InputProps={{
+                ...params.InputProps,
+                sx: {
+                  '@media only screen and (max-width: 1000px)': {
+                    fontSize: '10px',
+                    margin: '5px 0', // Dostosuj marginesy (góra i dół)
+                    padding: '4px', // Dostosuj padding
+                  },
+                  '& .MuiAutocomplete-clearIndicator': {
+                    '& svg': {
+                      fontSize: '13px', // Dostosuj rozmiar ikony "X"
+                      cursor: 'pointer', // Dodaj kursor wskaźnika, aby wskazywać na możliwość zamknięcia
+                    },
+                  },
+                },
+              }}
+              variant='filled'
+              label='Select vehicle'
+            />
           )}
         />
       </span>
