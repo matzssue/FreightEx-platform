@@ -38,6 +38,7 @@ export const AddLoadForm = () => {
   const mutation = useMutation(async (values: AddLoadData) => addLoad(values), {
     onSuccess: () => {
       queryClient.invalidateQueries(['loads']);
+      queryClient.invalidateQueries(['published']);
       notify('success', 'Load successfully added');
     },
     onError: () => {

@@ -10,9 +10,6 @@
     background-color: rgb(77, 77, 77);
     color: $secondary-text-color;
     padding: 0.5rem 0;
-    &:hover {
-      background-color: rgb(112, 112, 112);
-    }
   }
 }
 @media only screen and (max-width: $breakpoint-large) {

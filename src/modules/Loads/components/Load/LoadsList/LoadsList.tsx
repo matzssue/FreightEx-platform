@@ -11,16 +11,21 @@ import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { LoadingSpinner } from '../../../../../common/LoadingSpinner/LoadingSpinner';
 import { useAcceptOffer } from '../../../hooks/useAcceptOffer';
 import { Paginate } from '../../../../../common/Pagination/Pagination';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useDeleteOrder } from 'src/modules/Orders/hooks/useDeleteOrder';
 import { usePaginationContext } from 'src/store/contexts/PaginationContext';
+import AlertDialog from 'src/common/Dialog/AlertDialog';
+
+type SelectedDialog = 'accept' | 'delete' | null;
+
 export const Loads = () => {
   const { filterId } = useParams<string>();
   const acceptOfferMutation = useAcceptOffer();
   const deleteOfferMutation = useDeleteOrder();
   const { userData } = useUserContext();
   const { currentPage, itemsPerPage } = usePaginationContext();
-
+  const [selectedDialog, setSelectedDialog] = useState<SelectedDialog>(null);
+  const [openId, setOpenId] = useState<string | null>(null);
   const filters = useAppSelector((state) => state.loadsFilters.filters);
 
   const { data: allLoads, isLoading: isAllLoading } = useQuery(
@@ -49,12 +54,34 @@ export const Loads = () => {
 
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.preventDefault();
+    console.log(id);
     acceptOfferMutation.mutate({ loadId: id, userId: userData.id });
   };
   const deleteOrderHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.preventDefault();
+    console.log(id);
     deleteOfferMutation.mutate(id);
   };
+
+  const onDeleteClick = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.preventDefault();
+    setSelectedDialog('delete');
+    setOpenId(id);
+  };
+  const onAcceptClick = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.preventDefault();
+    setSelectedDialog('accept');
+    setOpenId(id);
+  };
+
+  const agreeHandler = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    if (selectedDialog === 'delete') {
+      deleteOrderHandler(e, id);
+    } else if (selectedDialog === 'accept') {
+      acceptOfferHandler(e, id);
+    }
+  };
+
   if (isAllLoading || (filteredLoads && isFilteredLoading)) return <LoadingSpinner />;
   if (!memoizedLoads) return;
   return (
@@ -66,9 +93,19 @@ export const Loads = () => {
         <ul>
           {memoizedLoads.loads?.map((load) => (
             <li id={`${load.id}`} key={load.id}>
+              <AlertDialog
+                agreeHandler={(e) => agreeHandler(e, load.id)}
+                description={`${selectedDialog}-load-confirmation`}
+                close={() => setOpenId(null)}
+                title={`${selectedDialog}-confirmation`}
+                open={load.id === openId}
+                label={`Confirmation`}
+              >
+                Are you sure you want to {selectedDialog} this order?
+              </AlertDialog>
               <LoadCard
-                onDelete={(e) => deleteOrderHandler(e, load.id)}
-                onAccept={(e) => acceptOfferHandler(e, load.id)}
+                onDelete={(e) => onDeleteClick(e, load.id)}
+                onAccept={(e) => onAcceptClick(e, load.id)}
                 data={load}
               />
             </li>

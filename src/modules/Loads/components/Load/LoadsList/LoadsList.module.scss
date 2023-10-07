@@ -25,10 +25,6 @@
     li {
       position: relative;
       padding: 0.5rem 0.2rem;
-      cursor: pointer;
-      &:hover {
-        background-color: $primary-blue-color;
-      }
       &::after {
         content: '';
         position: absolute;
