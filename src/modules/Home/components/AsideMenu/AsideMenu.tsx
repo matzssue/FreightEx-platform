@@ -13,11 +13,6 @@ export const AsideMenu = ({ showMenu }: { showMenu: boolean }) => {
         >
           <Links hidden={!showMenu} data={menuLinks} />
         </div>
-        <div
-          className={showMenu ? styles['info-links'] : `${styles['info-links']} ${styles.hidden}`}
-        >
-          <Links activeMode={false} data={infoLinks} />
-        </div>
         <p className={showMenu ? styles.author : `${styles.author} ${styles.hidden}`}>
           @made by m.kluska
         </p>
