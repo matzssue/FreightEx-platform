@@ -11,6 +11,9 @@
   .payment-inputs {
     display: flex;
     gap: 30px;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
     label {
       margin: 0 1rem;
     }
@@ -23,12 +26,12 @@
     width: 100%;
   }
 }
-@media only screen and (max-width: $breakpoint-medium) {
+
+@media only screen and (max-width: $breakpoint-small) {
   .payment-inputs__container {
-    .payment {
-      gap: 20px;
+    .payment-inputs {
+      align-items: flex-start;
       flex-direction: column;
-      align-items: center;
     }
   }
 }
