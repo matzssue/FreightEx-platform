@@ -19,7 +19,7 @@ export const PaymentDetails = ({
           label={'term(days)'}
           name='term'
           control={control}
-          defaultValue={null}
+          defaultValue={''}
           sx={{ width: 'auto', maxWidth: '100px', helperText: { width: '300px' } }}
           variant='standard'
         />
@@ -29,7 +29,7 @@ export const PaymentDetails = ({
             label={'price'}
             name='price'
             control={control}
-            defaultValue={null}
+            defaultValue={''}
             sx={{ width: 'auto', maxWidth: '100px' }}
             variant='standard'
           />

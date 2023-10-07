@@ -2,15 +2,20 @@ import { FilterCard } from '../FilterCard/FilterCard';
 import { DateInput } from '../../../../../../common/Inputs/DateInput/DateInput';
 import styles from './DateFilter.module.scss';
 import { Control, FieldValues, Path } from 'react-hook-form';
+import dayjs from 'dayjs';
 
 type DateFilterProps<T extends FieldValues> = {
   control: Control<T>;
 };
 
+const today = dayjs();
+const minDate = today.subtract(2, 'year');
+const maxDate = today.add(1, 'year');
 const commonProps = {
   fontSize: '15px',
   size: 'small' as const,
   sx: { boxShadow: '3px 3px 0px 0px rgba(148, 148, 148, 0.267)' },
+  props: { minDate, maxDate },
 };
 
 export const DateFilter = <T extends FieldValues>({ control }: DateFilterProps<T>) => {

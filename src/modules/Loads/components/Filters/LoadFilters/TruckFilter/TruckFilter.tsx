@@ -23,7 +23,6 @@ export const TruckFilter = ({
           <input
             id='min-load-weight'
             className={styles.input}
-            placeholder='min'
             {...register('minWeight')}
             step='any'
             type='number'
@@ -34,7 +33,6 @@ export const TruckFilter = ({
           <input
             id='max-load-weight'
             className={styles.input}
-            placeholder='max'
             {...register('maxWeight')}
             type='number'
           />
@@ -46,7 +44,6 @@ export const TruckFilter = ({
           <input
             id='min-load-length'
             className={styles.input}
-            placeholder='max'
             {...register('minLength')}
             type='number'
           />
@@ -56,7 +53,6 @@ export const TruckFilter = ({
           <input
             id='max-load-length'
             className={styles.input}
-            placeholder='max'
             {...register('maxLength')}
             type='number'
           />

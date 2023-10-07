@@ -1,5 +1,5 @@
 import { AiOutlineClose } from 'react-icons/ai';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getLoadDetails } from '../../../../../utils/api/supabase/Loads/getLoadDetails';
 import { useQuery } from '@tanstack/react-query';
 
@@ -13,10 +13,11 @@ import { useAcceptOffer } from 'src/modules/Loads/hooks/useAcceptOffer';
 export const LoadDetails = () => {
   const { loadId, filterId } = useParams();
   const acceptOfferMutation = useAcceptOffer();
-
+  const navigation = useNavigate();
   const { userData } = useUserContext();
   const [distance, setDistance] = useState<string | undefined>(undefined);
   const [duration, setDuration] = useState<string | undefined>(undefined);
+  const closeLink = filterId ? `/loads/filters/${filterId}` : '/loads';
 
   const { data: loadDetails, isLoading } = useQuery(
     ['loads', loadId],
@@ -27,13 +28,14 @@ export const LoadDetails = () => {
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.preventDefault();
     acceptOfferMutation.mutate({ loadId: id, userId: userData.id });
+    navigation(closeLink);
   };
 
   if (!loadDetails) return;
   if (isLoading) return <div>Loading...</div>;
+
   const { loadingAddress, unloadingAddress, price, term, currency, id, userId } = loadDetails;
 
-  const closeLink = filterId ? `/loads/filters/${filterId}` : '/loads';
   return (
     <div className={styles.container}>
       <NavLink className={styles['close-button']} to={closeLink}>

@@ -7,7 +7,7 @@ export type ChangeNameFormValue = yup.InferType<typeof changeNameSchema>;
 export type ChangeSurnameFormValue = yup.InferType<typeof changeSurnameSchema>;
 
 export const loginSchema = yup.object().shape({
-  email: yup.string().email().required('Email is required'),
+  email: yup.string().email().required('Email is required').trim(),
   password: yup.string().required('No password provided.'),
 });
 const registerUserSchema = yup.object({

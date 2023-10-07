@@ -97,9 +97,11 @@ export const RegisterForm = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           {getStepContent(activeStep)}
           <div className={styles.buttons}>
-            <button className={styles.submit} onClick={handlePrev} disabled={activeStep === 0}>
-              Back
-            </button>
+            {activeStep !== 0 && (
+              <button className={styles.submit} onClick={handlePrev}>
+                Back
+              </button>
+            )}
             {activeStep !== 1 ? (
               <button className={styles.submit} type='button' onClick={handleNext}>
                 Next
@@ -109,10 +111,10 @@ export const RegisterForm = () => {
                 {isLoading ? 'Loading...' : 'Submit'}
               </button>
             )}
-            <p className={styles.register}>
-              Arleady registered? <Link to={'/login'}>Log In</Link>
-            </p>
           </div>
+          <p className={styles.register}>
+            Arleady registered? <Link to={'/login'}>Log In</Link>
+          </p>
         </form>
       </FormProvider>
     </AuthFormWrapper>

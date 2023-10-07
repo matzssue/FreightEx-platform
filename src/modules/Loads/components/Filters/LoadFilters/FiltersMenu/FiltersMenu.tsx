@@ -87,7 +87,7 @@ export const FiltersMenu = () => {
           className={`${styles['apply-button']} ${showFilersMenu ? '' : styles.hidden}`}
           type='submit'
         >
-          Aplly filters
+          Apply filters
         </button>
       </div>
     </form>

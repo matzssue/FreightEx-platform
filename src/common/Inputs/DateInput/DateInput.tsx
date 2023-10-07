@@ -2,7 +2,7 @@ import { Controller, FieldValues, PathValue, Path } from 'react-hook-form';
 import styles from './DateInput.module.scss';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import { ChangeEvent } from 'react';
 import { BaseInputProps } from '../types';
 import { SxProps } from '@mui/material';
@@ -11,6 +11,7 @@ type DateInputProps<T extends FieldValues> = {
   size?: 'small' | 'medium';
   fontSize?: string;
   sx?: SxProps;
+  props?: DatePickerProps<any>;
 } & BaseInputProps<T>;
 
 export const DateInput = <T extends FieldValues>({
@@ -19,6 +20,7 @@ export const DateInput = <T extends FieldValues>({
   size = 'medium',
   fontSize = '18px',
   sx,
+  props,
 }: DateInputProps<T>) => {
   return (
     <Controller
@@ -36,6 +38,7 @@ export const DateInput = <T extends FieldValues>({
                 '& .MuiOutlinedInput-input': {
                   fontSize: fontSize,
                   borderWidth: '15px',
+                  fontFamily: `'Nunito', sans-serif`,
                 },
                 '& .MuiOutlinedInput-root': {
                   '&.Mui-focused fieldset': {
@@ -45,7 +48,12 @@ export const DateInput = <T extends FieldValues>({
                 '.css-1wc848c-MuiFormHelperText-root': {
                   fontFamily: 'Nunito, sans-serif',
                 },
+                '.css-k4qjio-MuiFormHelperText-root.Mui-error': {
+                  fontSize: '0.7rem',
+                  fontFamily: `'Nunito', sans-serif`,
+                },
                 backgroundColor: 'transparent',
+
                 ...sx,
               }}
               className={styles.input}
@@ -59,6 +67,7 @@ export const DateInput = <T extends FieldValues>({
                   id: `${name}`,
                 },
               }}
+              {...props}
             />
           </div>
         </LocalizationProvider>

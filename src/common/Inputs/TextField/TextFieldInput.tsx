@@ -58,7 +58,7 @@ export const TextFieldInput = <T extends FieldValues>({
             inputProps={{ 'aria-readonly': true }}
             placeholder={placeholder}
             disabled={disabled}
-            value={value}
+            value={value && value.trim()}
             FormHelperTextProps={{
               className: styles.helperText,
             }}

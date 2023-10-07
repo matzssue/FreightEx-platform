@@ -6,6 +6,9 @@ import { PlacesAutocompleteInput } from '../../../../../../common/Inputs/PlacesA
 import { ControllerProps } from '../../types';
 import { UseFormSetValue } from 'react-hook-form';
 import { Title } from '../../../../../../common/Title/Title';
+import dayjs from 'dayjs';
+const today = dayjs();
+const maxDate = today.add(2, 'year');
 export const PlaceAndDateSearch = ({
   control,
   setValue,
@@ -14,7 +17,12 @@ export const PlaceAndDateSearch = ({
     <>
       <div className={styles['loading-inputs']}>
         <Title title={'Loading'} />
-        <DateInput<AddLoadValues> label={'Date'} control={control} name={'loadingDate'} />
+        <DateInput<AddLoadValues>
+          props={{ minDate: today, maxDate }}
+          label={'Date'}
+          control={control}
+          name={'loadingDate'}
+        />
         <PlacesAutocompleteInput<AddLoadValues>
           setValue={setValue}
           setValueKey='loadingAddressData'
@@ -33,7 +41,12 @@ export const PlaceAndDateSearch = ({
       </div>
       <div className={styles['unloading-inputs']}>
         <Title title={'Unloading'} />
-        <DateInput<AddLoadValues> label={'Date'} control={control} name={'unloadingDate'} />
+        <DateInput<AddLoadValues>
+          props={{ minDate: today, maxDate }}
+          label={'Date'}
+          control={control}
+          name={'unloadingDate'}
+        />
         <PlacesAutocompleteInput<AddLoadValues>
           setValue={setValue}
           control={control}
