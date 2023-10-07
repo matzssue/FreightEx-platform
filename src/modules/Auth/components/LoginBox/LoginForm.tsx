@@ -61,7 +61,7 @@ export const LoginForm = () => {
         </div>
         <div className={styles['test-account']}>
           <h4>Test Acccount</h4>
-          <p>Login: test@transportex.com</p>
+          <p>Login: test1@transportex.com</p>
           <p>Password: Test123</p>
         </div>
       </form>

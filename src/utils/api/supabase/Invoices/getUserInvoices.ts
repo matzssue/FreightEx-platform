@@ -18,6 +18,7 @@ export const getUserInvoices = async (
     })
     .eq('seller_id', id)
     .range((page - 1) * itemsPerPage, page * itemsPerPage - 1)
+    .order('id', { ascending: true })
     .returns<GetInvoicesDatabase[]>();
 
   if (invoiceError) throw new Error();
@@ -36,7 +37,7 @@ export const getUserInvoices = async (
     };
   });
 
-  const totalPages = count && Math.ceil(count / 4);
+  const totalPages = count && Math.ceil(count / itemsPerPage);
   const returnValue =
     totalPages && invoices ? { invoiceData, totalPages } : { invoiceData: [], totalPages: 0 };
 
