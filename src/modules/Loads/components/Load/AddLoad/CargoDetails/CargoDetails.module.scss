@@ -16,7 +16,8 @@
     }
   }
 }
-@media only screen and (max-width: $breakpoint-medium) {
+
+@media only screen and (max-width: $breakpoint-small) {
   .cargo-dimensions {
     .dimensions-inputs__container {
       flex-direction: column;
