@@ -1,4 +1,4 @@
-import { menuLinks, infoLinks } from '../../constants/asideMenuData';
+import { menuLinks } from '../../constants/asideMenuData';
 import logo from 'src/assets/logo.svg';
 import styles from './AsideMenu.module.scss';
 import Links from '../../../../common/Lists/Links';
@@ -12,11 +12,6 @@ export const AsideMenu = ({ showMenu }: { showMenu: boolean }) => {
           className={showMenu ? styles['main-links'] : `${styles['main-links']} ${styles.hidden}`}
         >
           <Links hidden={!showMenu} data={menuLinks} />
-        </div>
-        <div
-          className={showMenu ? styles['info-links'] : `${styles['info-links']} ${styles.hidden}`}
-        >
-          <Links activeMode={false} data={infoLinks} />
         </div>
         <p className={showMenu ? styles.author : `${styles.author} ${styles.hidden}`}>
           @made by m.kluska

@@ -6,6 +6,7 @@ import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import { ChangeEvent } from 'react';
 import { BaseInputProps } from '../types';
 import { SxProps } from '@mui/material';
+import dayjs from 'dayjs';
 
 type DateInputProps<T extends FieldValues> = {
   size?: 'small' | 'medium';
@@ -13,7 +14,7 @@ type DateInputProps<T extends FieldValues> = {
   sx?: SxProps;
   props?: DatePickerProps<any>;
 } & BaseInputProps<T>;
-
+const currentDate = dayjs();
 export const DateInput = <T extends FieldValues>({
   control,
   name,
@@ -31,6 +32,9 @@ export const DateInput = <T extends FieldValues>({
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div className={styles.container}>
             <DatePicker
+              onOpen={() => {
+                onChange(currentDate as PathValue<T, Path<T>> | ChangeEvent<Element>);
+              }}
               onChange={(date) => {
                 onChange(date as PathValue<T, Path<T>> | ChangeEvent<Element>);
               }}

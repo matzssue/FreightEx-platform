@@ -77,6 +77,11 @@
     padding: 0 1rem;
     background-color: $secondary-color;
   }
+  .loads {
+    ul {
+      gap: 15px;
+    }
+  }
   .sort-list {
     display: none;
   }
