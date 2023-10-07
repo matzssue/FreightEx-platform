@@ -9,7 +9,7 @@ import { ReactNode } from 'react';
 type AlertDialogProps = {
   open: boolean;
   close: () => void;
-  agreeHandler: () => void;
+  agreeHandler: (e: any) => void;
   children: ReactNode;
   title: string;
   description: string;
