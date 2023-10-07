@@ -1,4 +1,4 @@
-import { menuLinks, infoLinks } from '../../constants/asideMenuData';
+import { menuLinks } from '../../constants/asideMenuData';
 import logo from 'src/assets/logo.svg';
 import styles from './AsideMenu.module.scss';
 import Links from '../../../../common/Lists/Links';

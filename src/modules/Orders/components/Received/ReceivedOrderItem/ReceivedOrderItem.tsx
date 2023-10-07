@@ -8,7 +8,7 @@ import { Autocomplete, TextField } from '@mui/material';
 import { useUpdateAcceptedLoad } from '../../../hooks/useUpdateAcceptedLoad';
 import { SyntheticEvent, useState } from 'react';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
-import ClearIcon from '@mui/icons-material/Clear';
+
 export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
   const { userId } = useUserContext();
   const { notify } = useNotificationContext();
