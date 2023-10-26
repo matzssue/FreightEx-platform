@@ -25,51 +25,53 @@ vi.mock('../../store/contexts/UserContext', () => ({
   })),
 }));
 
-beforeEach(() => {
-  render(
-    <QueryClientProvider client={queryClient}>
-      <UserContextProvider>
-        <BrowserRouter>
-          <LoginForm />
-        </BrowserRouter>
-      </UserContextProvider>
-    </QueryClientProvider>,
-  );
-});
+describe('Login Form component', () => {
+  beforeEach(() => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <UserContextProvider>
+          <BrowserRouter>
+            <LoginForm />
+          </BrowserRouter>
+        </UserContextProvider>
+      </QueryClientProvider>,
+    );
+  });
 
-test('username, password input, button should be rendered', () => {
-  expect(screen.getByLabelText('Email')).toBeInTheDocument();
-  expect(screen.getByLabelText('Password')).toBeInTheDocument();
+  it('username, password input, button should be rendered', () => {
+    expect(screen.getByLabelText('Email')).toBeInTheDocument();
+    expect(screen.getByLabelText('Password')).toBeInTheDocument();
 
-  const buttonEl = screen.getByRole('button', { name: 'Login' });
+    const buttonEl = screen.getByRole('button', { name: 'Login' });
 
-  expect(buttonEl).toBeInTheDocument();
-});
+    expect(buttonEl).toBeInTheDocument();
+  });
 
-test('email, password input should change', () => {
-  const testValue = 'test';
-  const emailInputEl = screen.getByLabelText('Email') as HTMLInputElement;
-  const passwordInputEl = screen.getByLabelText('Password') as HTMLInputElement;
-  fireEvent.change(emailInputEl, { target: { value: testValue } });
-  fireEvent.change(passwordInputEl, { target: { value: testValue } });
-  expect(emailInputEl.value).toBe(testValue);
-  expect(passwordInputEl.value).toBe(testValue);
-});
+  it('email, password input should change', () => {
+    const testValue = 'test';
+    const emailInputEl = screen.getByLabelText('Email') as HTMLInputElement;
+    const passwordInputEl = screen.getByLabelText('Password') as HTMLInputElement;
+    fireEvent.change(emailInputEl, { target: { value: testValue } });
+    fireEvent.change(passwordInputEl, { target: { value: testValue } });
+    expect(emailInputEl.value).toBe(testValue);
+    expect(passwordInputEl.value).toBe(testValue);
+  });
 
-test('displays an error message for invalid data', () => {
-  const emailInputEl = screen.getByLabelText('Email') as HTMLInputElement;
-  const passwordInputEl = screen.getByLabelText('Password') as HTMLInputElement;
-  const submitButton = screen.getByRole('button', { name: 'Login' });
+  it('displays an error message for invalid data', () => {
+    const emailInputEl = screen.getByLabelText('Email') as HTMLInputElement;
+    const passwordInputEl = screen.getByLabelText('Password') as HTMLInputElement;
+    const submitButton = screen.getByRole('button', { name: 'Login' });
 
-  fireEvent.change(emailInputEl, { target: { value: 'invalid@email.pl' } });
-  fireEvent.change(passwordInputEl, { target: { value: 'invalid' } });
-  fireEvent.click(submitButton);
+    fireEvent.change(emailInputEl, { target: { value: 'invalid@email.pl' } });
+    fireEvent.change(passwordInputEl, { target: { value: 'invalid' } });
+    fireEvent.click(submitButton);
 
-  waitFor(() => {
-    const errorMessage = screen.queryByText('Invalid email or password');
-    expect(errorMessage).toBeInTheDocument();
+    waitFor(() => {
+      const errorMessage = screen.queryByText('Invalid email or password');
+      expect(errorMessage).toBeInTheDocument();
 
-    expect(emailInputEl.value).toBe('invalid@email.pl');
-    expect(passwordInputEl.value).toBe('');
+      expect(emailInputEl.value).toBe('invalid@email.pl');
+      expect(passwordInputEl.value).toBe('');
+    });
   });
 });
