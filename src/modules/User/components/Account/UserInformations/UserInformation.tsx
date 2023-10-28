@@ -67,35 +67,29 @@ export const UserInformation = ({
   };
 
   return (
-    <>
-      <div className={styles.information}>
-        <p>
-          {label}: <span>{value}</span>
-        </p>
-        {isChangeable && (
-          <button onClick={() => setOpen(true)}>
-            <AiOutlineEdit />
-          </button>
-        )}
+    <div className={styles.information}>
+      <p>
+        {label}: <span>{value}</span>
+      </p>
+      {isChangeable && (
+        <button onClick={() => setOpen(true)}>
+          <AiOutlineEdit />
+        </button>
+      )}
 
-        {isChangeable && open && type && (
-          <form className={styles['information-form']} onSubmit={handleSubmit(onSubmit)}>
-            <label>Enter new {type === 'name' ? 'name' : 'surname'}</label>
-            <input {...register(type)} type='text' />
-            {errors[type] && <span className={styles.error}>{errors[type]?.message}</span>}
-            <button className={styles['submit-button']} type='submit'>
-              Save
-            </button>
-            <button
-              type='button'
-              className={styles['submit-button']}
-              onClick={() => setOpen(false)}
-            >
-              Cancel
-            </button>
-          </form>
-        )}
-      </div>
-    </>
+      {isChangeable && open && type && (
+        <form className={styles['information-form']} onSubmit={handleSubmit(onSubmit)}>
+          <label>Enter new {type === 'name' ? 'name' : 'surname'}</label>
+          <input {...register(type)} type='text' />
+          {errors[type] && <span className={styles.error}>{errors[type]?.message}</span>}
+          <button className={styles['submit-button']} type='submit'>
+            Save
+          </button>
+          <button type='button' className={styles['submit-button']} onClick={() => setOpen(false)}>
+            Cancel
+          </button>
+        </form>
+      )}
+    </div>
   );
 };
