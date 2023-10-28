@@ -1,9 +1,9 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import { RegisterForm } from './RegisterForm';
 import { BrowserRouter } from 'react-router-dom';
-
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import { RegisterForm } from './RegisterForm';
 
 const queryClient = new QueryClient();
 const user = userEvent.setup();

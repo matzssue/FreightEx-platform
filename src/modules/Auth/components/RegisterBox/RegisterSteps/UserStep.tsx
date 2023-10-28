@@ -1,6 +1,6 @@
-import PasswordInput from '../../../../../common/Inputs/PasswordInput/PasswordInput';
 import { useFormContext } from 'react-hook-form';
 
+import PasswordInput from '../../../../../common/Inputs/PasswordInput/PasswordInput';
 import { TextFieldInput } from '../../../../../common/Inputs/TextField/TextFieldInput';
 
 export const UserStep = () => {

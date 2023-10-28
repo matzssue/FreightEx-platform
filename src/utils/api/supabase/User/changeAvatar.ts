@@ -1,5 +1,6 @@
-import supabase from '../../../../config/supabase';
 import { toast } from 'react-toastify';
+
+import supabase from '../../../../config/supabase';
 export const changeAvatar = async (userId: string, file: File) => {
   try {
     const { error: uploadError } = await supabase.storage

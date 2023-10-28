@@ -1,18 +1,19 @@
-import styles from './VehicleCard.module.scss';
-import { VehicleCardWrapper } from '../VehicleCardWrapper/VehicleCardWrapper';
-import { selectVehicleImage } from '../../../utils/selectVehicleImage';
-
-import { LinkButton } from 'src/common/Buttons/LinkButton/LinkButton';
-import { Button } from 'src/common/Buttons/Button/Button';
-import AlertDialog from 'src/common/Dialog/AlertDialog';
 import { useState } from 'react';
-import { useDeleteVehicle } from 'src/modules/Fleet/hooks/useDeleteVehicle';
 import { FaUserLarge } from 'react-icons/fa6';
+import { Button } from 'src/common/Buttons/Button/Button';
+import { LinkButton } from 'src/common/Buttons/LinkButton/LinkButton';
+import AlertDialog from 'src/common/Dialog/AlertDialog';
+import { useDeleteVehicle } from 'src/modules/Fleet/hooks/useDeleteVehicle';
+
+import { selectVehicleImage } from '../../../utils/selectVehicleImage';
+import { VehicleCardWrapper } from '../VehicleCardWrapper/VehicleCardWrapper';
+
+import styles from './VehicleCard.module.scss';
 type VehicleData = {
   driverName: string;
   driverPhoneNumber: string;
-  vehicleType: string;
   vehicleRegistrationNumber: string;
+  vehicleType: string;
 };
 
 export const VehicleCard = ({
@@ -42,7 +43,11 @@ export const VehicleCard = ({
       </AlertDialog>
       <VehicleCardWrapper>
         <div className={styles['image-container']}>
-          <img className={styles['truck-image']} src={selectVehicleImage(vehicleType)} />
+          <img
+            className={styles['truck-image']}
+            alt='truck-image'
+            src={selectVehicleImage(vehicleType)}
+          />
         </div>
         <p className={styles['truck-type']}>{vehicleType}</p>
         <div className={styles['truck-informations']}>

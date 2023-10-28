@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import styles from './FilterInput.module.scss';
 
 export const FilterInput = ({
@@ -9,11 +10,9 @@ export const FilterInput = ({
   children: ReactNode;
   label: string;
   labelId: string;
-}) => {
-  return (
-    <div className={styles['input-container']}>
-      <label htmlFor={labelId}>{label}</label>
-      {children}
-    </div>
-  );
-};
+}) => (
+  <div className={styles['input-container']}>
+    <label htmlFor={labelId}>{label}</label>
+    {children}
+  </div>
+);

@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import { StyleSheet, Text, View } from '@react-pdf/renderer';
 import { GetInvoices } from 'src/utils/api/supabase/types';
 
 const styles = StyleSheet.create({
@@ -16,23 +16,21 @@ const styles = StyleSheet.create({
   date: { fontWeight: 400, fontSize: 10, textAlign: 'center' },
 });
 
-export const InvoiceDates = ({ invoiceData }: { invoiceData: GetInvoices }) => {
-  return (
-    <View style={styles.titleContainer}>
-      <View style={styles.spaceBetween}>
-        <View style={{ maxWidth: 300 }}>
-          <Text style={styles.dateTitle}>Facture Date </Text>
-          <Text style={styles.date}>{invoiceData.date}</Text>
-        </View>
-        <View style={{ maxWidth: 300 }}>
-          <Text style={styles.dateTitle}>End date </Text>
-          <Text style={styles.date}>{invoiceData.endDate}</Text>
-        </View>
-        <View style={{ maxWidth: 200 }}>
-          <Text style={styles.dateTitle}>Payment term(days) </Text>
-          <Text style={styles.date}>{invoiceData.paymentTerm}</Text>
-        </View>
+export const InvoiceDates = ({ invoiceData }: { invoiceData: GetInvoices }) => (
+  <View style={styles.titleContainer}>
+    <View style={styles.spaceBetween}>
+      <View style={{ maxWidth: 300 }}>
+        <Text style={styles.dateTitle}>Facture Date </Text>
+        <Text style={styles.date}>{invoiceData.date}</Text>
+      </View>
+      <View style={{ maxWidth: 300 }}>
+        <Text style={styles.dateTitle}>End date </Text>
+        <Text style={styles.date}>{invoiceData.endDate}</Text>
+      </View>
+      <View style={{ maxWidth: 200 }}>
+        <Text style={styles.dateTitle}>Payment term(days) </Text>
+        <Text style={styles.date}>{invoiceData.paymentTerm}</Text>
       </View>
     </View>
-  );
-};
+  </View>
+);

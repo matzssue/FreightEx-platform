@@ -1,8 +1,9 @@
-import supabase from '../../../config/supabase';
-import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
+
+import supabase from '../../../config/supabase';
 export const useUpdateAcceptedLoad = () => {
   const navigation = useNavigate();
   const queryClient = useQueryClient();
@@ -22,7 +23,7 @@ export const useUpdateAcceptedLoad = () => {
   };
 
   return useMutation(
-    async ({ registerNumber, orderId }: { registerNumber: string; orderId: string }) =>
+    async ({ registerNumber, orderId }: { orderId: string; registerNumber: string }) =>
       await updateAcceptedLoad(registerNumber, orderId),
     {
       onSuccess: async () => {

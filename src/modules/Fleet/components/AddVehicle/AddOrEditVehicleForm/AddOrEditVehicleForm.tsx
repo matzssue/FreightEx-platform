@@ -1,22 +1,24 @@
-import styles from './AddOrEditVehicleForm.module.scss';
-import { SelectInput } from 'src/common/Inputs/Select/Select';
-import { vehicleTypes } from '../../../constants/vehicleTypes';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { TextFieldInput } from 'src/common/Inputs/TextField/TextFieldInput';
-import { addVehicleSchema, VehicleValuesSchema } from 'src/utils/schemas/addVehicleSchema';
-import { useUserContext } from 'src/store/contexts/UserContext';
-import { useAddVehicle } from 'src/modules/Fleet/hooks/useAddVehicle';
-import { LinkButton } from 'src/common/Buttons/LinkButton/LinkButton';
 import { Button } from 'src/common/Buttons/Button/Button';
+import { LinkButton } from 'src/common/Buttons/LinkButton/LinkButton';
+import { SelectInput } from 'src/common/Inputs/Select/Select';
+import { TextFieldInput } from 'src/common/Inputs/TextField/TextFieldInput';
+import { useAddVehicle } from 'src/modules/Fleet/hooks/useAddVehicle';
 import { useUpdateVehicleData } from 'src/modules/Fleet/hooks/useUpdateVehicleData';
+import { useUserContext } from 'src/store/contexts/UserContext';
+import { addVehicleSchema, VehicleValuesSchema } from 'src/utils/schemas/addVehicleSchema';
+
+import { vehicleTypes } from '../../../constants/vehicleTypes';
+
+import styles from './AddOrEditVehicleForm.module.scss';
 
 type AddVehicleFormProps = {
-  mode?: 'add' | 'edit';
   driverName?: string;
   driverPhoneNumber?: string;
-  vehicleType?: string;
+  mode?: 'add' | 'edit';
   vehicleRegistrationNumber?: string;
+  vehicleType?: string;
 };
 
 export const AddOrEditVehicleForm = ({

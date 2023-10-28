@@ -1,10 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { screen, render, waitFor } from '@testing-library/react';
-import { UserContextProvider } from 'src/store/contexts/UserContext';
-import { LoginForm } from './LoginForm';
-import { vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { UserContextProvider } from 'src/store/contexts/UserContext';
+import { vi } from 'vitest';
+
+import { LoginForm } from './LoginForm';
 
 const queryClient = new QueryClient();
 const mockUsedNavigate = vi.fn();

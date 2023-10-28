@@ -1,10 +1,10 @@
-import { OrdersMenu } from 'src/modules/Orders/components/OrdersMenu/OrdersMenu';
-import { ProtectedWrapper } from 'src/common/ProtectedWrapper/ProtectedWrapper';
 import { PageLayout } from 'src/common/PageLayout/PageLayout';
-import { PublishedOrdersList } from 'src/modules/Orders/components/Published/PublishedOrdersList/PublishedOrdersList';
-import { OrdersWrapper } from 'src/modules/Orders/components/OrdersWrapper/OrdersWrapper';
+import { ProtectedWrapper } from 'src/common/ProtectedWrapper/ProtectedWrapper';
 import { JoyrideLoader } from 'src/modules/Joyride/components/JoyrideLoader/JoyrideLoader';
 import { useMountJoyride } from 'src/modules/Joyride/hooks/useMountJoyride';
+import { OrdersMenu } from 'src/modules/Orders/components/OrdersMenu/OrdersMenu';
+import { OrdersWrapper } from 'src/modules/Orders/components/OrdersWrapper/OrdersWrapper';
+import { PublishedOrdersList } from 'src/modules/Orders/components/Published/PublishedOrdersList/PublishedOrdersList';
 
 const joyrideIndex = 6;
 

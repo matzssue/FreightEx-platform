@@ -1,19 +1,19 @@
+import { ReactNode } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { ReactNode } from 'react';
 
 type AlertDialogProps = {
-  open: boolean;
-  close: () => void;
   agreeHandler: (e: any) => void;
   children: ReactNode;
-  title: string;
+  close: () => void;
   description: string;
   label: string;
+  open: boolean;
+  title: string;
 };
 
 export default function AlertDialog({
@@ -38,9 +38,7 @@ export default function AlertDialog({
       </DialogContent>
       <DialogActions>
         <Button onClick={close}>Disagree</Button>
-        <Button onClick={agreeHandler} autoFocus>
-          Agree
-        </Button>
+        <Button onClick={agreeHandler}>Agree</Button>
       </DialogActions>
     </Dialog>
   );

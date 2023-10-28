@@ -1,10 +1,11 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { AddLoadForm } from './AddLoadForm';
-import { vi } from 'vitest';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { UserContextProvider } from 'src/store/contexts/UserContext';
 import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { NotificationContextProvider } from 'src/store/contexts/NotficationContext';
+import { UserContextProvider } from 'src/store/contexts/UserContext';
+import { vi } from 'vitest';
+
+import { AddLoadForm } from './AddLoadForm';
 
 const mockFunction = vi.fn();
 

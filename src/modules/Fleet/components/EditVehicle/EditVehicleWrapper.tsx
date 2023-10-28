@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { AddOrEditVehicleForm } from '../AddVehicle/AddOrEditVehicleForm/AddOrEditVehicleForm';
 import { useQuery } from '@tanstack/react-query';
-import { getVehicleData } from 'src/utils/api/supabase/Vehicles/getVehicleData';
 import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
+import { getVehicleData } from 'src/utils/api/supabase/Vehicles/getVehicleData';
+
+import { AddOrEditVehicleForm } from '../AddVehicle/AddOrEditVehicleForm/AddOrEditVehicleForm';
 export const EditVehicleWrapper = () => {
   const { vehicleId } = useParams();
 

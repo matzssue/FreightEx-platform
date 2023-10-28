@@ -4,16 +4,16 @@ export type AddInvoiceProps = {
 };
 
 export type OrderToInvoiceData = {
+  createdAt: string;
+  currency: string;
   id: string;
-  loadingCountry: string;
   loadingCity: string | null;
-  unloadingCountry: string;
-  unloadingCity: string | null;
+  loadingCountry: string;
   paymentTerm: string;
   price: number;
-  currency: string;
-  seller: string;
   recipient: string;
-  createdAt: string;
+  seller: string;
+  unloadingCity: string | null;
+  unloadingCountry: string;
   vehicleId: string | null;
 };

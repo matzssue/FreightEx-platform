@@ -1,13 +1,16 @@
-import styles from './LoadCard.module.scss';
-import Avatar from '@mui/material/Avatar';
+import { MouseEventHandler } from 'react';
+import { FaMapMarked } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { LoadAddress } from './LoadAddress';
+import Avatar from '@mui/material/Avatar';
+
+import { avatarLink } from '../../../../../constants/avatarLink';
 import { useUserContext } from '../../../../../store/contexts/UserContext';
 import { Load as TLoad } from '../../../../../utils/api/supabase/types';
-import { FaMapMarked } from 'react-icons/fa';
-import { MouseEventHandler } from 'react';
-import { avatarLink } from '../../../../../constants/avatarLink';
+
+import { LoadAddress } from './LoadAddress';
+
+import styles from './LoadCard.module.scss';
 
 type LoadProps = {
   data: TLoad;

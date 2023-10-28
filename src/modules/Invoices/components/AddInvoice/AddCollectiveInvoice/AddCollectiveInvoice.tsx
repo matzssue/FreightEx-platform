@@ -1,33 +1,34 @@
-import styles from './AddCollectiveInvoice.module.scss';
-
-import { Modal } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Controller, SubmitHandler } from 'react-hook-form';
 import { SyntheticEvent } from 'react';
+import { Controller, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Modal } from '@mui/material';
 import { Autocomplete, TextField } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import { useUserContext } from 'src/store/contexts/UserContext';
-import { CollectiveInvoice, addCollectiveInvoiceSchema } from 'src/utils/schemas/addInvoiceSchema';
-import { useForm } from 'react-hook-form';
+import { Button } from 'src/common/Buttons/Button/Button';
 import { DateInput } from 'src/common/Inputs/DateInput/DateInput';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { TextFieldInput } from 'src/common/Inputs/TextField/TextFieldInput';
-import { useAddInvoince } from '../../../hooks/useAddInvoice';
+import { AddInvoiceProps } from 'src/modules/Invoices/types';
+import { useUserContext } from 'src/store/contexts/UserContext';
 import { getAllCompanies } from 'src/utils/api/supabase/Company/getAllCompanies';
 import { getCompanyOrdersToFacture } from 'src/utils/api/supabase/Invoices/getCompanyOrdersToFacture';
-import { OrderToInvoice } from '../../OrderToInvoice/OrderToInvoice';
-import { Button } from 'src/common/Buttons/Button/Button';
-import { InvoiceFormHeader } from '../../InvoiceFormHeader/InvoiceFormHeader';
-import { calculateTotal } from '../../../utils/calculateTotal';
-import { AddInvoiceProps } from 'src/modules/Invoices/types';
 import { CompanyOrdersData } from 'src/utils/api/supabase/types';
+import { addCollectiveInvoiceSchema, CollectiveInvoice } from 'src/utils/schemas/addInvoiceSchema';
+
+import { useAddInvoince } from '../../../hooks/useAddInvoice';
+import { calculateTotal } from '../../../utils/calculateTotal';
+import { InvoiceFormHeader } from '../../InvoiceFormHeader/InvoiceFormHeader';
+import { OrderToInvoice } from '../../OrderToInvoice/OrderToInvoice';
+
+import styles from './AddCollectiveInvoice.module.scss';
 
 type SelectedOrders = {
+  currency: string;
   id: string;
   price: number;
-  currency: string;
-  sellerId: string;
   recipientId: string;
+  sellerId: string;
 };
 export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) => {
   const { userId } = useUserContext();
@@ -147,9 +148,7 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
                 }}
                 loading={isLoading}
                 options={data}
-                getOptionLabel={(option) => {
-                  return `${option.name} ${option.vat_id}`;
-                }}
+                getOptionLabel={(option) => `${option.name} ${option.vat_id}`}
                 size='small'
                 sx={{
                   '.css-k4qjio-MuiFormHelperText-root': {
@@ -168,7 +167,7 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
                 )}
               />
             )}
-          ></Controller>
+          />
 
           <div>
             <label htmlFor='invoiceDate'>Date of invoice</label>
@@ -184,25 +183,23 @@ export const AddCollectiveInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) 
           />
           <ul className={styles['orders-list']}>
             {!isOrdersListLoading ? (
-              companyFactures?.map((order) => {
-                return (
-                  <OrderToInvoice key={order.id} order={order}>
-                    <input
-                      id={order.id}
-                      type='checkbox'
-                      value={order.id}
-                      disabled={
-                        selectedOrders.length > 0 && selectedOrders[0].currency !== order.currency
-                      }
-                      {...register('orders')}
-                      onChange={(e) => {
-                        handleOrderCheckbox(e, order);
-                        register(`orders`);
-                      }}
-                    />
-                  </OrderToInvoice>
-                );
-              })
+              companyFactures?.map((order) => (
+                <OrderToInvoice key={order.id} order={order}>
+                  <input
+                    id={order.id}
+                    type='checkbox'
+                    value={order.id}
+                    disabled={
+                      selectedOrders.length > 0 && selectedOrders[0].currency !== order.currency
+                    }
+                    {...register('orders')}
+                    onChange={(e) => {
+                      handleOrderCheckbox(e, order);
+                      register(`orders`);
+                    }}
+                  />
+                </OrderToInvoice>
+              ))
             ) : (
               <p>Loading please wait...</p>
             )}

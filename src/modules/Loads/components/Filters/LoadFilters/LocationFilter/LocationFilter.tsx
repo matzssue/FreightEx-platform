@@ -1,11 +1,13 @@
-import { FilterCard } from '../FilterCard/FilterCard';
-import { PlacesAutocompleteInput } from '../../../../../../common/Inputs/PlacesAutocompeteInput/PlacesAutocompleteInput';
-import styles from './LocationFilter.module.scss';
-import { SelectInput } from '../../../../../../common/Inputs/Select/Select';
-import { FieldValues, Control, UseFormSetValue, PathValue, Path } from 'react-hook-form';
-import { searchAreaInKM } from 'src/modules/Loads/constants/searchAreaInKm';
+import { Control, FieldValues, Path, PathValue, UseFormSetValue } from 'react-hook-form';
 import { Fieldset } from 'src/common/Fieldset/Fieldset';
+import { searchAreaInKM } from 'src/modules/Loads/constants/searchAreaInKm';
+
+import { PlacesAutocompleteInput } from '../../../../../../common/Inputs/PlacesAutocompeteInput/PlacesAutocompleteInput';
+import { SelectInput } from '../../../../../../common/Inputs/Select/Select';
+import { FilterCard } from '../FilterCard/FilterCard';
 import { FilterInput } from '../FilterInput/FilterInput';
+
+import styles from './LocationFilter.module.scss';
 type LocationFilterProps<T extends FieldValues> = {
   control: Control<T>;
   setValue: UseFormSetValue<T>;

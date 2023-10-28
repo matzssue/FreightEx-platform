@@ -1,12 +1,13 @@
-import { Page, Document, StyleSheet } from '@react-pdf/renderer';
+import { Document, Page, StyleSheet } from '@react-pdf/renderer';
 import { GetAcceptedLoadsData, GetInvoices } from 'src/utils/api/supabase/types';
+
+import { Address } from './Address/Address';
+import { InvoiceDates } from './InvoiceDates/InvoiceDates';
 import InvoiceTitle from './InvoiceHeader/InvoiceTitle';
 import { TableBody } from './TableBody/TableBody';
-import { Address } from './Address/Address';
-import { UserAddress } from './UserAddress/UserAddress';
 import { TableHead } from './TableHead/TableHead';
 import { TableTotal } from './TableTotal/TableTotal';
-import { InvoiceDates } from './InvoiceDates/InvoiceDates';
+import { UserAddress } from './UserAddress/UserAddress';
 
 type InvoiceData = {
   invoice: GetInvoices;

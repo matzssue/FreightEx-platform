@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface CounterState {
-  isLoadModalOpen: boolean;
   isLoadDialogOpen: boolean;
+  isLoadModalOpen: boolean;
 }
 
 const initialState: CounterState = {

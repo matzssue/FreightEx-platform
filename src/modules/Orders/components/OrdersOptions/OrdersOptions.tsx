@@ -1,8 +1,9 @@
-import styles from './OrdersOptions.module.scss';
-import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+
+import styles from './OrdersOptions.module.scss';
 
 type OrdersOptionsProps = {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

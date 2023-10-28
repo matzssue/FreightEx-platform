@@ -1,9 +1,10 @@
-import styles from './InvoiceMenu.module.scss';
-
 import { useState } from 'react';
+
 import { AddCollectiveInvoice } from '../AddInvoice/AddCollectiveInvoice/AddCollectiveInvoice';
 import { AddInvoice } from '../AddInvoice/AddSingleInvoice/AddInvoice';
 import { InvoiceList } from '../InvoiceList/InvoiceList';
+
+import styles from './InvoiceMenu.module.scss';
 
 export const InvoiceMenu = () => {
   const [isSingleFactureModalOpen, setIsSingleFactureModalOpen] = useState<boolean>(false);

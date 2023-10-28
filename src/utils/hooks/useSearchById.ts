@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 type FilteredItems<T> = {
   items: T[] | null | undefined;
   totalPages: number | null | undefined;
