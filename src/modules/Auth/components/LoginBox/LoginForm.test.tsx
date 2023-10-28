@@ -1,12 +1,14 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { screen, render, fireEvent, waitFor } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 import { UserContextProvider } from 'src/store/contexts/UserContext';
 import { LoginForm } from './LoginForm';
 import { vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 const queryClient = new QueryClient();
 const mockUsedNavigate = vi.fn();
+const user = userEvent.setup();
 
 vi.mock('react-router-dom', () => ({
   ...require('react-router-dom'),
@@ -47,24 +49,25 @@ describe('Login Form component', () => {
     expect(buttonEl).toBeInTheDocument();
   });
 
-  it('email, password input should change', () => {
+  it('email, password input should change', async () => {
     const testValue = 'test';
     const emailInputEl = screen.getByLabelText('Email') as HTMLInputElement;
     const passwordInputEl = screen.getByLabelText('Password') as HTMLInputElement;
-    fireEvent.change(emailInputEl, { target: { value: testValue } });
-    fireEvent.change(passwordInputEl, { target: { value: testValue } });
+    await user.type(emailInputEl, testValue);
+    await user.type(passwordInputEl, testValue);
+
     expect(emailInputEl.value).toBe(testValue);
     expect(passwordInputEl.value).toBe(testValue);
   });
 
-  it('displays an error message for invalid data', () => {
+  it('displays an error message for invalid data', async () => {
     const emailInputEl = screen.getByLabelText('Email') as HTMLInputElement;
     const passwordInputEl = screen.getByLabelText('Password') as HTMLInputElement;
     const submitButton = screen.getByRole('button', { name: 'Login' });
 
-    fireEvent.change(emailInputEl, { target: { value: 'invalid@email.pl' } });
-    fireEvent.change(passwordInputEl, { target: { value: 'invalid' } });
-    fireEvent.click(submitButton);
+    await user.type(emailInputEl, 'invalid@email.pl');
+    await user.type(passwordInputEl, 'password123');
+    user.click(submitButton);
 
     waitFor(() => {
       const errorMessage = screen.queryByText('Invalid email or password');
