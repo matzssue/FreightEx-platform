@@ -1,20 +1,22 @@
-import styles from './LoadsList.module.scss';
-import { List } from '../../../../../common/Lists/List';
-import { loadColumns } from '../../../constants/loadColumns';
-import { LoadCard } from '../LoadCard/LoadCard';
-import { getAllLoads } from '../../../../../utils/api/supabase/Loads/getAllLoads';
-import { getFilteredLoads } from '../../../../../utils/api/supabase/Loads/getFilteredLoads';
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../../../../store/hooks';
-import { useUserContext } from '../../../../../store/contexts/UserContext';
-import { LoadingSpinner } from '../../../../../common/LoadingSpinner/LoadingSpinner';
-import { useAcceptOffer } from '../../../hooks/useAcceptOffer';
-import { Paginate } from '../../../../../common/Pagination/Pagination';
 import { useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import AlertDialog from 'src/common/Dialog/AlertDialog';
 import { useDeleteOrder } from 'src/modules/Orders/hooks/useDeleteOrder';
 import { usePaginationContext } from 'src/store/contexts/PaginationContext';
-import AlertDialog from 'src/common/Dialog/AlertDialog';
+
+import { List } from '../../../../../common/Lists/List';
+import { LoadingSpinner } from '../../../../../common/LoadingSpinner/LoadingSpinner';
+import { Paginate } from '../../../../../common/Pagination/Pagination';
+import { useUserContext } from '../../../../../store/contexts/UserContext';
+import { useAppSelector } from '../../../../../store/hooks';
+import { getAllLoads } from '../../../../../utils/api/supabase/Loads/getAllLoads';
+import { getFilteredLoads } from '../../../../../utils/api/supabase/Loads/getFilteredLoads';
+import { loadColumns } from '../../../constants/loadColumns';
+import { useAcceptOffer } from '../../../hooks/useAcceptOffer';
+import { LoadCard } from '../LoadCard/LoadCard';
+
+import styles from './LoadsList.module.scss';
 
 type SelectedDialog = 'accept' | 'delete' | null;
 
@@ -54,12 +56,12 @@ export const Loads = () => {
 
   const acceptOfferHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.preventDefault();
-    console.log(id);
+
     acceptOfferMutation.mutate({ loadId: id, userId: userData.id });
   };
   const deleteOrderHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.preventDefault();
-    console.log(id);
+
     deleteOfferMutation.mutate(id);
   };
 

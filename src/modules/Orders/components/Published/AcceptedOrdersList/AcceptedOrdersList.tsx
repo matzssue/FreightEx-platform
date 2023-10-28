@@ -1,16 +1,18 @@
-import styles from './AcceptedOrdersList.module.scss';
-import { PublishedOrderItem } from '../PublishedOrderItem/PublishedOrderItem';
-import { useUserContext } from 'src/store/contexts/UserContext';
+import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { OrdersColumns } from '../../OrdersColumns/OrdersColumns';
-import { acceptedOrdersColumns } from '../../../constants/ordersColumns';
 import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
-import { getAcceptedOrders } from 'src/utils/api/supabase/Orders/getAcceptedOrders';
-import { useEffect, useState, useRef } from 'react';
 import { Paginate } from 'src/common/Pagination/Pagination';
 import { usePaginationContext } from 'src/store/contexts/PaginationContext';
+import { useUserContext } from 'src/store/contexts/UserContext';
+import { getAcceptedOrders } from 'src/utils/api/supabase/Orders/getAcceptedOrders';
 import { Load } from 'src/utils/api/supabase/types';
+
+import { acceptedOrdersColumns } from '../../../constants/ordersColumns';
+import { OrdersColumns } from '../../OrdersColumns/OrdersColumns';
 import { OrdersOptions } from '../../OrdersOptions/OrdersOptions';
+import { PublishedOrderItem } from '../PublishedOrderItem/PublishedOrderItem';
+
+import styles from './AcceptedOrdersList.module.scss';
 
 type FilteredLoads = {
   orders: Load[] | null;
@@ -70,15 +72,13 @@ export const AcceptedOrdersList = () => {
           columns={acceptedOrdersColumns}
         />
         <ul className={styles['orders-list']}>
-          {orders?.orders?.map((order) => {
-            return (
-              <PublishedOrderItem key={order.id} order={order}>
-                <span>
-                  {order.user.name} {order.user.surname}, {order.company.name}
-                </span>
-              </PublishedOrderItem>
-            );
-          })}
+          {orders?.orders?.map((order) => (
+            <PublishedOrderItem key={order.id} order={order}>
+              <span>
+                {order.user.name} {order.user.surname}, {order.company.name}
+              </span>
+            </PublishedOrderItem>
+          ))}
         </ul>
         {orders?.orders?.length === 0 && <p>No orders found</p>}
       </div>

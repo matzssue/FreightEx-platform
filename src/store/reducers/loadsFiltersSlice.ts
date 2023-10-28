@@ -1,26 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 // import { LoadsFiltersValues } from '../../utils/schemas/loadsFilters';
-
 import { Addresses } from '../../utils/api/supabase/types';
 
 export type LoadsFilters = {
-  loadingAddress: string;
-  unloadingAddress?: string | null | undefined;
-  loadingAddressData: Addresses;
-  unloadingAddressData: { country?: string | undefined };
-  startLoadingDate: string | null;
   endLoadingDate: string | null;
-  startUnloadingDate: string | null;
   endUnloadingDate: string | null;
-  minWeight?: number | null | undefined;
+  id: string;
+  loadingAddress: string;
+  loadingAddressData: Addresses;
+  loadingArea: number;
+  maxLength?: number | null | undefined;
   maxWeight?: number | null | undefined;
   minLength?: number | null | undefined;
-  maxLength?: number | null | undefined;
-  loadingArea: number;
+  minWeight?: number | null | undefined;
+  startLoadingDate: string | null;
+  startUnloadingDate: string | null;
+  unloadingAddress?: string | null | undefined;
+  unloadingAddressData: { country?: string | undefined };
   unloadingArea?: number | null | undefined;
-  id: string;
 };
 
 type LoadsFiltersState = {

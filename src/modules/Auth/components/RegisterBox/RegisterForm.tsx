@@ -1,19 +1,21 @@
-import { UserStep } from './RegisterSteps/UserStep';
-import { CompanyStep } from './RegisterSteps/CompanyStep';
-import styles from './RegisterForm.module.scss';
-
-import { Link } from 'react-router-dom';
 import { ReactNode, useState } from 'react';
-import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Step, StepLabel, Stepper } from '@mui/material';
+
 import { AuthFormWrapper } from '../../../../common/AuthFormWrapper/AuthFormWrapper';
 import {
   RegisterCompanyFormValues,
-  RegisterUserFormValues,
   registerSchema,
+  RegisterUserFormValues,
 } from '../../../../utils/schemas/authSchema';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Stepper, Step, StepLabel } from '@mui/material';
 import useCreateUser, { UserData } from '../../hooks/useCreateUser';
+
+import { CompanyStep } from './RegisterSteps/CompanyStep';
+import { UserStep } from './RegisterSteps/UserStep';
+
+import styles from './RegisterForm.module.scss';
 
 const steps = ['User', 'Company'];
 

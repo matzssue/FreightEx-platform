@@ -1,13 +1,15 @@
-import { AcceptedLoad } from 'src/utils/api/supabase/types';
-import styles from './ReceivedOrderItem.module.scss';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
-import { useQuery } from '@tanstack/react-query';
-import { getUserVehicles } from 'src/utils/api/supabase/Vehicles/getUserVehicles';
-import { useUserContext } from 'src/store/contexts/UserContext';
-import { Autocomplete, TextField } from '@mui/material';
-import { useUpdateAcceptedLoad } from '../../../hooks/useUpdateAcceptedLoad';
 import { SyntheticEvent, useState } from 'react';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { Autocomplete, TextField } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
+import { useUserContext } from 'src/store/contexts/UserContext';
+import { AcceptedLoad } from 'src/utils/api/supabase/types';
+import { getUserVehicles } from 'src/utils/api/supabase/Vehicles/getUserVehicles';
+
+import { useUpdateAcceptedLoad } from '../../../hooks/useUpdateAcceptedLoad';
+
+import styles from './ReceivedOrderItem.module.scss';
 
 export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
   const { userId } = useUserContext();
@@ -22,9 +24,7 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
 
   if (error) return <p>Sorry,there was an error. Please try again </p>;
 
-  const selectVehicles = allVehicles?.map((vehicle) => {
-    return vehicle.vehicleRegistrationNumber;
-  });
+  const selectVehicles = allVehicles?.map((vehicle) => vehicle.vehicleRegistrationNumber);
 
   const selectVehicleHandler = (
     _: SyntheticEvent,

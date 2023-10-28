@@ -1,16 +1,17 @@
-import styles from './UserInformation.module.scss';
-import { AiOutlineEdit } from 'react-icons/ai';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { AiOutlineEdit } from 'react-icons/ai';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  ChangeNameFormValue,
-  ChangeSurnameFormValue,
-  changeNameSchema,
-  changeSurnameSchema,
-} from 'src/utils/schemas/authSchema';
 import { useUserContext } from 'src/store/contexts/UserContext';
 import { updateUserField } from 'src/utils/api/supabase/User/updateUserField';
+import {
+  ChangeNameFormValue,
+  changeNameSchema,
+  ChangeSurnameFormValue,
+  changeSurnameSchema,
+} from 'src/utils/schemas/authSchema';
+
+import styles from './UserInformation.module.scss';
 
 type FormData = {
   name: string;
@@ -18,10 +19,10 @@ type FormData = {
 };
 
 type UserInformationProps = {
-  label: string;
-  value: string;
   isChangeable?: boolean;
+  label: string;
   type?: 'name' | 'surname';
+  value: string;
 };
 
 export const UserInformation = ({

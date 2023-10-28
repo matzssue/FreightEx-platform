@@ -1,25 +1,27 @@
+import { ChangeEvent } from 'react';
+import Autocomplete from 'react-google-autocomplete';
 import {
   Controller,
+  ControllerRenderProps,
   FieldValues,
   Path,
   PathValue,
-  ControllerRenderProps,
   UseFormSetValue,
 } from 'react-hook-form';
-import Autocomplete from 'react-google-autocomplete';
-import styles from './PlacesAutocompleteInput.module.scss';
-import { Properties } from 'csstype';
-import { ChangeEvent } from 'react';
-import { BaseInputProps } from '../types';
 import { SxProps } from '@mui/material';
+import { Properties } from 'csstype';
+
+import { BaseInputProps } from '../types';
+
+import styles from './PlacesAutocompleteInput.module.scss';
 
 type PlacesInputProps<T extends FieldValues> = {
-  sx?: Properties<string | number, string & SxProps>;
+  errorLabel: string;
   filterType?: string;
   placeholder?: string;
   setValue: UseFormSetValue<T>;
   setValueKey: Path<T>;
-  errorLabel: string;
+  sx?: Properties<string | number, string & SxProps>;
 } & BaseInputProps<T>;
 
 export const PlacesAutocompleteInput = <T extends FieldValues>({

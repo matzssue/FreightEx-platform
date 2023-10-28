@@ -1,4 +1,5 @@
-import { FieldValues, Control } from 'react-hook-form';
+import { Control, FieldValues } from 'react-hook-form';
+
 import { Addresses, UserDatabaseWithComp } from '../../../../utils/api/supabase/types';
 
 export type ControllerProps<T extends FieldValues> = {
@@ -8,17 +9,17 @@ export type Vehicles = {
   [key: string]: boolean;
 };
 export type LoadDetails = {
-  id: string;
-  price: string;
-  loadingAddress: Addresses;
-  unloadingAddress: Addresses;
-  currency: string;
-  paymentTerm: string;
-  loadingDate: string;
-  unloadingDate: string;
   cargoLength: number | null;
   cargoWeight: number | null;
-  vehicleTypes: Vehicles;
-  user: UserDatabaseWithComp;
   createdAt: string;
+  currency: string;
+  id: string;
+  loadingAddress: Addresses;
+  loadingDate: string;
+  paymentTerm: string;
+  price: string;
+  unloadingAddress: Addresses;
+  unloadingDate: string;
+  user: UserDatabaseWithComp;
+  vehicleTypes: Vehicles;
 };

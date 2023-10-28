@@ -1,7 +1,9 @@
-import { useJsApiLoader, GoogleMap, DirectionsRenderer } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
-import styles from './LoadMap.module.scss';
+import { DirectionsRenderer, GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+
 import { Load } from '../../../../../utils/api/supabase/types';
+
+import styles from './LoadMap.module.scss';
 
 type LoadMap = {
   address: Partial<Load>;

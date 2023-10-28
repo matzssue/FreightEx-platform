@@ -1,7 +1,7 @@
 import { createContext, useMemo } from 'react';
-import { useSetState } from 'react-use';
 import { useContext } from 'react';
 import { Step } from 'react-joyride';
+import { useSetState } from 'react-use';
 
 type AppState = {
   run: boolean;
@@ -34,7 +34,7 @@ export const JoyRideContextProvider = (props: any) => {
     [setState, state],
   );
 
-  return <JoyRideContext.Provider value={value} {...props}></JoyRideContext.Provider>;
+  return <JoyRideContext.Provider value={value} {...props} />;
 };
 
 export function useJoyrideContext(): {

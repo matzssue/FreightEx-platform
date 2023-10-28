@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import { StyleSheet, Text, View } from '@react-pdf/renderer';
 import { UserDatabaseWithComp } from 'src/utils/api/supabase/types';
 
 const styles = StyleSheet.create({

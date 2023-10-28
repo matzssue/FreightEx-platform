@@ -1,22 +1,24 @@
-import Modal from '@mui/material/Modal';
-import styles from './AddLoadForm.module.scss';
 import { useForm } from 'react-hook-form';
-import { currencyOptions } from '../../../../constants/currencyOptions';
-import { LoadHeader } from '../LoadHeader/LoadHeader';
 import { yupResolver } from '@hookform/resolvers/yup';
-import AlertDialog from '../../../../../../common/Dialog/AlertDialog';
-import { useAppSelector, useAppDispatch } from '../../../../../../store/hooks';
-import { closeModal, openDialog, closeDialog } from '../../../../../../store/reducers/modalSlice';
-import { addLoadSchema, AddLoadValues } from '../../../../../../utils/schemas/addLoadSchema';
-import { addLoad } from '../../../../../../utils/api/supabase/Loads/addLoad';
+import Modal from '@mui/material/Modal';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { PlaceAndDateSearch } from '../PlaceAndDateSearch/PlaceAndDateSearch';
-import { CargoDetails } from '../CargoDetails/CargoDetails';
-import { VehicleDetails } from '../VehicleDetails/VehicleDetails';
-import { PaymentDetails } from '../PaymentDetails/PaymentDetails';
-import { useUserContext } from '../../../../../../store/contexts/UserContext';
-import { AddLoadData } from '../../../../../../utils/api/supabase/types';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
+
+import AlertDialog from '../../../../../../common/Dialog/AlertDialog';
+import { useUserContext } from '../../../../../../store/contexts/UserContext';
+import { useAppDispatch, useAppSelector } from '../../../../../../store/hooks';
+import { closeDialog, closeModal, openDialog } from '../../../../../../store/reducers/modalSlice';
+import { addLoad } from '../../../../../../utils/api/supabase/Loads/addLoad';
+import { AddLoadData } from '../../../../../../utils/api/supabase/types';
+import { addLoadSchema, AddLoadValues } from '../../../../../../utils/schemas/addLoadSchema';
+import { currencyOptions } from '../../../../constants/currencyOptions';
+import { CargoDetails } from '../CargoDetails/CargoDetails';
+import { LoadHeader } from '../LoadHeader/LoadHeader';
+import { PaymentDetails } from '../PaymentDetails/PaymentDetails';
+import { PlaceAndDateSearch } from '../PlaceAndDateSearch/PlaceAndDateSearch';
+import { VehicleDetails } from '../VehicleDetails/VehicleDetails';
+
+import styles from './AddLoadForm.module.scss';
 export const AddLoadForm = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();

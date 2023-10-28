@@ -1,7 +1,7 @@
-import { JoyrideLoader } from 'src/modules/Joyride/components/JoyrideLoader/JoyrideLoader';
 import { PageLayout } from 'src/common/PageLayout/PageLayout';
 import { ProtectedWrapper } from 'src/common/ProtectedWrapper/ProtectedWrapper';
 import { InvoiceMenu } from 'src/modules/Invoices/components/InvoiceMenu/InvoiceMenu';
+import { JoyrideLoader } from 'src/modules/Joyride/components/JoyrideLoader/JoyrideLoader';
 import { useMountJoyride } from 'src/modules/Joyride/hooks/useMountJoyride';
 
 const joyrideIndex = 8;

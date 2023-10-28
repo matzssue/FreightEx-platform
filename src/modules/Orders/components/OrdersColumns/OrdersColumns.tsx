@@ -12,9 +12,9 @@ export const OrdersColumns = ({ columns, gridColumns }: OrdersColumnsProps) => {
 
   return (
     <ul className={styles['orders-columns__list']} style={columnListStyle}>
-      {columns.map((column, i) => {
-        return <li key={i}>{column}</li>;
-      })}
+      {columns.map((column, i) => (
+        <li key={i}>{column}</li>
+      ))}
     </ul>
   );
 };

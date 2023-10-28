@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import modalSlice from './reducers/modalSlice';
+
 import loadsFiltersSlice from './reducers/loadsFiltersSlice';
+import modalSlice from './reducers/modalSlice';
 
 const reducer = combineReducers({
   modal: modalSlice,

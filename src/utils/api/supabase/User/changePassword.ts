@@ -1,5 +1,6 @@
-import supabase from '../../../../config/supabase';
 import { toast } from 'react-toastify';
+
+import supabase from '../../../../config/supabase';
 
 export const changePassword = async (newPassword: string) => {
   try {

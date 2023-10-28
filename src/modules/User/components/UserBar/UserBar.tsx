@@ -1,19 +1,19 @@
-import { Avatar, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
-import styles from './UserBar.module.scss';
-import { GiHamburgerMenu } from 'react-icons/gi';
-
-import { AddLoadForm } from '../../../Loads/components/Load/AddLoad/AddLoadForm/AddLoadForm';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdLogout } from 'react-icons/md';
-import { useAppDispatch } from '../../../../store/hooks';
-
-import { openModal } from '../../../../store/reducers/modalSlice';
-import { useUserContext } from '../../../../store/contexts/UserContext';
 import { useNavigate } from 'react-router';
-import { useLogout } from '../../../Auth/hooks/useLogout';
-import { NotificationBox } from '../NoticiationBox/NotificationBox';
+import { Avatar, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import { useJoyrideContext } from 'src/store/contexts/JoyRideContext';
+
+import { useUserContext } from '../../../../store/contexts/UserContext';
+import { useAppDispatch } from '../../../../store/hooks';
+import { openModal } from '../../../../store/reducers/modalSlice';
+import { useLogout } from '../../../Auth/hooks/useLogout';
+import { AddLoadForm } from '../../../Loads/components/Load/AddLoad/AddLoadForm/AddLoadForm';
+import { NotificationBox } from '../NoticiationBox/NotificationBox';
+
+import styles from './UserBar.module.scss';
 
 export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<boolean>> }) => {
   const navigate = useNavigate();

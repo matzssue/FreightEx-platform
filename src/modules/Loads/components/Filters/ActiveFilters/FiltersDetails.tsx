@@ -1,6 +1,8 @@
-import { useAppSelector } from '../../../../../store/hooks';
-import styles from './FiltersDetails.module.scss';
 import { useParams } from 'react-router-dom';
+
+import { useAppSelector } from '../../../../../store/hooks';
+
+import styles from './FiltersDetails.module.scss';
 
 export const FilterDetails = () => {
   const { filterId } = useParams();
