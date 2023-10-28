@@ -18,7 +18,6 @@ export const useAddVehicle = () => {
   };
 
   return useMutation(
-    ['fleet'],
     async ({ vehicleData, userId }: { vehicleData: InsertVehicle; userId: string }) =>
       await addVehicle(vehicleData, userId),
     {
