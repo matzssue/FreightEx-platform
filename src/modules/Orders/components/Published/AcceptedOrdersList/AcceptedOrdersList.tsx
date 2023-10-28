@@ -60,7 +60,6 @@ export const AcceptedOrdersList = () => {
   }
 
   const orders = filteredLoads.orders ? filteredLoads : acceptedOrders;
-  console.log(orders);
 
   return (
     <>
