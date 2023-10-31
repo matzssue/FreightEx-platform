@@ -25,15 +25,7 @@ import { Invoices } from './Pages/Invoices/Invoices';
 import { JoyRideContextProvider } from './store/contexts/JoyRideContext';
 import JoyrideWrapper from './modules/Joyride/components/JoyrideWrapper/JoyrideWrapper';
 import { Error404 } from './Pages/404/Error404';
-
-const queryClient = new QueryClient({
-  queryCache: new QueryCache(),
-  defaultOptions: {
-    queries: {
-      staleTime: 60_000,
-    },
-  },
-});
+import { queryClient } from './config/queryClient';
 
 function App() {
   return (
