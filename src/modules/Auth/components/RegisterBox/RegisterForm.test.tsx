@@ -1,18 +1,16 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { RegisterForm } from './RegisterForm';
 import { BrowserRouter } from 'react-router-dom';
-
+import { render } from 'src/setupTests';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import userEvent from '@testing-library/user-event';
+import { customUser as user } from 'src/setupTests';
 
-const queryClient = new QueryClient();
-const user = userEvent.setup();
-
-const data = {
+const { companyName, vatId, passwordConfirmation, password, email, name, surname } = {
   companyName: 'TestCompany',
   vatId: '123456789',
 
-  passwordConfirmation: 'Surname',
+  passwordConfirmation: 'Password',
   name: 'TestName',
   surname: 'Surname',
   email: 'Test@Company',
@@ -21,21 +19,15 @@ const data = {
 
 describe('RegisterForm Component', () => {
   beforeEach(() => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <RegisterForm />
-        </BrowserRouter>
-      </QueryClientProvider>,
-    );
+    render(<RegisterForm />);
   });
 
   it('allows navigation between steps', async () => {
-    await user.type(screen.getByLabelText('Email'), 'Test@Company');
-    await user.type(screen.getByLabelText('Name'), 'TestName');
-    await user.type(screen.getByLabelText('Surname'), 'Surname');
-    await user.type(screen.getByLabelText('Password'), 'Password');
-    await user.type(screen.getByLabelText('Confirm Password'), 'Password');
+    await user.type(screen.getByLabelText('Email'), email);
+    await user.type(screen.getByLabelText('Name'), name);
+    await user.type(screen.getByLabelText('Surname'), surname);
+    await user.type(screen.getByLabelText('Password'), password);
+    await user.type(screen.getByLabelText('Confirm Password'), passwordConfirmation);
 
     await user.click(screen.getByText('Next'));
 
@@ -47,16 +39,16 @@ describe('RegisterForm Component', () => {
   });
 
   it('submits the form', async () => {
-    await user.type(screen.getByLabelText('Email'), 'Test@Company');
-    await user.type(screen.getByLabelText('Name'), 'TestName');
-    await user.type(screen.getByLabelText('Surname'), 'Surname');
-    await user.type(screen.getByLabelText('Password'), 'Password');
-    await user.type(screen.getByLabelText('Confirm Password'), 'Password');
+    await user.type(screen.getByLabelText('Email'), email);
+    await user.type(screen.getByLabelText('Name'), name);
+    await user.type(screen.getByLabelText('Surname'), surname);
+    await user.type(screen.getByLabelText('Password'), password);
+    await user.type(screen.getByLabelText('Confirm Password'), passwordConfirmation);
 
     await user.click(screen.getByText('Next'));
 
-    await user.type(screen.getByLabelText('VATID'), data.vatId);
-    await user.type(screen.getByLabelText(`Company name`), data.companyName);
+    await user.type(screen.getByLabelText('VATID'), vatId);
+    await user.type(screen.getByLabelText(`Company name`), companyName);
 
     await user.click(screen.getByText('Submit'));
 
