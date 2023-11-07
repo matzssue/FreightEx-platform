@@ -1,10 +1,12 @@
-import styles from './NotificaitionBox.module.scss';
 import { ReactNode, useState } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 import { Badge } from '@mui/material';
-import { AiOutlineClose } from 'react-icons/ai';
-import { Title } from '../../../../common/Title/Title';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
+
+import { Title } from '../../../../common/Title/Title';
+
+import styles from './NotificaitionBox.module.scss';
 export const NotificationBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,20 +28,18 @@ export const NotificationBox = () => {
           <Title title='Notifications' />
           <ul>
             {notifications.length > 0 ? (
-              notifications.map((notification) => {
-                return (
-                  <li key={notification.id} className={styles[notification.type as string]}>
-                    <span className={styles.notification}>{notification.text as ReactNode} </span>
+              notifications.map((notification) => (
+                <li key={notification.id} className={styles[notification.type as string]}>
+                  <span className={styles.notification}>{notification.text as ReactNode} </span>
 
-                    <button
-                      className={styles.remove}
-                      onClick={() => deleteNotification(notification.id)}
-                    >
-                      X
-                    </button>
-                  </li>
-                );
-              })
+                  <button
+                    className={styles.remove}
+                    onClick={() => deleteNotification(notification.id)}
+                  >
+                    X
+                  </button>
+                </li>
+              ))
             ) : (
               <p className={styles['no-results']}>No new notifications</p>
             )}

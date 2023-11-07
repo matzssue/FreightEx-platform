@@ -1,6 +1,7 @@
-import { selectVehicleImage } from './selectVehicleImage';
-import { describe, expect, test } from 'vitest';
 import solo from 'src/assets/solo.svg';
+import { describe, expect, test } from 'vitest';
+
+import { selectVehicleImage } from './selectVehicleImage';
 
 describe('Select vehicle image', () => {
   test('For type solo return solo path', () => {

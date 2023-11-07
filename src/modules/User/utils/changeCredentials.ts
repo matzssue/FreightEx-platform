@@ -1,6 +1,7 @@
-import supabase from '../../../config/supabase';
 import { toast } from 'react-toastify';
 import { UserAttributes } from '@supabase/supabase-js';
+
+import supabase from '../../../config/supabase';
 
 type Credentials = 'password' | 'email';
 

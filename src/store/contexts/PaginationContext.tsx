@@ -1,14 +1,13 @@
 import { createContext, useState } from 'react';
 
+import { loadsPerPageWithMenu } from '../../modules/Loads/constants/loadsPerPage';
 import { getSafeContext } from '../../utils/helpers/getSateContext';
 
-import { loadsPerPageWithMenu } from '../../modules/Loads/constants/loadsPerPage';
-
 type PaginationContextProps = {
+  changeItemsPerPage: (value: number) => void;
   changePage: (value: number) => void;
   currentPage: number;
   itemsPerPage: number;
-  changeItemsPerPage: (value: number) => void;
 };
 
 export const PaginationContext = createContext<PaginationContextProps | null>(null);

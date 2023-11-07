@@ -1,10 +1,10 @@
-import supabase from '../../../config/supabase';
-
-import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useMutation } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
+
+import supabase from '../../../config/supabase';
 export const useDeleteVehicle = () => {
   const { notify } = useNotificationContext();
   const navigation = useNavigate();
@@ -20,7 +20,7 @@ export const useDeleteVehicle = () => {
     return data;
   };
 
-  return useMutation(['fleet'], async (vehicleId: string) => await deleteVehicle(vehicleId), {
+  return useMutation(async (vehicleId: string) => await deleteVehicle(vehicleId), {
     onSuccess: async () => {
       notify('success', 'vehicle deleted');
       navigation('/fleet');

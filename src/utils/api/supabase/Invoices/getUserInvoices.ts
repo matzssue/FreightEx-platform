@@ -1,4 +1,5 @@
 import supabase from 'src/config/supabase';
+
 import { GetInvoices, GetInvoicesDatabase } from '../types';
 
 export const getUserInvoices = async (
@@ -23,19 +24,17 @@ export const getUserInvoices = async (
 
   if (invoiceError) throw new Error();
 
-  const invoiceData: GetInvoices[] = invoices.map((invoice) => {
-    return {
-      id: invoice.id,
-      cost: invoice.cost,
-      date: invoice.date,
-      endDate: invoice.end_date,
-      paymentTerm: invoice.payment_term,
-      recipient: invoice.recipient_id,
-      seller: invoice.seller_id,
-      additionalInformations: invoice.additional_informations,
-      currency: invoice.currency,
-    };
-  });
+  const invoiceData: GetInvoices[] = invoices.map((invoice) => ({
+    id: invoice.id,
+    cost: invoice.cost,
+    date: invoice.date,
+    endDate: invoice.end_date,
+    paymentTerm: invoice.payment_term,
+    recipient: invoice.recipient_id,
+    seller: invoice.seller_id,
+    additionalInformations: invoice.additional_informations,
+    currency: invoice.currency,
+  }));
 
   const totalPages = count && Math.ceil(count / itemsPerPage);
   const returnValue =

@@ -1,5 +1,6 @@
+import { describe, expect, test } from 'vitest';
+
 import { calculateTotal } from './calculateTotal';
-import { describe, test, expect } from 'vitest';
 
 describe('calculate total amount', () => {
   test('Returns sum of all prices', () => {

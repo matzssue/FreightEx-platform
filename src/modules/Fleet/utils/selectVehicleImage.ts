@@ -2,6 +2,7 @@ import bus from 'src/assets/bus.svg';
 import doubleTrailer from 'src/assets/double-trailer.svg';
 import semiTrailer from 'src/assets/semi-trailer.svg';
 import solo from 'src/assets/solo.svg';
+
 import { vehicleTypes } from '../constants/vehicleTypes';
 
 type VehicleTypes = (typeof vehicleTypes)[number];

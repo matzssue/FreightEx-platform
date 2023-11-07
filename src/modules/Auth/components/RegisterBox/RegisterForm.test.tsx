@@ -1,12 +1,27 @@
+<<<<<<< HEAD
 import { screen, waitFor } from '@testing-library/react';
 import { RegisterForm } from './RegisterForm';
 import { BrowserRouter } from 'react-router-dom';
 import { render } from 'src/setupTests';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+=======
+import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, waitFor } from '@testing-library/react';
+>>>>>>> 1a29e4ef0d2e59111bf9137c0e9f5ced099e45d0
 import userEvent from '@testing-library/user-event';
 import { customUser as user } from 'src/setupTests';
 
+<<<<<<< HEAD
 const { companyName, vatId, passwordConfirmation, password, email, name, surname } = {
+=======
+import { RegisterForm } from './RegisterForm';
+
+const queryClient = new QueryClient();
+const user = userEvent.setup();
+
+const data = {
+>>>>>>> 1a29e4ef0d2e59111bf9137c0e9f5ced099e45d0
   companyName: 'TestCompany',
   vatId: '123456789',
 

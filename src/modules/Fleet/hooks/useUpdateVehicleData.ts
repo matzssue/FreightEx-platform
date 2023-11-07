@@ -1,9 +1,10 @@
-import supabase from '../../../config/supabase';
-import { InsertVehicle } from '../../../utils/api/supabase/types';
-import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
+
+import supabase from '../../../config/supabase';
+import { InsertVehicle } from '../../../utils/api/supabase/types';
 export const useUpdateVehicleData = () => {
   const navigation = useNavigate();
   const queryClient = useQueryClient();
@@ -22,7 +23,6 @@ export const useUpdateVehicleData = () => {
   };
 
   return useMutation(
-    ['fleet'],
     async ({ vehicleData, vehicleId }: { vehicleData: InsertVehicle; vehicleId: string }) =>
       await updateVehicle(vehicleData, vehicleId),
     {

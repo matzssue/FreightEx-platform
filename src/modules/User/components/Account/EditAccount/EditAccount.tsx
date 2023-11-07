@@ -1,28 +1,29 @@
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
-import styles from './EditAccount.module.scss';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useUserContext } from 'src/store/contexts/UserContext';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  ChangePasswordFormValues,
-  changeEmailSchema,
-  changePasswordSchema,
-} from '../../../../../utils/schemas/authSchema';
-
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import PasswordInput from 'src/common/Inputs/PasswordInput/PasswordInput';
 import { TextFieldInput } from 'src/common/Inputs/TextField/TextFieldInput';
-import { changeCredientials } from '../../../utils/changeCredentials';
+import { useUserContext } from 'src/store/contexts/UserContext';
 import { changeAvatar } from 'src/utils/api/supabase/User/changeAvatar';
+
+import {
+  changeEmailSchema,
+  ChangePasswordFormValues,
+  changePasswordSchema,
+} from '../../../../../utils/schemas/authSchema';
+import { changeCredientials } from '../../../utils/changeCredentials';
+
+import styles from './EditAccount.module.scss';
 
 interface Event<T = EventTarget> {
   target: T;
   // ...
 }
 type FormData = {
+  email: string;
   password: string;
   passwordConfirmation: string;
-  email: string;
 };
 
 export const EditAccount = () => {

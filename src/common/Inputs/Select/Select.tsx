@@ -1,18 +1,18 @@
 import { Controller, FieldValues, Path, PathValue } from 'react-hook-form';
 import { MenuItem, SxProps } from '@mui/material';
-
 import { FormControl, Select } from '@mui/material';
 
-import styles from './Select.module.scss';
 import { BaseInputProps } from '../types';
 
+import styles from './Select.module.scss';
+
 type SelectInputProps<T extends FieldValues> = {
-  options: string[] | number[];
   defaultValue: PathValue<T, Path<T>> | undefined;
-  variant?: 'standard' | 'outlined' | 'filled';
-  sx?: SxProps;
   direction?: 'column' | 'row';
   fontSize?: string;
+  options: string[] | number[];
+  sx?: SxProps;
+  variant?: 'standard' | 'outlined' | 'filled';
 } & BaseInputProps<T>;
 
 export const SelectInput = <T extends FieldValues>({
@@ -25,41 +25,39 @@ export const SelectInput = <T extends FieldValues>({
   sx,
   direction = 'column',
   fontSize = '10px',
-}: SelectInputProps<T>) => {
-  return (
-    <Controller
-      name={name}
-      defaultValue={defaultValue}
-      control={control}
-      render={({ field: { onBlur, onChange, value } }) => (
-        <FormControl style={{ flexDirection: direction }}>
-          <Select
-            id={`select-${name}`}
-            variant={variant}
-            size='small'
-            label={label}
-            className={styles.select}
-            onChange={onChange as PathValue<T, Path<T>>}
-            value={value}
-            onBlur={onBlur}
-            autoWidth={true}
-            sx={sx}
-            inputProps={{ id: name }}
-            MenuProps={{ MenuListProps: { style: { maxHeight: '150px' } } }}
-          >
-            {options.map((option: string | number) => (
-              <MenuItem
-                className={styles['select-items']}
-                sx={{ fontSize: fontSize }}
-                key={option}
-                value={option}
-              >
-                {option}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      )}
-    />
-  );
-};
+}: SelectInputProps<T>) => (
+  <Controller
+    name={name}
+    defaultValue={defaultValue}
+    control={control}
+    render={({ field: { onBlur, onChange, value } }) => (
+      <FormControl style={{ flexDirection: direction }}>
+        <Select
+          id={`select-${name}`}
+          variant={variant}
+          size='small'
+          label={label}
+          className={styles.select}
+          onChange={onChange as PathValue<T, Path<T>>}
+          value={value}
+          onBlur={onBlur}
+          autoWidth={true}
+          sx={sx}
+          inputProps={{ id: name }}
+          MenuProps={{ MenuListProps: { style: { maxHeight: '150px' } } }}
+        >
+          {options.map((option: string | number) => (
+            <MenuItem
+              className={styles['select-items']}
+              sx={{ fontSize: fontSize }}
+              key={option}
+              value={option}
+            >
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    )}
+  />
+);

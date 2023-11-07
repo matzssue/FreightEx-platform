@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import supabase from '../../../config/supabase';
 import { useNotificationContext } from 'src/store/contexts/NotficationContext';
+
+import supabase from '../../../config/supabase';
 export const useAcceptOffer = () => {
   const { notify } = useNotificationContext();
   const queryClient = useQueryClient();

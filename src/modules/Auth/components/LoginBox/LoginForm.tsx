@@ -1,14 +1,16 @@
-import styles from './LoginForm.module.scss';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { AuthFormWrapper } from '../../../../common/AuthFormWrapper/AuthFormWrapper';
 import PasswordInput from '../../../../common/Inputs/PasswordInput/PasswordInput';
 import { TextFieldInput } from '../../../../common/Inputs/TextField/TextFieldInput';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginFormValues, loginSchema } from '../../../../utils/schemas/authSchema';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthFormWrapper } from '../../../../common/AuthFormWrapper/AuthFormWrapper';
-import { useLogin } from '../../hooks/useLogin';
-import { useEffect, useState } from 'react';
 import { useUserContext } from '../../../../store/contexts/UserContext';
+import { LoginFormValues, loginSchema } from '../../../../utils/schemas/authSchema';
+import { useLogin } from '../../hooks/useLogin';
+
+import styles from './LoginForm.module.scss';
 
 export const LoginForm = () => {
   const navigator = useNavigate();
