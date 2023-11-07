@@ -22,9 +22,9 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
 
   if (error) return <p>Sorry,there was an error. Please try again </p>;
 
-  const selectVehicles = allVehicles?.map((vehicle) => {
-    return vehicle.vehicleRegistrationNumber;
-  });
+  const selectVehicles = Array.isArray(allVehicles)
+    ? allVehicles.map((vehicle) => vehicle.vehicleRegistrationNumber)
+    : [];
 
   const selectVehicleHandler = (
     _: SyntheticEvent,
