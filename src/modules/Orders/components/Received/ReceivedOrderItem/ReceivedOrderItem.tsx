@@ -24,17 +24,9 @@ export const ReceivedOrderItem = ({ order }: { order: AcceptedLoad }) => {
 
   if (error) return <p>Sorry,there was an error. Please try again </p>;
 
-<<<<<<< HEAD
-  const selectVehicles = allVehicles?.map((vehicle) => vehicle.vehicleRegistrationNumber);
-=======
-<<<<<<< HEAD
   const selectVehicles = Array.isArray(allVehicles)
     ? allVehicles.map((vehicle) => vehicle.vehicleRegistrationNumber)
     : [];
-=======
-  const selectVehicles = allVehicles?.map((vehicle) => vehicle.vehicleRegistrationNumber);
->>>>>>> 1a29e4ef0d2e59111bf9137c0e9f5ced099e45d0
->>>>>>> feature/tests
 
   const selectVehicleHandler = (
     _: SyntheticEvent,

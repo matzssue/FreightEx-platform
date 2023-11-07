@@ -1,10 +1,8 @@
 import { screen, waitFor } from '@testing-library/react';
-import { LoginForm } from './LoginForm';
+
 import { vi } from 'vitest';
 
 import { render } from 'src/setupTests';
-
-import { customUser as user } from 'src/setupTests';
 
 import { ReceivedOrdersList } from './ReceivedOrdersList';
 

@@ -1,4 +1,4 @@
-import { act, renderHook, waitFor } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
 import { useSearch } from '../useSearch';
 
 describe('test useSearch hook', () => {

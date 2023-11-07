@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom';
-import { vi } from 'vitest';
-import { BrowserRouter, Router } from 'react-router-dom';
+
+import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import React, { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
