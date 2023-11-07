@@ -20,6 +20,14 @@ import { Orders } from './Pages/Orders/Orders';
 import { PublishedOrders } from './Pages/Orders/PublishedOrders';
 import { ReceivedOrders } from './Pages/Orders/ReceivedOrders';
 import { JoyRideContextProvider } from './store/contexts/JoyRideContext';
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import JoyrideWrapper from './modules/Joyride/components/JoyrideWrapper/JoyrideWrapper';
+import { Error404 } from './Pages/404/Error404';
+import { queryClient } from './config/queryClient';
+=======
+>>>>>>> feature/tests
 import { NotificationContextProvider } from './store/contexts/NotficationContext';
 import { PaginationContextProvider } from './store/contexts/PaginationContext';
 import { UserContextProvider } from './store/contexts/UserContext';
@@ -36,6 +44,7 @@ const queryClient = new QueryClient({
     },
   },
 });
+>>>>>>> 1a29e4ef0d2e59111bf9137c0e9f5ced099e45d0
 
 const App = () => (
   <>
