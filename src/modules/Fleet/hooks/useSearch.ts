@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { VehicleValuesSchema } from 'src/utils/schemas/addVehicleSchema';
+import { useEffect, useState } from 'react';
 import { Dispatch, SetStateAction } from 'react';
+import { VehicleValuesSchema } from 'src/utils/schemas/addVehicleSchema';
 
 interface SearchResults {
-  searchValue: string;
-  filteredData: VehicleValuesSchema[]; // Zmieniony typ na VehicleValuesSchema[]
+  filteredData: VehicleValuesSchema[];
+  searchValue: string; // Zmieniony typ na VehicleValuesSchema[]
   setSearchValue: Dispatch<SetStateAction<string>>;
 }
 
@@ -14,13 +14,13 @@ export const useSearch = (initialData: VehicleValuesSchema[] | []): SearchResult
 
   useEffect(() => {
     const delaySearch = setTimeout(() => {
-      const filter = initialData.filter((element) => {
-        return element.vehicleRegistrationNumber
+      const filter = initialData.filter((element) =>
+        element.vehicleRegistrationNumber
           ?.trim()
           .toLocaleLowerCase()
           .replace(/\s/g, '')
-          .includes(searchValue.toLocaleLowerCase().replace(/\s/g, ''));
-      });
+          .includes(searchValue.toLocaleLowerCase().replace(/\s/g, '')),
+      );
       setFilteredData(filter);
     }, 1000);
     return () => clearTimeout(delaySearch);

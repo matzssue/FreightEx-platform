@@ -1,12 +1,14 @@
-import styles from './InvoiceItem.module.scss';
-import { GetInvoices } from 'src/utils/api/supabase/types';
-import { useQuery } from '@tanstack/react-query';
-import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
 import { FaRegFilePdf } from 'react-icons/fa';
-import { Button } from 'src/common/Buttons/Button/Button';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { InvoicePDF } from '../InvoicePDF/InvoicePDF';
+import { useQuery } from '@tanstack/react-query';
+import { Button } from 'src/common/Buttons/Button/Button';
+import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
 import { getInvoiceOrders } from 'src/utils/api/supabase/Invoices/getInvoiceOrders';
+import { GetInvoices } from 'src/utils/api/supabase/types';
+
+import { InvoicePDF } from '../InvoicePDF/InvoicePDF';
+
+import styles from './InvoiceItem.module.scss';
 
 export const InvoiceItem = ({ invoice }: { invoice: GetInvoices }) => {
   const { id, cost, date, endDate, paymentTerm, recipient, currency } = invoice;

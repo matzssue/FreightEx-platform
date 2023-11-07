@@ -1,9 +1,10 @@
-import supabase from '../../../config/supabase';
-import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { InsertVehicle } from 'src/utils/api/supabase/types';
-import { useNotificationContext } from 'src/store/contexts/NotficationContext';
+import { useMutation } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
+import { useNotificationContext } from 'src/store/contexts/NotficationContext';
+import { InsertVehicle } from 'src/utils/api/supabase/types';
+
+import supabase from '../../../config/supabase';
 
 export const useAddVehicle = () => {
   const { notify } = useNotificationContext();
@@ -18,8 +19,7 @@ export const useAddVehicle = () => {
   };
 
   return useMutation(
-    ['fleet'],
-    async ({ vehicleData, userId }: { vehicleData: InsertVehicle; userId: string }) =>
+    async ({ vehicleData, userId }: { userId: string; vehicleData: InsertVehicle }) =>
       await addVehicle(vehicleData, userId),
     {
       onSuccess: async () => {

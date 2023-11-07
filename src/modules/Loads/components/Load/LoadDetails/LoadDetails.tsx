@@ -1,15 +1,16 @@
+import { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getLoadDetails } from '../../../../../utils/api/supabase/Loads/getLoadDetails';
+import { NavLink } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { useAcceptOffer } from 'src/modules/Loads/hooks/useAcceptOffer';
+import { useUserContext } from 'src/store/contexts/UserContext';
+
+import { getLoadDetails } from '../../../../../utils/api/supabase/Loads/getLoadDetails';
+import { LoadAddress } from '../LoadCard/LoadAddress';
+import { LoadMap } from '../LoadMap/LoadMap';
 
 import styles from './LoadDetails.module.scss';
-import { LoadMap } from '../LoadMap/LoadMap';
-import { LoadAddress } from '../LoadCard/LoadAddress';
-import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import { useUserContext } from 'src/store/contexts/UserContext';
-import { useAcceptOffer } from 'src/modules/Loads/hooks/useAcceptOffer';
 export const LoadDetails = () => {
   const { loadId, filterId } = useParams();
   const acceptOfferMutation = useAcceptOffer();

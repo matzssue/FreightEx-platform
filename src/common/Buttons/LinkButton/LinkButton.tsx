@@ -1,20 +1,16 @@
-import { NavLink } from 'react-router-dom';
-import styles from './LinkButton.module.scss';
 import { ReactNode } from 'react';
+import { NavLink } from 'react-router-dom';
+
+import styles from './LinkButton.module.scss';
 
 type LinkButtonProps = {
-  link: string;
   children: ReactNode;
+  link: string;
   mode: 'back' | 'next';
 };
 
-export const LinkButton = ({ link, children, mode }: LinkButtonProps) => {
-  return (
-    <NavLink
-      className={`${styles.navlink} ${mode === 'back' ? styles.back : styles.next}`}
-      to={link}
-    >
-      {children}
-    </NavLink>
-  );
-};
+export const LinkButton = ({ link, children, mode }: LinkButtonProps) => (
+  <NavLink className={`${styles.navlink} ${mode === 'back' ? styles.back : styles.next}`} to={link}>
+    {children}
+  </NavLink>
+);

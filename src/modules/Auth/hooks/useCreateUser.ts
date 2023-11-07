@@ -1,12 +1,13 @@
-import { useMutation } from '@tanstack/react-query';
-import supabase from '../../../config/supabase';
 // import { useNotificationContext } from '../components/contexts/NotificationContext';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useMutation } from '@tanstack/react-query';
+
+import supabase from '../../../config/supabase';
 import {
   RegisterCompanyFormValues,
   RegisterUserFormValues,
 } from '../../../utils/schemas/authSchema';
-import { toast } from 'react-toastify';
 export type UserData = RegisterCompanyFormValues & RegisterUserFormValues;
 
 const createUser = async (user: UserData) => {

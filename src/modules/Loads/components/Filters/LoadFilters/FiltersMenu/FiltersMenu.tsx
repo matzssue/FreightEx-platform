@@ -1,21 +1,23 @@
-import styles from './FiltersMenu.module.scss';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
+import { yupResolver } from '@hookform/resolvers/yup';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+
+import { usePaginationContext } from '../../../../../../store/contexts/PaginationContext';
+import { useAppDispatch } from '../../../../../../store/hooks';
+import { addFilter, LoadsFilters } from '../../../../../../store/reducers/loadsFiltersSlice';
 import {
   loadsFilterSchema,
   LoadsFiltersValues,
 } from '../../../../../../utils/schemas/loadsFilters';
-import { useAppDispatch } from '../../../../../../store/hooks';
-import { addFilter, LoadsFilters } from '../../../../../../store/reducers/loadsFiltersSlice';
-import { TruckFilter } from '../TruckFilter/TruckFilter';
-import { LocationFilter } from '../LocationFilter/LocationFilter';
-import { DateFilter } from '../DateFilter/DateFilter';
-import { usePaginationContext } from '../../../../../../store/contexts/PaginationContext';
 import { loadsPerPageWithMenu, loadsPerPageWithoutMenu } from '../../../../constants/loadsPerPage';
+import { DateFilter } from '../DateFilter/DateFilter';
+import { LocationFilter } from '../LocationFilter/LocationFilter';
+import { TruckFilter } from '../TruckFilter/TruckFilter';
+
+import styles from './FiltersMenu.module.scss';
 
 export const FiltersMenu = () => {
   const [showFilersMenu, setShowFiltersMenu] = useState(true);
@@ -83,6 +85,16 @@ export const FiltersMenu = () => {
           {showFilersMenu ? 'Hide filters' : 'Show Filters'}{' '}
           {showFilersMenu ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />}
         </button>
+
+        <button
+          type='button'
+          className={`${styles['apply-button']} ${showFilersMenu ? '' : styles.hidden}`}
+          id='reset-form'
+          onClick={() => reset()}
+        >
+          Reset form
+        </button>
+
         <button
           className={`${styles['apply-button']} ${showFilersMenu ? '' : styles.hidden}`}
           type='submit'

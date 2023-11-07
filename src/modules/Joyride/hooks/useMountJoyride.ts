@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useJoyrideContext } from 'src/store/contexts/JoyRideContext';
 import { useMount } from 'react-use';
+import { useJoyrideContext } from 'src/store/contexts/JoyRideContext';
 
 export const useMountJoyride = (index: number) => {
   const [showLoader, setLoader] = useState(true);

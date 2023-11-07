@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import { Fragment } from 'react';
+import { StyleSheet, Text, View } from '@react-pdf/renderer';
 import { GetAcceptedLoadsData } from 'src/utils/api/supabase/types';
 const styles = StyleSheet.create({
   tbody: {

@@ -1,12 +1,13 @@
 import { ChangeEventHandler } from 'react';
+
 import styles from './SearchVehicle.module.scss';
 
 export const SearchVehicle = ({
   value,
   onChange,
 }: {
-  value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  value: string;
 }) => {
   const handleSubmit = (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -1,19 +1,21 @@
-import styles from './LoginForm.module.scss';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { AuthFormWrapper } from '../../../../common/AuthFormWrapper/AuthFormWrapper';
 import PasswordInput from '../../../../common/Inputs/PasswordInput/PasswordInput';
 import { TextFieldInput } from '../../../../common/Inputs/TextField/TextFieldInput';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginFormValues, loginSchema } from '../../../../utils/schemas/authSchema';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthFormWrapper } from '../../../../common/AuthFormWrapper/AuthFormWrapper';
-import { useLogin } from '../../hooks/useLogin';
-import { useEffect, useState } from 'react';
 import { useUserContext } from '../../../../store/contexts/UserContext';
+import { LoginFormValues, loginSchema } from '../../../../utils/schemas/authSchema';
+import { useLogin } from '../../hooks/useLogin';
+
+import styles from './LoginForm.module.scss';
 
 export const LoginForm = () => {
   const navigator = useNavigate();
   const loginMutation = useLogin();
-  const { isLoggedIn } = useUserContext();
+  const { isLoggedIn, logIn } = useUserContext();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,17 +32,16 @@ export const LoginForm = () => {
       setIsLoading(true);
       setError(null);
       await loginMutation.mutateAsync(data);
-      setIsLoading(false);
     } catch (error) {
-      setIsLoading(false);
       setValue('password', '');
       setError('Invalid email or password');
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
   return (
     <AuthFormWrapper>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form data-testid='login-form' onSubmit={handleSubmit(onSubmit)}>
         <TextFieldInput
           size='medium'
           defaultValue={''}
@@ -64,6 +65,7 @@ export const LoginForm = () => {
           <p>Login: test1@transportex.com</p>
           <p>Password: Test123</p>
         </div>
+        <button onClick={() => logIn()}>testlogin</button>
       </form>
     </AuthFormWrapper>
   );

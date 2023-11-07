@@ -1,9 +1,9 @@
-import { Container } from '@mui/material';
 import Joyride, { CallBackProps } from 'react-joyride';
 import { useNavigate } from 'react-router-dom';
 import { useMount } from 'react-use';
-
+import { Container } from '@mui/material';
 import { useJoyrideContext } from 'src/store/contexts/JoyRideContext';
+
 import { joyrideSteps } from '../../constants/joyrideSteps';
 
 export default function JoyrideWrapper() {

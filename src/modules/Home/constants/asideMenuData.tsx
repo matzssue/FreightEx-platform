@@ -1,6 +1,6 @@
 import { FiPackage } from 'react-icons/fi';
 import { MdOutlineAssignment } from 'react-icons/md';
-import { TbTruck, TbFileInvoice } from 'react-icons/tb';
+import { TbFileInvoice, TbTruck } from 'react-icons/tb';
 
 export const menuLinks = [
   { linkName: 'Loads', link: '/loads', icon: <FiPackage />, disable: false },

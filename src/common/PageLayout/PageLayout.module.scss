@@ -6,8 +6,13 @@
   height: 100%;
   flex-grow: 1;
   background-color: $primary-color;
-  overflow: auto;
 }
+@media only screen and (max-width: $breakpoint-medium) {
+  .box {
+    overflow: hidden;
+  }
+}
+
 @media only screen and (max-width: $breakpoint-small) {
   .box {
     flex-direction: column;

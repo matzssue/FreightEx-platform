@@ -1,23 +1,23 @@
-import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
-
-import { getSafeContext } from '../../utils/helpers/getSateContext';
-import { getUser } from '../../utils/api/supabase/User/getUser';
-import { UserDatabase } from '../../utils/api/supabase/types';
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from 'src/config/supabase';
+
+import { UserDatabase } from '../../utils/api/supabase/types';
+import { getUser } from '../../utils/api/supabase/User/getUser';
+import { getSafeContext } from '../../utils/helpers/getSateContext';
 type UserContextProps = {
+  changeUserInformations: (...props: any) => void;
+  isLoading: boolean;
   isLoggedIn: boolean;
-  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-  userId: string | undefined;
-  setUserId: Dispatch<SetStateAction<string | undefined>>;
+  isNavigationOpen: boolean;
   logIn: () => void;
   logOut: () => void;
-  userData: UserDatabase;
-  changeUserInformations: (...props: any) => void;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
-  isLoading: boolean;
-  isNavigationOpen: boolean;
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
+  setUserId: Dispatch<SetStateAction<string | undefined>>;
   toggleNavigation: () => void;
+  userData: UserDatabase;
+  userId: string | undefined;
 };
 
 type UpdateUserCallback = (...updateData: any) => Promise<UserDatabase>;

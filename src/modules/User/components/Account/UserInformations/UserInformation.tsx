@@ -1,16 +1,17 @@
-import styles from './UserInformation.module.scss';
-import { AiOutlineEdit } from 'react-icons/ai';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { AiOutlineEdit } from 'react-icons/ai';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  ChangeNameFormValue,
-  ChangeSurnameFormValue,
-  changeNameSchema,
-  changeSurnameSchema,
-} from 'src/utils/schemas/authSchema';
 import { useUserContext } from 'src/store/contexts/UserContext';
 import { updateUserField } from 'src/utils/api/supabase/User/updateUserField';
+import {
+  ChangeNameFormValue,
+  changeNameSchema,
+  ChangeSurnameFormValue,
+  changeSurnameSchema,
+} from 'src/utils/schemas/authSchema';
+
+import styles from './UserInformation.module.scss';
 
 type FormData = {
   name: string;
@@ -18,10 +19,10 @@ type FormData = {
 };
 
 type UserInformationProps = {
-  label: string;
-  value: string;
   isChangeable?: boolean;
+  label: string;
   type?: 'name' | 'surname';
+  value: string;
 };
 
 export const UserInformation = ({
@@ -67,35 +68,29 @@ export const UserInformation = ({
   };
 
   return (
-    <>
-      <div className={styles.information}>
-        <p>
-          {label}: <span>{value}</span>
-        </p>
-        {isChangeable && (
-          <button onClick={() => setOpen(true)}>
-            <AiOutlineEdit />
-          </button>
-        )}
+    <div className={styles.information}>
+      <p>
+        {label}: <span>{value}</span>
+      </p>
+      {isChangeable && (
+        <button onClick={() => setOpen(true)}>
+          <AiOutlineEdit />
+        </button>
+      )}
 
-        {isChangeable && open && type && (
-          <form className={styles['information-form']} onSubmit={handleSubmit(onSubmit)}>
-            <label>Enter new {type === 'name' ? 'name' : 'surname'}</label>
-            <input {...register(type)} type='text' />
-            {errors[type] && <span className={styles.error}>{errors[type]?.message}</span>}
-            <button className={styles['submit-button']} type='submit'>
-              Save
-            </button>
-            <button
-              type='button'
-              className={styles['submit-button']}
-              onClick={() => setOpen(false)}
-            >
-              Cancel
-            </button>
-          </form>
-        )}
-      </div>
-    </>
+      {isChangeable && open && type && (
+        <form className={styles['information-form']} onSubmit={handleSubmit(onSubmit)}>
+          <label>Enter new {type === 'name' ? 'name' : 'surname'}</label>
+          <input {...register(type)} type='text' />
+          {errors[type] && <span className={styles.error}>{errors[type]?.message}</span>}
+          <button className={styles['submit-button']} type='submit'>
+            Save
+          </button>
+          <button type='button' className={styles['submit-button']} onClick={() => setOpen(false)}>
+            Cancel
+          </button>
+        </form>
+      )}
+    </div>
   );
 };

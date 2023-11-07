@@ -1,4 +1,5 @@
 import supabase from 'src/config/supabase';
+
 import { GetAcceptedLoadsData } from '../types';
 
 export const getInvoiceOrders = async (invoiceId: string | number | undefined) => {

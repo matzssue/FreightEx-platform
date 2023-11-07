@@ -8,14 +8,12 @@ export const getUserVehicles = async (id: string | undefined) => {
 
   if (error) throw new Error();
 
-  const vehicles = vehicleData.map((data) => {
-    return {
-      vehicleRegistrationNumber: data.vehicle_register_number,
-      vehicleType: data.vehicle_type,
-      driverPhoneNumber: data.driver_phone_number,
-      driverName: data.driver_name,
-    };
-  });
+  const vehicles = vehicleData.map((data) => ({
+    vehicleRegistrationNumber: data.vehicle_register_number,
+    vehicleType: data.vehicle_type,
+    driverPhoneNumber: data.driver_phone_number,
+    driverName: data.driver_name,
+  }));
 
   return vehicles;
 };

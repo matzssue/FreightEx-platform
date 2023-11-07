@@ -1,13 +1,15 @@
-import styles from './VehicleList.module.scss';
-import { AddVehicleCard } from '../AddVehicle/AddVehicleCard/AddVehicleCard';
-import { VehicleCard } from '../VehicleCard/VehicleCard/VehicleCard';
-import { getUserVehicles } from 'src/utils/api/supabase/Vehicles/getUserVehicles';
-import { useUserContext } from 'src/store/contexts/UserContext';
+import { ChangeEvent } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from 'src/common/LoadingSpinner/LoadingSpinner';
+import { useUserContext } from 'src/store/contexts/UserContext';
+import { getUserVehicles } from 'src/utils/api/supabase/Vehicles/getUserVehicles';
+
 import { useSearch } from '../../hooks/useSearch';
+import { AddVehicleCard } from '../AddVehicle/AddVehicleCard/AddVehicleCard';
 import { SearchVehicle } from '../SearchVehicle/SearchVehicle';
-import { ChangeEvent } from 'react';
+import { VehicleCard } from '../VehicleCard/VehicleCard/VehicleCard';
+
+import styles from './VehicleList.module.scss';
 
 export const VehicleList = () => {
   const { userId } = useUserContext();
@@ -43,9 +45,9 @@ export const VehicleList = () => {
           <p className={styles['no-results__information']}>{noResultsMessage}</p>
         )}
         {noVehiclesMessage && <p>{noVehiclesMessage}</p>}
-        {vehicleList?.map((vehicles) => {
-          return <VehicleCard key={vehicles.vehicleRegistrationNumber} {...vehicles} />;
-        })}
+        {vehicleList?.map((vehicles) => (
+          <VehicleCard key={vehicles.vehicleRegistrationNumber} {...vehicles} />
+        ))}
       </div>
     </div>
   );

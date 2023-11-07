@@ -1,3 +1,2 @@
-export const calculateTotal = <T extends { price: number }>(items: T[]): number => {
-  return items.reduce((total, item) => total + Number(item.price), 0);
-};
+export const calculateTotal = <T extends { price: number }>(items: T[]): number =>
+  items.reduce((total, item) => total + Number(item.price), 0);

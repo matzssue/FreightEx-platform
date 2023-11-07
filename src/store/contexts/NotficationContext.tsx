@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { getSafeContext } from 'src/utils/helpers/getSateContext';
 import { toast } from 'react-toastify';
+import { getSafeContext } from 'src/utils/helpers/getSateContext';
+import { v4 as uuidv4 } from 'uuid';
 
 type NotificationContextProps = {
   clear: () => void;
+  deleteNotification: (id: string) => void;
   notifications: Notification[];
   notify: (type: 'success' | 'error', text: string) => void;
-  deleteNotification: (id: string) => void;
 };
 
 type Notification = {
-  type: 'success' | 'error';
-  text: string;
   id: string;
+  text: string;
+  type: 'success' | 'error';
 };
 
 export const NotificationContext = React.createContext<NotificationContextProps | null>(null);

@@ -1,17 +1,19 @@
 import { useState } from 'react';
+import { Controller, FieldValues, Path, PathValue } from 'react-hook-form';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Controller, PathValue, FieldValues, Path } from 'react-hook-form';
 import {
   FormControl,
+  FormHelperText,
   IconButton,
   InputAdornment,
   OutlinedInput,
   SxProps,
-  FormHelperText,
 } from '@mui/material';
-import styles from './PasswordInput.module.scss';
+
 import { BaseInputProps } from '../types';
+
+import styles from './PasswordInput.module.scss';
 
 type PasswordInputProps<T extends FieldValues> = {
   size?: 'small' | 'medium';

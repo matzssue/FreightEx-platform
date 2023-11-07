@@ -1,21 +1,22 @@
-import styles from './AddInvoice.module.scss';
-
-import { Modal } from '@mui/material';
-import { Controller, SubmitHandler } from 'react-hook-form';
 import { SyntheticEvent } from 'react';
+import { Controller, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Modal } from '@mui/material';
 import { Autocomplete, TextField } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import { getOrdersToFacture } from 'src/utils/api/supabase/Invoices/getOrdersToFacture';
-import { useUserContext } from 'src/store/contexts/UserContext';
-import { Invoice, addInvoiceSchema } from 'src/utils/schemas/addInvoiceSchema';
-import { useForm } from 'react-hook-form';
+import { Button } from 'src/common/Buttons/Button/Button';
 import { DateInput } from 'src/common/Inputs/DateInput/DateInput';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { TextFieldInput } from 'src/common/Inputs/TextField/TextFieldInput';
+import { AddInvoiceProps } from 'src/modules/Invoices/types';
+import { useUserContext } from 'src/store/contexts/UserContext';
+import { getOrdersToFacture } from 'src/utils/api/supabase/Invoices/getOrdersToFacture';
+import { addInvoiceSchema, Invoice } from 'src/utils/schemas/addInvoiceSchema';
+
 import { useAddInvoince } from '../../../hooks/useAddInvoice';
 import { InvoiceFormHeader } from '../../InvoiceFormHeader/InvoiceFormHeader';
-import { Button } from 'src/common/Buttons/Button/Button';
-import { AddInvoiceProps } from 'src/modules/Invoices/types';
+
+import styles from './AddInvoice.module.scss';
 
 export const AddInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) => {
   const { userId } = useUserContext();
@@ -84,7 +85,7 @@ export const AddInvoice = ({ isModalOpen, onClose }: AddInvoiceProps) => {
                 )}
               />
             )}
-          ></Controller>
+          />
           <div>
             <label className={styles['invoice-date__label']} htmlFor='invoiceDate'>
               Date of invoice
