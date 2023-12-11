@@ -15,7 +15,7 @@ import styles from './LoginForm.module.scss';
 export const LoginForm = () => {
   const navigator = useNavigate();
   const loginMutation = useLogin();
-  const { isLoggedIn, logIn } = useUserContext();
+  const { isLoggedIn } = useUserContext();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
