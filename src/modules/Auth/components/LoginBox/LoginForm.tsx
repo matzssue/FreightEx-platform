@@ -15,7 +15,7 @@ import styles from './LoginForm.module.scss';
 export const LoginForm = () => {
   const navigator = useNavigate();
   const loginMutation = useLogin();
-  const { isLoggedIn, logIn } = useUserContext();
+  const { isLoggedIn } = useUserContext();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -65,7 +65,6 @@ export const LoginForm = () => {
           <p>Login: test1@transportex.com</p>
           <p>Password: Test123</p>
         </div>
-        <button onClick={() => logIn()}>testlogin</button>
       </form>
     </AuthFormWrapper>
   );
