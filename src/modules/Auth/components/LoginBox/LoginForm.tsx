@@ -65,7 +65,6 @@ export const LoginForm = () => {
           <p>Login: test1@transportex.com</p>
           <p>Password: Test123</p>
         </div>
-        <button onClick={() => logIn()}>testlogin</button>
       </form>
     </AuthFormWrapper>
   );
