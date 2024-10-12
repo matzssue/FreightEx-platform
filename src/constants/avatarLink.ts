@@ -1,2 +1,1 @@
-export const avatarLink =
-  'https://cxupvaymlpdeyyrdrpkn.supabase.co/storage/v1/object/public/images/';
+export const avatarLink = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/images/`;

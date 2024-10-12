@@ -14,6 +14,7 @@ import { AddLoadForm } from '../../../Loads/components/Load/AddLoad/AddLoadForm/
 import { NotificationBox } from '../NoticiationBox/NotificationBox';
 
 import styles from './UserBar.module.scss';
+import { avatarLink } from 'src/constants/avatarLink';
 
 export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<boolean>> }) => {
   const navigate = useNavigate();
@@ -86,7 +87,7 @@ export const UserBar = ({ setShowMenu }: { setShowMenu: Dispatch<SetStateAction<
             ':hover': { borderColor: '#3c5f77' },
           }}
           alt={`User photo`}
-          src={`https://cxupvaymlpdeyyrdrpkn.supabase.co/storage/v1/object/public/images/${userData?.avatar}`}
+          src={`${avatarLink}/${userData?.avatar}`}
         />
       </IconButton>
       <Menu
