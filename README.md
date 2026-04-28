@@ -1,27 +1,12 @@
-![Logo](https://i.ibb.co/VH5CLRH/cover.png)
+The project is currently not operational due to Supabase limitations (the project has been permanently paused).
 
 # Freight Exchange Platform
 
 FreightEx is platform that connects carriers, forwarding companies and clients that are looking for transport services
 
-## Live
-
-[FreightEx Platform Vercel](https://freight-ex-platform.vercel.app)
-
-_Test Account_
-
-Login: test1@transportex.com
-Password: Test123
-
 ## Installation
 
-Install my-project with npm or arn
-
-```bash
-  npm run dev
-  # or
-  yarn dev
-```
+The project is currently not operational due to Supabase limitations (the project has been permanently paused).
 
 ## Instructions
 
